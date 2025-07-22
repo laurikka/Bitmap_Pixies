@@ -203,7 +203,7 @@ title_main:
     sta SCREEN+24*40,y      ; text location with row offset
     dey
     bpl :--                 ; loop until the whole row is updated
-    bvc :++
+    jmp :++
 :
     lda #<scrollertext      ; indirect 16-bit adress of scrolltext
     sta SCROLLERPOS         ; location is stored in two bytes

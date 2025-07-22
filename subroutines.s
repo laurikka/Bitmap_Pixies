@@ -4,15 +4,6 @@
 
 ;## set level ############################
 set_level:
-    clc
-    lda LEVEL_CUR           ; get level value
-
-    asl                     ; calculate offset to fetch
-    asl                     ; new level data
-    asl
-    asl
-    adc #12                 ; multiply by 16 and add 12
-    tay                     ; y is now the offset for current level
 
     lda #0                  ; reset level timers
     sta LEVEL_F
@@ -21,7 +12,10 @@ set_level:
     lda #1
     sta $d015               ; reset sprite visibility
     sta PREV_CATCH          ; init previous catch variable
-    lda levels+2,y          ; load revealtimer for level
+    lda #$ff
+    sta SPRITEACTIVE        ; reset active sprites
+    ldy #14
+    lda (LEVELS_P),y          ; load revealtimer for level
     sta REVEALTIMER
     lda #$61
     sta SCREEN+COLORROW     ; flip to active char for colorrow pos 0
@@ -33,20 +27,26 @@ set_level:
     sta SCREEN+COLORROW+5
     sta SCREEN+COLORROW+6
 
+    ldy #12
     ldx #12
 .loop                       ; read sprite coordinates from level data
     clc
-    lda levels,y
+    lda (LEVELS_P),y
     asl                     ; multiply x
     sta $d002,x             ; store x
-    lda levels+1,y
+    iny
+    lda (LEVELS_P),y
     sta $d002+1,x
+    dey
     dey
     dey
     dex
     dex
     bpl .loop
-    
+
+    ldy #24                 ; 24 -> ready
+    jsr feedback_print      ; print text
+
     ldy SPRITECOLOR+1
     jsr set_borderlinecolor
 
@@ -105,15 +105,15 @@ bgfx:
     lda FXCHAR,x            ; load current row of fxchar
     rol                     ; shift bits left
     bcs :++                 ; if bit 7 was not empty, jump
-    bvc :++++               ; otherwise ready to store
+    jmp :++++               ; otherwise ready to store
 :                           ;.negx
     lda FXCHAR,x
     ror
     bcs :++
-    bvc :+++
+    jmp :+++
 :                           ;.carryposx
     eor #1                  ; put pixel in first bit
-    bvc :++
+    jmp :++
 :                           ;.carrynegx
     eor #$80                ; put pixel in last bit
 :                           ;.readyx
@@ -144,7 +144,7 @@ bgfx:
     sta FXCHAR+6
     tya
     sta FXCHAR+7
-    bvc :++
+    jmp :++
 :                           ;.negy, move all down up wrapping last to first
     lda FXCHAR+7
     tay
@@ -214,6 +214,30 @@ spritecopy:
     bne spritecopy
     lda (SPRITEMEM),y
     sta (SPRITEVIC),y
+    rts
+
+feedback_print:                   ; print text to screen
+    ldx #0
+.textloop
+    lda feedback,y
+    cmp #$60
+    bcc :+
+    sbc #$60
+:
+    sta SCREEN+10*40+16,x          ; text location with row offset
+    iny
+    inx
+    cpx #8
+    bne .textloop
+    rts
+
+feedback_clear:
+    ldx #7
+    lda #$40
+:
+    sta SCREEN+10*40+16,x          ; text location with row offset
+    dex
+    bpl :-
     rts
 
 

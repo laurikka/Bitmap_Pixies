@@ -2,64 +2,65 @@
     incdir bin
 
 ;## directives ##########################################
-DEBUG = 1                   ; if 1 includes debug-related stuff
-SOUND = 0                   ; if zero skip sound routines
-MINIMAL = 1                 ; if set, disable animated stuff
-SKIPINTRO = 0               ; go straight to game
+DEBUG        = 0            ; if 1 includes debug-related stuff
+SOUND        = 0            ; if zero skip sound routines
+MINIMAL      = 1            ; if set, disable animated stuff
+SKIPINTRO    = 0            ; go straight to game
 
 ;## constants ###########################################
-SCREEN = $4000              ; screen memory
-SCREENSPR = $4400           ; sprite screen memory
-SPRITE_MEM = $10            ; $10 * $40 equals $400
-FONT        = $4800         ; font absolute location
-FXCHAR      = FONT+$200     ; character used for moving background FX
-COLORROW    = 23*40+16      ; location of color dots at the bottom
-MAX_SPEED = 4               ; max movement speed
+SCREEN       = $4000        ; screen memory
+SCREENSPR    = $4400        ; sprite screen memory
+SPRITE_MEM   = $10          ; $10 * $40 equals $400
+FONT         = $4800        ; font absolute location
+FXCHAR       = FONT+$200    ; character used for moving background FX
+COLORROW     = 23*40+16     ; location of color dots at the bottom
+MAX_SPEED    = 4            ; max movement speed
 
-LEFT_LIMIT  = 5             ; limits for sprites before they wrap around
-RIGHT_LIMIT = 90
-UP_LIMIT    = 24
-DOWN_LIMIT  = 250
+LEFT_LIMIT   = 5            ; limits for sprites before they wrap around
+RIGHT_LIMIT  = 90
+UP_LIMIT     = 24
+DOWN_LIMIT   = 250
 
 ;## zero page addresses #############################################
-VAR0        = $10           ; reusable variables
-VAR1        = $11
-COLLIDED    = $12           ; current collided sprites
-TARGET      = $13           ; next sprite to collect
-LEVEL_F     = $14           ; level variable for counting frames
-LEVEL_R     = $15           ; level variable for revealing sprites
-REVEALTIMER = $16           ; level variable for delay before reveal
-LEVEL_CUR   = $17           ; current level
-POINTBUFFER = $18           ; store points before they are processed
-PREV_CATCH  = $19           ; keep track of previously catched sprite
-COUNTERX    = $1A           ; countermove for hero sprite movement
-COUNTERY    = $1B
-CARRY_CUR   = $1C           ; spriteloop temp storage for x extra bit
-TEMPY       = $1D           ; spriteloop temp y for processing
-X8BIT       = $1E           ; spriteloop temp x 8th bit for processing
-COLLECTED   = $1F           ; store collected sprites
+VAR0         = $10          ; reusable variables
 
-SPEEDX      = $20           ; $20-2f, current speed of sprite
-ANIMF       = $30           ; $30-37, current animation frame for sprite
+COLLIDED     = $12          ; current collided sprites
+TARGET       = $13          ; next sprite to collect
+LEVEL_F      = $14          ; level variable for counting frames
+LEVEL_R      = $15          ; level variable for revealing sprites
+REVEALTIMER  = $16          ; level variable for delay before reveal
+LEVEL_CUR    = $17          ; current level
+POINTBUFFER  = $18          ; store points before they are processed
+PREV_CATCH   = $19          ; keep track of previously catched sprite
+COUNTERX     = $1A          ; countermove for hero sprite movement
+COUNTERY     = $1B
+CARRY_CUR    = $1C          ; spriteloop temp storage for x extra bit
+TEMPY        = $1D          ; spriteloop temp y for processing
+X8BIT        = $1E          ; spriteloop temp x 8th bit for processing
+COLLECTED    = $1F          ; store collected sprites
 
-TITLE_F     = $38           ; framecounter for title screen
-TITLE_READY = $39           ; marker to delay game start immediately after
-SCROLLER_F  = $3A
-;unused 3b
-TIMER_F     = $3C
-TIMER_D1    = $3D           ; three decimal digits for time left
-TIMER_D2    = $3E
-TIMER_D3    = $3F
+SPEEDX       = $20          ; $20-2f, current speed of sprite
+ANIMF        = $30          ; $30-37, current animation frame for sprite
 
-COLLISION   = $40           ; $40-47 bitmasks to compare collided sprites
-CARRYBIT    = $48           ; $48-57 for calculating the extra x bit
-SINGLEBITS  = $58           ; $58-5f single bit index from low to high
-SPRITECOLOR = $60           ; $60-67 colors for sprites
+TITLE_F      = $38          ; framecounter for title screen
+TITLE_READY  = $39          ; marker to delay game start immediately after
+SCROLLER_F   = $3A
+SPRITEACTIVE = $3B
+TIMER_F      = $3C
+TIMER_D1     = $3D          ; three decimal digits for time left
+TIMER_D2     = $3E
+TIMER_D3     = $3F
 
-SCROLLERPOS = $68           ; +$69, indirect pointer to scroller
-SPRITEMEM   = $6a           ; +6b, pointer to current sprite location in main memory
-SPRITEVIC   = $6c
-SPRITEOFFSET= $6e
+COLLISION    = $40          ; $40-47 bitmasks to compare collided sprites
+CARRYBIT     = $48          ; $48-57 for calculating the extra x bit
+SINGLEBITS   = $58          ; $58-5f single bit index from low to high
+SPRITECOLOR  = $60          ; $60-67 colors for sprites
+
+SCROLLERPOS  = $68          ; +$69, indirect pointer to scroller
+SPRITEMEM    = $6a          ; +6b, pointer to current sprite location in main memory
+SPRITEVIC    = $6c
+SPRITEOFFSET = $6e
+LEVELS_P     = $70          ; pointer to level data
 
 ; $e* reserved for sound
 
@@ -70,7 +71,6 @@ SPRITEOFFSET= $6e
 
 init:
     sei                     ; disable intterrupts
-    clv                     ; clear overflow
 
     lda #0
     ldx #$30
@@ -141,6 +141,11 @@ gameinit:
     lda #$40                ; character to fill screen
     ldy #11                 ; color to fill screen
     jsr clearscreen
+
+    lda #<levels      ; indirect 16-bit adress of scrolltext
+    sta LEVELS_P         ; location is stored in two bytes
+    lda #>levels      ; in zero page
+    sta LEVELS_P+1
 
     if SOUND=1
     jsr play_start_init
@@ -229,6 +234,7 @@ gameinit:
 
 ;## bottom text #########################################
     ldx #39
+    ldy #$40
 .loop_bottom:
     lda text+40,x
     cmp #$20
@@ -343,7 +349,6 @@ main:
     endif
 
 ;## loop through sprites #########################################
-    clv
     clc                     ; clear carry flag
     lda $d010
     sta X8BIT               ; store 8th xbit to zeropage for calculations
@@ -387,7 +392,7 @@ spriteloop:
     sta X8BIT               ; store back
     lda #LEFT_LIMIT+1       ; move the sprite to left edge
     tay                     ; store current x coord
-    bvc :++                 ; no need to check left
+    jmp :++                 ; no need to check left
 :                           ; checkleft
     cpy #LEFT_LIMIT         ; compare x against limit
     bcs :+
@@ -405,7 +410,7 @@ spriteloop:
     bcs :+
     lda #DOWN_LIMIT-1
     sta TEMPY
-    bvc :++
+    jmp :++
 :                           ; checkbottom
     cmp #DOWN_LIMIT
     bcc :+
@@ -422,18 +427,18 @@ spriteloop:
     lda X8BIT
     sta $d010               ; put 8th x bit back to hardware
 
+
 ;##collision check###################################################
     if DEBUG=1
     inc $d020               ; border color during calculations
     endif
 sprite_collision:
     lda $d01e               ; get the collided sprites
-    sta COLLIDED            ; and store them for processing
-    lda #0
-    sta $d01e
-    lda #1
-    bit COLLIDED            ; check if sprite 0 has collided
-    beq .end                ; if not, skip ahead
+    sta $d01e               ; write back to enable further detection
+    and SPRITEACTIVE        ; only consider active sprites
+    cmp COLLIDED
+    beq .end                ; if same as previous frame, skip ahead
+    sta COLLIDED
 
     ldx #7
 :
@@ -445,15 +450,16 @@ sprite_collision:
 
 :                           ; commit
     eor #%11111110          ; flip the bits for collision
-    and $d015               ; and with current active sprites
-    sta $d015               ; override old with new active sprites
+        
+    and SPRITEACTIVE        ; and with current active sprites
+    sta SPRITEACTIVE        ; override old with new active sprites
+
     lda COLLIDED            ; get current collision pattern
     lsr                     ; shift right and remove sprite 0
     cmp PREV_CATCH          ; compare to previous catch
     beq :+                  ; if equal, award more points
-                            ; one_point
     inc POINTBUFFER
-    bvc .end
+    jmp .end
 :                           ; five points
     asl                     ; shift bit pattern left
     sta PREV_CATCH          ; store as new previous catch
@@ -471,6 +477,64 @@ sprite_collision:
     adc POINTBUFFER
     sta POINTBUFFER
 .end
+
+;## trailing sprites ################################################
+    lda SPRITEACTIVE
+    and #%00000010
+    bne :+
+    lda posbuffer+3
+    sta $d002
+    lda posbuffer+4
+    sta $d003
+:
+    lda SPRITEACTIVE
+    and #%00000100
+    bne :+
+    lda posbuffer+6
+    sta $d004
+    lda posbuffer+7
+    sta $d005
+:
+    lda SPRITEACTIVE
+    and #%00001000
+    bne :+
+    lda posbuffer+9
+    sta $d006
+    lda posbuffer+10
+    sta $d007
+:
+    lda SPRITEACTIVE
+    and #%00010000
+    bne :+
+    lda posbuffer+12
+    sta $d008
+    lda posbuffer+13
+    sta $d009
+:
+    lda SPRITEACTIVE
+    and #%00100000
+    bne :+
+    lda posbuffer+15
+    sta $d00a
+    lda posbuffer+16
+    sta $d00b
+:
+    lda SPRITEACTIVE
+    and #%01000000
+    bne :+
+    lda posbuffer+18
+    sta $d00c
+    lda posbuffer+19
+    sta $d00d
+:
+    lda SPRITEACTIVE
+    and #%10000000
+    bne :+
+    lda posbuffer+21
+    sta $d00e
+    lda posbuffer+22
+    sta $d00f
+:
 
 ;## enforce maximum speed ###########################################
     if DEBUG=1
@@ -508,9 +572,14 @@ sprite_collision:
     lda LEVEL_F             ; check level timer
     cmp REVEALTIMER         ; compare against reveal delay
     beq :+                  ; if equals, proceed with reveal
-    bne :++                 ; otherwise skip to end
+    bne :+++                 ; otherwise skip to end
 :                           ;.reveal
     ldx LEVEL_R             ; copy sprite count to x
+    cpx #1
+    bne :+
+    jsr feedback_clear      ; clear text
+    ldx LEVEL_R             ; copy sprite count to x
+:
     cpx #7
     beq :+
     lda #0
@@ -584,13 +653,13 @@ countermove_calc:
     bcs :+++                ; if higher than value, jump ahead
 :                           ;.zerox
     lda #0
-    bvc :+++                ; no countermove
+    jmp :+++                ; no countermove
 :                           ;.negx
     lda #-2                 ; swap comparison order to get correct carry flag
     cmp SPEEDX,x
     bcc :--                 ; if not higher set zero countermove
     lda #1                  ; counter to positive direction
-    bvc :++
+    jmp :++
 :                           ;.posx
     lda #-1                 ; counter to negative direction
 :                           ;.storex
@@ -632,19 +701,21 @@ timer:
 :                           ;.d1
     dec TIMER_D1            ; decrement one from first digit
     bmi :+                  ; if negative, jump to digit 2
-    bvc .end                ; otherwise jump to end
+    jmp .end                ; otherwise jump to end
 :                           ;.d2
     stx TIMER_D1
     dec TIMER_D2
     bmi :+
-    bvc .end
+    jmp .end
 :                           ;.d3
     stx TIMER_D2
     dec TIMER_D3            ; if timer digit 3 is negative
     bmi :+                  ; the time has run out
-    bvc .end
+    jmp .end
 :                           ;.time_out
-    ldy #100
+    ldy #16                 ; 16 -> time out
+    jsr feedback_print      ; print text
+    ldy #100    
     jsr freeze
     jmp game_over         ; if time is out game is over
 .end
@@ -658,6 +729,15 @@ timer:
     adc #$30
     sta SCREEN+23*40+6
 
+    clc
+    lda TIMER_D3
+    bne :+
+    lda TIMER_D2
+    cmp #6
+    bcs :+
+    ldy #8                  ; 8 -> low time
+    jsr feedback_print
+:
 
 ;## update location buffer for previous positions ####################
     if DEBUG=1
@@ -665,7 +745,7 @@ timer:
     sta $d020               ; border color
     endif
 posbuffer_shift:
-    ldx #45
+    ldx #30
 :
     lda posbuffer,x
     sta posbuffer+3,x
@@ -677,6 +757,13 @@ posbuffer_shift:
     dex
     dex
     bpl :-
+
+    lda $d000
+    sta posbuffer
+    lda $d001
+    sta posbuffer+1
+    lda $d002
+    sta posbuffer+2
 
 ;## copy sprite from memory to vic ###################################
     if DEBUG=1
@@ -776,15 +863,21 @@ idlewait2:
     inc TIMER_F
     inc LEVEL_F
 
-    lda $d015               ; if collision is 1, all sprites
+    lda SPRITEACTIVE
     cmp #1                  ; might have been collected
     bne .ready
-    lda LEVEL_R             ; make sure by checking if all
-    cmp #7                  ; sprites were already activated
-    bne .ready
+
+    ldy #0                  ; 0 -> level up
+    jsr feedback_print      ; print text
     ldy #50
     jsr freeze
-    inc LEVEL_CUR           ; if so, initiate next level
+    clc
+    lda #$10                ; offset for next level
+    adc LEVELS_P
+    sta LEVELS_P
+    lda #0                  ; possible carry add
+    adc LEVELS_P+1
+    sta LEVELS_P+1
     jsr set_level
 .ready
     jmp main
@@ -814,6 +907,14 @@ text:   ascii " level 000              hi-score        "
         ascii "         for maximum score              "
         ascii "         hi-scores                      "
 
+feedback:
+        ascii "level up"
+        ascii "low time"
+        ascii "time out"
+        byte $40
+        ascii "ready"
+        byte $40,$40
+
 scrollertext:
     blk 40,$20              ; 40 spaces before the scroller
     incbin scroller.txt
@@ -825,7 +926,6 @@ scrollertext:
 ;## x and y coordinates + revealtimer + pad byte               ##
 ;## x needs to be multplied by 2 to get correct location       ##
 ;################################################################
-
 levels:
     byte 90, 72, 122, 154, 75, 200, 63, 98, 116, 98, 104, 200, 57, 154, 20, 0
     byte 170, 163, 48, 232, 150, 240, 91, 99, 108, 193, 32, 134, 164, 67, 20, 0
