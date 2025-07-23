@@ -3,15 +3,15 @@
 
 ;## directives ##########################################
 DEBUG        = 1            ; if 1 includes debug-related stuff
-SOUND        = 1            ; if zero skip sound routines
+SOUND        = 0            ; if zero skip sound routines
 MINIMAL      = 0            ; if set, disable animated stuff
 SKIPINTRO    = 0            ; go straight to game
 
 ;## constants ###########################################
-SCREEN       = $4000        ; screen memory
-SCREENSPR    = $4400        ; sprite screen memory
-SPRITE_MEM   = $10          ; $10 * $40 equals $400
-FONT         = $4800        ; font absolute location
+SCREEN       = $4400        ; screen memory
+SCREENSPR    = $4800        ; sprite screen memory
+SPRITE_MEM   = $20          ; $20 * $40 equals $800
+FONT         = $4000        ; font absolute location
 FXCHAR       = FONT+$200    ; character used for moving background FX
 COLORROW     = 23*40+16     ; location of color dots at the bottom
 MAX_SPEED    = 4            ; max movement speed
@@ -59,11 +59,7 @@ SINGLEBITS   = $58          ; $58-5f single bit index from low to high
 SPRITECOLOR  = $60          ; $60-67 colors for sprites
 
 SCROLLERPOS  = $68          ; +$69, indirect pointer to scroller
-SPRITEMEM    = $6a          ; +6b, pointer to current sprite location in main memory
-SPRITEVIC    = $6c
-SPRITEOFFSET = $6e
 LEVELS_P     = $70          ; pointer to level data
-
 SPEEDX       = $80          ; $80-8f, current speed of sprite
 
 
@@ -106,21 +102,21 @@ init:
 
     lda #%00000010          ; vic bank 1, $4000-$7FFF
     sta $dd00
-    lda #%00000010          ; VIC textmode 1, $0800-$0FFF
+    lda #%00010000          ; VIC textmode 1, $0800-$0FFF
     sta $d018               ; screen mem 0: $0000-$03FF
 
     if SOUND=1
     jsr play_init
     endif
 
-    ldy #SPRITE_MEM
+;    ldy #SPRITE_MEM
     ldx #0
 :
     lda SPRITECOLOR,x
     sta $d027,x             ; set sprite colors
-    tya
-    sta SCREEN+$03f8,x      ; set graphics to first sprite sheet
-    iny
+;    tya
+;    sta SCREEN+$03f8,x      ; set graphics to first sprite sheet
+;    iny
     inx
     cpx #8
     bne :-
@@ -159,48 +155,14 @@ gameinit:
     sta $d020               ; border color
     sta $d021               ; screen color
 
-    lda #%00000010          ; vic bank 1, $4000-$7FFF
-    sta $dd00
-    lda #%00000010          ; VIC textmode 6: $3000-$37FF,
-    sta $d018               ; screen mem 0: $0000-$03FF
-
-    ldy #SPRITE_MEM
+    ldy #SPRITE_MEM+8
     ldx #0
 :
-    lda SPRITECOLOR,x
-    sta $d027,x             ; set sprite colors
     tya
     sta SCREEN+$03f8,x      ; set graphics to first sprite sheet
     iny
     inx
     cpx #8
-    bne :-
-
-    clc
-    lda #0
-    sta SPRITEMEM
-    sta SPRITEVIC
-
-    lda #>spritesheet_0     ; high byte is enough as sprites
-    sta SPRITEMEM+1         ; align to 00 in low byte
-    lda #>SCREENSPR
-    sta SPRITEVIC+1
-
-    ldx #8
-:
-    ldy #$3f
-    jsr spritecopy
-    clc
-    lda #5
-    adc SPRITEMEM+1
-    sta SPRITEMEM+1
-    lda #$40
-    adc SPRITEVIC
-    sta SPRITEVIC
-    lda #0
-    adc SPRITEVIC+1
-    sta SPRITEVIC+1
-    dex
     bne :-
 
 ;## top text ############################################
@@ -673,8 +635,6 @@ countermove_calc:
     dex                     ; decrease x
     bpl countermove_calc    ; if not negative, go again
 
-
-
 ;## empty pointbuffer #################################################
 points:
     lda POINTBUFFER         ; get current value in point buffer
@@ -774,82 +734,6 @@ posbuffer_shift:
     sta posbuffer+1
     lda $d002
     sta posbuffer+2
-
-;## copy sprite from memory to vic ###################################
-    if DEBUG=1
-    lda #2
-    sta $d020               ; border color
-    endif
-spriteanim:
-    lda #0
-    sta SPRITEMEM
-    sta SPRITEVIC
-
-    lda #>spritesheet_0     ; high byte is enough as sprites
-    sta SPRITEMEM+1         ; align to 00 in low byte
-    lda #>SCREENSPR
-    sta SPRITEVIC+1
-
-    clc
-    if MINIMAL=1
-    lda #0
-    else
-    lda #$40
-    endif
-
-    adc SPRITEOFFSET
-    sta SPRITEOFFSET
-    lda #0
-    adc SPRITEOFFSET+1
-    sta SPRITEOFFSET+1
-    clc
-    lda SPRITEMEM
-    adc SPRITEOFFSET
-    sta SPRITEMEM
-    lda SPRITEMEM+1
-    adc SPRITEOFFSET+1
-    sta SPRITEMEM+1
-
-    ldx #8
-.loop
-    ldy #$3f
-    jsr spritecopy
-    clc
-    
-    if MINIMAL=1
-    lda #0
-    else
-    lda #5
-    endif
-
-    adc SPRITEMEM+1
-    sta SPRITEMEM+1
-    lda #$40
-    adc SPRITEVIC
-    sta SPRITEVIC
-    lda #0
-    adc SPRITEVIC+1
-    sta SPRITEVIC+1
-    dex
-    bne .loop
-
-
-    inc ANIMF
-    lda ANIMF
-
-    if MINIMAL=1
-    cmp #1
-    else
-    cmp #19
-    endif
-
-    bne .end
-    lda #0
-    sta ANIMF
-    sta SPRITEOFFSET
-    sta SPRITEOFFSET+1
-.end
-
     if DEBUG=1
     lda #0
     sta $d020               ; border color
@@ -896,7 +780,6 @@ idlewait2:
 .ready
     jmp main
 
-
     include titlescreen.s
     include subroutines.s
     include sound.s
@@ -914,22 +797,23 @@ singlebits      byte %00000001,%00000010,%00000100,%00001000,%00010000,%00100000
 spritecolor     byte 10,2,8,7,5,3,6,4
 
 ;## non-zeropage ################################################
-text:   ascii " level 000              hi-score        "
-        ascii " time 000                  score 000000 "
+text:
+    ascii " level 000              hi-score        "
+    ascii " time 000                  score 000000 "
 
-        ascii "       collect colors in order          "
-        ascii "         for maximum score              "
-        ascii "         hi-scores                      "
+    ascii "       collect colors in order          "
+    ascii "         for maximum score              "
+    ascii "         hi-scores                      "
 
 feedback:
-        ascii "level up"
-        ascii "low time"
-        ascii "time out"
-        byte $40
-        ascii "ready"
-        byte $40,$40
-        ascii "  wait  "
-        ascii "bonustime +"
+    ascii "level up"
+    ascii "low time"
+    ascii "time out"
+    byte $40
+    ascii "ready"
+    byte $40,$40
+    ascii "  wait  "
+    ascii "bonustime +"
 
 scrollertext:
     blk 40,$20              ; 40 spaces before the scroller
@@ -943,9 +827,6 @@ scrollertext:
 ;## x needs to be multplied by 2 to get correct location       ##
 ;################################################################
 levels:
-;    byte 90, 72, 122, 154, 75, 200, 63, 98, 116, 98, 104, 200, 57, 154, 20, 0
-;    byte 170, 163, 48, 232, 150, 240, 91, 99, 108, 193, 32, 134, 164, 67, 20, 0
-
     byte 90, 72, 116, 98, 122, 154, 104, 200, 75, 200, 57, 154, 63, 98, 20, 0
     byte 102, 72, 136, 192, 56, 184, 58, 67, 137, 128, 100, 217, 37, 117, 20, 0
     byte 132, 202, 129, 154, 113, 109, 90, 77, 65, 63, 45, 68, 33, 88, 10, 0
@@ -965,10 +846,12 @@ sintable:   ; 36 delta sine values, twice to allow offsets
 posbuffer:  ; used to store previous positions of hero sprite
     blk 48
 
+    org FONT
+    incbin font.bin             ; 1kb font
 
-    org $5000
+    org $4800
 spritelogo:
-    incbin sprite_logo_0.bin
+    incbin sprite_logo_0.bin    ; 8 slots for logo
 spritesheet_0:
     if MINIMAL=1
     incbin sprite_logo_0.bin
@@ -977,5 +860,3 @@ spritesheet_0:
     endif
 
 
-    org FONT
-    incbin font.bin             ; 1kb font

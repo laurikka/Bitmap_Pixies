@@ -12,22 +12,6 @@ titlescreen:
     endif
 
 ;# sprite init ################################################
-    lda #0
-    sta SPRITEMEM
-    sta SPRITEVIC
-
-    lda #>spritelogo        ; high byte is enough as sprites
-    sta SPRITEMEM+1         ; align to 00 in low byte
-
-    lda #>SCREENSPR
-    sta SPRITEVIC+1
-
-    ldy #0                  ; 0 means go through 256 times
-    jsr spritecopy
-
-    inc SPRITEMEM+1         ; 1 in high byte is 4 sprite slots
-    inc SPRITEVIC+1
-    jsr spritecopy
 
     clc
     lda #0
@@ -46,8 +30,6 @@ titlescreen:
     ldy #SPRITE_MEM
     ldx #0
 :
-    lda SPRITECOLOR,x
-    sta $d027,x             ; set sprite colors
     tya
     sta SCREEN+$03f8,x      ; set graphics to first sprite sheet
     iny
@@ -159,17 +141,12 @@ title_main:
 
     clc
     lda TITLE_READY
-    cmp #2
+    cmp #1
     bcc :+
     lda $dc00               ; read port A joystick 2 bits
     and #%00001111
     cmp #%00001111
     bne .start_game
-;    jmp :++
-:
-;    ldy #32
-;    jsr feedback_print
-;:
 
     ldx #7    
 .coloranim
@@ -334,7 +311,6 @@ title_main:
     endif
 
                             ;.ready
-;    jsr feedback_dec
     dec SCROLLER_F
     inc TITLE_F
     jmp title_main

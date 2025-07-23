@@ -206,18 +206,6 @@ freeze:
     bne :-
     rts
 
-;## sprite copy from memory to vic #######
-;## y is how many loops                 ##
-;## SPRITEMEM is sprites in memory      ##
-;## SPRITEVIC is sprite area in vic     ##
-spritecopy:
-    lda (SPRITEMEM),y
-    sta (SPRITEVIC),y
-    dey
-    bne spritecopy
-    lda (SPRITEMEM),y
-    sta (SPRITEVIC),y
-    rts
 
 ;## feedback routines ####################
 feedback_print:             ; print text to screen

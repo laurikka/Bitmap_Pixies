@@ -68,7 +68,7 @@ for x in range(len(blocks)):
 
 ## write out data in binary form ##################################################################
 
-newFile = open(newname, "wb")
+newFile = open(sys.argv[2], "wb")
 for i in range(len(bytelist)):
     newFile.write(bytelist[i].to_bytes(1, byteorder='big'))
 
