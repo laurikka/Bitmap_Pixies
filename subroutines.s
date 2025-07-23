@@ -44,6 +44,8 @@ set_level:
     dex
     bpl .loop
 
+    jsr feedback_bonustime_clear
+
     ldy #24                 ; 24 -> ready
     jsr feedback_print      ; print text
 
@@ -58,7 +60,7 @@ set_level:
     sta SPEEDX
     sta SPEEDX+1
 
-    inc TIMER_D3
+;    inc TIMER_D3
     inc SCREEN+40+9
     rts
 
@@ -164,7 +166,7 @@ bgfx:
     sta FXCHAR+1
     tya
     sta FXCHAR
-:                            ;.endy
+:                            ; end
     rts
 
 ;## clear screen #########################
@@ -198,6 +200,7 @@ freeze:
     bne :-                  ; wait until true
     sty VAR0                ; save y to temp var
     jsr bgfx                ; continue bgfx during freeze
+    jsr play_start          ; keep playing sound
     ldy VAR0                ; restore y
     dey
     bne :-
@@ -216,19 +219,151 @@ spritecopy:
     sta (SPRITEVIC),y
     rts
 
-feedback_print:                   ; print text to screen
+;## feedback routines ####################
+feedback_print:             ; print text to screen
     ldx #0
 .textloop
-    lda feedback,y
+    lda feedback,y          ; y is offset to text table
     cmp #$60
     bcc :+
     sbc #$60
 :
-    sta SCREEN+10*40+16,x          ; text location with row offset
+    sta SCREEN+10*40+16,x   ; text location with row offset
     iny
     inx
     cpx #8
     bne .textloop
+    lda #25
+    sta FEEDBACK_F
+    rts
+
+feedback_points:            ; print points to screen
+    lda #$40
+    sta SCREEN+10*40+16
+    sta SCREEN+10*40+17
+    sta SCREEN+10*40+18
+    lda #$2b                ; "+"-sign
+    sta SCREEN+10*40+19
+    tya                     ; points to print should be in y
+    clc
+    adc #$30
+    sta SCREEN+10*40+20
+    lda #$40
+    sta SCREEN+10*40+21
+    sta SCREEN+10*40+22
+    sta SCREEN+10*40+23
+    lda #15
+    sta FEEDBACK_F
+    rts
+
+feedback_bonustime:            ; print points to screen
+    ldx #0
+.textloop
+    lda feedback,y          ; y is offset to text table
+    cmp #$60
+    bcc :+
+    sbc #$60
+:
+    sta SCREEN+12*40+12,x   ; text location with row offset
+    iny
+    inx
+    cpx #11
+    bne .textloop
+    clc
+:
+    lda BONUSTIME_D1
+    cmp #10
+    bcc :+
+    clc
+    inc BONUSTIME_D2
+;    lda BONUSTIME_D1
+    sbc #10
+    sta BONUSTIME_D1
+    clc
+    bcs :-
+:
+    clc
+    lda BONUSTIME_D2
+    cmp #10
+    bcc :+
+    clc
+    inc BONUSTIME_D3
+;    lda BONUSTIME_D2
+    sbc #10
+    sta BONUSTIME_D2
+    clc
+    bcs :-
+:
+    lda BONUSTIME_D3
+    adc #$30
+    sta SCREEN+12*40+23
+    lda BONUSTIME_D2
+    adc #$30
+    sta SCREEN+12*40+24
+    lda BONUSTIME_D1
+    adc #$30
+    sta SCREEN+12*40+25
+
+    clc
+    lda BONUSTIME_D1
+    adc TIMER_D1
+    sta TIMER_D1
+    lda #0
+    adc TIMER_D2
+    sta TIMER_D2
+    clc
+    lda BONUSTIME_D2
+    adc TIMER_D2
+    sta TIMER_D2
+    lda #0
+    adc TIMER_D3
+    sta TIMER_D3
+    clc
+    lda BONUSTIME_D3
+    adc TIMER_D3
+    sta TIMER_D3
+    clc
+
+    clc
+:
+    lda TIMER_D1
+    cmp #10
+    bcc :+
+    clc
+    inc TIMER_D2
+;    lda TIMER_D1
+    sbc #10
+    sta TIMER_D1
+    clc
+    bcs :-
+:
+    clc
+    lda TIMER_D2
+    cmp #10
+    bcc :+
+    clc
+    inc TIMER_D3
+;    lda TIMER_D2
+    sbc #10
+    sta TIMER_D2
+    clc
+    bcs :-
+:
+
+
+    lda #0
+    sta BONUSTIME_D1
+    sta BONUSTIME_D2
+    sta BONUSTIME_D3
+    rts
+
+feedback_bonustime_clear:
+    ldx #13
+    lda #$40
+:
+    sta SCREEN+12*40+12,x          ; text location with row offset
+    dex
+    bpl :-
     rts
 
 feedback_clear:
@@ -240,7 +375,19 @@ feedback_clear:
     bpl :-
     rts
 
+feedback_dec:
+    lda FEEDBACK_F
+    bmi :+++
+    beq :+
+    jmp :++
+:
+    jsr feedback_clear
+:
+    dec FEEDBACK_F
+:
+    rts
 
+;## game over ############################
 game_over:
     clc
     ldx #5

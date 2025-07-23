@@ -2,9 +2,9 @@
     incdir bin
 
 ;## directives ##########################################
-DEBUG        = 0            ; if 1 includes debug-related stuff
-SOUND        = 0            ; if zero skip sound routines
-MINIMAL      = 1            ; if set, disable animated stuff
+DEBUG        = 1            ; if 1 includes debug-related stuff
+SOUND        = 1            ; if zero skip sound routines
+MINIMAL      = 0            ; if set, disable animated stuff
 SKIPINTRO    = 0            ; go straight to game
 
 ;## constants ###########################################
@@ -23,7 +23,7 @@ DOWN_LIMIT   = 250
 
 ;## zero page addresses #############################################
 VAR0         = $10          ; reusable variables
-
+FEEDBACK_F   = $11          ; delay for clearing feedback from screen
 COLLIDED     = $12          ; current collided sprites
 TARGET       = $13          ; next sprite to collect
 LEVEL_F      = $14          ; level variable for counting frames
@@ -38,8 +38,10 @@ CARRY_CUR    = $1C          ; spriteloop temp storage for x extra bit
 TEMPY        = $1D          ; spriteloop temp y for processing
 X8BIT        = $1E          ; spriteloop temp x 8th bit for processing
 COLLECTED    = $1F          ; store collected sprites
+BONUSTIME_D1 = $20          ; collect points during level
+BONUSTIME_D2 = $21
+BONUSTIME_D3 = $22
 
-SPEEDX       = $20          ; $20-2f, current speed of sprite
 ANIMF        = $30          ; $30-37, current animation frame for sprite
 
 TITLE_F      = $38          ; framecounter for title screen
@@ -62,6 +64,9 @@ SPRITEVIC    = $6c
 SPRITEOFFSET = $6e
 LEVELS_P     = $70          ; pointer to level data
 
+SPEEDX       = $80          ; $80-8f, current speed of sprite
+
+
 ; $e* reserved for sound
 
 ;## global init ############################################################
@@ -73,9 +78,9 @@ init:
     sei                     ; disable intterrupts
 
     lda #0
-    ldx #$30
+    ldx #$80
 :
-    sta $10,x               ; clear zeropage between $10-$40
+    sta $10,x               ; clear zeropage between $10-$ff
     dex
     bpl :-                  ; jump to previous anonymous label
 
@@ -98,13 +103,6 @@ init:
     sta SCROLLERPOS         ; location is stored in two bytes
     lda #>scrollertext      ; in zero page
     sta SCROLLERPOS+1
-
-    lda #0
-    ldx #$10
-:
-    sta $68,x
-    dex
-    bpl :-
 
     lda #%00000010          ; vic bank 1, $4000-$7FFF
     sta $dd00
@@ -142,9 +140,9 @@ gameinit:
     ldy #11                 ; color to fill screen
     jsr clearscreen
 
-    lda #<levels      ; indirect 16-bit adress of scrolltext
-    sta LEVELS_P         ; location is stored in two bytes
-    lda #>levels      ; in zero page
+    lda #<levels            ; indirect 16-bit adress of scrolltext
+    sta LEVELS_P            ; location is stored in two bytes
+    lda #>levels            ; in zero page
     sta LEVELS_P+1
 
     if SOUND=1
@@ -160,7 +158,6 @@ gameinit:
     sta $d01b               ; sprite bg priority
     sta $d020               ; border color
     sta $d021               ; screen color
-
 
     lda #%00000010          ; vic bank 1, $4000-$7FFF
     sta $dd00
@@ -272,7 +269,7 @@ gameinit:
     adc #$30
     sta $8000+23*40+7
     clc
-    lda #0
+    lda #1
     sta TIMER_D3
     adc #$30
     sta $8000+23*40+6
@@ -447,7 +444,7 @@ sprite_collision:
     beq :+                  ; if equal, jump to commit
     dex                     
     bne :-
-
+    jmp .end
 :                           ; commit
     eor #%11111110          ; flip the bits for collision
         
@@ -458,7 +455,13 @@ sprite_collision:
     lsr                     ; shift right and remove sprite 0
     cmp PREV_CATCH          ; compare to previous catch
     beq :+                  ; if equal, award more points
+
     inc POINTBUFFER
+    inc BONUSTIME_D1
+    inc BONUSTIME_D1
+    inc BONUSTIME_D1
+    ldy #1
+    jsr feedback_points
     jmp .end
 :                           ; five points
     asl                     ; shift bit pattern left
@@ -476,6 +479,10 @@ sprite_collision:
     lda #5
     adc POINTBUFFER
     sta POINTBUFFER
+    inc BONUSTIME_D2
+    inc BONUSTIME_D2
+    ldy #5
+    jsr feedback_points
 .end
 
 ;## trailing sprites ################################################
@@ -577,7 +584,6 @@ sprite_collision:
     ldx LEVEL_R             ; copy sprite count to x
     cpx #1
     bne :+
-    jsr feedback_clear      ; clear text
     ldx LEVEL_R             ; copy sprite count to x
 :
     cpx #7
@@ -733,8 +739,12 @@ timer:
     lda TIMER_D3
     bne :+
     lda TIMER_D2
-    cmp #6
+    cmp #3
     bcs :+
+    ldy FEEDBACK_F
+    bpl :+
+    ldy #10
+    sta FEEDBACK_F
     ldy #8                  ; 8 -> low time
     jsr feedback_print
 :
@@ -771,7 +781,6 @@ posbuffer_shift:
     sta $d020               ; border color
     endif
 spriteanim:
-
     lda #0
     sta SPRITEMEM
     sta SPRITEVIC
@@ -859,9 +868,12 @@ idlewait2:
     sta $d020               ; border color
     endif
 
+    jsr feedback_dec
+
     sta $d01e               ; reset sprite collision
     inc TIMER_F
     inc LEVEL_F
+
 
     lda SPRITEACTIVE
     cmp #1                  ; might have been collected
@@ -869,6 +881,8 @@ idlewait2:
 
     ldy #0                  ; 0 -> level up
     jsr feedback_print      ; print text
+    ldy #40
+    jsr feedback_bonustime
     ldy #50
     jsr freeze
     clc
@@ -914,6 +928,8 @@ feedback:
         byte $40
         ascii "ready"
         byte $40,$40
+        ascii "  wait  "
+        ascii "bonustime +"
 
 scrollertext:
     blk 40,$20              ; 40 spaces before the scroller
@@ -927,8 +943,17 @@ scrollertext:
 ;## x needs to be multplied by 2 to get correct location       ##
 ;################################################################
 levels:
-    byte 90, 72, 122, 154, 75, 200, 63, 98, 116, 98, 104, 200, 57, 154, 20, 0
-    byte 170, 163, 48, 232, 150, 240, 91, 99, 108, 193, 32, 134, 164, 67, 20, 0
+;    byte 90, 72, 122, 154, 75, 200, 63, 98, 116, 98, 104, 200, 57, 154, 20, 0
+;    byte 170, 163, 48, 232, 150, 240, 91, 99, 108, 193, 32, 134, 164, 67, 20, 0
+
+    byte 90, 72, 116, 98, 122, 154, 104, 200, 75, 200, 57, 154, 63, 98, 20, 0
+    byte 102, 72, 136, 192, 56, 184, 58, 67, 137, 128, 100, 217, 37, 117, 20, 0
+    byte 132, 202, 129, 154, 113, 109, 90, 77, 65, 63, 45, 68, 33, 88, 10, 0
+    byte 133, 193, 79, 101, 89, 232, 170, 127, 127, 91, 14, 190, 20, 41, 30, 0
+    byte 126, 85, 170, 133, 51, 149, 112, 187, 10, 102, 45, 236, 71, 63, 10, 0
+    byte 67, 195, 45, 202, 112, 179, 90, 187, 22, 210, 157, 164, 135, 172, 10, 0
+    byte 119, 98, 127, 169, 49, 184, 81, 172, 143, 122, 40, 123, 91, 103, 25, 0
+
 
 highscore:
     blk 24,$30              ; 4 rows of 6 zeroes

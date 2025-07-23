@@ -1,4 +1,4 @@
-all: game.prg
+all: font.bin game.prg
 
 game.prg: game.s titlescreen.s subroutines.s sound.s bin/music.bin bin/spritesheet_0.bin bin/sprite_ball_0.bin bin/font.bin scroller.txt
 		vasm6502_oldstyle -Fbin -cbm-prg -opt-branch game.s -o game.prg

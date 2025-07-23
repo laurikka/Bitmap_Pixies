@@ -165,7 +165,11 @@ title_main:
     and #%00001111
     cmp #%00001111
     bne .start_game
+;    jmp :++
 :
+;    ldy #32
+;    jsr feedback_print
+;:
 
     ldx #7    
 .coloranim
@@ -330,6 +334,7 @@ title_main:
     endif
 
                             ;.ready
+;    jsr feedback_dec
     dec SCROLLER_F
     inc TITLE_F
     jmp title_main
