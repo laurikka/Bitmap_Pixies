@@ -15,7 +15,7 @@ set_level:
     lda #$ff
     sta SPRITEACTIVE        ; reset active sprites
     ldy #14
-    lda (LEVELS_P),y          ; load revealtimer for level
+    lda (LEVELS_P),y        ; load revealtimer for level
     sta REVEALTIMER
     lda #$61
     sta SCREEN+COLORROW     ; flip to active char for colorrow pos 0
@@ -27,9 +27,18 @@ set_level:
     sta SCREEN+COLORROW+5
     sta SCREEN+COLORROW+6
 
+    lda SPRITE_LEVEL
+    ldx #0
+:
+    sta SCREEN+$03f8,x      ; set graphics to first sprite sheet
+    inx
+    cpx #8
+    bne :-
+
+
     ldy #12
     ldx #12
-.loop                       ; read sprite coordinates from level data
+:                       ; read sprite coordinates from level data
     clc
     lda (LEVELS_P),y
     asl                     ; multiply x
@@ -42,7 +51,7 @@ set_level:
     dey
     dex
     dex
-    bpl .loop
+    bpl :-
 
     jsr feedback_bonustime_clear
 
@@ -60,7 +69,6 @@ set_level:
     sta SPEEDX
     sta SPEEDX+1
 
-;    inc TIMER_D3
     inc SCREEN+40+9
     rts
 
@@ -201,11 +209,30 @@ freeze:
     sty VAR0                ; save y to temp var
     jsr bgfx                ; continue bgfx during freeze
     jsr play_start          ; keep playing sound
+    jsr sprite_animation
     ldy VAR0                ; restore y
     dey
     bne :-
     rts
 
+;## sprite animation ################################################
+sprite_animation:
+    clc
+    ldx #0
+:
+    lda ANIMF,x
+    adc #1
+    cmp #20
+    bne :+
+    lda #0
+:
+    sta ANIMF,x
+    adc SPRITE_LEVEL
+    sta SCREEN+$03f8,x      ; set graphics to first sprite sheet
+    inx
+    cpx #8
+    bne :--
+    rts
 
 ;## feedback routines ####################
 feedback_print:             ; print text to screen
@@ -337,7 +364,6 @@ feedback_bonustime:            ; print points to screen
     clc
     bcs :-
 :
-
 
     lda #0
     sta BONUSTIME_D1

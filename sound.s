@@ -15,34 +15,42 @@ PWSPEED3    = 5
 ;    cpu 6510                ; identifier for assembler to target c64
 	org $2000
 
-    jsr play_init
-    jsr play_start_init
-
-loop
-    ldx $d012               ; load current raster line
-    cpx #$60                ; compare to given number
-    bne loop                ; wait until true
-    lda #1
-    sta $d020,x
-
-    jsr play_start
-
-    lda #0
-    sta $d020,x
-    jmp loop
-
+;    jsr play_init
+;    jsr play_start_init
+;
+;loop
+;    ldx $d012               ; load current raster line
+;    cpx #$60                ; compare to given number
+;    bne loop                ; wait until true
+;    lda #1
+;    sta $d020,x
+;
+;    jsr play_start
+;
+;    lda #0
+;    sta $d020,x
+;    jmp loop
+;
 play_init:
+    clc
     lda #0
     sta PLAY_FRAME
     sta ch1_pos
 
-    ldx #11
+    ldx #7
     lda #0
 :
     sta ch1pwl,x
-    sta $d020,x
     dex
     bpl :-
+
+    ldx #20
+    lda #0
+:
+    sta $d400,x
+    dex
+    bpl :-
+
 
     lda #%00001111          ; volume to max
     sta $d418
@@ -51,6 +59,7 @@ play_init:
     sta $d404
     sta $d40b
     sta $d412
+    rts
 
 play_intro:
     jsr pw_update

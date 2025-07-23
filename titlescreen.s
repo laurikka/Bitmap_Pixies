@@ -7,10 +7,6 @@ titlescreen:
     ldy #11                 ; color to fill screen
     jsr clearscreen
 
-    if SOUND=1
-    jsr play_init
-    endif
-
 ;# sprite init ################################################
 
     clc
@@ -116,17 +112,25 @@ titlescreen:
     clc
     tay
     lda SPRITECOLOR,x
-    sta $d800+(18*40)+14,x    ; store color to text row with x-offset
+    sta $d027,x             ; set sprite colors
+    sta $d800+(18*40)+14,x  ; store color to text row with x-offset
     tya
-    dex                       ; decrement x
-    bpl :-                    ; if positive, loop back
+    dex                     ; decrement x
+    bpl :-                  ; if positive, loop back
 
 
     if DEBUG=1
     lda #1
-    sta $d020                 ; border color
+    sta $d020               ; border color
     endif
 
+    if SOUND=1
+    jsr play_init
+    endif
+
+;#######################################################
+;## title main                                        ##
+;#######################################################
 
 title_main:
 
@@ -147,7 +151,7 @@ title_main:
     and #%00001111
     cmp #%00001111
     bne .start_game
-
+:
     ldx #7    
 .coloranim
     inc SCREEN+(18*40)+14,x

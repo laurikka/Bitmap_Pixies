@@ -2,8 +2,8 @@
     incdir bin
 
 ;## directives ##########################################
-DEBUG        = 1            ; if 1 includes debug-related stuff
-SOUND        = 0            ; if zero skip sound routines
+DEBUG        = 0            ; if 1 includes debug-related stuff
+SOUND        = 1            ; if zero skip sound routines
 MINIMAL      = 0            ; if set, disable animated stuff
 SKIPINTRO    = 0            ; go straight to game
 
@@ -41,26 +41,25 @@ COLLECTED    = $1F          ; store collected sprites
 BONUSTIME_D1 = $20          ; collect points during level
 BONUSTIME_D2 = $21
 BONUSTIME_D3 = $22
-
+SCROLLERPOS  = $23          ; +$24, indirect pointer to scroller
+LEVELS_P     = $25          ; +$26 pointer to level data
+SPRITE_LEVEL = $27          ; offset for sprite animation sheet
+TITLE_F      = $28          ; framecounter for title screen
+TITLE_READY  = $29          ; marker to delay game start immediately after
+SCROLLER_F   = $2A
+SPRITEACTIVE = $2B
+TIMER_F      = $2C
+TIMER_D1     = $2D          ; three decimal digits for time left
+TIMER_D2     = $2E
+TIMER_D3     = $2F
 ANIMF        = $30          ; $30-37, current animation frame for sprite
 
-TITLE_F      = $38          ; framecounter for title screen
-TITLE_READY  = $39          ; marker to delay game start immediately after
-SCROLLER_F   = $3A
-SPRITEACTIVE = $3B
-TIMER_F      = $3C
-TIMER_D1     = $3D          ; three decimal digits for time left
-TIMER_D2     = $3E
-TIMER_D3     = $3F
-
+SPRITECOLOR  = $38          ; $38-3f colors for sprites
 COLLISION    = $40          ; $40-47 bitmasks to compare collided sprites
 CARRYBIT     = $48          ; $48-57 for calculating the extra x bit
 SINGLEBITS   = $58          ; $58-5f single bit index from low to high
-SPRITECOLOR  = $60          ; $60-67 colors for sprites
 
-SCROLLERPOS  = $68          ; +$69, indirect pointer to scroller
-LEVELS_P     = $70          ; pointer to level data
-SPEEDX       = $80          ; $80-8f, current speed of sprite
+SPEEDX       = $60          ; $60-6f, current speed of sprite
 
 
 ; $e* reserved for sound
@@ -74,16 +73,16 @@ init:
     sei                     ; disable intterrupts
 
     lda #0
-    ldx #$80
+    ldx #$60
 :
-    sta $10,x               ; clear zeropage between $10-$ff
+    sta $10,x               ; clear zeropage between $10-$6f
     dex
     bpl :-                  ; jump to previous anonymous label
 
-    ldx #$38
+    ldx #$28
 :                           ; copy to zeropage from tables
     lda to_zeropage,x
-    sta $40,x
+    sta $38,x
     dex
     bpl :-
 
@@ -105,21 +104,17 @@ init:
     lda #%00010000          ; VIC textmode 1, $0800-$0FFF
     sta $d018               ; screen mem 0: $0000-$03FF
 
+    ldx #7
+:
+    lda SPRITECOLOR,x
+    sta $d027,x             ; set sprite colors
+    dex
+    bpl :-
+
     if SOUND=1
     jsr play_init
     endif
 
-;    ldy #SPRITE_MEM
-    ldx #0
-:
-    lda SPRITECOLOR,x
-    sta $d027,x             ; set sprite colors
-;    tya
-;    sta SCREEN+$03f8,x      ; set graphics to first sprite sheet
-;    iny
-    inx
-    cpx #8
-    bne :-
 
 ;# first go to title screen ###################################
 
@@ -141,6 +136,11 @@ gameinit:
     lda #>levels            ; in zero page
     sta LEVELS_P+1
 
+    clc
+    lda #SPRITE_MEM
+    adc #8
+    sta SPRITE_LEVEL        ; first set of animated sprites
+
     if SOUND=1
     jsr play_start_init
     endif
@@ -155,17 +155,7 @@ gameinit:
     sta $d020               ; border color
     sta $d021               ; screen color
 
-    ldy #SPRITE_MEM+8
-    ldx #0
-:
-    tya
-    sta SCREEN+$03f8,x      ; set graphics to first sprite sheet
-    iny
-    inx
-    cpx #8
-    bne :-
-
-;## top text ############################################
+ ;## top text ############################################
     ldx #39
     ldy #$40
 .loop_top
@@ -287,6 +277,16 @@ gameinit:
     lda #$28
     sta SCREEN+24*40+39
 
+    clc
+    lda #0
+    ldx #0
+:
+    sta ANIMF,x
+    adc #2
+    inx
+    cpx #8
+    bne :-
+
 ;## start level 1 ########################
 
     lda #0
@@ -386,8 +386,9 @@ spriteloop:
     lda X8BIT
     sta $d010               ; put 8th x bit back to hardware
 
+    jsr sprite_animation
 
-;##collision check###################################################
+;## collision check #################################################
     if DEBUG=1
     inc $d020               ; border color during calculations
     endif
@@ -776,6 +777,15 @@ idlewait2:
     lda #0                  ; possible carry add
     adc LEVELS_P+1
     sta LEVELS_P+1
+    clc
+    lda SPRITE_LEVEL
+    adc #20
+    cmp #90
+    bcc :+
+    clc
+    lda #SPRITE_MEM+8
+:
+    sta SPRITE_LEVEL
     jsr set_level
 .ready
     jmp main
@@ -791,10 +801,10 @@ idlewait2:
     org $3000
 ;## bit patterns used for testing conditions
 to_zeropage:
+spritecolor     byte 10,2,8,7,5,3,6,4
 collision       byte 0,%00000011,%00000101,%00001001,%00010001,%00100001,%01000001,%10000001
 carrybit        byte %00000001,0,%00000010,0,%00000100,0,%00001000,0,%00010000,0,%00100000,0,%01000000,0,%10000000,0
 singlebits      byte %00000001,%00000010,%00000100,%00001000,%00010000,%00100000,%01000000,%10000000
-spritecolor     byte 10,2,8,7,5,3,6,4
 
 ;## non-zeropage ################################################
 text:
