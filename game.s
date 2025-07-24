@@ -744,7 +744,6 @@ idlewait2:
     clc
     lda SPRITE_LEVEL        ; update pointer for sprites
     adc #20
-    cmp #90                 ; reset if higher than total amount
     bcc :+
     clc
     lda #SPRITE_MEM+8
