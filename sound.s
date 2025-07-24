@@ -15,7 +15,7 @@ PWSPEED2    = 7
 PWSPEED3    = 5
 
 ;    cpu 6510                ; identifier for assembler to target c64
-	org $2000
+;	org $2000
 
 ;    jsr play_init
 ;    jsr play_start_init
@@ -142,14 +142,14 @@ play_start_init:
     sta PLAY_FRAME
     sta ch1_pos
 
-    lda #%00011000          ; 0-3 decay, 4-7 attack
+    lda #%00011010          ; 0-3 decay, 4-7 attack
     sta $d405               ; ch 1
     lda #%00011100          ; 0-3 decay, 4-7 attack
     sta $d40c               ; ch 2
     lda #%00100010          ; 0-3 decay, 4-7 attack
     sta $d413               ; ch 3
 
-    lda #%01001000          ; 0-3 release, 4-7 sustain vol
+    lda #%01001010          ; 0-3 release, 4-7 sustain vol
     sta $d406               ; ch 1
     lda #%01001100          ; 0-3 release, 4-7 sustain vol
     sta $d40d               ; ch 2

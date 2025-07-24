@@ -8,8 +8,11 @@ set_level:
     lda #0                  ; reset level timers
     sta LEVEL_F
     sta LEVEL_R
-    sta TARGET              ; reset target color
     sta COLLIDED
+    sta BONUSTIME_D1
+    sta BONUSTIME_D2
+    sta BONUSTIME_D3
+    sta $d010
     lda #1
     sta $d015               ; reset sprite visibility
     sta PREV_CATCH          ; init previous catch variable
@@ -38,21 +41,27 @@ set_level:
 
 
     ldy #12
-    ldx #12
+    ldx #6
 :                       ; read sprite coordinates from level data
     clc
     lda (LEVELS_P),y
+    bpl :+
+    lda singlebits+1,x
+    eor $d010
+    sta $d010
+    lda (LEVELS_P),y
+    adc #$80
+:
     asl                     ; multiply x
-    sta $d002,x             ; store x
+    sta $d002,y             ; store x
     iny
     lda (LEVELS_P),y
-    sta $d002+1,x
+    sta $d002,y
     dey
     dey
     dey
     dex
-    dex
-    bpl :-
+    bpl :--
 
     jsr feedback_bonustime_clear
 
@@ -373,20 +382,19 @@ feedback_bonustime:         ; print points to screen
     cmp #10
     bcc :+
     clc
-    inc BONUSTIME_D2
-    sbc #10
+    adc #$f6
     sta BONUSTIME_D1
+    inc BONUSTIME_D2
     clc
     bcc :-
 :
-    clc
     lda BONUSTIME_D2
     cmp #10
     bcc :+
     clc
-    inc BONUSTIME_D3
-    sbc #10
+    adc #$f6
     sta BONUSTIME_D2
+    inc BONUSTIME_D3
     clc
     bcc :-
 :
@@ -399,51 +407,40 @@ feedback_bonustime:         ; print points to screen
     lda BONUSTIME_D1
     adc #$30
     sta SCREEN+12*40+25
-
     clc
     lda BONUSTIME_D1
     adc TIMER_D1
     sta TIMER_D1
-    lda #0
-    adc TIMER_D2
-    sta TIMER_D2
     clc
     lda BONUSTIME_D2
     adc TIMER_D2
     sta TIMER_D2
-    lda #0
-    adc TIMER_D3
-    sta TIMER_D3
     clc
     lda BONUSTIME_D3
     adc TIMER_D3
     sta TIMER_D3
     clc
 
-    clc
 :
     lda TIMER_D1
     cmp #10
     bcc :+
     clc
-    inc TIMER_D2
-;    lda TIMER_D1
-    sbc #10
+    adc #$f6
     sta TIMER_D1
+    inc TIMER_D2
     clc
-    bcs :-
+    bcc :-
 :
-    clc
     lda TIMER_D2
     cmp #10
     bcc :+
     clc
-    inc TIMER_D3
-;    lda TIMER_D2
-    sbc #10
+    adc #$f6
     sta TIMER_D2
+    inc TIMER_D3
     clc
-    bcs :-
+    bcc :-
 :
 
     lda #0

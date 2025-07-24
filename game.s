@@ -26,7 +26,7 @@ VAR0         = $10          ; reusable variables
 VAR1         = $17
 FEEDBACK_F   = $11          ; delay for clearing feedback from screen
 COLLIDED     = $12          ; current collided sprites
-TARGET       = $13          ; next sprite to collect
+LEVEL        = $13          ; hold level number
 LEVEL_F      = $14          ; level variable for counting frames
 LEVEL_R      = $15          ; level variable for revealing sprites
 REVEALTIMER  = $16          ; level variable for delay before reveal
@@ -42,7 +42,7 @@ BONUSTIME_D1 = $20          ; collect points during level
 BONUSTIME_D2 = $21
 BONUSTIME_D3 = $22
 SCROLLERPOS  = $23          ; +$24, indirect pointer to scroller
-LEVELS_P     = $25          ; +$26 pointer to level data
+LEVELS_P     = $25          ; +$26, pointer to level data
 SPRITE_LEVEL = $27          ; offset for sprite animation sheet
 TITLE_F      = $28          ; framecounter for title screen
 TITLE_READY  = $29          ; marker to delay game start immediately after
@@ -123,6 +123,8 @@ init:
     endif
 
 gameinit:
+    lda #0
+    sta LEVEL
 
     lda #$C8                ; reset screen control register
     sta $d016
@@ -212,12 +214,12 @@ gameinit:
     adc #$30
     sta $8000+23*40+8
     clc
-    lda #5
+    lda #0
     sta TIMER_D2
     adc #$30
     sta $8000+23*40+7
     clc
-    lda #1
+    lda #2
     sta TIMER_D3
     adc #$30
     sta $8000+23*40+6
@@ -415,9 +417,11 @@ sprite_collision:
 
     inc POINTBUFFER
     clc
-    lda #5
-    adc BONUSTIME_D1
-    sta BONUSTIME_D1
+    inc BONUSTIME_D1
+    inc BONUSTIME_D1
+    inc BONUSTIME_D1
+    inc BONUSTIME_D1
+    inc BONUSTIME_D1
     ldy #1
     jsr feedback_points
     jsr play_retrigger_ch1
@@ -432,9 +436,13 @@ sprite_collision:
     adc POINTBUFFER
     sta POINTBUFFER
     clc
-    lda #3
-    adc BONUSTIME_D2
-    sta BONUSTIME_D2
+    inc BONUSTIME_D1
+    inc BONUSTIME_D1
+    inc BONUSTIME_D1
+    inc BONUSTIME_D1
+    inc BONUSTIME_D1
+    inc BONUSTIME_D2
+
     ldy #5
     jsr feedback_points
     jsr play_retrigger_ch2
@@ -630,9 +638,11 @@ timer:
     lda TIMER_D1
     adc #$30
     sta SCREEN+23*40+8
+    clc
     lda TIMER_D2
     adc #$30
     sta SCREEN+23*40+7
+    clc
     lda TIMER_D3
     adc #$30
     sta SCREEN+23*40+6
@@ -709,8 +719,20 @@ idlewait2:
     jsr feedback_print      ; print text
     ldy #40
     jsr feedback_bonustime
-    ldy #50
+    ldy #65
     jsr freeze
+    clc
+    inc LEVEL
+    lda LEVEL
+    cmp #2
+    bne :+
+    clc
+    lda #<levels            ; indirect 16-bit adress of scrolltext
+    sta LEVELS_P            ; location is stored in two bytes
+    lda #>levels            ; in zero page
+    sta LEVELS_P+1
+    jmp :++
+:
     clc
     lda #$10                ; offset for next level
     adc LEVELS_P            ; add to current level offset
@@ -718,6 +740,7 @@ idlewait2:
     lda #0                  ; possible carry add
     adc LEVELS_P+1
     sta LEVELS_P+1
+:
     clc
     lda SPRITE_LEVEL        ; update pointer for sprites
     adc #20
@@ -739,7 +762,7 @@ idlewait2:
 ;##  setup variables, to_zeropage is copied to zeropage         ##
 ;#################################################################
 
-    org $3000
+;    org $3000
 ;## bit patterns used for testing conditions
 to_zeropage:
 spritecolor     byte 10,2,8,7,5,3,6,4
