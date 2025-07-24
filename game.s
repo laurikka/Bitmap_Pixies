@@ -141,10 +141,6 @@ gameinit:
     adc #8
     sta SPRITE_LEVEL        ; first set of animated sprites
 
-    if SOUND=1
-    jsr play_start_init
-    endif
-
 ;# sprite init ################################################
     lda #0
     sta $d017               ; sprite double height
@@ -289,8 +285,6 @@ gameinit:
 
 ;## start level 1 ########################
 
-;    lda #0
-;    sta LEVEL_CUR
     jsr set_level           ; subroutine to init level variables
 
 
@@ -426,19 +420,12 @@ sprite_collision:
     sta BONUSTIME_D1
     ldy #1
     jsr feedback_points
+    jsr play_retrigger_ch1
     jmp .end
 :                           ; five points
     asl                     ; shift bit pattern left
     sta PREV_CATCH          ; store as new previous catch
 
-
-;    ldy TARGET
-;    lda #$60
-;    sta SCREEN+COLORROW,y
-;    lda #$61
-;    sta SCREEN+COLORROW+1,y
-;    iny
-;    sty TARGET
     jsr set_borderlinecolor
 
     lda #5
@@ -450,6 +437,7 @@ sprite_collision:
     sta BONUSTIME_D2
     ldy #5
     jsr feedback_points
+    jsr play_retrigger_ch2
 .end
     jsr colorrow_update
 

@@ -71,6 +71,11 @@ set_level:
     sta SPEEDX+1
 
     inc SCREEN+40+9
+
+    jsr play_reset
+    ldy #2
+    jsr freeze
+    jsr play_start_init
     rts
 
 ;## border line color ####################
@@ -463,6 +468,9 @@ feedback_clear:
     sta SCREEN+10*40+16,x          ; text location with row offset
     dex
     bpl :-
+
+    jsr play_retrigger_off
+
     rts
 
 feedback_dec:
