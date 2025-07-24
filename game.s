@@ -23,13 +23,13 @@ DOWN_LIMIT   = 250
 
 ;## zero page addresses #############################################
 VAR0         = $10          ; reusable variables
+VAR1         = $17
 FEEDBACK_F   = $11          ; delay for clearing feedback from screen
 COLLIDED     = $12          ; current collided sprites
 TARGET       = $13          ; next sprite to collect
 LEVEL_F      = $14          ; level variable for counting frames
 LEVEL_R      = $15          ; level variable for revealing sprites
 REVEALTIMER  = $16          ; level variable for delay before reveal
-LEVEL_CUR    = $17          ; current level
 POINTBUFFER  = $18          ; store points before they are processed
 PREV_CATCH   = $19          ; keep track of previously catched sprite
 COUNTERX     = $1A          ; countermove for hero sprite movement
@@ -60,7 +60,7 @@ CARRYBIT     = $48          ; $48-57 for calculating the extra x bit
 SINGLEBITS   = $58          ; $58-5f single bit index from low to high
 
 SPEEDX       = $60          ; $60-6f, current speed of sprite
-
+VARPOINTER   = $70
 
 ; $e* reserved for sound
 
@@ -216,7 +216,7 @@ gameinit:
     adc #$30
     sta $8000+23*40+8
     clc
-    lda #0
+    lda #5
     sta TIMER_D2
     adc #$30
     sta $8000+23*40+7
@@ -289,8 +289,8 @@ gameinit:
 
 ;## start level 1 ########################
 
-    lda #0
-    sta LEVEL_CUR
+;    lda #0
+;    sta LEVEL_CUR
     jsr set_level           ; subroutine to init level variables
 
 
@@ -420,9 +420,10 @@ sprite_collision:
     beq :+                  ; if equal, award more points
 
     inc POINTBUFFER
-    inc BONUSTIME_D1
-    inc BONUSTIME_D1
-    inc BONUSTIME_D1
+    clc
+    lda #5
+    adc BONUSTIME_D1
+    sta BONUSTIME_D1
     ldy #1
     jsr feedback_points
     jmp .end
@@ -430,81 +431,30 @@ sprite_collision:
     asl                     ; shift bit pattern left
     sta PREV_CATCH          ; store as new previous catch
 
-    ldy TARGET
-    lda #$60
-    sta SCREEN+COLORROW,y
-    lda #$61
-    sta SCREEN+COLORROW+1,y
-    iny
-    sty TARGET
+
+;    ldy TARGET
+;    lda #$60
+;    sta SCREEN+COLORROW,y
+;    lda #$61
+;    sta SCREEN+COLORROW+1,y
+;    iny
+;    sty TARGET
     jsr set_borderlinecolor
 
     lda #5
     adc POINTBUFFER
     sta POINTBUFFER
-    inc BONUSTIME_D2
-    inc BONUSTIME_D2
+    clc
+    lda #3
+    adc BONUSTIME_D2
+    sta BONUSTIME_D2
     ldy #5
     jsr feedback_points
 .end
+    jsr colorrow_update
 
 ;## trailing sprites ################################################
-    lda SPRITEACTIVE
-    and #%00000010
-    bne :+
-    lda posbuffer+3
-    sta $d002
-    lda posbuffer+4
-    sta $d003
-:
-    lda SPRITEACTIVE
-    and #%00000100
-    bne :+
-    lda posbuffer+6
-    sta $d004
-    lda posbuffer+7
-    sta $d005
-:
-    lda SPRITEACTIVE
-    and #%00001000
-    bne :+
-    lda posbuffer+9
-    sta $d006
-    lda posbuffer+10
-    sta $d007
-:
-    lda SPRITEACTIVE
-    and #%00010000
-    bne :+
-    lda posbuffer+12
-    sta $d008
-    lda posbuffer+13
-    sta $d009
-:
-    lda SPRITEACTIVE
-    and #%00100000
-    bne :+
-    lda posbuffer+15
-    sta $d00a
-    lda posbuffer+16
-    sta $d00b
-:
-    lda SPRITEACTIVE
-    and #%01000000
-    bne :+
-    lda posbuffer+18
-    sta $d00c
-    lda posbuffer+19
-    sta $d00d
-:
-    lda SPRITEACTIVE
-    and #%10000000
-    bne :+
-    lda posbuffer+21
-    sta $d00e
-    lda posbuffer+22
-    sta $d00f
-:
+    jsr trailing_sprites
 
 ;## enforce maximum speed ###########################################
     if DEBUG=1
@@ -542,7 +492,7 @@ sprite_collision:
     lda LEVEL_F             ; check level timer
     cmp REVEALTIMER         ; compare against reveal delay
     beq :+                  ; if equals, proceed with reveal
-    bne :+++                 ; otherwise skip to end
+    bne :+++                ; otherwise skip to end
 :                           ;.reveal
     ldx LEVEL_R             ; copy sprite count to x
     cpx #1
@@ -684,6 +634,9 @@ timer:
     jsr feedback_print      ; print text
     ldy #100    
     jsr freeze
+    jsr play_reset
+    ldy #2
+    jsr freeze
     jmp game_over         ; if time is out game is over
 .end
     lda TIMER_D1
@@ -706,7 +659,7 @@ timer:
     bpl :+
     ldy #10
     sta FEEDBACK_F
-    ldy #8                  ; 8 -> low time
+    ldy #8                  ; offset 8 -> "low time"-text
     jsr feedback_print
 :
 
@@ -733,7 +686,7 @@ posbuffer_shift:
     sta posbuffer
     lda $d001
     sta posbuffer+1
-    lda $d002
+    lda $d010
     sta posbuffer+2
     if DEBUG=1
     lda #0
@@ -760,8 +713,8 @@ idlewait2:
     inc LEVEL_F
 
 
-    lda SPRITEACTIVE
-    cmp #1                  ; might have been collected
+    lda SPRITEACTIVE        ; if spriteactive is 1 then
+    cmp #1                  ; all sprites are collected
     bne .ready
 
     ldy #0                  ; 0 -> level up
@@ -772,15 +725,15 @@ idlewait2:
     jsr freeze
     clc
     lda #$10                ; offset for next level
-    adc LEVELS_P
+    adc LEVELS_P            ; add to current level offset
     sta LEVELS_P
     lda #0                  ; possible carry add
     adc LEVELS_P+1
     sta LEVELS_P+1
     clc
-    lda SPRITE_LEVEL
+    lda SPRITE_LEVEL        ; update pointer for sprites
     adc #20
-    cmp #90
+    cmp #90                 ; reset if higher than total amount
     bcc :+
     clc
     lda #SPRITE_MEM+8
@@ -805,6 +758,7 @@ spritecolor     byte 10,2,8,7,5,3,6,4
 collision       byte 0,%00000011,%00000101,%00001001,%00010001,%00100001,%01000001,%10000001
 carrybit        byte %00000001,0,%00000010,0,%00000100,0,%00001000,0,%00010000,0,%00100000,0,%01000000,0,%10000000,0
 singlebits      byte %00000001,%00000010,%00000100,%00001000,%00010000,%00100000,%01000000,%10000000
+invertbits      byte %11111110,%11111101,%11111011,%11110111,%11101111,%11011111,%10111111,%01111111
 
 ;## non-zeropage ################################################
 text:

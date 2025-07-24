@@ -9,6 +9,7 @@ set_level:
     sta LEVEL_F
     sta LEVEL_R
     sta TARGET              ; reset target color
+    sta COLLIDED
     lda #1
     sta $d015               ; reset sprite visibility
     sta PREV_CATCH          ; init previous catch variable
@@ -101,7 +102,84 @@ set_borderlinecolor:
     bcc :-
     rts
 
+;## colorrow update ######################
+colorrow_update:
+    lda SPRITEACTIVE
+    bit singlebits+1
+    beq :+
+    lda #$61
+    sta SCREEN+COLORROW
+    bne :++
+:
+    lda #$60
+    sta SCREEN+COLORROW
+:
+    lda SPRITEACTIVE
+    bit singlebits+2
+    beq :+
+    lda #$61
+    sta SCREEN+COLORROW+1
+    bne :++
+:
+    lda #$60
+    sta SCREEN+COLORROW+1
+:
+    lda SPRITEACTIVE
+    bit singlebits+3
+    beq :+
+    lda #$61
+    sta SCREEN+COLORROW+2
+    bne :++
+:
+    lda #$60
+    sta SCREEN+COLORROW+2
+:
+    lda SPRITEACTIVE
+    bit singlebits+4
+    beq :+
+    lda #$61
+    sta SCREEN+COLORROW+3
+    bne :++
+:
+    lda #$60
+    sta SCREEN+COLORROW+3
+:
+    lda SPRITEACTIVE
+    bit singlebits+5
+    beq :+
+    lda #$61
+    sta SCREEN+COLORROW+4
+    bne :++
+:
+    lda #$60
+    sta SCREEN+COLORROW+4
+:
+    lda SPRITEACTIVE
+    bit singlebits+6
+    beq :+
+    lda #$61
+    sta SCREEN+COLORROW+5
+    bne :++
+:
+    lda #$60
+    sta SCREEN+COLORROW+5
+:
+    lda SPRITEACTIVE
+    bit singlebits+7
+    beq :+
+    lda #$61
+    sta SCREEN+COLORROW+6
+    bne :++
+:
+    lda #$60
+    sta SCREEN+COLORROW+6
+:
+    rts
+
+
 ;## BG FX ###########################################################
+;## a moving pattern based on updating single character            ##
+
 bgfx:
     ldx #7                  ; run for each row in character
     lda SPEEDX              ; get current speed
@@ -209,7 +287,7 @@ freeze:
     sty VAR0                ; save y to temp var
     jsr bgfx                ; continue bgfx during freeze
     jsr play_start          ; keep playing sound
-    jsr sprite_animation
+    jsr sprite_animation    ; keep updating sprites
     ldy VAR0                ; restore y
     dey
     bne :-
@@ -271,7 +349,7 @@ feedback_points:            ; print points to screen
     sta FEEDBACK_F
     rts
 
-feedback_bonustime:            ; print points to screen
+feedback_bonustime:         ; print points to screen
     ldx #0
 .textloop
     lda feedback,y          ; y is offset to text table
@@ -291,11 +369,10 @@ feedback_bonustime:            ; print points to screen
     bcc :+
     clc
     inc BONUSTIME_D2
-;    lda BONUSTIME_D1
     sbc #10
     sta BONUSTIME_D1
     clc
-    bcs :-
+    bcc :-
 :
     clc
     lda BONUSTIME_D2
@@ -303,11 +380,10 @@ feedback_bonustime:            ; print points to screen
     bcc :+
     clc
     inc BONUSTIME_D3
-;    lda BONUSTIME_D2
     sbc #10
     sta BONUSTIME_D2
     clc
-    bcs :-
+    bcc :-
 :
     lda BONUSTIME_D3
     adc #$30
@@ -479,3 +555,234 @@ game_over:
 .end
 
     jmp titlescreen
+
+;## trailing sprites #####################
+trailing_sprites:
+
+    ldx #1
+    ldy #3
+
+    lda SPRITEACTIVE
+    and singlebits,x
+    bne :+++
+    lda posbuffer,y
+    sta $d002
+    iny
+    lda posbuffer,y
+    sta $d003
+    lda $d010
+    and invertbits,x
+    sta VAR0
+    iny
+    lda posbuffer,y
+    and #%00000001
+    bne :+
+    lda #0
+    beq :++
+:
+    lda singlebits,x
+:
+    eor VAR0
+    sta $d010
+    iny
+    inx
+    jmp :++
+:
+    iny
+    iny
+    iny
+    inx
+:
+    lda SPRITEACTIVE
+    and singlebits,x
+    bne :+++
+    lda posbuffer,y
+    sta $d004
+    iny
+    lda posbuffer,y
+    sta $d005
+    lda $d010
+    and invertbits,x
+    sta VAR0
+    iny
+    lda posbuffer,y
+    and #%00000001
+    bne :+
+    lda #0
+    beq :++
+:
+    lda singlebits,x
+:
+    eor VAR0
+    sta $d010
+    iny
+    inx
+    jmp :++
+:
+    iny
+    iny
+    iny
+    inx
+:
+    lda SPRITEACTIVE
+    and singlebits,x
+    bne :+++
+    lda posbuffer,y
+    sta $d006
+    iny
+    lda posbuffer,y
+    sta $d007
+    lda $d010
+    and invertbits,x
+    sta VAR0
+    iny
+    lda posbuffer,y
+    and #%00000001
+    bne :+
+    lda #0
+    beq :++
+:
+    lda singlebits,x
+:
+    eor VAR0
+    sta $d010
+    iny
+    inx
+    jmp :++
+:
+    iny
+    iny
+    iny
+    inx
+:
+    lda SPRITEACTIVE
+    and singlebits,x
+    bne :+++
+    lda posbuffer,y
+    sta $d008
+    iny
+    lda posbuffer,y
+    sta $d009
+    lda $d010
+    and invertbits,x
+    sta VAR0
+    iny
+    lda posbuffer,y
+    and #%00000001
+    bne :+
+    lda #0
+    beq :++
+:
+    lda singlebits,x
+:
+    eor VAR0
+    sta $d010
+    iny
+    inx
+    jmp :++
+:
+    iny
+    iny
+    iny
+    inx
+:
+    lda SPRITEACTIVE
+    and singlebits,x
+    bne :+++
+    lda posbuffer,y
+    sta $d00a
+    iny
+    lda posbuffer,y
+    sta $d00b
+    lda $d010
+    and invertbits,x
+    sta VAR0
+    iny
+    lda posbuffer,y
+    and #%00000001
+    bne :+
+    lda #0
+    beq :++
+:
+    lda singlebits,x
+:
+    eor VAR0
+    sta $d010
+    iny
+    inx
+    jmp :++
+:
+    iny
+    iny
+    iny
+    inx
+:
+    lda SPRITEACTIVE
+    and singlebits,x
+    bne :+++
+    lda posbuffer,y
+    sta $d00c
+    iny
+    lda posbuffer,y
+    sta $d00d
+    lda $d010
+    and invertbits,x
+    sta VAR0
+    iny
+    lda posbuffer,y
+    and #%00000001
+    bne :+
+    lda #0
+    beq :++
+:
+    lda singlebits,x
+:
+    eor VAR0
+    sta $d010
+    iny
+    inx
+    jmp :++
+:
+    iny
+    iny
+    iny
+    inx
+:
+    lda SPRITEACTIVE
+    and singlebits,x
+    bne :+++
+    lda posbuffer,y
+    sta $d00e
+    iny
+    lda posbuffer,y
+    sta $d00f
+    lda $d010
+    and invertbits,x
+    sta VAR0
+    iny
+    lda posbuffer,y
+    and #%00000001
+    bne :+
+    lda #0
+    beq :++
+:
+    lda singlebits,x
+:
+    eor VAR0
+    sta $d010
+    iny
+    inx
+    jmp :++
+:
+    iny
+    iny
+    iny
+    inx
+:
+
+
+
+
+.end
+    clc
+    rts

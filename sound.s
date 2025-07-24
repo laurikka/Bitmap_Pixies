@@ -61,6 +61,16 @@ play_init:
     sta $d412
     rts
 
+play_reset:
+    lda #0
+    ldx #17
+:
+    sta $d400,x
+    dex
+    bpl :-
+    rts
+
+
 play_intro:
     jsr pw_update
     lda #%01111110          ; 0-3 decay, 4-7 attack
@@ -150,23 +160,23 @@ play_start:
     sta $d40b
     sta $d412
 
-    jsr pw_update
+    jsr pw_update           ; run pulsewidth update
 
-    inc PLAY_FRAME
-    lda PLAY_FRAME
+    inc PLAY_FRAME          ; counter to advance
+    lda PLAY_FRAME          ; to next note
     cmp #5
     bne .skip
 
-    lda ch1_pos
-    cmp #8
-    bne :+
-    lda #0
+    lda ch1_pos             ; current position
+    cmp #8                  ; compare
+    bne :+                  ; skip if not that
+    lda #0                  ; reset to 0
     sta ch1_pos
 :
     tay
     lda start_ch1,y
     tax
-    lda notes_lowbyte,x
+    lda notes_lowbyte,x     ; get frequency to play
     sta $d400
     lda notes_highbyte,x
     sta $d401
@@ -195,8 +205,6 @@ play_start:
     sta PLAY_FRAME
 .skip
     rts
-
-
 
 pw_update:
     clc
