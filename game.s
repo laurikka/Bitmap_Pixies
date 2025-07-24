@@ -724,7 +724,7 @@ idlewait2:
     clc
     inc LEVEL
     lda LEVEL
-    cmp #2
+    cmp #7
     bne :+
     clc
     lda #<levels            ; indirect 16-bit adress of scrolltext
