@@ -136,7 +136,6 @@ play_intro:
     rts
 
 
-
 play_start_init:
     lda #0
     sta PLAY_FRAME

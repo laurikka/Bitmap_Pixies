@@ -624,9 +624,10 @@ timer:
     jsr play_reset
     ldy #2
     jsr freeze
-    jsr game_over_alt         ; if time is out game is over
-    jsr resort_highscore
-    jsr resort_highscore
+    jsr game_over           ; if time is out game is over
+    jsr resort_highscore    ; high score ends up in top
+    jsr resort_highscore    ; again just in case
+    jsr resort_highscore    ; again just in case
     jmp titlescreen
 .end
     lda TIMER_D1
