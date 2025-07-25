@@ -4,7 +4,6 @@
 ;## directives ##########################################
 DEBUG        = 0            ; if 1 includes debug-related stuff
 SOUND        = 1            ; if zero skip sound routines
-MINIMAL      = 0            ; if set, disable animated stuff
 SKIPINTRO    = 0            ; go straight to game
 
 ;## constants ###########################################
@@ -419,7 +418,6 @@ sprite_collision:
     clc
     inc BONUSTIME_D1
     inc BONUSTIME_D1
-    inc BONUSTIME_D1
     ldy #1
     jsr feedback_points
     jsr play_retrigger_ch1
@@ -434,7 +432,6 @@ sprite_collision:
     adc POINTBUFFER
     sta POINTBUFFER
     clc
-    inc BONUSTIME_D1
     inc BONUSTIME_D1
     inc BONUSTIME_D2
 
@@ -627,7 +624,10 @@ timer:
     jsr play_reset
     ldy #2
     jsr freeze
-    jmp game_over         ; if time is out game is over
+    jsr game_over_alt         ; if time is out game is over
+    jsr resort_highscore
+    jsr resort_highscore
+    jmp titlescreen
 .end
     lda TIMER_D1
     adc #$30
@@ -680,6 +680,7 @@ posbuffer_shift:
     sta posbuffer+1
     lda $d010
     sta posbuffer+2
+
     if DEBUG=1
     lda #0
     sta $d020               ; border color
@@ -718,7 +719,7 @@ idlewait2:
     clc
     inc LEVEL
     lda LEVEL
-    cmp #12
+    cmp #16
     bne :+
     clc
     lda #<levels            ; indirect 16-bit adress of scrolltext
@@ -803,10 +804,15 @@ levels:
     byte 67, 195, 45, 202, 112, 179, 90, 187, 22, 210, 157, 164, 135, 172, 10, 0
     byte 119, 98, 127, 169, 49, 184, 81, 172, 143, 122, 40, 123, 91, 103, 25, 0
     byte 96, 40, 61, 208, 124, 193, 38, 80, 86, 123, 166, 240, 151, 71, 10, 25
-    byte 111, 40, 144, 120, 50, 240, 87, 184, 149, 40, 20, 173, 78, 82, 10, 0
+    byte 111, 40, 144, 120, 50, 240, 87, 184, 149, 40, 20, 173, 78, 82, 7, 0
     byte 162, 199, 163, 94, 118, 137, 32, 129, 73, 184, 32, 225, 74, 67, 5, 0
     byte 164, 96, 39, 77, 15, 119, 85, 43, 61, 113, 62, 228, 30, 40, 5, 0
-    byte 79, 153, 94, 134, 83, 185, 53, 133, 113, 156, 60, 181, 65, 92, 5, 0
+    byte 79, 153, 94, 134, 83, 185, 53, 133, 113, 156, 60, 181, 65, 92, 4, 0
+    byte 128, 91, 169, 127, 50, 148, 112, 186, 12, 99, 49, 227, 73, 66, 4, 0
+    byte 141, 114, 77, 213, 103, 171, 57, 106, 115, 40, 157, 197, 22, 43, 3, 0
+    byte 170, 134, 48, 84, 141, 211, 112, 127, 135, 43, 56, 217, 14, 40, 3, 0
+    byte 59, 163, 112, 137, 81, 104, 128, 57, 21, 227, 169, 101, 61, 40, 2, 0
+
 
 highscore:
     blk 24,$30              ; 4 rows of 6 zeroes
@@ -822,13 +828,7 @@ posbuffer:  ; used to store previous positions of hero sprite
     incbin font.bin             ; 1kb font
 
     org $4800
-spritelogo:
     incbin sprite_logo_0.bin    ; 8 slots for logo
-spritesheet_0:
-    if MINIMAL=1
-    incbin sprite_logo_0.bin
-    else
     incbin spritesheet_0.bin
-    endif
 
 

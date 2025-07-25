@@ -516,6 +516,7 @@ feedback_dec:
     rts
 
 ;## game over ############################
+
 game_over:
     clc
     ldx #5
@@ -528,14 +529,15 @@ game_over:
 
 .compare3rd                 ; compare 4th to 3rd
     clc
-    lda highscore+18,x
-    cmp highscore+12,x
-    bcc :+                  ; new score not higher, skip equality
+    lda highscore+12,x
+    cmp highscore+18,x
+    bcs :+                  ; old score higher or same
     bne :++                 ; if not equal, must be higher
 :
     inx
     cpx #6
     bne .compare3rd
+    ldx #0
     jmp .compare2nd
 :                           ; replace 3rd slot with new score
     ldx #5
@@ -544,19 +546,21 @@ game_over:
     sta highscore+12,x
     dex
     bpl :-
+    ldx #0
 
 .compare2nd
-    inx
     clc
-    lda highscore+12,x
-    cmp highscore+6,x
-    bcc :+
-    bne :++
+    lda highscore+6,x
+    cmp highscore+12,x
+    bcs :+                  ; old score higher or same
+    bne :++                 ; if not equal, must be higher
 :
+    inx
     cpx #6
     bne .compare2nd
+    ldx #0
     jmp .compare1st
-:
+:                           ; replace 3rd slot with new score
     ldx #5
 :
     lda highscore+6,x       ; swap slots between 2nd and 3rd
@@ -567,22 +571,23 @@ game_over:
     sta highscore+12,x
     dex
     bpl :-
+    ldx #0
 
 .compare1st
-    inx
     clc
-    lda highscore+6,x
-    cmp highscore,x
-    bcc :+
-    bne :++
+    lda highscore,x
+    cmp highscore+6,x
+    bcs :+                  ; old score higher or same
+    bne :++                 ; if not equal, must be higher
 :
+    inx
     cpx #6
     bne .compare1st
     jmp .end
-:
+:                           ; replace 3rd slot with new score
     ldx #5
 :
-    lda highscore,x
+    lda highscore,x       ; swap slots between 2nd and 3rd
     tay
     lda highscore+6,x
     sta highscore,x
@@ -591,8 +596,148 @@ game_over:
     dex
     bpl :-
 .end
+    rts
 
-    jmp titlescreen
+
+game_over_alt:
+    clc
+    ldx #5
+:                           ; copy game score to 4th slot
+    lda SCREEN+23*40+33,x
+    sta highscore+18,x
+    dex
+    bpl :-
+    ldx #0
+
+.compare3rd                 ; compare 4th to 3rd
+    clc
+    lda highscore+12,x
+    cmp highscore+18,x
+;    beq :+
+    bcs :+                  ; old score higher or same
+    bne :++                 ; if not equal, must be higher
+:
+    inx
+    cpx #6
+    bne .compare3rd
+    ldx #0
+    jmp .compare2nd
+:                           ; replace 3rd slot with new score
+    ldx #5
+:
+    lda highscore+18,x
+    sta highscore+12,x
+    dex
+    bpl :-
+    ldx #0
+
+.compare2nd
+    clc
+    lda highscore+6,x
+    cmp highscore+12,x
+;    beq :+
+    bcs :+                  ; old score higher or same
+    bne :++                 ; if not equal, must be higher
+:
+    inx
+    cpx #6
+    bne .compare2nd
+    ldx #0
+    jmp .compare1st
+:                           ; replace 3rd slot with new score
+    ldx #5
+:
+    lda highscore+6,x       ; swap slots between 2nd and 3rd
+    tay
+    lda highscore+12,x
+    sta highscore+6,x
+    tya
+    sta highscore+12,x
+    dex
+    bpl :-
+    ldx #0
+
+.compare1st
+    clc
+    lda highscore,x
+    cmp highscore+6,x
+;    beq :+
+    bcs :+                  ; old score higher or same
+    bne :++                 ; if not equal, must be higher
+:
+    inx
+    cpx #6
+    bne .compare1st
+    jmp .end
+:                           ; replace 3rd slot with new score
+    ldx #5
+:
+    lda highscore,x       ; swap slots between 2nd and 3rd
+    tay
+    lda highscore+6,x
+    sta highscore,x
+    tya
+    sta highscore+6,x
+    dex
+    bpl :-
+.end
+    rts
+
+
+resort_highscore:
+    ldx #0
+.compare2nd
+    clc
+    lda highscore+6,x
+    cmp highscore+12,x
+;    beq :+
+    bcs :+                  ; old score higher or same
+    bne :++                 ; if not equal, must be higher
+:
+    inx
+    cpx #6
+    bne .compare2nd
+    ldx #0
+    jmp .compare1st
+:                           ; replace 3rd slot with new score
+    ldx #5
+:
+    lda highscore+6,x       ; swap slots between 2nd and 3rd
+    tay
+    lda highscore+12,x
+    sta highscore+6,x
+    tya
+    sta highscore+12,x
+    dex
+    bpl :-
+    ldx #0
+
+.compare1st
+    clc
+    lda highscore,x
+    cmp highscore+6,x
+;    beq :+
+    bcs :+                  ; old score higher or same
+    bne :++                 ; if not equal, must be higher
+:
+    inx
+    cpx #6
+    bne .compare1st
+    jmp .end
+:                           ; replace 3rd slot with new score
+    ldx #5
+:
+    lda highscore,x       ; swap slots between 2nd and 3rd
+    tay
+    lda highscore+6,x
+    sta highscore,x
+    tya
+    sta highscore+6,x
+    dex
+    bpl :-
+.end
+    rts
+
 
 ;## trailing sprites #####################
 trailing_sprites:
