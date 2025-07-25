@@ -23,13 +23,13 @@ DOWN_LIMIT   = 250
 
 ;## zero page addresses #############################################
 VAR0         = $10          ; reusable variables
-MOVEDELAY    = $17          ; value read from level data
 FEEDBACK_F   = $11          ; delay for clearing feedback from screen
 COLLIDED     = $12          ; current collided sprites
 LEVEL        = $13          ; hold level number
 LEVEL_F      = $14          ; level variable for counting frames
 LEVEL_R      = $15          ; level variable for revealing sprites
 REVEALTIMER  = $16          ; level variable for delay before reveal
+MOVEDELAY    = $17          ; value read from level data
 POINTBUFFER  = $18          ; store points before they are processed
 PREV_CATCH   = $19          ; keep track of previously catched sprite
 COUNTERX     = $1A          ; countermove for hero sprite movement
@@ -41,14 +41,14 @@ COLLECTED    = $1F          ; store collected sprites
 BONUSTIME_D1 = $20          ; collect points during level
 BONUSTIME_D2 = $21
 BONUSTIME_D3 = $22
-SCROLLERPOS  = $23          ; +$24, indirect pointer to scroller
+SCROLLERPOS  = $23          ; +$24, pointer to scroller
 LEVELS_P     = $25          ; +$26, pointer to level data
 SPRITE_LEVEL = $27          ; offset for sprite animation sheet
 TITLE_F      = $28          ; framecounter for title screen
 TITLE_READY  = $29          ; marker to delay game start immediately after
-SCROLLER_F   = $2A
-SPRITEACTIVE = $2B
-TIMER_F      = $2C
+SCROLLER_F   = $2A          ; counter for character swap
+SPRITEACTIVE = $2B          ; which sprites to consider for collisions
+TIMER_F      = $2C          ; delays updating timer
 TIMER_D1     = $2D          ; three decimal digits for time left
 TIMER_D2     = $2E
 TIMER_D3     = $2F
@@ -718,7 +718,7 @@ idlewait2:
     clc
     inc LEVEL
     lda LEVEL
-    cmp #7
+    cmp #12
     bne :+
     clc
     lda #<levels            ; indirect 16-bit adress of scrolltext
@@ -738,9 +738,9 @@ idlewait2:
     clc
     lda SPRITE_LEVEL        ; update pointer for sprites
     adc #20
-    bcc :+
+    bcc :+                  ; if no overflow, skip
     clc
-    lda #SPRITE_MEM+8
+    lda #SPRITE_MEM+8       ; otherwise reset back to first sprite
 :
     sta SPRITE_LEVEL
     jsr set_level
@@ -802,7 +802,11 @@ levels:
     byte 126, 85, 170, 133, 51, 149, 112, 187, 10, 102, 45, 236, 71, 63, 10, 25
     byte 67, 195, 45, 202, 112, 179, 90, 187, 22, 210, 157, 164, 135, 172, 10, 0
     byte 119, 98, 127, 169, 49, 184, 81, 172, 143, 122, 40, 123, 91, 103, 25, 0
-
+    byte 96, 40, 61, 208, 124, 193, 38, 80, 86, 123, 166, 240, 151, 71, 10, 25
+    byte 111, 40, 144, 120, 50, 240, 87, 184, 149, 40, 20, 173, 78, 82, 10, 0
+    byte 162, 199, 163, 94, 118, 137, 32, 129, 73, 184, 32, 225, 74, 67, 5, 0
+    byte 164, 96, 39, 77, 15, 119, 85, 43, 61, 113, 62, 228, 30, 40, 5, 0
+    byte 79, 153, 94, 134, 83, 185, 53, 133, 113, 156, 60, 181, 65, 92, 5, 0
 
 highscore:
     blk 24,$30              ; 4 rows of 6 zeroes
