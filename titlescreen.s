@@ -4,7 +4,7 @@
 titlescreen:
 
     lda #$20                ; character to fill screen
-    ldy #11                 ; color to fill screen
+    ldy #12                 ; color to fill screen
     jsr clearscreen
 
 ;# sprite init ################################################

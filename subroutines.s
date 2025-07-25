@@ -21,6 +21,9 @@ set_level:
     ldy #14
     lda (LEVELS_P),y        ; load revealtimer for level
     sta REVEALTIMER
+    ldy #15
+    lda (LEVELS_P),y        ; delay for moving pixies
+    sta MOVEDELAY
     lda #$61
     sta SCREEN+COLORROW     ; flip to active char for colorrow pos 0
     lda #$60
@@ -38,6 +41,13 @@ set_level:
     inx
     cpx #8
     bne :-
+
+    lda #0
+    ldx #15
+:
+    sta SPEEDX,x
+    dex
+    bpl :-
 
 
     ldy #12
@@ -80,11 +90,34 @@ set_level:
     sta SPEEDX+1
 
     inc SCREEN+40+9
+    lda SCREEN+40+9
+    cmp #$3a
+    bne :+
+    inc SCREEN+40+8
+    lda #$30
+    sta SCREEN+40+9
+:
 
     jsr play_reset
     ldy #2
     jsr freeze
     jsr play_start_init
+    rts
+
+;## move pixies ##########################
+move_pixies:
+    lda LEVEL_R
+    and #%00000111
+    clc
+    rol
+    tax
+    lda SPEEDX+2,x
+    adc sintable,x
+    sta SPEEDX+2,x
+    lda SPEEDX+3,x
+    adc sintable+9,x
+    sta SPEEDX+3,x
+
     rts
 
 ;## border line color ####################

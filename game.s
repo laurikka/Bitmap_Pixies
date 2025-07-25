@@ -23,7 +23,7 @@ DOWN_LIMIT   = 250
 
 ;## zero page addresses #############################################
 VAR0         = $10          ; reusable variables
-VAR1         = $17
+MOVEDELAY    = $17          ; value read from level data
 FEEDBACK_F   = $11          ; delay for clearing feedback from screen
 COLLIDED     = $12          ; current collided sprites
 LEVEL        = $13          ; hold level number
@@ -60,7 +60,7 @@ CARRYBIT     = $48          ; $48-57 for calculating the extra x bit
 SINGLEBITS   = $58          ; $58-5f single bit index from low to high
 
 SPEEDX       = $60          ; $60-6f, current speed of sprite
-VARPOINTER   = $70
+;VARPOINTER   = $70
 
 ; $e* reserved for sound
 
@@ -130,7 +130,7 @@ gameinit:
     sta $d016
 
     lda #$40                ; character to fill screen
-    ldy #11                 ; color to fill screen
+    ldy #12                 ; color to fill screen
     jsr clearscreen
 
     lda #<levels            ; indirect 16-bit adress of scrolltext
@@ -420,8 +420,6 @@ sprite_collision:
     inc BONUSTIME_D1
     inc BONUSTIME_D1
     inc BONUSTIME_D1
-    inc BONUSTIME_D1
-    inc BONUSTIME_D1
     ldy #1
     jsr feedback_points
     jsr play_retrigger_ch1
@@ -436,9 +434,6 @@ sprite_collision:
     adc POINTBUFFER
     sta POINTBUFFER
     clc
-    inc BONUSTIME_D1
-    inc BONUSTIME_D1
-    inc BONUSTIME_D1
     inc BONUSTIME_D1
     inc BONUSTIME_D1
     inc BONUSTIME_D2
@@ -457,46 +452,36 @@ sprite_collision:
     inc $d020               ; border color during calculations
     endif
 
-    lda SPEEDX
+    ldx #0
+:
+    lda SPEEDX,x
     bmi :+
     cmp #MAX_SPEED
     bcc :++
     lda #MAX_SPEED
-    sta SPEEDX
+    sta SPEEDX,x
     bcs :++
 :                           ;.neg
     cmp #0-MAX_SPEED
     bcs :+
     lda #0-MAX_SPEED
-    sta SPEEDX
+    sta SPEEDX,x
 :                           ;.checky
-    lda SPEEDX+1
-    bmi :+
-    cmp #MAX_SPEED
-    bcc :++
-    lda #MAX_SPEED
-    sta SPEEDX+1
-    bcs :++
-:                           ;.negy
-    cmp #0-MAX_SPEED
-    bcs :+
-    lda #0-MAX_SPEED
-    sta SPEEDX+1
-:                           ;.ready
+    inx
+    cpx #16
+    bne :---
+
 
 ;## level reveal ####################################################
     lda LEVEL_F             ; check level timer
     cmp REVEALTIMER         ; compare against reveal delay
     beq :+                  ; if equals, proceed with reveal
-    bne :+++                ; otherwise skip to end
+    bne :+++                 ; otherwise skip to end
 :                           ;.reveal
     ldx LEVEL_R             ; copy sprite count to x
-    cpx #1
-    bne :+
-    ldx LEVEL_R             ; copy sprite count to x
-:
+    clc
     cpx #7
-    beq :+
+    bcs :+
     lda #0
     sta LEVEL_F             ; zero out level timer
     inx                     ; increase revealed sprites count
@@ -504,8 +489,17 @@ sprite_collision:
     lda SINGLEBITS,x        ; get sprite bit to activate
     adc $d015
     sta $d015               ; commit it back
-:                           ;.end
-
+    jmp :++
+:                           ; end
+    inx
+    stx LEVEL_R
+    lda #0
+    sta LEVEL_F             ; zero out level timer
+    clc
+    cpx MOVEDELAY
+    bcc :+
+    jsr move_pixies
+:
     jsr bgfx
 
 
@@ -628,7 +622,7 @@ timer:
 :                           ;.time_out
     ldy #16                 ; 16 -> time out
     jsr feedback_print      ; print text
-    ldy #100    
+    ldy #125    
     jsr freeze
     jsr play_reset
     ldy #2
@@ -801,11 +795,11 @@ scrollertext:
 ;## x needs to be multplied by 2 to get correct location       ##
 ;################################################################
 levels:
-    byte 90, 72, 116, 98, 122, 154, 104, 200, 75, 200, 57, 154, 63, 98, 20, 0
-    byte 102, 72, 136, 192, 56, 184, 58, 67, 137, 128, 100, 217, 37, 117, 20, 0
-    byte 132, 202, 129, 154, 113, 109, 90, 77, 65, 63, 45, 68, 33, 88, 10, 0
-    byte 133, 193, 79, 101, 89, 232, 170, 127, 127, 91, 14, 190, 20, 41, 30, 0
-    byte 126, 85, 170, 133, 51, 149, 112, 187, 10, 102, 45, 236, 71, 63, 10, 0
+    byte 90, 72, 116, 98, 122, 154, 104, 200, 75, 200, 57, 154, 63, 98, 20, 20
+    byte 102, 72, 136, 192, 56, 184, 58, 67, 137, 128, 100, 217, 37, 117, 20, 14
+    byte 132, 202, 129, 154, 113, 109, 90, 77, 65, 63, 45, 68, 33, 88, 10, 20
+    byte 133, 193, 79, 101, 89, 232, 170, 127, 127, 91, 14, 190, 20, 41, 30, 10
+    byte 126, 85, 170, 133, 51, 149, 112, 187, 10, 102, 45, 236, 71, 63, 10, 25
     byte 67, 195, 45, 202, 112, 179, 90, 187, 22, 210, 157, 164, 135, 172, 10, 0
     byte 119, 98, 127, 169, 49, 184, 81, 172, 143, 122, 40, 123, 91, 103, 25, 0
 
