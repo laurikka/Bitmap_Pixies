@@ -529,6 +529,10 @@ game_over:
 compare_scores:
 ;## round 1 ###########################################
     clc
+    lda highscore+14
+    cmp highscore+20
+    bcc :+
+    bne :++
     lda highscore+15
     cmp highscore+21
     bcc :+
@@ -541,6 +545,8 @@ compare_scores:
     cmp highscore+23
     bcs :++
 :
+    lda highscore+20
+    sta highscore+14
     lda highscore+21
     sta highscore+15
     lda highscore+22
@@ -549,6 +555,10 @@ compare_scores:
     sta highscore+17
 :;## round 2 ###########################################
     clc
+    lda highscore+8
+    cmp highscore+14
+    bcc :+
+    bne :++
     lda highscore+9
     cmp highscore+15
     bcc :+
@@ -561,6 +571,11 @@ compare_scores:
     cmp highscore+17
     bcs :++
 :
+    ldy highscore+8
+    lda highscore+14
+    sta highscore+8
+    sty highscore+14
+
     ldy highscore+9
     lda highscore+15
     sta highscore+9
@@ -578,6 +593,10 @@ compare_scores:
 :
 :;## round 3 ###########################################
     clc
+    lda highscore+2
+    cmp highscore+8
+    bcc :+
+    bne :++
     lda highscore+3
     cmp highscore+9
     bcc :+
@@ -590,6 +609,11 @@ compare_scores:
     cmp highscore+11
     bcs :++
 :
+    ldy highscore+2
+    lda highscore+8
+    sta highscore+2
+    sty highscore+8
+
     ldy highscore+3
     lda highscore+9
     sta highscore+3
