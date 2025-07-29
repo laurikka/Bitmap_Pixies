@@ -524,81 +524,87 @@ game_over:
     sta highscore+18,x
     dex
     bpl :-
-    ldx #0
+;    rts
 
-.compare3rd                 ; compare 4th to 3rd
+compare_scores:
+;## round 1 ###########################################
     clc
-    lda highscore+12,x
-    cmp highscore+18,x
-    bcs :+                  ; old score higher or same
-    bne :++                 ; if not equal, must be higher
+    lda highscore+15
+    cmp highscore+21
+    bcc :+
+    bne :++
+    lda highscore+16
+    cmp highscore+22
+    bcc :+
+    bne :++
+    lda highscore+17
+    cmp highscore+23
+    bcs :++
 :
-    inx
-    cpx #6
-    bne .compare3rd
-    ldx #0
-    jmp .end
-:                           ; replace 3rd slot with new score
-    ldx #5
+    lda highscore+21
+    sta highscore+15
+    lda highscore+22
+    sta highscore+16
+    lda highscore+23
+    sta highscore+17
+:;## round 2 ###########################################
+    clc
+    lda highscore+9
+    cmp highscore+15
+    bcc :+
+    bne :++
+    lda highscore+10
+    cmp highscore+16
+    bcc :+
+    bne :++
+    lda highscore+11
+    cmp highscore+17
+    bcs :++
 :
-    lda highscore+18,x
-    sta highscore+12,x
-    dex
-    bpl :-
-    ldx #0
-.end
-    rts
+    ldy highscore+9
+    lda highscore+15
+    sta highscore+9
+    sty highscore+15
 
-resort_highscore:
-    ldx #0
-.compare2nd
-    clc
-    lda highscore+6,x
-    cmp highscore+12,x
-    bcs :+                  ; old score higher or same
-    bne :++                 ; if not equal, must be higher
-:
-    inx
-    cpx #6
-    bne .compare2nd
-    ldx #0
-    jmp .compare1st
-:                           ; replace 3rd slot with new score
-    ldx #5
-:
-    lda highscore+6,x       ; swap slots between 2nd and 3rd
-    tay
-    lda highscore+12,x
-    sta highscore+6,x
-    tya
-    sta highscore+12,x
-    dex
-    bpl :-
-    ldx #0
+    ldy highscore+10
+    lda highscore+16
+    sta highscore+10
+    sty highscore+16
 
-.compare1st
+    ldy highscore+11
+    lda highscore+17
+    sta highscore+11
+    sty highscore+17
+:
+:;## round 3 ###########################################
     clc
-    lda highscore,x
-    cmp highscore+6,x
-    bcs :+                  ; old score higher or same
-    bne :++                 ; if not equal, must be higher
+    lda highscore+3
+    cmp highscore+9
+    bcc :+
+    bne :++
+    lda highscore+4
+    cmp highscore+10
+    bcc :+
+    bne :++
+    lda highscore+5
+    cmp highscore+11
+    bcs :++
 :
-    inx
-    cpx #6
-    bne .compare1st
-    jmp .end
-:                           ; replace 3rd slot with new score
-    ldx #5
+    ldy highscore+3
+    lda highscore+9
+    sta highscore+3
+    sty highscore+9
+
+    ldy highscore+4
+    lda highscore+10
+    sta highscore+4
+    sty highscore+10
+
+    ldy highscore+5
+    lda highscore+11
+    sta highscore+5
+    sty highscore+11
 :
-    lda highscore,x       ; swap slots between 2nd and 3rd
-    tay
-    lda highscore+6,x
-    sta highscore,x
-    tya
-    sta highscore+6,x
-    dex
-    bpl :-
-.end
     rts
 
 ;## trailing sprites #####################

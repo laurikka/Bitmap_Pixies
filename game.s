@@ -59,8 +59,8 @@ CARRYBIT     = $48          ; $48-57 for calculating the extra x bit
 SINGLEBITS   = $58          ; $58-5f single bit index from low to high
 
 SPEEDX       = $60          ; $60-6f, current speed of sprite
-;VARPOINTER   = $70
-
+HIGHSCORE    = $70          ; +$71, memory location of high score table
+HIGHSCORE_N  = $72          ; +$73, next location on highscore
 ; $e* reserved for sound
 
 ;## global init ############################################################
@@ -98,6 +98,21 @@ init:
     lda #>scrollertext      ; in zero page
     sta SCROLLERPOS+1
 
+    lda #<highscore
+    sta HIGHSCORE
+    lda #>highscore
+    sta HIGHSCORE+1
+
+    lda #<highscore
+    sta HIGHSCORE_N
+    lda #>highscore
+    sta HIGHSCORE_N+1
+
+    lda #6
+    clc
+    adc HIGHSCORE_N
+    sta HIGHSCORE_N
+
     lda #%00000010          ; vic bank 1, $4000-$7FFF
     sta $dd00
     lda #%00010000          ; VIC textmode 1, $0800-$0FFF
@@ -132,7 +147,7 @@ gameinit:
     ldy #12                 ; color to fill screen
     jsr clearscreen
 
-    lda #<levels            ; indirect 16-bit adress of scrolltext
+    lda #<levels            ; indirect 16-bit adress of levels
     sta LEVELS_P            ; location is stored in two bytes
     lda #>levels            ; in zero page
     sta LEVELS_P+1
@@ -625,9 +640,6 @@ timer:
     ldy #2
     jsr freeze
     jsr game_over           ; if time is out game is over
-    jsr resort_highscore    ; high score ends up in top
-    jsr resort_highscore    ; again just in case
-    jsr resort_highscore    ; again just in case
     jmp titlescreen
 .end
     lda TIMER_D1
@@ -815,15 +827,16 @@ levels:
     byte 59, 163, 112, 137, 81, 104, 128, 57, 21, 227, 169, 101, 61, 40, 2, 0
 
 
-highscore:
-    blk 24,$30              ; 4 rows of 6 zeroes
-
 sintable:   ; 36 delta sine values, twice to allow offsets
     byte 1, 2, 2, 1, 1, 1, 1, 0, 1, -1, 0, -1, -1, -1, -1, -2, -2, -1, -1, -2, -2, -1, -1, -1, -1, 0, -1, 1, 0, 1, 1, 1, 1, 2, 2, 1
     blk 36
 
 posbuffer:  ; used to store previous positions of hero sprite
     blk 48
+
+    org $2000
+highscore:
+    blk 24,$30              ; 4 rows of 6 zeroes
 
     org FONT
     incbin font.bin             ; 1kb font
