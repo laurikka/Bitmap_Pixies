@@ -49,8 +49,3 @@ newFile.close()
 
 print(header)
 
-## print debug info ###############################################################################
-
-#print("  sprite resolution\t",spritex,"*",spritey)
-#print("  image resolution\t",sizex,"*",sizey)
-#print("  sprite array\t\t",int(sizex/spritex),"*",int(sizey/spritey))

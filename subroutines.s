@@ -45,29 +45,28 @@ set_level:
     lda #0
     ldx #15
 :
-    sta SPEEDX,x
+    sta SPEEDX,x            ; reset speed
     dex
     bpl :-
 
-
     ldy #12
     ldx #6
-:                       ; read sprite coordinates from level data
+:                           ; read sprite coordinates from level data
     clc
     lda (LEVELS_P),y
-    bpl :+
-    lda singlebits+1,x
-    eor $d010
+    bpl :+                  ; if over $80 the extra x-position is needed
+    lda singlebits+1,x      ; get the current sprite bit pattern
+    eor $d010               ; flip the existing status of x-extra bit
     sta $d010
     lda (LEVELS_P),y
-    adc #$80
+    adc #$80                ; take out the extra positin to get remainder pos
 :
-    asl                     ; multiply x
-    sta $d002,y             ; store x
+    asl                     ; multiply x by 2 because it's stored like that
+    sta $d002,y             ; in level data to fit in 8 bits
     iny
     lda (LEVELS_P),y
     sta $d002,y
-    dey
+    dey                     ; decrements to get the next sprite to process
     dey
     dey
     dex
@@ -98,9 +97,9 @@ set_level:
     sta SCREEN+40+9
 :
 
-    jsr play_reset
+    jsr play_reset          ; to reset sound envelopes
     ldy #2
-    jsr freeze
+    jsr freeze              ; wait 2 frames
     jsr play_start_init
     rts
 
@@ -117,7 +116,6 @@ move_pixies:
     lda SPEEDX+3,x
     adc sintable+9,x
     sta SPEEDX+3,x
-
     rts
 
 ;## border line color ####################
@@ -524,9 +522,8 @@ game_over:
     sta highscore+18,x
     dex
     bpl :-
-;    rts
 
-compare_scores:
+;compare_scores
 ;## round 1 ###########################################
     clc
     lda highscore+14
@@ -854,9 +851,6 @@ trailing_sprites:
     iny
     inx
 :
-
-
-
 
 .end
     clc

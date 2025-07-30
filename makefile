@@ -6,12 +6,11 @@ game.prg: game.s titlescreen.s subroutines.s sound.s bin/spritesheet_0.bin bin/f
 		mv game.prg Bitmap_Pixies.prg
 		denise.exe Bitmap_Pixies.prg
 
-
 bin/spritesheet_0.bin: python/spriteconv.py assets/spritesheet_0.tga
 		python3 python/spriteconv.py assets/spritesheet_0.tga bin/spritesheet_0.bin
 
-font.bin: python/font_from_tga.py assets/font_0.tga
+bin/font.bin: python/font_from_tga.py assets/font_0.tga
 		python3 python/font_from_tga.py assets/font_0.tga
 
-sprite_logo_0.bin: python/spriteconv.py assets/sprite_logo_0.tga
-		python3 python/spriteconv.py assets/sprite_logo_0.tga
+bin/sprite_logo_0.bin: python/spriteconv.py assets/sprite_logo_0.tga
+		python3 python/spriteconv.py assets/sprite_logo_0.tga bin/sprite_logo_0.bin

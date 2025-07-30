@@ -1,9 +1,7 @@
-
     incdir bin
 
 ;## directives ##########################################
 DEBUG        = 0            ; if 1 includes debug-related stuff
-SOUND        = 1            ; if zero skip sound routines
 SKIPINTRO    = 0            ; go straight to game
 
 ;## constants ###########################################
@@ -37,7 +35,7 @@ CARRY_CUR    = $1C          ; spriteloop temp storage for x extra bit
 TEMPY        = $1D          ; spriteloop temp y for processing
 X8BIT        = $1E          ; spriteloop temp x 8th bit for processing
 COLLECTED    = $1F          ; store collected sprites
-BONUSTIME_D1 = $20          ; collect points during level
+BONUSTIME_D1 = $20          ; collect extra time during level
 BONUSTIME_D2 = $21
 BONUSTIME_D3 = $22
 SCROLLERPOS  = $23          ; +$24, pointer to scroller
@@ -59,8 +57,6 @@ CARRYBIT     = $48          ; $48-57 for calculating the extra x bit
 SINGLEBITS   = $58          ; $58-5f single bit index from low to high
 
 SPEEDX       = $60          ; $60-6f, current speed of sprite
-HIGHSCORE    = $70          ; +$71, memory location of high score table
-HIGHSCORE_N  = $72          ; +$73, next location on highscore
 ; $e* reserved for sound
 
 ;## global init ############################################################
@@ -92,26 +88,10 @@ init:
     dex
     bpl :-
 
-
     lda #<scrollertext      ; indirect 16-bit adress of scrolltext
     sta SCROLLERPOS         ; location is stored in two bytes
     lda #>scrollertext      ; in zero page
     sta SCROLLERPOS+1
-
-    lda #<highscore
-    sta HIGHSCORE
-    lda #>highscore
-    sta HIGHSCORE+1
-
-    lda #<highscore
-    sta HIGHSCORE_N
-    lda #>highscore
-    sta HIGHSCORE_N+1
-
-    lda #6
-    clc
-    adc HIGHSCORE_N
-    sta HIGHSCORE_N
 
     lda #%00000010          ; vic bank 1, $4000-$7FFF
     sta $dd00
@@ -125,9 +105,7 @@ init:
     dex
     bpl :-
 
-    if SOUND=1
-    jsr play_init
-    endif
+    jsr play_init           ; init sound
 
 
 ;# first go to title screen ###################################
@@ -153,12 +131,13 @@ gameinit:
     sta LEVELS_P+1
 
     clc
-    lda #SPRITE_MEM
+    lda #SPRITE_MEM         ; vic-relative sprite memory
     adc #8
     sta SPRITE_LEVEL        ; first set of animated sprites
 
 ;# sprite init ################################################
     lda #0
+    sta $d015               ; sprite enabled
     sta $d017               ; sprite double height
     sta $d01c               ; sprite multicolor
     sta $d01d               ; sprite double width
@@ -536,9 +515,7 @@ idlewait1:
     sta $d020               ; border color
     endif
 
-    if SOUND=1
-    jsr play_start
-    endif
+    jsr play_start          ; keep sound going
 
 ;## joystick read  ##################################################
 joystick_read:

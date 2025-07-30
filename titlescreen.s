@@ -124,9 +124,7 @@ titlescreen:
     sta $d020               ; border color
     endif
 
-    if SOUND=1
-    jsr play_init
-    endif
+    jsr play_init           ; start intro sound
 
 ;#######################################################
 ;## title main                                        ##
@@ -139,9 +137,7 @@ title_main:
     sta $d020               ; border color
     endif
 
-    if SOUND=1
     jsr play_intro
-    endif
 
     clc
     lda TITLE_READY
