@@ -420,6 +420,7 @@ sprite_collision:
     asl                     ; shift bit pattern left
     sta PREV_CATCH          ; store as new previous catch
 
+;    lda COLLIDED
     jsr set_borderlinecolor
 
     lda #5
@@ -811,7 +812,7 @@ sintable:   ; 36 delta sine values, twice to allow offsets
 posbuffer:  ; used to store previous positions of hero sprite
     blk 48
 
-    org $2000
+;    org $2000
 highscore:
     blk 24,$30              ; 4 rows of 6 zeroes
 

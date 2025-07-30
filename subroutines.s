@@ -78,7 +78,7 @@ set_level:
     jsr feedback_print      ; print text
 
     ldy SPRITECOLOR+1
-    jsr set_borderlinecolor
+    jsr borderlinecolor
 
     lda #180
     sta $d000               ; init hero sprite x location
@@ -120,7 +120,60 @@ move_pixies:
 
 ;## border line color ####################
 set_borderlinecolor:
-    tya                     ; y should hold spritecolor index
+    lda SPRITEACTIVE
+    bit singlebits+1
+    beq :+
+    ldy #1
+    lda SPRITECOLOR,y
+    jmp .set
+:
+    lda SPRITEACTIVE
+    bit singlebits+2
+    beq :+
+    ldy #2
+    lda SPRITECOLOR,y
+    jmp .set
+:
+    lda SPRITEACTIVE
+    bit singlebits+3
+    beq :+
+    ldy #3
+    lda SPRITECOLOR,y
+    jmp .set
+:
+    lda SPRITEACTIVE
+    bit singlebits+4
+    beq :+
+    ldy #4
+    lda SPRITECOLOR,y
+    jmp .set
+:
+    lda SPRITEACTIVE
+    bit singlebits+5
+    beq :+
+    ldy #5
+    lda SPRITECOLOR,y
+    jmp .set
+:
+    lda SPRITEACTIVE
+    bit singlebits+6
+    beq :+
+    ldy #6
+    lda SPRITECOLOR,y
+    jmp .set
+:
+    lda SPRITEACTIVE
+    bit singlebits+7
+    beq :+
+    ldy #7
+    lda SPRITECOLOR,y
+    jmp .set
+:
+
+.set
+    tay
+borderlinecolor:
+    tya
     ldx #0
 :                           ;.top
     sta $d800,x
