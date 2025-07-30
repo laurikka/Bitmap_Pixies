@@ -51,7 +51,7 @@ TIMER_D2     = $2E
 TIMER_D3     = $2F
 ANIMF        = $30          ; $30-37, current animation frame for sprite
 
-SPRITECOLOR  = $38          ; $38-3f colors for sprites
+;SPRITECOLOR  = $38          ; $38-3f colors for sprites
 COLLISION    = $40          ; $40-47 bitmasks to compare collided sprites
 CARRYBIT     = $48          ; $48-57 for calculating the extra x bit
 SINGLEBITS   = $58          ; $58-5f single bit index from low to high
@@ -74,10 +74,10 @@ init:
     dex
     bpl :-                  ; jump to previous anonymous label
 
-    ldx #$28
+    ldx #$20
 :                           ; copy to zeropage from tables
     lda to_zeropage,x
-    sta $38,x
+    sta $40,x
     dex
     bpl :-
 
@@ -100,7 +100,7 @@ init:
 
     ldx #7
 :
-    lda SPRITECOLOR,x
+    lda spritecolor,x
     sta $d027,x             ; set sprite colors
     dex
     bpl :-
@@ -195,7 +195,7 @@ gameinit:
 :
     lda #$75
     sta SCREEN+COLORROW,x
-    lda SPRITECOLOR+1,x
+    lda spritecolor+1,x
     sta $d800+COLORROW,x    ; store color to text row with x-offset
     dex                     ; decrement x
     bpl :-                  ; if positive, loop back
@@ -420,8 +420,6 @@ sprite_collision:
     asl                     ; shift bit pattern left
     sta PREV_CATCH          ; store as new previous catch
 
-;    lda COLLIDED
-    jsr set_borderlinecolor
 
     lda #5
     adc POINTBUFFER
@@ -435,8 +433,7 @@ sprite_collision:
     jsr play_retrigger_ch2
 .end
     jsr colorrow_update
-
-;## trailing sprites ################################################
+    jsr set_borderlinecolor
     jsr trailing_sprites
 
 ;## enforce maximum speed ###########################################
@@ -747,16 +744,16 @@ idlewait2:
 ;##  setup variables, to_zeropage is copied to zeropage         ##
 ;#################################################################
 
-;    org $3000
 ;## bit patterns used for testing conditions
 to_zeropage:
-spritecolor     byte 10,2,8,7,5,3,6,4
 collision       byte 0,%00000011,%00000101,%00001001,%00010001,%00100001,%01000001,%10000001
 carrybit        byte %00000001,0,%00000010,0,%00000100,0,%00001000,0,%00010000,0,%00100000,0,%01000000,0,%10000000,0
 singlebits      byte %00000001,%00000010,%00000100,%00001000,%00010000,%00100000,%01000000,%10000000
-invertbits      byte %11111110,%11111101,%11111011,%11110111,%11101111,%11011111,%10111111,%01111111
 
 ;## non-zeropage ################################################
+spritecolor     byte 10,2,8,7,5,3,6,4
+invertbits      byte %11111110,%11111101,%11111011,%11110111,%11101111,%11011111,%10111111,%01111111
+
 text:
     ascii " level 000              hi-score        "
     ascii " time 000                  score 000000 "

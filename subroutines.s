@@ -77,7 +77,7 @@ set_level:
     ldy #24                 ; 24 -> ready
     jsr feedback_print      ; print text
 
-    ldy SPRITECOLOR+1
+    ldy spritecolor+1
     jsr borderlinecolor
 
     lda #180
@@ -120,57 +120,20 @@ move_pixies:
 
 ;## border line color ####################
 set_borderlinecolor:
-    lda SPRITEACTIVE
-    bit singlebits+1
-    beq :+
     ldy #1
-    lda SPRITECOLOR,y
-    jmp .set
 :
-    lda SPRITEACTIVE
-    bit singlebits+2
+    lda singlebits,y
+    and SPRITEACTIVE
     beq :+
-    ldy #2
-    lda SPRITECOLOR,y
     jmp .set
 :
-    lda SPRITEACTIVE
-    bit singlebits+3
-    beq :+
-    ldy #3
-    lda SPRITECOLOR,y
-    jmp .set
-:
-    lda SPRITEACTIVE
-    bit singlebits+4
-    beq :+
-    ldy #4
-    lda SPRITECOLOR,y
-    jmp .set
-:
-    lda SPRITEACTIVE
-    bit singlebits+5
-    beq :+
-    ldy #5
-    lda SPRITECOLOR,y
-    jmp .set
-:
-    lda SPRITEACTIVE
-    bit singlebits+6
-    beq :+
-    ldy #6
-    lda SPRITECOLOR,y
-    jmp .set
-:
-    lda SPRITEACTIVE
-    bit singlebits+7
-    beq :+
-    ldy #7
-    lda SPRITECOLOR,y
-    jmp .set
-:
+    iny
+    cpy #8
+    bne :--
 
+:
 .set
+    lda spritecolor,y
     tay
 borderlinecolor:
     tya

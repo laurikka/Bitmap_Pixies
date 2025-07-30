@@ -9,3 +9,6 @@ Compiling the game: My setup is based on VS Code with WSL terminal at the bottom
 Vasm needs to be compiled with CPU=6502 and SYNTAX=oldstyle.
 The executable is compressed with Exomizer: https://bitbucket.org/magli143/exomizer/src/master/.
 I used Denise C64 emulator, mostly because it seems to start a bit faster than Vice: https://bitbucket.org/piciji/denise/src/master/.
+
+bugs:
+- next color to collect not always accurate, results in less point given than intended

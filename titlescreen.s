@@ -111,7 +111,7 @@ titlescreen:
     sta SCREEN+(18*40)+14,x
     clc
     tay
-    lda SPRITECOLOR,x
+    lda spritecolor,x
     sta $d027,x             ; set sprite colors
     sta $d800+(18*40)+14,x  ; store color to text row with x-offset
     tya
