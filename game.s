@@ -28,7 +28,7 @@ LEVEL_R      = $15          ; level variable for revealing sprites
 REVEALTIMER  = $16          ; level variable for delay before reveal
 MOVEDELAY    = $17          ; value read from level data
 POINTBUFFER  = $18          ; store points before they are processed
-PREV_CATCH   = $19          ; keep track of previously catched sprite
+NEXT         = $19          ; next sprite to catch
 COUNTERX     = $1A          ; countermove for hero sprite movement
 COUNTERY     = $1B
 CARRY_CUR    = $1C          ; spriteloop temp storage for x extra bit
@@ -50,12 +50,7 @@ TIMER_D1     = $2D          ; three decimal digits for time left
 TIMER_D2     = $2E
 TIMER_D3     = $2F
 
-TEST0        = $30
-TEST1        = $31
-
-ANIMF        = $38          ; $30-37, current animation frame for sprite
-
-;SPRITECOLOR  = $38          ; $38-3f colors for sprites
+ANIMF        = $38          ; $38-3f, current animation frame for sprite
 COLLISION    = $40          ; $40-47 bitmasks to compare collided sprites
 CARRYBIT     = $48          ; $48-57 for calculating the extra x bit
 SINGLEBITS   = $58          ; $58-5f single bit index from low to high
@@ -408,11 +403,9 @@ sprite_collision:
     sta SPRITEACTIVE        ; override old with new active sprites
 
 
-
-
     ldy #1
 :
-    lda singlebits,y
+    lda singlebits,y        ; get the index of collided sprite
     and COLLIDED
     beq :+
     jmp :++
@@ -421,11 +414,8 @@ sprite_collision:
     cpy #8
     bne :--
 :
-    sty TEST0
-    cpy TEST1
-;    lda TEST1
-;    cmp TEST0
-    beq :+
+    cpy NEXT                ; compare to bonus point target
+    beq :+                  ; if equal, award more points
 
     inc POINTBUFFER
     clc
@@ -438,16 +428,17 @@ sprite_collision:
 
 :                           ; five points
 
+    clc
     lda #5
     adc POINTBUFFER
     sta POINTBUFFER
-    clc
+;    clc
     inc BONUSTIME_D1
     inc BONUSTIME_D2
 
     ldy #1
 :
-    lda singlebits,y
+    lda singlebits,y        ; calculate the next bonus target
     and SPRITEACTIVE
     beq :+
     jmp :++
@@ -456,14 +447,15 @@ sprite_collision:
     cpy #8
     bne :--
 :
-    sty TEST1
+    sty NEXT
 
     ldy #5
     jsr feedback_points
     jsr play_retrigger_ch2
 .end
     jsr colorrow_update
-    jsr set_borderlinecolor
+    ldy NEXT
+    jsr borderlinecolor
     jsr trailing_sprites
 
 ;## enforce maximum speed ###########################################
@@ -781,7 +773,7 @@ carrybit        byte %00000001,0,%00000010,0,%00000100,0,%00001000,0,%00010000,0
 singlebits      byte %00000001,%00000010,%00000100,%00001000,%00010000,%00100000,%01000000,%10000000
 
 ;## non-zeropage ################################################
-spritecolor     byte 10,2,8,7,5,3,6,4
+spritecolor     byte 10,2,8,7,5,3,6,4,10
 invertbits      byte %11111110,%11111101,%11111011,%11110111,%11101111,%11011111,%10111111,%01111111
 
 text:

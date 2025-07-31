@@ -15,7 +15,7 @@ set_level:
     sta $d010
     lda #1
     sta $d015               ; reset sprite visibility
-    sta PREV_CATCH          ; init previous catch variable
+    sta NEXT                ; init next sprite to catch
     lda #$ff
     sta SPRITEACTIVE        ; reset active sprites
     ldy #14
@@ -33,9 +33,6 @@ set_level:
     sta SCREEN+COLORROW+4
     sta SCREEN+COLORROW+5
     sta SCREEN+COLORROW+6
-
-    lda #1
-    sta TEST1
 
     lda SPRITE_LEVEL
     ldx #0
@@ -80,8 +77,8 @@ set_level:
     ldy #24                 ; 24 -> ready
     jsr feedback_print      ; print text
 
-    ldy spritecolor+1
-    jsr borderlinecolor
+;    ldy #0
+;    jsr borderlinecolor
 
     lda #180
     sta $d000               ; init hero sprite x location
@@ -122,24 +119,11 @@ move_pixies:
     rts
 
 ;## border line color ####################
-set_borderlinecolor:
-    ldy #1
-:
-    lda singlebits,y
-    and SPRITEACTIVE
-    beq :+
-    jmp .set
-:
-    iny
-    cpy #8
-    bne :--
 
-:
-.set
+borderlinecolor:
     lda spritecolor,y
     tay
-borderlinecolor:
-    tya
+
     ldx #0
 :                           ;.top
     sta $d800,x
