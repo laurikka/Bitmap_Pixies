@@ -49,7 +49,11 @@ TIMER_F      = $2C          ; delays updating timer
 TIMER_D1     = $2D          ; three decimal digits for time left
 TIMER_D2     = $2E
 TIMER_D3     = $2F
-ANIMF        = $30          ; $30-37, current animation frame for sprite
+
+TEST0        = $30
+TEST1        = $31
+
+ANIMF        = $38          ; $30-37, current animation frame for sprite
 
 ;SPRITECOLOR  = $38          ; $38-3f colors for sprites
 COLLISION    = $40          ; $40-47 bitmasks to compare collided sprites
@@ -394,7 +398,7 @@ sprite_collision:
     lda COLLISION,x         ; load collision bit pattern
     cmp COLLIDED            ; compare against current collision
     beq :+                  ; if equal, jump to commit
-    dex                     
+    dex
     bne :-
     jmp .end
 :                           ; commit
@@ -403,10 +407,25 @@ sprite_collision:
     and SPRITEACTIVE        ; and with current active sprites
     sta SPRITEACTIVE        ; override old with new active sprites
 
-    lda COLLIDED            ; get current collision pattern
-    lsr                     ; shift right and remove sprite 0
-    cmp PREV_CATCH          ; compare to previous catch
-    beq :+                  ; if equal, award more points
+
+
+
+    ldy #1
+:
+    lda singlebits,y
+    and COLLIDED
+    beq :+
+    jmp :++
+:
+    iny
+    cpy #8
+    bne :--
+:
+    sty TEST0
+    cpy TEST1
+;    lda TEST1
+;    cmp TEST0
+    beq :+
 
     inc POINTBUFFER
     clc
@@ -416,10 +435,8 @@ sprite_collision:
     jsr feedback_points
     jsr play_retrigger_ch1
     jmp .end
-:                           ; five points
-    asl                     ; shift bit pattern left
-    sta PREV_CATCH          ; store as new previous catch
 
+:                           ; five points
 
     lda #5
     adc POINTBUFFER
@@ -427,6 +444,19 @@ sprite_collision:
     clc
     inc BONUSTIME_D1
     inc BONUSTIME_D2
+
+    ldy #1
+:
+    lda singlebits,y
+    and SPRITEACTIVE
+    beq :+
+    jmp :++
+:
+    iny
+    cpy #8
+    bne :--
+:
+    sty TEST1
 
     ldy #5
     jsr feedback_points
@@ -809,7 +839,6 @@ sintable:   ; 36 delta sine values, twice to allow offsets
 posbuffer:  ; used to store previous positions of hero sprite
     blk 48
 
-;    org $2000
 highscore:
     blk 24,$30              ; 4 rows of 6 zeroes
 

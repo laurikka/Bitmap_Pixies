@@ -34,6 +34,9 @@ set_level:
     sta SCREEN+COLORROW+5
     sta SCREEN+COLORROW+6
 
+    lda #1
+    sta TEST1
+
     lda SPRITE_LEVEL
     ldx #0
 :

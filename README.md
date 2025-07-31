@@ -5,10 +5,10 @@ A game for Commodore 64
 Play advice: move around with joystick in port 2 and collect all pixies, no fire button needed in this game. Collecting the colors in correct order is rewarded both in time and points so pay attention to the sequence.
 The game is designed to be played on tac-2 or similar quick action joystick. A low latency setup like a real hardware or mister on crt will make obtaining high scores much easier.
 
-Compiling the game: My setup is based on VS Code with WSL terminal at the bottom. I used Vasm assembler: http://sun.hasenbraten.de/vasm/index.php?view=relsrc.
+Compiling the game:
+- My setup is based on VS Code in Windows with WSL terminal at the bottom.
+- I used Vasm assembler: http://sun.hasenbraten.de/vasm/index.php?view=relsrc
 Vasm needs to be compiled with CPU=6502 and SYNTAX=oldstyle.
-The executable is compressed with Exomizer: https://bitbucket.org/magli143/exomizer/src/master/.
-I used Denise C64 emulator, mostly because it seems to start a bit faster than Vice: https://bitbucket.org/piciji/denise/src/master/.
-
-bugs:
-- next color to collect not always accurate, results in less point given than intended
+- The executable is compressed with Exomizer: https://bitbucket.org/magli143/exomizer/src/master/
+- I used Denise C64 emulator, mostly because it seems to start a bit faster than Vice: https://bitbucket.org/piciji/denise/src/master/
+- Retro Debugger is great for checking what's going on under the hood https://github.com/slajerek/RetroDebugger

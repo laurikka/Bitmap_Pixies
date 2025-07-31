@@ -4,6 +4,7 @@ game.prg: game.s titlescreen.s subroutines.s sound.s bin/spritesheet_0.bin bin/f
 		vasm6502_oldstyle -Fbin -cbm-prg -opt-branch game.s -o game.prg
 		exomizer sfx 2048 -x1 game.prg -o game.prg
 		mv game.prg Bitmap_Pixies.prg
+#		retrodebugger.exe Bitmap_Pixies.prg
 		denise.exe Bitmap_Pixies.prg
 
 bin/spritesheet_0.bin: python/spriteconv.py assets/spritesheet_0.tga
