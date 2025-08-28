@@ -146,7 +146,8 @@ title_main:
     lda $dc00               ; read port A joystick 2 bits
     and #%00001111
     cmp #%00001111
-    bne .start_game
+    beq :+
+    jmp .start_game
 :
     ldx #7    
 .coloranim
@@ -318,4 +319,4 @@ title_main:
 .start_game
     lda #0
     sta TITLE_READY
-    jmp gameinit
+    rts

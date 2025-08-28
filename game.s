@@ -1,8 +1,9 @@
     incdir bin
 
 ;## directives ##########################################
-DEBUG        = 0            ; if 1 includes debug-related stuff
-SKIPINTRO    = 0            ; go straight to game
+DEBUG        = 1            ; if 1 includes debug-related stuff
+SKIPINTRO    = 1            ; go straight to game
+COMPRESS     = 0            ; if on skip the autorun part
 
 ;## constants ###########################################
 SCREEN       = $4400        ; screen memory
@@ -49,18 +50,30 @@ TIMER_F      = $2C          ; delays updating timer
 TIMER_D1     = $2D          ; three decimal digits for time left
 TIMER_D2     = $2E
 TIMER_D3     = $2F
+S_CHARX      = $31
+CHARFX_PREV  = $33          ; previous offset value for comparison
+CHARFX_FRAME = $34          ; charfx animation frame
+CHARFX_ACTIVE= $35          ; if non zero, jump into charfx-loop
+CHARFX_MEM   = $36          ; +$37, memory pointer for charfx
+CHARFX_MEM_C = $38          ; +$39, memory pointer for charfx color
 
-ANIMF        = $38          ; $38-3f, current animation frame for sprite
 COLLISION    = $40          ; $40-47 bitmasks to compare collided sprites
 CARRYBIT     = $48          ; $48-57 for calculating the extra x bit
 SINGLEBITS   = $58          ; $58-5f single bit index from low to high
 
 SPEEDX       = $60          ; $60-6f, current speed of sprite
+ANIMF        = $70          ; $70-77, current animation frame for sprite
 ; $e* reserved for sound
 
 ;## global init ############################################################
 
     cpu 6510                ; identifier for assembler to target c64
+
+    if COMPRESS=0
+	org $0326               ; autorun address
+	word init               ; pointer to program start
+    endif
+
     org $800                ; program run location
 
 init:
@@ -110,177 +123,15 @@ init:
 ;# first go to title screen ###################################
 
     if SKIPINTRO=0
-    jmp titlescreen
+    jsr titlescreen
     endif
 
-gameinit:
-    lda #0
-    sta LEVEL
-
-    lda #$C8                ; reset screen control register
-    sta $d016
-
-    lda #$40                ; character to fill screen
-    ldy #12                 ; color to fill screen
-    jsr clearscreen
-
-    lda #<levels            ; indirect 16-bit adress of levels
-    sta LEVELS_P            ; location is stored in two bytes
-    lda #>levels            ; in zero page
-    sta LEVELS_P+1
-
-    clc
-    lda #SPRITE_MEM         ; vic-relative sprite memory
-    adc #8
-    sta SPRITE_LEVEL        ; first set of animated sprites
-
-;# sprite init ################################################
-    lda #0
-    sta $d015               ; sprite enabled
-    sta $d017               ; sprite double height
-    sta $d01c               ; sprite multicolor
-    sta $d01d               ; sprite double width
-    sta $d010               ; sprite bit 8
-    sta $d01b               ; sprite bg priority
-    sta $d020               ; border color
-    sta $d021               ; screen color
-
- ;## top text ############################################
-    ldx #39
-    ldy #$40
-.loop_top
-    lda text,x
-    cmp #$20                ; if space character replace with fx-char
-    bne :+                  ; if not, skip
-    tya
-    beq :++                 ; skip to commit
-:
-    cmp #$60
-    bcc :+                  ; if carry set, skip ahead
-    sbc #$60
-:
-    sta SCREEN+1*40,x      ; text location with row offset
-    dex
-    bpl .loop_top
-
-;## highscore ###########################################
-    ldy #5
-:
-    lda highscore,y
-    sta SCREEN+(1*40)+33,y
-    dey
-    bpl :-
-
-;## bottom text #########################################
-    ldx #39
-    ldy #$40
-.loop_bottom:
-    lda text+40,x
-    cmp #$20
-    bne :+
-    tya
-    beq :++
-:
-    cmp #$60
-    bcc :+
-    sbc #$60
-:
-    sta SCREEN+23*40,x      ; text location with row offset
-    dex
-    bpl .loop_bottom
-
-;## bottom color row ####################################
-    ldx #6
-:
-    lda #$75
-    sta SCREEN+COLORROW,x
-    lda spritecolor+1,x
-    sta $d800+COLORROW,x    ; store color to text row with x-offset
-    dex                     ; decrement x
-    bpl :-                  ; if positive, loop back
-
-;## init timers #########################################
-    clc
-    lda #0
-    sta TIMER_D1
-    adc #$30
-    sta $8000+23*40+8
-    clc
-    lda #0
-    sta TIMER_D2
-    adc #$30
-    sta $8000+23*40+7
-    clc
-    lda #2
-    sta TIMER_D3
-    adc #$30
-    sta $8000+23*40+6
-
-;## screen init ###################################
-    ldx #38
-    lda #$21
-:                           ; top
-    sta SCREEN,x
-    dex
-    bne :-
-    ldx #38
-    lda #$22
-:                           ; bottom
-    sta SCREEN+24*40,x
-    dex
-    bne :-
-    ldx #0
-    ldy #$23
-    clc
-:                           ; left
-    txa
-    adc #40
-    tax
-    tya
-    sta SCREEN,x
-    sta SCREEN+$f0,x
-    sta SCREEN+$1e0,x
-    sta SCREEN+$2d0,x
-    cpx #240
-    bcc :-
-    ldx #0
-    ldy #$24
-    clc
-:                           ; right
-    txa
-    adc #40
-    tax
-    tya
-    sta SCREEN+$27,x
-    sta SCREEN+$117,x
-    sta SCREEN+$207,x
-    sta SCREEN+$2f7,x
-    cpx #240
-    bcc :-
-                            ;corners
-    lda #$25
-    sta SCREEN
-    lda #$26
-    sta SCREEN+39
-    lda #$27
-    sta SCREEN+24*40
-    lda #$28
-    sta SCREEN+24*40+39
-
-    clc
-    lda #0
-    ldx #0
-:
-    sta ANIMF,x
-    adc #2
-    inx
-    cpx #8
-    bne :-
+start_game:
+    jsr gameinit
 
 ;## start level 1 ########################
 
     jsr set_level           ; subroutine to init level variables
-
 
 
 ;#################################################################
@@ -432,7 +283,6 @@ sprite_collision:
     lda #5
     adc POINTBUFFER
     sta POINTBUFFER
-;    clc
     inc BONUSTIME_D1
     inc BONUSTIME_D2
 
@@ -452,6 +302,10 @@ sprite_collision:
     ldy #5
     jsr feedback_points
     jsr play_retrigger_ch2
+    lda #0
+    sta CHARFX_FRAME
+    lda #2                  ; init charfx-animation
+    sta CHARFX_ACTIVE
 .end
     jsr colorrow_update
     ldy NEXT
@@ -482,7 +336,6 @@ sprite_collision:
     cpx #16
     bne :---
 
-
 ;## level reveal ####################################################
     lda LEVEL_F             ; check level timer
     cmp REVEALTIMER         ; compare against reveal delay
@@ -512,7 +365,6 @@ sprite_collision:
     jsr move_pixies
 :
     jsr bgfx
-
 
     if DEBUG=1
     lda #0
@@ -637,7 +489,8 @@ timer:
     ldy #2
     jsr freeze
     jsr game_over           ; if time is out game is over
-    jmp titlescreen
+    jsr titlescreen
+    jmp start_game
 .end
     lda TIMER_D1
     adc #$30
@@ -692,9 +545,20 @@ posbuffer_shift:
     sta posbuffer+2
 
     if DEBUG=1
+    lda #5
+    sta $d020               ; border color
+    endif
+
+    lda CHARFX_ACTIVE       ; if charfx is not zero, jump to subroutine
+    beq :+
+    jsr charfx
+    :
+
+    if DEBUG=1
     lda #0
     sta $d020               ; border color
     endif
+
 
 ;#################################################################
 ;##    idle wait 2, things updated after screen update done     ##
@@ -732,7 +596,7 @@ idlewait2:
     cmp #16
     bne :+
     clc
-    lda #<levels            ; indirect 16-bit adress of scrolltext
+    lda #<levels            ; indirect 16-bit adress of level data
     sta LEVELS_P            ; location is stored in two bytes
     lda #>levels            ; in zero page
     sta LEVELS_P+1
@@ -833,6 +697,36 @@ posbuffer:  ; used to store previous positions of hero sprite
 
 highscore:
     blk 24,$30              ; 4 rows of 6 zeroes
+
+posx:   ; from 71 to 40, used to convert sprite pos to character position
+    byte 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 16, 17, 17, 18, 18, 19, 19, 20, 20, 21, 21, 22, 22, 23, 23, 24, 24, 25, 25, 26, 26, 27, 27, 28, 28, 29, 29, 30, 30, 31, 31, 32, 32, 33, 33, 34, 34, 35, 35, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36
+posy:   ; from 64 to 25
+    byte 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19, 20, 20, 21, 21, 22, 22
+
+;   row    1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25
+mul40_s_h:  ; screen high byte
+    byte $44,$44,$44,$44,$44,$44,$44,$45,$45,$45,$45,$45,$45,$46,$46,$46,$46,$46,$46,$46,$47,$47,$47,$47,$47,$47
+;mul40_c_h:  ; color high byte
+;    byte $d8,$d8,$d8,$d8,$d8,$d8,$d8,$d9,$d9,$d9,$d9,$d9,$d9,$da,$da,$da,$da,$da,$da,$da,$db,$db,$db,$db,$db,$db
+mul40_s_l:  ; common low byte
+    byte $00,$28,$50,$78,$a0,$c8,$f0,$18,$40,$68,$90,$b8,$e0,$08,$30,$58,$80,$a8,$d0,$f8,$20,$48,$70,$98,$c0,$e8
+
+;## charfx tables ################################################################
+;#  offset is per-frame offset into pscale and coord lists                       #
+;#  the routine goes through the list until it reaches the previous frame offset #
+;#  or comes across zero at the end of the list                                  #
+;#  pscale is direct offset into character font                                  #
+;#  coords is offset from top left position in 9x7 grid in screen space          #
+;#################################################################################
+
+    byte 0
+charfx_1_offset:
+    byte 1, 2, 7, 16, 24, 32, 44, 64, 80, 100, 128, 156, 188, 212, 236, 244
+    byte 0
+charfx_1_pscale:
+    byte 67, 66, 65, 65, 65, 65, 65, 65, 66, 65, 66, 64, 66, 65, 66, 65, 65, 66, 65, 66, 66, 65, 66, 65, 66, 66, 66, 66, 66, 66, 66, 66, 65, 66, 65, 66, 65, 65, 65, 65, 66, 65, 66, 65, 65, 66, 65, 65, 65, 64, 65, 65, 66, 64, 64, 66, 65, 65, 64, 65, 65, 65, 66, 65, 66, 66, 66, 66, 65, 65, 66, 66, 66, 66, 65, 65, 66, 66, 66, 66, 65, 66, 65, 66, 65, 66, 64, 64, 66, 66, 66, 66, 64, 64, 66, 65, 66, 65, 66, 65, 65, 65, 65, 66, 65, 65, 65, 66, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 66, 65, 65, 65, 66, 65, 65, 65, 66, 66, 66, 66, 65, 64, 65, 66, 65, 65, 65, 65, 66, 64, 64, 66, 65, 65, 65, 65, 66, 65, 64, 65, 66, 66, 66, 66, 65, 66, 66, 66, 65, 65, 66, 64, 64, 66, 65, 66, 64, 64, 66, 66, 66, 66, 64, 64, 66, 65, 66, 64, 64, 66, 65, 65, 66, 66, 66, 65, 65, 66, 65, 66, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 66, 65, 66, 65, 65, 64, 64, 64, 65, 65, 64, 64, 65, 64, 64, 64, 64, 64, 64, 65, 64, 64, 65, 65, 64, 64, 64, 65, 64, 64, 64, 64, 64, 64, 64, 64
+charfx_1_coords:
+    byte 124, 124, 84, 123, 124, 125, 164, 83, 84, 85, 123, 124, 125, 163, 164, 165, 83, 84, 85, 123, 125, 163, 164, 165, 83, 84, 85, 123, 125, 163, 164, 165, 44, 83, 84, 85, 122, 123, 125, 126, 163, 164, 165, 204, 43, 44, 45, 82, 83, 84, 85, 86, 122, 123, 125, 126, 162, 163, 164, 165, 166, 203, 204, 205, 43, 44, 45, 82, 83, 85, 86, 122, 126, 162, 163, 165, 166, 203, 204, 205, 42, 43, 44, 45, 46, 82, 83, 85, 86, 122, 126, 162, 163, 165, 166, 202, 203, 204, 205, 206, 3, 4, 5, 42, 43, 44, 45, 46, 81, 82, 86, 87, 121, 122, 126, 127, 161, 162, 166, 167, 202, 203, 204, 205, 206, 243, 244, 245, 3, 4, 5, 42, 43, 44, 45, 46, 81, 82, 86, 87, 121, 122, 126, 127, 161, 162, 166, 167, 202, 203, 204, 205, 206, 243, 244, 245, 2, 3, 4, 5, 6, 41, 42, 43, 45, 46, 47, 81, 82, 86, 87, 121, 127, 161, 162, 166, 167, 201, 202, 203, 205, 206, 207, 242, 243, 244, 245, 246, 2, 3, 4, 5, 6, 41, 42, 46, 47, 81, 87, 121, 127, 161, 167, 201, 202, 206, 207, 242, 243, 244, 245, 246, 2, 3, 4, 5, 6, 41, 42, 46, 47, 81, 87, 121, 127, 161, 167, 201, 202, 206, 207, 242, 243, 244, 245, 246, 2, 6, 41, 47, 201, 207, 242, 246
 
     org FONT
     incbin font.bin             ; 1kb font

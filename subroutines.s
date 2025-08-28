@@ -2,6 +2,175 @@
 ;##  subroutines                                                ##
 ;#################################################################
 
+
+
+
+gameinit:
+    lda #0
+    sta LEVEL
+
+    lda #$C8                ; reset screen control register
+    sta $d016
+
+    lda #$40                ; character to fill screen
+    ldy #12                 ; color to fill screen
+    jsr clearscreen
+
+    lda #<levels            ; indirect 16-bit adress of levels
+    sta LEVELS_P            ; location is stored in two bytes
+    lda #>levels            ; in zero page
+    sta LEVELS_P+1
+
+    clc
+    lda #SPRITE_MEM         ; vic-relative sprite memory
+    adc #8
+    sta SPRITE_LEVEL        ; first set of animated sprites
+
+;# sprite init ################################################
+    lda #0
+    sta $d015               ; sprite enabled
+    sta $d017               ; sprite double height
+    sta $d01c               ; sprite multicolor
+    sta $d01d               ; sprite double width
+    sta $d010               ; sprite bit 8
+    sta $d01b               ; sprite bg priority
+    sta $d020               ; border color
+    sta $d021               ; screen color
+
+ ;## top text ############################################
+    ldx #39
+    ldy #$40
+.loop_top
+    lda text,x
+    cmp #$20                ; if space character replace with fx-char
+    bne :+                  ; if not, skip
+    tya
+    beq :++                 ; skip to commit
+:
+    cmp #$60
+    bcc :+                  ; if carry set, skip ahead
+    sbc #$60
+:
+    sta SCREEN+1*40,x      ; text location with row offset
+    dex
+    bpl .loop_top
+
+;## highscore ###########################################
+    ldy #5
+:
+    lda highscore,y
+    sta SCREEN+(1*40)+33,y
+    dey
+    bpl :-
+
+;## bottom text #########################################
+    ldx #39
+    ldy #$40
+.loop_bottom:
+    lda text+40,x
+    cmp #$20
+    bne :+
+    tya
+    beq :++
+:
+    cmp #$60
+    bcc :+
+    sbc #$60
+:
+    sta SCREEN+23*40,x      ; text location with row offset
+    dex
+    bpl .loop_bottom
+
+;## bottom color row ####################################
+    ldx #6
+:
+    lda #$75
+    sta SCREEN+COLORROW,x
+    lda spritecolor+1,x
+    sta $d800+COLORROW,x    ; store color to text row with x-offset
+    dex                     ; decrement x
+    bpl :-                  ; if positive, loop back
+
+;## init timers #########################################
+    clc
+    lda #0
+    sta TIMER_D1
+    adc #$30
+    sta $8000+23*40+8
+    clc
+    lda #0
+    sta TIMER_D2
+    adc #$30
+    sta $8000+23*40+7
+    clc
+    lda #2
+    sta TIMER_D3
+    adc #$30
+    sta $8000+23*40+6
+
+;## screen init ###################################
+    ldx #38
+    lda #$21
+:                           ; top
+    sta SCREEN,x
+    dex
+    bne :-
+    ldx #38
+    lda #$22
+:                           ; bottom
+    sta SCREEN+24*40,x
+    dex
+    bne :-
+    ldx #0
+    ldy #$23
+    clc
+:                           ; left
+    txa
+    adc #40
+    tax
+    tya
+    sta SCREEN,x
+    sta SCREEN+$f0,x
+    sta SCREEN+$1e0,x
+    sta SCREEN+$2d0,x
+    cpx #240
+    bcc :-
+    ldx #0
+    ldy #$24
+    clc
+:                           ; right
+    txa
+    adc #40
+    tax
+    tya
+    sta SCREEN+$27,x
+    sta SCREEN+$117,x
+    sta SCREEN+$207,x
+    sta SCREEN+$2f7,x
+    cpx #240
+    bcc :-
+                            ;corners
+    lda #$25
+    sta SCREEN
+    lda #$26
+    sta SCREEN+39
+    lda #$27
+    sta SCREEN+24*40
+    lda #$28
+    sta SCREEN+24*40+39
+
+    clc
+    lda #0
+    ldx #0
+:
+    sta ANIMF,x
+    adc #2
+    inx
+    cpx #8
+    bne :-
+
+    rts
+
 ;## set level ############################
 set_level:
 
@@ -301,6 +470,231 @@ bgfx:
     tya
     sta FXCHAR
 :                            ; end
+;    rts
+
+bgfx_2:
+    ldx #7                  ; run for each row in character
+    lda SPEEDX              ; get current speed
+    tay                     ; transfer speed to y
+.shiftx
+    clc                     ; clear carry
+    tya                     ; get speed from y
+    beq .endx               ; if speed is zero, skip to end
+    bmi :++                 ; if speed is negative, skip ahead
+:                           ;.posx
+    lda FXCHAR+8,x            ; load current row of fxchar
+    rol                     ; shift bits left
+    bcs :++                 ; if bit 7 was not empty, jump
+    jmp :++++               ; otherwise ready to store
+:                           ;.negx
+    lda FXCHAR+8,x
+    ror
+    bcs :++
+    jmp :+++
+:                           ;.carryposx
+    eor #1                  ; put pixel in first bit
+    jmp :++
+:                           ;.carrynegx
+    eor #$80                ; put pixel in last bit
+:                           ;.readyx
+    sta FXCHAR+8,x            ; store shifted row
+.endx
+    dex
+    bpl .shiftx
+
+    lda SPEEDX+1            ; get y-speed
+    beq :+++                ; if 0, jump to end
+    bmi :++                 ; with negative value, skip ahead
+:                           ;.posy  move all rows up wrapping first to last
+    lda FXCHAR+8
+    tay
+    lda FXCHAR+8+1
+    sta FXCHAR+8
+    lda FXCHAR+8+2
+    sta FXCHAR+8+1
+    lda FXCHAR+8+3
+    sta FXCHAR+8+2
+    lda FXCHAR+8+4
+    sta FXCHAR+8+3
+    lda FXCHAR+8+5
+    sta FXCHAR+8+4
+    lda FXCHAR+8+6
+    sta FXCHAR+8+5
+    lda FXCHAR+8+7
+    sta FXCHAR+8+6
+    tya
+    sta FXCHAR+8+7
+    jmp :++
+:                           ;.negy, move all down up wrapping last to first
+    lda FXCHAR+8+7
+    tay
+    lda FXCHAR+8+6
+    sta FXCHAR+8+7
+    lda FXCHAR+8+5
+    sta FXCHAR+8+6
+    lda FXCHAR+8+4
+    sta FXCHAR+8+5
+    lda FXCHAR+8+3
+    sta FXCHAR+8+4
+    lda FXCHAR+8+2
+    sta FXCHAR+8+3
+    lda FXCHAR+8+1
+    sta FXCHAR+8+2
+    lda FXCHAR+8
+    sta FXCHAR+8+1
+    tya
+    sta FXCHAR+8
+:                            ; end
+;    rts
+
+bgfx_3:
+    ldx #7                  ; run for each row in character
+    lda SPEEDX              ; get current speed
+    tay                     ; transfer speed to y
+.shiftx
+    clc                     ; clear carry
+    tya                     ; get speed from y
+    beq .endx               ; if speed is zero, skip to end
+    bmi :++                 ; if speed is negative, skip ahead
+:                           ;.posx
+    lda FXCHAR+16,x            ; load current row of fxchar
+    rol                     ; shift bits left
+    bcs :++                 ; if bit 7 was not empty, jump
+    jmp :++++               ; otherwise ready to store
+:                           ;.negx
+    lda FXCHAR+16,x
+    ror
+    bcs :++
+    jmp :+++
+:                           ;.carryposx
+    eor #1                  ; put pixel in first bit
+    jmp :++
+:                           ;.carrynegx
+    eor #$80                ; put pixel in last bit
+:                           ;.readyx
+    sta FXCHAR+16,x            ; store shifted row
+.endx
+    dex
+    bpl .shiftx
+
+    lda SPEEDX+1            ; get y-speed
+    beq :+++                ; if 0, jump to end
+    bmi :++                 ; with negative value, skip ahead
+:                           ;.posy  move all rows up wrapping first to last
+    lda FXCHAR+16
+    tay
+    lda FXCHAR+16+1
+    sta FXCHAR+16
+    lda FXCHAR+16+2
+    sta FXCHAR+16+1
+    lda FXCHAR+16+3
+    sta FXCHAR+16+2
+    lda FXCHAR+16+4
+    sta FXCHAR+16+3
+    lda FXCHAR+16+5
+    sta FXCHAR+16+4
+    lda FXCHAR+16+6
+    sta FXCHAR+16+5
+    lda FXCHAR+16+7
+    sta FXCHAR+16+6
+    tya
+    sta FXCHAR+16+7
+    jmp :++
+:                           ;.negy, move all down up wrapping last to first
+    lda FXCHAR+16+7
+    tay
+    lda FXCHAR+16+6
+    sta FXCHAR+16+7
+    lda FXCHAR+16+5
+    sta FXCHAR+16+6
+    lda FXCHAR+16+4
+    sta FXCHAR+16+5
+    lda FXCHAR+16+3
+    sta FXCHAR+16+4
+    lda FXCHAR+16+2
+    sta FXCHAR+16+3
+    lda FXCHAR+16+1
+    sta FXCHAR+16+2
+    lda FXCHAR+16
+    sta FXCHAR+16+1
+    tya
+    sta FXCHAR+16
+:                            ; end
+;    rts
+
+bgfx_4:
+    ldx #7                  ; run for each row in character
+    lda SPEEDX              ; get current speed
+    tay                     ; transfer speed to y
+.shiftx
+    clc                     ; clear carry
+    tya                     ; get speed from y
+    beq .endx               ; if speed is zero, skip to end
+    bmi :++                 ; if speed is negative, skip ahead
+:                           ;.posx
+    lda FXCHAR+24,x            ; load current row of fxchar
+    rol                     ; shift bits left
+    bcs :++                 ; if bit 7 was not empty, jump
+    jmp :++++               ; otherwise ready to store
+:                           ;.negx
+    lda FXCHAR+24,x
+    ror
+    bcs :++
+    jmp :+++
+:                           ;.carryposx
+    eor #1                  ; put pixel in first bit
+    jmp :++
+:                           ;.carrynegx
+    eor #$80                ; put pixel in last bit
+:                           ;.readyx
+    sta FXCHAR+24,x            ; store shifted row
+.endx
+    dex
+    bpl .shiftx
+
+    lda SPEEDX+1            ; get y-speed
+    beq :+++                ; if 0, jump to end
+    bmi :++                 ; with negative value, skip ahead
+:                           ;.posy  move all rows up wrapping first to last
+    lda FXCHAR+24
+    tay
+    lda FXCHAR+24+1
+    sta FXCHAR+24
+    lda FXCHAR+24+2
+    sta FXCHAR+24+1
+    lda FXCHAR+24+3
+    sta FXCHAR+24+2
+    lda FXCHAR+24+4
+    sta FXCHAR+24+3
+    lda FXCHAR+24+5
+    sta FXCHAR+24+4
+    lda FXCHAR+24+6
+    sta FXCHAR+24+5
+    lda FXCHAR+24+7
+    sta FXCHAR+24+6
+    tya
+    sta FXCHAR+24+7
+    jmp :++
+:                           ;.negy, move all down up wrapping last to first
+    lda FXCHAR+24+7
+    tay
+    lda FXCHAR+24+6
+    sta FXCHAR+24+7
+    lda FXCHAR+24+5
+    sta FXCHAR+24+6
+    lda FXCHAR+24+4
+    sta FXCHAR+24+5
+    lda FXCHAR+24+3
+    sta FXCHAR+24+4
+    lda FXCHAR+24+2
+    sta FXCHAR+24+3
+    lda FXCHAR+24+1
+    sta FXCHAR+24+2
+    lda FXCHAR+24
+    sta FXCHAR+24+1
+    tya
+    sta FXCHAR+24
+:                            ; end
     rts
 
 ;## clear screen #########################
@@ -336,9 +730,13 @@ freeze:
     jsr bgfx                ; continue bgfx during freeze
     jsr play_start          ; keep playing sound
     jsr sprite_animation    ; keep updating sprites
+    lda CHARFX_ACTIVE       ; if charfx is not zero, jump to subroutine
+    beq :+
+    jsr charfx
+    :
     ldy VAR0                ; restore y
     dey
-    bne :-
+    bne :--
     rts
 
 ;## sprite animation ################################################
@@ -857,4 +1255,100 @@ trailing_sprites:
 
 .end
     clc
+    rts
+
+;## charfx ################################################################
+;## calculate hero sprite position in character coords ###############
+;#####################################################################
+charfx:
+
+    cmp #2                  ; accumulator should have the value of CHARFX_ACTIVE
+    bne .anim
+
+; calculate the coordinates the first time charfx is called,
+; subsequently it can be skipped until next location is needed
+
+    lda $d010               ; get x extra bits
+    and #1                  ; leave only herobit
+    asl                     ; multiply by 64
+    asl
+    asl
+    asl
+    asl
+    asl
+;   %01000000
+    sta S_CHARX             ; store x extra bit
+    lda $d000               ; get hero x pos
+    lsr                     ; divide by 4
+    lsr
+;    %00100000
+    adc S_CHARX             ; add extra bit to get x-pos in range 1-128
+    tax                     ; move it to x register
+    lda posx,x              ; get value from table that converts x-pos to char pos
+    sta S_CHARX             ; overwrite the previous value with the converted value
+
+    lda $d001               ; get hero y pos
+
+    lsr                     ; divide by 4
+    lsr
+    clc
+    tax                     ; move to x
+    lda posy,x              ; get character y pos from table
+
+    tax                     ; move char y-pos to x register
+    clc
+    lda mul40_s_l,x         ; get y-row from table
+    adc S_CHARX             ; add x-pos to row
+    sta CHARFX_MEM          
+    sta CHARFX_MEM_C
+
+    lda mul40_s_h,x
+    adc #0              ; add carry bit only
+    sta CHARFX_MEM+1
+;    lda mul40_c_h,x
+;    adc #0
+    adc #$94
+    sta CHARFX_MEM_C+1
+
+    dec CHARFX_ACTIVE
+
+
+;## charfx routine ###############################################################
+;#  offset is per-frame offset into pscale and coord lists                       #
+;#  the routine goes through the list until it reaches the previous frame offset #
+;#  or comes across zero at the end of the list                                  #
+;#  pscale is direct offset into character font                                  #
+;#  coords is offset from top left position in 9x7 grid in screen space          #
+;#################################################################################
+
+.anim:
+    ldx CHARFX_FRAME
+    lda charfx_1_offset-1,x
+    sta CHARFX_PREV
+
+    lda charfx_1_offset,x
+    tax
+    bne :+
+    lda #0
+    sta CHARFX_FRAME
+    sta CHARFX_ACTIVE
+    beq .end
+:
+    dex
+    ldy charfx_1_coords,x
+    lda charfx_1_pscale,x
+    sta (CHARFX_MEM),y
+    cmp #64
+    bne :+
+    lda #12
+    bne :++
+    :
+    lda #10
+    :
+    sta (CHARFX_MEM_C),y
+    cpx CHARFX_PREV
+    bne :---
+.end
+    inc CHARFX_FRAME
+
     rts
