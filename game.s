@@ -3,7 +3,7 @@
 ;## directives ##########################################
 DEBUG        = 1            ; if 1 includes debug-related stuff
 SKIPINTRO    = 1            ; go straight to game
-COMPRESS     = 0            ; if on skip the autorun part
+COMPRESS     = 1            ; if on skip the autorun part
 
 ;## constants ###########################################
 SCREEN       = $4400        ; screen memory
@@ -302,6 +302,8 @@ sprite_collision:
     ldy #5
     jsr feedback_points
     jsr play_retrigger_ch2
+    lda CHARFX_ACTIVE
+    bne .end                ; if previous charfx still active, jump ahead
     lda #0
     sta CHARFX_FRAME
     lda #2                  ; init charfx-animation

@@ -1303,14 +1303,13 @@ charfx:
     sta CHARFX_MEM_C
 
     lda mul40_s_h,x
-    adc #0              ; add carry bit only
+    adc #0                  ; add carry bit only
     sta CHARFX_MEM+1
-;    lda mul40_c_h,x
-;    adc #0
-    adc #$94
+    adc #$94                ; offset from screen to color memory
     sta CHARFX_MEM_C+1
 
-    dec CHARFX_ACTIVE
+    dec CHARFX_ACTIVE       ; no need to recalculate coordinates for the rest of
+                            ; the animation
 
 
 ;## charfx routine ###############################################################
@@ -1328,14 +1327,18 @@ charfx:
 
     lda charfx_1_offset,x
     tax
-    bne :+
-    lda #0
-    sta CHARFX_FRAME
+    bne :+                  ; if not zero, jump ahead
+    sta CHARFX_FRAME        ; reset the animation loop
     sta CHARFX_ACTIVE
     beq .end
 :
     dex
     ldy charfx_1_coords,x
+    lda (CHARFX_MEM),y
+    cmp #$40
+    bcc :+++
+    cmp #$45
+    bcs :+++
     lda charfx_1_pscale,x
     sta (CHARFX_MEM),y
     cmp #64
@@ -1346,8 +1349,9 @@ charfx:
     lda #10
     :
     sta (CHARFX_MEM_C),y
+    :
     cpx CHARFX_PREV
-    bne :---
+    bne :----
 .end
     inc CHARFX_FRAME
 
