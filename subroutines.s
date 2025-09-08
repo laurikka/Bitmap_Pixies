@@ -246,9 +246,6 @@ set_level:
     ldy #24                 ; 24 -> ready
     jsr feedback_print      ; print text
 
-;    ldy #0
-;    jsr borderlinecolor
-
     lda #180
     sta $d000               ; init hero sprite x location
     lda #140
@@ -265,10 +262,11 @@ set_level:
     lda #$30
     sta SCREEN+40+9
 :
-
+    lda #0
+    sta PLAY_OFFSET
+    lda #6
+    sta PLAY_DELAY
     jsr play_reset          ; to reset sound envelopes
-    ldy #2
-    jsr freeze              ; wait 2 frames
     jsr play_start_init
     rts
 
@@ -470,7 +468,6 @@ bgfx:
     tya
     sta FXCHAR
 :                            ; end
-;    rts
 
 bgfx_2:
     ldx #7                  ; run for each row in character
@@ -545,7 +542,6 @@ bgfx_2:
     tya
     sta FXCHAR+8
 :                            ; end
-;    rts
 
 bgfx_3:
     ldx #7                  ; run for each row in character
@@ -556,12 +552,12 @@ bgfx_3:
     tya                     ; get speed from y
     beq .endx               ; if speed is zero, skip to end
     bmi :++                 ; if speed is negative, skip ahead
-:                           ;.posx
-    lda FXCHAR+16,x            ; load current row of fxchar
+:
+    lda FXCHAR+16,x         ; load current row of fxchar
     rol                     ; shift bits left
     bcs :++                 ; if bit 7 was not empty, jump
     jmp :++++               ; otherwise ready to store
-:                           ;.negx
+:
     lda FXCHAR+16,x
     ror
     bcs :++
@@ -572,7 +568,7 @@ bgfx_3:
 :                           ;.carrynegx
     eor #$80                ; put pixel in last bit
 :                           ;.readyx
-    sta FXCHAR+16,x            ; store shifted row
+    sta FXCHAR+16,x         ; store shifted row
 .endx
     dex
     bpl .shiftx
@@ -730,7 +726,7 @@ freeze:
     jsr bgfx                ; continue bgfx during freeze
     jsr play_start          ; keep playing sound
     jsr sprite_animation    ; keep updating sprites
-    lda CHARFX_ACTIVE       ; if charfx is not zero, jump to subroutine
+    lda CHARFX_ACT          ; if charfx is not zero, jump to subroutine
     beq :+
     jsr charfx
     :
@@ -1257,12 +1253,18 @@ trailing_sprites:
     clc
     rts
 
-;## charfx ################################################################
-;## calculate hero sprite position in character coords ###############
-;#####################################################################
+;## charfx #######################################################################
+;#  calculate hero sprite position in character coords                           #
+;#  offset is per-frame offset into pscale and coord lists                       #
+;#  the routine goes through the list until it reaches the previous frame offset #
+;#  or comes across zero at the end of the list                                  #
+;#  pscale is direct offset into character font                                  #
+;#  coords is offset from top left position in 9x7 grid in screen space          #
+;#################################################################################
+
 charfx:
 
-    cmp #2                  ; accumulator should have the value of CHARFX_ACTIVE
+    cmp #2                  ; accumulator should have the value of CHARFX_ACT
     bne .anim
 
 ; calculate the coordinates the first time charfx is called,
@@ -1277,15 +1279,15 @@ charfx:
     asl
     asl
 ;   %01000000
-    sta S_CHARX             ; store x extra bit
+    sta CHARFX_X            ; store x extra bit
     lda $d000               ; get hero x pos
     lsr                     ; divide by 4
     lsr
 ;    %00100000
-    adc S_CHARX             ; add extra bit to get x-pos in range 1-128
+    adc CHARFX_X            ; add extra bit to get x-pos in range 1-128
     tax                     ; move it to x register
     lda posx,x              ; get value from table that converts x-pos to char pos
-    sta S_CHARX             ; overwrite the previous value with the converted value
+    sta CHARFX_X            ; overwrite the previous value with the converted value
 
     lda $d001               ; get hero y pos
 
@@ -1298,46 +1300,40 @@ charfx:
     tax                     ; move char y-pos to x register
     clc
     lda mul40_s_l,x         ; get y-row from table
-    adc S_CHARX             ; add x-pos to row
+    adc CHARFX_X            ; add x-pos to row
     sta CHARFX_MEM          
-    sta CHARFX_MEM_C
+    sta CHARFX_CMEM
 
     lda mul40_s_h,x
     adc #0                  ; add carry bit only
     sta CHARFX_MEM+1
     adc #$94                ; offset from screen to color memory
-    sta CHARFX_MEM_C+1
+    sta CHARFX_CMEM+1
 
-    dec CHARFX_ACTIVE       ; no need to recalculate coordinates for the rest of
-                            ; the animation
-
-
-;## charfx routine ###############################################################
-;#  offset is per-frame offset into pscale and coord lists                       #
-;#  the routine goes through the list until it reaches the previous frame offset #
-;#  or comes across zero at the end of the list                                  #
-;#  pscale is direct offset into character font                                  #
-;#  coords is offset from top left position in 9x7 grid in screen space          #
-;#################################################################################
+    dec CHARFX_ACT          ; no need to recalculate coordinates for the rest of
+                            ; the animation so value goes from 2 to 1
+    ldy PREV
+    lda spritecolor,y
+    sta CHARFX_CLR
 
 .anim:
-    ldx CHARFX_FRAME
+    ldx CHARFX_FRM
     lda charfx_1_offset-1,x
-    sta CHARFX_PREV
+    sta CHARFX_PRV
 
     lda charfx_1_offset,x
     tax
-    bne :+                  ; if not zero, jump ahead
-    sta CHARFX_FRAME        ; reset the animation loop
-    sta CHARFX_ACTIVE
+    bne .animloop           ; if not zero, jump ahead
+    sta CHARFX_FRM          ; reset the animation loop
+    sta CHARFX_ACT          ; de-activate charfx
     beq .end
-:
+.animloop
     dex
     ldy charfx_1_coords,x
     lda (CHARFX_MEM),y
-    cmp #$40
-    bcc :+++
-    cmp #$45
+    cmp #$40                ; check upper and lower limit in font
+    bcc :+++                ; if not animatable character, jump ahead
+    cmp #$45                ; to avoid drawing over borders and text
     bcs :+++
     lda charfx_1_pscale,x
     sta (CHARFX_MEM),y
@@ -1346,13 +1342,13 @@ charfx:
     lda #12
     bne :++
     :
-    lda #10
+    lda CHARFX_CLR
     :
-    sta (CHARFX_MEM_C),y
+    sta (CHARFX_CMEM),y
     :
-    cpx CHARFX_PREV
-    bne :----
+    cpx CHARFX_PRV
+    bne .animloop
 .end
-    inc CHARFX_FRAME
+    inc CHARFX_FRM
 
     rts

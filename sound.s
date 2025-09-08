@@ -8,8 +8,12 @@ ch1pwh      = $e6
 ch2pwh      = $e7
 ch3pwh      = $e8
 PLAY_FRAME  = $e9
+PLAY_RESET  = $ea
+PLAY_RETRIG = $eb
+PLAY_OFFSET = $ef
+PLAY_DELAY  = $f0
 
-NOTEDELAY   = 4
+NOTEDELAY   = 6
 PWSPEED1    = 9
 PWSPEED2    = 7
 PWSPEED3    = 5
@@ -37,9 +41,14 @@ play_init:
     clc
     lda #0
     sta PLAY_FRAME
+    sta PLAY_RESET
+    sta PLAY_OFFSET
     sta ch1_pos
     sta ch2_pos
     sta ch3_pos
+
+    lda #6
+    sta PLAY_DELAY
 
     ldx #7
     lda #0
@@ -65,13 +74,35 @@ play_init:
     sta $d412
     rts
 
+play_call:                  ; collect all play-processing here and call it once a frame
+    lda PLAY_RESET
+    beq :+
+    jsr play_reset
+:
+    lda PLAY_RETRIG
+    beq :++
+    cmp #2
+    beq :+
+    jsr play_retrigger_ch1
+    beq :++
+:
+    jsr play_retrigger_ch2
+:
+    jsr play_start          ; keep sound going
+    rts
+
 play_reset:
     lda #0
+    sta PLAY_RESET
     ldx #17
 :
     sta $d400,x
     dex
     bpl :-
+
+    ldy #2
+    jsr freeze
+
     rts
 
 
@@ -87,9 +118,7 @@ play_intro:
     sta $d406               ; ch 1
     sta $d40d               ; ch 2
     sta $d414               ; ch 3
-
-
-    
+   
     inc PLAY_FRAME
     lda PLAY_FRAME
     cmp #4
@@ -167,12 +196,16 @@ play_retrigger_ch1:
     clc
     lda #%01000001
     sta $d404
+    lda #0
+    sta PLAY_RETRIG
     rts
 
 play_retrigger_ch2:
     clc
     lda #%01000001
     sta $d40b
+    lda #0
+    sta PLAY_RETRIG
     rts
 
 play_retrigger_off:
@@ -183,7 +216,6 @@ play_retrigger_off:
     rts
 
 play_start:    
-
     lda #%01000001
     sta $d412
 
@@ -218,11 +250,11 @@ play_start:
 
 .skip_1
     lda PLAY_FRAME          ; to next note
-    cmp #6
-    bne .skip
+    cmp PLAY_DELAY
+    bcc .skip
 
     lda ch1_pos             ; current position
-    cmp #8                  ; compare
+    cmp #6                  ; compare
     bne :+                  ; skip if not that
     lda #0                  ; reset to 0
     sta ch1_pos
@@ -244,13 +276,15 @@ play_start:
     inc ch1_pos
 
     lda ch3_pos             ; current position
+;    adc PLAY_OFFSET         ; shorten the loop
     cmp #8                  ; compare
-    bne :+                  ; skip if not that
+    bcc :+                  ; skip if not higher
     lda #0                  ; reset to 0
     sta ch3_pos
 :
     tay
     lda start_ch3,y
+    adc PLAY_OFFSET
     tax
     lda notes_lowbyte,x
     sta $d40e
@@ -312,9 +346,9 @@ start_ch2:
 start_ch3:
     byte  6, 8, 10,12,14,15,16,17
 
-;           1   2   3   4   5   6   7   8   9   10  11  12  13  14  15  16  17  18  19  20  21
-; notes    c-2,d-2,e-2,g-2,a-2,c-3,d-3,e-3,g-3,a-3,c-4,d-4,e-4,g-4,a-4,c-5,d-5,e-5,g-5,a-5,c-6
+;           1   2   3   4   5   6   7   8   9   10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26
+; notes    c-2,d-2,e-2,g-2,a-2,c-3,d-3,e-3,g-3,a-3,c-4,d-4,e-4,g-4,a-4,c-5,d-5,e-5,g-5,a-5,c-6,d-6,e-6,g-6,a-6,c-7
 notes_lowbyte
-    byte 0,$54,$DC,$74,$7C,$47,$A8,$B7,$E8,$F8,$8F,$50,$6F,$D0,$F0,$1E,$A0,$DD,$A0,$E1,$3B,$40
+    byte 0,$54,$DC,$74,$7C,$47,$A8,$B7,$E8,$F8,$8F,$50,$6F,$D0,$F0,$1E,$A0,$DD,$A0,$E1,$3B,$40,$BB,$3F,$C2,$76,$7F
 notes_highbyte
-    byte 0,$04,$04,$05,$06,$07,$08,$09,$0A,$0C,$0E,$11,$13,$15,$19,$1D,$22,$26,$2B,$33,$3A,$45
+    byte 0,$04,$04,$05,$06,$07,$08,$09,$0A,$0C,$0E,$11,$13,$15,$19,$1D,$22,$26,$2B,$33,$3A,$45,$4D,$57,$67,$74,$8A

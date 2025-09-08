@@ -50,12 +50,14 @@ TIMER_F      = $2C          ; delays updating timer
 TIMER_D1     = $2D          ; three decimal digits for time left
 TIMER_D2     = $2E
 TIMER_D3     = $2F
-S_CHARX      = $31
-CHARFX_PREV  = $33          ; previous offset value for comparison
-CHARFX_FRAME = $34          ; charfx animation frame
-CHARFX_ACTIVE= $35          ; if non zero, jump into charfx-loop
-CHARFX_MEM   = $36          ; +$37, memory pointer for charfx
-CHARFX_MEM_C = $38          ; +$39, memory pointer for charfx color
+CHARFX_X     = $30          ; store x-pos of charfx
+CHARFX_PRV   = $31          ; previous offset value for comparison
+CHARFX_FRM   = $32          ; charfx animation frame
+CHARFX_ACT   = $33          ; if non zero, jump into charfx-loop
+CHARFX_MEM   = $34          ; +$35, memory pointer for charfx
+CHARFX_CMEM  = $36          ; +$37, memory pointer for charfx color
+CHARFX_CLR   = $38          ; color for the effect
+PREV         = $39          ; previous color to catch
 
 COLLISION    = $40          ; $40-47 bitmasks to compare collided sprites
 CARRYBIT     = $48          ; $48-57 for calculating the extra x bit
@@ -274,7 +276,8 @@ sprite_collision:
     inc BONUSTIME_D1
     ldy #1
     jsr feedback_points
-    jsr play_retrigger_ch1
+    lda #1                  ; load 1 to retrigger ch1
+    sta PLAY_RETRIG
     jmp .end
 
 :                           ; five points
@@ -285,6 +288,8 @@ sprite_collision:
     sta POINTBUFFER
     inc BONUSTIME_D1
     inc BONUSTIME_D2
+    inc PLAY_OFFSET
+;    dec PLAY_DELAY
 
     ldy #1
 :
@@ -297,17 +302,20 @@ sprite_collision:
     cpy #8
     bne :--
 :
+    lda NEXT                ; store the previous sprite index
+    sta PREV
     sty NEXT
 
     ldy #5
     jsr feedback_points
-    jsr play_retrigger_ch2
-    lda CHARFX_ACTIVE
+    lda #2                  ; load 2 to retrigger ch2
+    sta PLAY_RETRIG
+    lda CHARFX_ACT
     bne .end                ; if previous charfx still active, jump ahead
     lda #0
-    sta CHARFX_FRAME
+    sta CHARFX_FRM
     lda #2                  ; init charfx-animation
-    sta CHARFX_ACTIVE
+    sta CHARFX_ACT
 .end
     jsr colorrow_update
     ldy NEXT
@@ -389,7 +397,7 @@ idlewait1:
     sta $d020               ; border color
     endif
 
-    jsr play_start          ; keep sound going
+    jsr play_call           ; init sound once a frame
 
 ;## joystick read  ##################################################
 joystick_read:
@@ -483,11 +491,17 @@ timer:
     bmi :+                  ; the time has run out
     jmp .end
 :                           ;.time_out
+    lda #8
+    sta PLAY_DELAY
+    lda #0
+    sta PLAY_OFFSET
+
     ldy #16                 ; 16 -> time out
     jsr feedback_print      ; print text
     ldy #125    
     jsr freeze
-    jsr play_reset
+    lda #1
+    sta PLAY_RESET
     ldy #2
     jsr freeze
     jsr game_over           ; if time is out game is over
@@ -516,6 +530,9 @@ timer:
     bpl :+
     ldy #10
     sta FEEDBACK_F
+    lda #5
+    sta PLAY_DELAY
+    inc PLAY_OFFSET
     ldy #8                  ; offset 8 -> "low time"-text
     jsr feedback_print
 :
@@ -551,7 +568,7 @@ posbuffer_shift:
     sta $d020               ; border color
     endif
 
-    lda CHARFX_ACTIVE       ; if charfx is not zero, jump to subroutine
+    lda CHARFX_ACT          ; if charfx is not zero, jump to subroutine
     beq :+
     jsr charfx
     :
