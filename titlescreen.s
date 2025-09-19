@@ -91,15 +91,15 @@ titlescreen:
     dex
     bpl .textloop_score
 
-    ldy #5
+    ldy #4
 :
     lda highscore,y
     sta SCREEN+(12*40)+20,y
-    lda highscore+6,y
+    lda highscore+5,y
     sta SCREEN+(13*40)+20,y
-    lda highscore+12,y
+    lda highscore+10,y
     sta SCREEN+(14*40)+20,y
-    lda highscore+18,y
+    lda highscore+15,y
     sta SCREEN+(16*40)+20,y
     dey
     bpl :-

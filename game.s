@@ -1,8 +1,8 @@
     incdir bin
 
 ;## directives ##########################################
-DEBUG        = 1            ; if 1 includes debug-related stuff
-SKIPINTRO    = 1            ; go straight to game
+DEBUG        = 0            ; if 1 includes debug-related stuff
+SKIPINTRO    = 0            ; go straight to game
 COMPRESS     = 1            ; if on skip the autorun part
 
 ;## constants ###########################################
@@ -289,7 +289,6 @@ sprite_collision:
     inc BONUSTIME_D1
     inc BONUSTIME_D2
     inc PLAY_OFFSET
-;    dec PLAY_DELAY
 
     ldy #1
 :
@@ -488,17 +487,23 @@ timer:
 :                           ;.d3
     stx TIMER_D2
     dec TIMER_D3            ; if timer digit 3 is negative
+    bne :+
+    lda #5                  ; speed up arpeggio if time left
+    sta PLAY_DELAY          ; is less than 100
+:
     bmi :+                  ; the time has run out
     jmp .end
 :                           ;.time_out
-    lda #8
+    lda #7
     sta PLAY_DELAY
     lda #0
     sta PLAY_OFFSET
 
     ldy #16                 ; 16 -> time out
     jsr feedback_print      ; print text
-    ldy #125    
+    lda #3                  ; load 3 to trigger end
+    sta PLAY_RETRIG
+    ldy #150    
     jsr freeze
     lda #1
     sta PLAY_RESET
@@ -660,8 +665,8 @@ spritecolor     byte 10,2,8,7,5,3,6,4,10
 invertbits      byte %11111110,%11111101,%11111011,%11110111,%11101111,%11011111,%10111111,%01111111
 
 text:
-    ascii " level 000              hi-score        "
-    ascii " time 000                  score 000000 "
+    ascii " level 000               hi-score       "
+    ascii " time 000                   score 00000 "
 
     ascii "       collect colors in order          "
     ascii "         for maximum score              "
@@ -718,9 +723,9 @@ highscore:
     blk 24,$30              ; 4 rows of 6 zeroes
 
 posx:   ; from 71 to 40, used to convert sprite pos to character position
-    byte 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 16, 17, 17, 18, 18, 19, 19, 20, 20, 21, 21, 22, 22, 23, 23, 24, 24, 25, 25, 26, 26, 27, 27, 28, 28, 29, 29, 30, 30, 31, 31, 32, 32, 33, 33, 34, 34, 35, 35, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36
+    byte 30, 31, 31, 32, 32, 33, 33, 34, 34, 35, 35, 36, 36, 00, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 16, 17, 17, 18, 18, 19, 19, 20, 20, 21, 21, 22, 22, 23, 23, 24, 24, 25, 25, 26, 26, 27, 27, 28, 28, 29, 29, 30, 30, 31, 31, 32, 32, 33, 33, 34, 34, 35, 35, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36
 posy:   ; from 64 to 25
-    byte 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19, 20, 20, 21, 21, 22, 22
+    byte 14, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19, 20, 20, 21, 21, 22, 22, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19, 20, 20, 21, 21, 22, 22
 
 ;   row    1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25
 mul40_s_h:  ; screen high byte

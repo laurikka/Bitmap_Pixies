@@ -56,10 +56,10 @@ gameinit:
     bpl .loop_top
 
 ;## highscore ###########################################
-    ldy #5
+    ldy #4
 :
     lda highscore,y
-    sta SCREEN+(1*40)+33,y
+    sta SCREEN+(1*40)+34,y
     dey
     bpl :-
 
@@ -724,7 +724,7 @@ freeze:
     bne :-                  ; wait until true
     sty VAR0                ; save y to temp var
     jsr bgfx                ; continue bgfx during freeze
-    jsr play_start          ; keep playing sound
+    jsr play_call           ; keep playing sound
     jsr sprite_animation    ; keep updating sprites
     lda CHARFX_ACT          ; if charfx is not zero, jump to subroutine
     beq :+
@@ -913,115 +913,115 @@ feedback_dec:
 ;## game over ############################
 game_over:
     clc
-    ldx #5
+    ldx #4
 :                           ; copy game score to 4th slot
-    lda SCREEN+23*40+33,x
-    sta highscore+18,x
+    lda SCREEN+23*40+34,x
+    sta highscore+15,x
     dex
     bpl :-
 
 ;compare_scores
 ;## round 1 ###########################################
     clc
-    lda highscore+14
-    cmp highscore+20
+    lda highscore+11    ;14
+    cmp highscore+16    ;20
     bcc :+
     bne :++
-    lda highscore+15
-    cmp highscore+21
+    lda highscore+12    ;15
+    cmp highscore+17    ;21
     bcc :+
     bne :++
-    lda highscore+16
-    cmp highscore+22
+    lda highscore+13    ;16
+    cmp highscore+18    ;22
     bcc :+
     bne :++
-    lda highscore+17
-    cmp highscore+23
+    lda highscore+14    ;17
+    cmp highscore+19    ;23
     bcs :++
 :
-    lda highscore+20
-    sta highscore+14
-    lda highscore+21
-    sta highscore+15
-    lda highscore+22
-    sta highscore+16
-    lda highscore+23
-    sta highscore+17
+    lda highscore+16    ;20
+    sta highscore+11    ;14
+    lda highscore+17    ;21
+    sta highscore+12    ;15
+    lda highscore+18    ;22
+    sta highscore+13    ;16
+    lda highscore+19    ;23
+    sta highscore+14    ;17
 :;## round 2 ###########################################
     clc
-    lda highscore+8
-    cmp highscore+14
+    lda highscore+6     ;8
+    cmp highscore+11     ;14
     bcc :+
     bne :++
-    lda highscore+9
-    cmp highscore+15
+    lda highscore+7     ;9
+    cmp highscore+12     ;15
     bcc :+
     bne :++
-    lda highscore+10
-    cmp highscore+16
+    lda highscore+8     ;10
+    cmp highscore+13     ;16
     bcc :+
     bne :++
-    lda highscore+11
-    cmp highscore+17
+    lda highscore+9     ;11
+    cmp highscore+14     ;17
     bcs :++
 :
-    ldy highscore+8
-    lda highscore+14
-    sta highscore+8
-    sty highscore+14
+    ldy highscore+6     ;8
+    lda highscore+11     ;14
+    sta highscore+6     ;8
+    sty highscore+11     ;14
 
-    ldy highscore+9
-    lda highscore+15
-    sta highscore+9
-    sty highscore+15
+    ldy highscore+7     ;9
+    lda highscore+12     ;15
+    sta highscore+7     ;9
+    sty highscore+12     ;15
 
-    ldy highscore+10
-    lda highscore+16
-    sta highscore+10
-    sty highscore+16
+    ldy highscore+8     ;10
+    lda highscore+13     ;16
+    sta highscore+8     ;10
+    sty highscore+13     ;16
 
-    ldy highscore+11
-    lda highscore+17
-    sta highscore+11
-    sty highscore+17
+    ldy highscore+9     ;11
+    lda highscore+14     ;17
+    sta highscore+9     ;11
+    sty highscore+14     ;17
 :
 :;## round 3 ###########################################
     clc
-    lda highscore+2
-    cmp highscore+8
+    lda highscore+1     ;2
+    cmp highscore+6     ;8
     bcc :+
     bne :++
-    lda highscore+3
-    cmp highscore+9
+    lda highscore+2     ;3
+    cmp highscore+7     ;9
     bcc :+
     bne :++
-    lda highscore+4
-    cmp highscore+10
+    lda highscore+3     ;4
+    cmp highscore+8     ;10
     bcc :+
     bne :++
-    lda highscore+5
-    cmp highscore+11
+    lda highscore+4     ;5
+    cmp highscore+9     ;11
     bcs :++
 :
-    ldy highscore+2
-    lda highscore+8
-    sta highscore+2
-    sty highscore+8
+    ldy highscore+1     ;2
+    lda highscore+6     ;8
+    sta highscore+1     ;2
+    sty highscore+6     ;8
 
-    ldy highscore+3
-    lda highscore+9
-    sta highscore+3
-    sty highscore+9
+    ldy highscore+2     ;3
+    lda highscore+7     ;9
+    sta highscore+2     ;3
+    sty highscore+7     ;9
 
-    ldy highscore+4
-    lda highscore+10
-    sta highscore+4
-    sty highscore+10
+    ldy highscore+3     ;4
+    lda highscore+8     ;10
+    sta highscore+3     ;4
+    sty highscore+8     ;10
 
-    ldy highscore+5
-    lda highscore+11
-    sta highscore+5
-    sty highscore+11
+    ldy highscore+4     ;5
+    lda highscore+9     ;11
+    sta highscore+4     ;5
+    sty highscore+9     ;11
 :
     rts
 

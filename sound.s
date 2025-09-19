@@ -81,6 +81,8 @@ play_call:                  ; collect all play-processing here and call it once 
 :
     lda PLAY_RETRIG
     beq :++
+    cmp #3
+    beq .end
     cmp #2
     beq :+
     jsr play_retrigger_ch1
@@ -89,6 +91,9 @@ play_call:                  ; collect all play-processing here and call it once 
     jsr play_retrigger_ch2
 :
     jsr play_start          ; keep sound going
+    rts
+.end
+    jsr play_end
     rts
 
 play_reset:
@@ -208,6 +213,29 @@ play_retrigger_ch2:
     sta PLAY_RETRIG
     rts
 
+play_end:
+    clc
+    lda #%00011000          ; 0-3 decay, 4-7 attack
+    sta $d405               ; ch 1
+    lda #%00011000          ; 0-3 decay, 4-7 attack
+    sta $d40c               ; ch 2
+    lda #%00100111          ; 0-3 decay, 4-7 attack
+    sta $d413               ; ch 3
+
+    lda #%01001010          ; 0-3 release, 4-7 sustain vol
+    sta $d406               ; ch 1
+    lda #%01001100          ; 0-3 release, 4-7 sustain vol
+    sta $d40d               ; ch 2
+    lda #%00100010          ; 0-3 release, 4-7 sustain vol
+    sta $d414               ; ch 3
+
+    lda #%01000001
+    sta $d40b
+    sta $d404
+    lda #4
+    sta PLAY_RETRIG
+    rts
+
 play_retrigger_off:
     clc
     lda #%01000000
@@ -276,9 +304,11 @@ play_start:
     inc ch1_pos
 
     lda ch3_pos             ; current position
-;    adc PLAY_OFFSET         ; shorten the loop
     cmp #8                  ; compare
     bcc :+                  ; skip if not higher
+    lda PLAY_RETRIG
+    cmp #4
+    beq .endpart
     lda #0                  ; reset to 0
     sta ch3_pos
 :
@@ -299,6 +329,26 @@ play_start:
     sta PLAY_FRAME
 .skip
     rts
+    
+.endpart
+    tay
+    lda start_ch3,y
+    adc PLAY_OFFSET
+    tax
+    lda notes_lowbyte,x
+    sta $d40e
+    lda notes_highbyte,x
+    sta $d40f
+
+    lda #%01000000
+    sta $d412
+
+    inc ch3_pos
+    lda #0
+    sta PLAY_FRAME
+    rts
+
+
 
 pw_update:
     clc
@@ -344,7 +394,7 @@ start_ch1:
 start_ch2:
     byte 16,17,18,20, 8,10,12,14
 start_ch3:
-    byte  6, 8, 10,12,14,15,16,17
+    byte  6, 8, 10,12,14,15,16,17,16,15,14,12,10,8,6,5,4,3,2,1,0
 
 ;           1   2   3   4   5   6   7   8   9   10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26
 ; notes    c-2,d-2,e-2,g-2,a-2,c-3,d-3,e-3,g-3,a-3,c-4,d-4,e-4,g-4,a-4,c-5,d-5,e-5,g-5,a-5,c-6,d-6,e-6,g-6,a-6,c-7
