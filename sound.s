@@ -1,3 +1,4 @@
+; sound
 ch1_pos     = $e0
 ch2_pos     = $e1
 ch3_pos     = $e2
@@ -8,45 +9,41 @@ ch1pwh      = $e6
 ch2pwh      = $e7
 ch3pwh      = $e8
 PLAY_FRAME  = $e9
-PLAY_RESET  = $ea
-PLAY_RETRIG = $eb
-PLAY_OFFSET = $ef
-PLAY_DELAY  = $f0
+PLAY_RETRIG = $ea
+PLAY_OFFSET = $eb
+PLAY_DELAY  = $ec
+PLAY_TABLE  = $ed           ; +$ee
 
+; sound constants
 NOTEDELAY   = 6
 PWSPEED1    = 9
 PWSPEED2    = 7
 PWSPEED3    = 5
 
-;    cpu 6510                ; identifier for assembler to target c64
-;	org $2000
+play_table:                 ; relative offsets below
+    jmp play_start          ;  0 
+    jmp play_retrigger_ch1  ;  3
+    jmp play_retrigger_ch2  ;  6
+    jmp play_end            ;  9
+    jmp play_sprite         ; 12
+    jmp play_reset          ; 15
+    jmp play_reset_env      ; 18
 
-;    jsr play_init
-;    jsr play_start_init
-;
-;loop
-;    ldx $d012               ; load current raster line
-;    cpx #$60                ; compare to given number
-;    bne loop                ; wait until true
-;    lda #1
-;    sta $d020,x
-;
-;    jsr play_start
-;
-;    lda #0
-;    sta $d020,x
-;    jmp loop
-;
+play_call:                  ; PLAY_TABLE has address that hits one of the
+    jmp (PLAY_TABLE)        ; jump-instructions in play_table
+
 play_init:
     clc
     lda #0
     sta PLAY_FRAME
-    sta PLAY_RESET
     sta PLAY_OFFSET
     sta ch1_pos
     sta ch2_pos
     sta ch3_pos
+    sta PLAY_TABLE
 
+    lda #>SOUND
+    sta PLAY_TABLE+1
     lda #6
     sta PLAY_DELAY
 
@@ -74,31 +71,9 @@ play_init:
     sta $d412
     rts
 
-play_call:                  ; collect all play-processing here and call it once a frame
-    lda PLAY_RESET
-    beq :+
-    jsr play_reset
-:
-    lda PLAY_RETRIG
-    beq :++
-    cmp #3
-    beq .end
-    cmp #2
-    beq :+
-    jsr play_retrigger_ch1
-    beq :++
-:
-    jsr play_retrigger_ch2
-:
-    jsr play_start          ; keep sound going
-    rts
-.end
-    jsr play_end
-    rts
-
 play_reset:
     lda #0
-    sta PLAY_RESET
+    sta PLAY_TABLE
     ldx #17
 :
     sta $d400,x
@@ -107,7 +82,19 @@ play_reset:
 
     ldy #2
     jsr freeze
+    rts
 
+play_reset_env:
+    lda #0
+    sta PLAY_TABLE
+    ldx #17
+:
+    sta $d400,x
+    dex
+    bpl :-
+
+    ldy #2
+    jsr freeze
     rts
 
 
@@ -129,7 +116,6 @@ play_intro:
     cmp #4
     bne .skip
 
-    clc
     lda #%01000001
     sta $d404
     sta $d40b
@@ -197,20 +183,38 @@ play_start_init:
     sta $d412
     rts
 
-play_retrigger_ch1:
-    clc
+play_sprite:
+    lda #%00010100          ; 0-3 decay, 4-7 attack
+    sta $d405               ; ch 1
+    lda #%00100100          ; 0-3 release, 4-7 sustain vol
+    sta $d406               ; ch 1
     lda #%01000001
     sta $d404
     lda #0
-    sta PLAY_RETRIG
+    sta PLAY_TABLE
+    rts
+
+
+play_retrigger_ch1:
+    lda #%00011010          ; 0-3 decay, 4-7 attack
+    sta $d405               ; ch 1
+    lda #%01001010          ; 0-3 release, 4-7 sustain vol
+    sta $d406               ; ch 1
+    lda #%01000001
+    sta $d404
+    lda #0
+    sta PLAY_TABLE
     rts
 
 play_retrigger_ch2:
-    clc
+    lda #%00011010          ; 0-3 decay, 4-7 attack
+    sta $d40c               ; ch 1
+    lda #%01001010          ; 0-3 release, 4-7 sustain vol
+    sta $d40d               ; ch 1
     lda #%01000001
     sta $d40b
     lda #0
-    sta PLAY_RETRIG
+    sta PLAY_TABLE
     rts
 
 play_end:
@@ -232,8 +236,8 @@ play_end:
     lda #%01000001
     sta $d40b
     sta $d404
-    lda #4
-    sta PLAY_RETRIG
+    lda #0                  ; 4?
+    sta PLAY_TABLE
     rts
 
 play_retrigger_off:
@@ -306,8 +310,8 @@ play_start:
     lda ch3_pos             ; current position
     cmp #8                  ; compare
     bcc :+                  ; skip if not higher
-    lda PLAY_RETRIG
-    cmp #4
+    lda PLAY_TABLE
+    cmp #9
     beq .endpart
     lda #0                  ; reset to 0
     sta ch3_pos
@@ -347,8 +351,6 @@ play_start:
     lda #0
     sta PLAY_FRAME
     rts
-
-
 
 pw_update:
     clc

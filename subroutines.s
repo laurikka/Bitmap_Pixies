@@ -253,6 +253,9 @@ set_level:
     lda #0
     sta SPEEDX
     sta SPEEDX+1
+    sta CHARFX_SPR_2
+    lda #2
+    sta CHARFX_ACT_2
 
     inc SCREEN+40+9
     lda SCREEN+40+9
@@ -715,8 +718,9 @@ clearscreen:
     bne :-
     rts
 
-;## freeze action ########################
-;## y should be number of frames        ##
+;## freeze action ###################################################
+;## y should be number of frames                                   ##
+;####################################################################
 freeze:
 :
     ldx $D012               ; load current raster line
@@ -910,7 +914,7 @@ feedback_dec:
 :
     rts
 
-;## game over ############################
+;## game over #######################################################
 game_over:
     clc
     ldx #4
@@ -921,8 +925,12 @@ game_over:
     bpl :-
 
 ;compare_scores
-;## round 1 ###########################################
+;## round 1 #########################################################
     clc
+    lda highscore+10    ;14
+    cmp highscore+15    ;20
+    bcc :+
+    bne :++
     lda highscore+11    ;14
     cmp highscore+16    ;20
     bcc :+
@@ -939,6 +947,8 @@ game_over:
     cmp highscore+19    ;23
     bcs :++
 :
+    lda highscore+15    ;20
+    sta highscore+10    ;14
     lda highscore+16    ;20
     sta highscore+11    ;14
     lda highscore+17    ;21
@@ -947,8 +957,12 @@ game_over:
     sta highscore+13    ;16
     lda highscore+19    ;23
     sta highscore+14    ;17
-:;## round 2 ###########################################
+:;## round 2 ########################################################
     clc
+    lda highscore+5     ;8
+    cmp highscore+10     ;14
+    bcc :+
+    bne :++
     lda highscore+6     ;8
     cmp highscore+11     ;14
     bcc :+
@@ -965,6 +979,11 @@ game_over:
     cmp highscore+14     ;17
     bcs :++
 :
+    ldy highscore+5     ;8
+    lda highscore+10     ;14
+    sta highscore+5     ;8
+    sty highscore+10     ;14
+
     ldy highscore+6     ;8
     lda highscore+11     ;14
     sta highscore+6     ;8
@@ -985,8 +1004,12 @@ game_over:
     sta highscore+9     ;11
     sty highscore+14     ;17
 :
-:;## round 3 ###########################################
+:;## round 3 ########################################################
     clc
+    lda highscore+0     ;2
+    cmp highscore+5     ;8
+    bcc :+
+    bne :++
     lda highscore+1     ;2
     cmp highscore+6     ;8
     bcc :+
@@ -1003,6 +1026,11 @@ game_over:
     cmp highscore+9     ;11
     bcs :++
 :
+    ldy highscore+0     ;2
+    lda highscore+5     ;8
+    sta highscore+0     ;2
+    sty highscore+5     ;8
+
     ldy highscore+1     ;2
     lda highscore+6     ;8
     sta highscore+1     ;2
@@ -1025,7 +1053,7 @@ game_over:
 :
     rts
 
-;## trailing sprites #####################
+;## trailing sprites ################################################
 trailing_sprites:
 
     ldx #1
@@ -1266,46 +1294,16 @@ charfx:
 
     cmp #2                  ; accumulator should have the value of CHARFX_ACT
     bne .anim
-
 ; calculate the coordinates the first time charfx is called,
 ; subsequently it can be skipped until next location is needed
 
-    lda $d010               ; get x extra bits
-    and #1                  ; leave only herobit
-    asl                     ; multiply by 64
-    asl
-    asl
-    asl
-    asl
-    asl
-;   %01000000
-    sta CHARFX_X            ; store x extra bit
-    lda $d000               ; get hero x pos
-    lsr                     ; divide by 4
-    lsr
-;    %00100000
-    adc CHARFX_X            ; add extra bit to get x-pos in range 1-128
-    tax                     ; move it to x register
-    lda posx,x              ; get value from table that converts x-pos to char pos
-    sta CHARFX_X            ; overwrite the previous value with the converted value
+    ldx #0                  ; load xreg with sprite number*2 to calculate
+    jsr spr_to_char
 
-    lda $d001               ; get hero y pos
+    stx CHARFX_MEM          
+    stx CHARFX_CMEM
 
-    lsr                     ; divide by 4
-    lsr
-    clc
-    tax                     ; move to x
-    lda posy,x              ; get character y pos from table
-
-    tax                     ; move char y-pos to x register
-    clc
-    lda mul40_s_l,x         ; get y-row from table
-    adc CHARFX_X            ; add x-pos to row
-    sta CHARFX_MEM          
-    sta CHARFX_CMEM
-
-    lda mul40_s_h,x
-    adc #0                  ; add carry bit only
+    tya
     sta CHARFX_MEM+1
     adc #$94                ; offset from screen to color memory
     sta CHARFX_CMEM+1
@@ -1351,4 +1349,113 @@ charfx:
 .end
     inc CHARFX_FRM
 
+    rts
+
+
+
+charfx_2:
+
+    cmp #2                  ; accumulator should have the value of CHARFX_ACT
+    bne .anim
+; calculate the coordinates the first time charfx is called,
+; subsequently it can be skipped until next location is needed
+
+    lda CHARFX_SPR_2                  ; load xreg with sprite number*2 to calculate
+    asl
+    tax
+    jsr spr_to_char
+
+    stx CHARFX_MEM_2
+    stx CHARFX_CMEM_2
+
+    tya
+    sta CHARFX_MEM_2+1
+    adc #$94                ; offset from screen to color memory
+    sta CHARFX_CMEM_2+1
+
+    dec CHARFX_ACT_2          ; no need to recalculate coordinates for the rest of
+                            ; the animation so value goes from 2 to 1
+    ldy PREV
+    lda spritecolor,y
+    sta CHARFX_CLR_2
+
+.anim:
+    ldx CHARFX_FRM_2
+    lda charfx_2_offset-1,x
+    sta CHARFX_PRV_2
+
+    lda charfx_2_offset,x
+    tax
+    bne .animloop           ; if not zero, jump ahead
+    sta CHARFX_FRM_2          ; reset the animation loop
+    sta CHARFX_ACT_2          ; de-activate charfx
+    beq .end
+.animloop
+    dex
+    ldy charfx_2_coords,x
+    lda (CHARFX_MEM_2),y
+    cmp #$40                ; check upper and lower limit in font
+    bcc :+++                ; if not animatable character, jump ahead
+    cmp #$45                ; to avoid drawing over borders and text
+    bcs :+++
+    lda charfx_2_pscale,x
+    sta (CHARFX_MEM_2),y
+    cmp #64
+    bne :+
+    lda #12
+    bne :++
+    :
+    lda CHARFX_CLR_2
+    :
+    sta (CHARFX_CMEM_2),y
+    :
+    cpx CHARFX_PRV_2
+    bne .animloop
+.end
+    inc CHARFX_FRM_2
+
+    rts
+
+
+
+;####################################################################
+;## sprite to character position                                   ##
+;## call witx sprite index*2 in x                                  ##
+;## will return with x low byte and y high byte of character ram   ##
+;####################################################################
+
+spr_to_char:
+    lda carrybit,x          ; get sprite x-pos extra bit position
+    and $d010               ; leave only active sprite value
+    cmp #0                  ; if any other than zero, put 64 to x-pos
+    beq :+
+    lda #64
+:
+    sta CHARFX_X            ; store x extra bit
+    lda $d000,x             ; get hero x pos
+    lsr                     ; divide by 4
+    lsr
+    adc CHARFX_X            ; add extra bit to get x-pos in range 1-128
+    tay                     ; move it to x register
+    lda posx,y              ; get value from table that converts x-pos to char pos
+    sta CHARFX_X            ; overwrite the previous value with the converted value
+
+    lda $d001,x             ; get hero y pos
+
+    lsr                     ; divide by 4
+    lsr
+    clc
+    tay                     ; move to x
+    lda posy,y              ; get character y pos from table
+
+    tay                     ; move char y-pos to x register
+    clc
+    lda mul40_s_l,y         ; get y-row from table
+    adc CHARFX_X            ; add x-pos to row
+    tax
+
+    lda mul40_s_h,y
+    adc #0                  ; add carry bit only
+    tay
+    
     rts

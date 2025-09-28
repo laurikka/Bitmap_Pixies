@@ -1,11 +1,12 @@
     incdir bin
 
 ;## directives ##########################################
-DEBUG        = 0            ; if 1 includes debug-related stuff
-SKIPINTRO    = 0            ; go straight to game
+DEBUG        = 1            ; if 1 includes debug-related stuff
+SKIPINTRO    = 1            ; go straight to game
 COMPRESS     = 1            ; if on skip the autorun part
 
 ;## constants ###########################################
+SOUND        = $3000
 SCREEN       = $4400        ; screen memory
 SCREENSPR    = $4800        ; sprite screen memory
 SPRITE_MEM   = $20          ; $20 * $40 equals $800
@@ -21,7 +22,7 @@ DOWN_LIMIT   = 250
 
 ;## zero page addresses #############################################
 VAR0         = $10          ; reusable variables
-FEEDBACK_F   = $11          ; delay for clearing feedback from screen
+FEEDBACK_F   = $11          ; counter for clearing feedback from screen
 COLLIDED     = $12          ; current collided sprites
 LEVEL        = $13          ; hold level number
 LEVEL_F      = $14          ; level variable for counting frames
@@ -59,6 +60,16 @@ CHARFX_CMEM  = $36          ; +$37, memory pointer for charfx color
 CHARFX_CLR   = $38          ; color for the effect
 PREV         = $39          ; previous color to catch
 
+CHARFX_X_2   = $3a          ; store x-pos of charfx
+CHARFX_PRV_2 = $3b          ; previous offset value for comparison
+CHARFX_FRM_2 = $3c          ; charfx animation frame
+CHARFX_ACT_2 = $3d          ; if non zero, jump into charfx-loop
+CHARFX_MEM_2 = $3e          ; +$35, memory pointer for charfx
+CHARFX_CMEM_2= $78          ; +$37, memory pointer for charfx color
+CHARFX_CLR_2 = $7a          ; color for the effect
+CHARFX_SPR_2 = $7b          ; sprite number to calculate
+
+
 COLLISION    = $40          ; $40-47 bitmasks to compare collided sprites
 CARRYBIT     = $48          ; $48-57 for calculating the extra x bit
 SINGLEBITS   = $58          ; $58-5f single bit index from low to high
@@ -66,6 +77,8 @@ SINGLEBITS   = $58          ; $58-5f single bit index from low to high
 SPEEDX       = $60          ; $60-6f, current speed of sprite
 ANIMF        = $70          ; $70-77, current animation frame for sprite
 ; $e* reserved for sound
+
+
 
 ;## global init ############################################################
 
@@ -82,7 +95,7 @@ init:
     sei                     ; disable intterrupts
 
     lda #0
-    ldx #$60
+    ldx #$80
 :
     sta $10,x               ; clear zeropage between $10-$6f
     dex
@@ -276,8 +289,8 @@ sprite_collision:
     inc BONUSTIME_D1
     ldy #1
     jsr feedback_points
-    lda #1                  ; load 1 to retrigger ch1
-    sta PLAY_RETRIG
+    lda #3                  ; load 1 to retrigger ch1
+    sta PLAY_TABLE
     jmp .end
 
 :                           ; five points
@@ -307,8 +320,8 @@ sprite_collision:
 
     ldy #5
     jsr feedback_points
-    lda #2                  ; load 2 to retrigger ch2
-    sta PLAY_RETRIG
+    lda #6                  ; load 2 to retrigger ch2
+    sta PLAY_TABLE
     lda CHARFX_ACT
     bne .end                ; if previous charfx still active, jump ahead
     lda #0
@@ -326,8 +339,8 @@ sprite_collision:
     inc $d020               ; border color during calculations
     endif
 
-    ldx #0
-:
+    ldx #15
+maxspeed:                   ; check each sprite against speed limit
     lda SPEEDX,x
     bmi :+
     cmp #MAX_SPEED
@@ -335,21 +348,20 @@ sprite_collision:
     lda #MAX_SPEED
     sta SPEEDX,x
     bcs :++
-:                           ;.neg
+:                           ; check negative speed
     cmp #0-MAX_SPEED
     bcs :+
     lda #0-MAX_SPEED
     sta SPEEDX,x
-:                           ;.checky
-    inx
-    cpx #16
-    bne :---
+:                           ; if x-reg is not negative, go again
+    dex
+    bpl maxspeed
 
-;## level reveal ####################################################
+;## reveal sprites one by one #######################################
     lda LEVEL_F             ; check level timer
     cmp REVEALTIMER         ; compare against reveal delay
     beq :+                  ; if equals, proceed with reveal
-    bne :+++                 ; otherwise skip to end
+    bne :+++                ; otherwise skip to end
 :                           ;.reveal
     ldx LEVEL_R             ; copy sprite count to x
     clc
@@ -362,6 +374,12 @@ sprite_collision:
     lda SINGLEBITS,x        ; get sprite bit to activate
     adc $d015
     sta $d015               ; commit it back
+    stx CHARFX_SPR_2
+    lda #2
+    sta CHARFX_ACT_2
+;    lda #12                  ; load 1 to retrigger ch1
+;    sta PLAY_TABLE
+    
     jmp :++
 :                           ; end
     inx
@@ -397,6 +415,7 @@ idlewait1:
     endif
 
     jsr play_call           ; init sound once a frame
+
 
 ;## joystick read  ##################################################
 joystick_read:
@@ -501,12 +520,12 @@ timer:
 
     ldy #16                 ; 16 -> time out
     jsr feedback_print      ; print text
-    lda #3                  ; load 3 to trigger end
-    sta PLAY_RETRIG
+    lda #9                  ; load 3 to trigger end
+    sta PLAY_TABLE
     ldy #150    
     jsr freeze
-    lda #1
-    sta PLAY_RESET
+    lda #15
+    sta PLAY_TABLE
     ldy #2
     jsr freeze
     jsr game_over           ; if time is out game is over
@@ -576,6 +595,11 @@ posbuffer_shift:
     lda CHARFX_ACT          ; if charfx is not zero, jump to subroutine
     beq :+
     jsr charfx
+    :
+
+    lda CHARFX_ACT_2        ; if charfx is not zero, jump to subroutine
+    beq :+
+    jsr charfx_2
     :
 
     if DEBUG=1
@@ -648,7 +672,6 @@ idlewait2:
 
     include titlescreen.s
     include subroutines.s
-    include sound.s
 
 ;#################################################################
 ;##  setup variables, to_zeropage is copied to zeropage         ##
@@ -670,7 +693,7 @@ text:
 
     ascii "       collect colors in order          "
     ascii "         for maximum score              "
-    ascii "         hi-scores                      "
+    ascii "          hi-scores                     "
 
 feedback:
     ascii "level up"
@@ -720,7 +743,13 @@ posbuffer:  ; used to store previous positions of hero sprite
     blk 48
 
 highscore:
-    blk 24,$30              ; 4 rows of 6 zeroes
+    blk 20,$30              ; 4 rows of 5 zeroes
+
+;CHARFX_MEM:
+;    blk 16
+;CHARFX_CMEM:
+;    blk 16
+
 
 posx:   ; from 71 to 40, used to convert sprite pos to character position
     byte 30, 31, 31, 32, 32, 33, 33, 34, 34, 35, 35, 36, 36, 00, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 16, 17, 17, 18, 18, 19, 19, 20, 20, 21, 21, 22, 22, 23, 23, 24, 24, 25, 25, 26, 26, 27, 27, 28, 28, 29, 29, 30, 30, 31, 31, 32, 32, 33, 33, 34, 34, 35, 35, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36
@@ -745,18 +774,33 @@ mul40_s_l:  ; common low byte
 
     byte 0
 charfx_1_offset:
-    byte 1, 2, 7, 16, 24, 32, 44, 64, 80, 100, 128, 156, 188, 212, 236, 244
+    byte 1, 4, 9, 18, 28, 48, 68, 92, 120, 150, 172, 188, 200, 214, 228, 236
     byte 0
 charfx_1_pscale:
-    byte 67, 66, 65, 65, 65, 65, 65, 65, 66, 65, 66, 64, 66, 65, 66, 65, 65, 66, 65, 66, 66, 65, 66, 65, 66, 66, 66, 66, 66, 66, 66, 66, 65, 66, 65, 66, 65, 65, 65, 65, 66, 65, 66, 65, 65, 66, 65, 65, 65, 64, 65, 65, 66, 64, 64, 66, 65, 65, 64, 65, 65, 65, 66, 65, 66, 66, 66, 66, 65, 65, 66, 66, 66, 66, 65, 65, 66, 66, 66, 66, 65, 66, 65, 66, 65, 66, 64, 64, 66, 66, 66, 66, 64, 64, 66, 65, 66, 65, 66, 65, 65, 65, 65, 66, 65, 65, 65, 66, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 66, 65, 65, 65, 66, 65, 65, 65, 66, 66, 66, 66, 65, 64, 65, 66, 65, 65, 65, 65, 66, 64, 64, 66, 65, 65, 65, 65, 66, 65, 64, 65, 66, 66, 66, 66, 65, 66, 66, 66, 65, 65, 66, 64, 64, 66, 65, 66, 64, 64, 66, 66, 66, 66, 64, 64, 66, 65, 66, 64, 64, 66, 65, 65, 66, 66, 66, 65, 65, 66, 65, 66, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 66, 65, 66, 65, 65, 64, 64, 64, 65, 65, 64, 64, 65, 64, 64, 64, 64, 64, 64, 65, 64, 64, 65, 65, 64, 64, 64, 65, 64, 64, 64, 64, 64, 64, 64, 64
+    byte 67, 65, 66, 65, 65, 66, 65, 66, 65, 66, 67, 66, 67, 64, 67, 66, 67, 66, 67, 67, 67, 65, 66, 66, 65, 67, 67, 67, 65, 66, 65, 65, 67, 65, 67, 65, 67, 65, 65, 67, 65, 67, 65, 67, 65, 65, 66, 65, 67, 68, 67, 67, 66, 64, 66, 67, 68, 64, 64, 68, 67, 66, 64, 66, 67, 67, 68, 67, 65, 66, 68, 67, 68, 66, 68, 64, 64, 68, 65, 67, 67, 65, 68, 64, 64, 68, 66, 68, 67, 68, 66, 65, 65, 65, 65, 66, 66, 65, 66, 66, 66, 65, 65, 66, 66, 64, 64, 66, 66, 65, 65, 66, 66, 66, 65, 66, 66, 65, 65, 65, 65, 65, 65, 65, 65, 64, 64, 64, 65, 65, 66, 64, 64, 66, 65, 65, 66, 64, 64, 66, 65, 65, 64, 64, 64, 65, 65, 65, 65, 65, 65, 65, 65, 65, 64, 64, 65, 64, 64, 65, 64, 64, 65, 64, 64, 65, 64, 64, 65, 65, 65, 65, 65, 64, 65, 65, 65, 65, 65, 64, 64, 65, 65, 65, 65, 65, 64, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 64, 64, 64, 64, 65, 65, 64, 64, 64, 64, 65, 65, 65, 64, 64, 65, 65, 65, 64, 64, 65, 65, 65, 64, 64, 65, 64, 64, 64, 64, 64, 64, 64, 64
 charfx_1_coords:
-    byte 124, 124, 84, 123, 124, 125, 164, 83, 84, 85, 123, 124, 125, 163, 164, 165, 83, 84, 85, 123, 125, 163, 164, 165, 83, 84, 85, 123, 125, 163, 164, 165, 44, 83, 84, 85, 122, 123, 125, 126, 163, 164, 165, 204, 43, 44, 45, 82, 83, 84, 85, 86, 122, 123, 125, 126, 162, 163, 164, 165, 166, 203, 204, 205, 43, 44, 45, 82, 83, 85, 86, 122, 126, 162, 163, 165, 166, 203, 204, 205, 42, 43, 44, 45, 46, 82, 83, 85, 86, 122, 126, 162, 163, 165, 166, 202, 203, 204, 205, 206, 3, 4, 5, 42, 43, 44, 45, 46, 81, 82, 86, 87, 121, 122, 126, 127, 161, 162, 166, 167, 202, 203, 204, 205, 206, 243, 244, 245, 3, 4, 5, 42, 43, 44, 45, 46, 81, 82, 86, 87, 121, 122, 126, 127, 161, 162, 166, 167, 202, 203, 204, 205, 206, 243, 244, 245, 2, 3, 4, 5, 6, 41, 42, 43, 45, 46, 47, 81, 82, 86, 87, 121, 127, 161, 162, 166, 167, 201, 202, 203, 205, 206, 207, 242, 243, 244, 245, 246, 2, 3, 4, 5, 6, 41, 42, 46, 47, 81, 87, 121, 127, 161, 167, 201, 202, 206, 207, 242, 243, 244, 245, 246, 2, 3, 4, 5, 6, 41, 42, 46, 47, 81, 87, 121, 127, 161, 167, 201, 202, 206, 207, 242, 243, 244, 245, 246, 2, 6, 41, 47, 201, 207, 242, 246
+    byte 126, 125, 126, 127, 86, 125, 126, 127, 166, 85, 86, 87, 125, 126, 127, 165, 166, 167, 85, 86, 87, 124, 125, 127, 128, 165, 166, 167, 45, 46, 47, 84, 85, 86, 87, 88, 124, 125, 127, 128, 164, 165, 166, 167, 168, 205, 206, 207, 45, 46, 47, 84, 85, 86, 87, 88, 124, 125, 127, 128, 164, 165, 166, 167, 168, 205, 206, 207, 6, 44, 45, 46, 47, 48, 84, 85, 87, 88, 123, 124, 128, 129, 164, 165, 167, 168, 204, 205, 206, 207, 208, 246, 5, 6, 7, 44, 45, 46, 47, 48, 83, 84, 88, 89, 123, 124, 128, 129, 163, 164, 168, 169, 204, 205, 206, 207, 208, 245, 246, 247, 5, 6, 7, 43, 44, 45, 46, 47, 48, 49, 83, 84, 88, 89, 123, 129, 163, 164, 168, 169, 203, 204, 205, 206, 207, 208, 209, 245, 246, 247, 5, 6, 7, 43, 44, 48, 49, 83, 89, 122, 123, 129, 130, 163, 169, 203, 204, 208, 209, 245, 246, 247, 5, 6, 7, 43, 49, 82, 90, 122, 130, 162, 170, 203, 209, 245, 246, 247, 5, 7, 43, 49, 82, 90, 162, 170, 203, 209, 245, 247, 5, 7, 43, 49, 82, 90, 121, 131, 162, 170, 203, 209, 245, 247, 3, 5, 7, 9, 81, 91, 121, 131, 161, 171, 243, 245, 247, 249, 3, 9, 81, 91, 161, 171, 243, 249
+
+    byte 0
+charfx_2_offset:
+    byte 1, 10, 30, 56, 74, 82
+;    byte 1, 4, 9, 18, 28, 48, 68, 92, 120, 150, 172, 188, 200, 214, 228, 236
+    byte 0
+charfx_2_pscale:
+    byte 66, 65, 67, 65, 67, 64, 67, 65, 67, 65, 65, 65, 65, 66, 65, 64, 65, 66, 66, 64, 64, 66, 66, 65, 64, 65, 66, 65, 65, 65, 65, 65, 64, 64, 64, 65, 65, 64, 64, 64, 64, 65, 64, 64, 65, 64, 64, 64, 64, 65, 65, 64, 64, 64, 65, 65, 65, 64, 65, 64, 64, 65, 64, 64, 65, 65, 64, 64, 65, 64, 64, 65, 64, 65, 64, 64, 64, 64, 64, 64, 64, 64
+;    byte 67, 65, 66, 65, 65, 66, 65, 66, 65, 66, 67, 66, 67, 64, 67, 66, 67, 66, 67, 67, 67, 65, 66, 66, 65, 67, 67, 67, 65, 66, 65, 65, 67, 65, 67, 65, 67, 65, 65, 67, 65, 67, 65, 67, 65, 65, 66, 65, 67, 68, 67, 67, 66, 64, 66, 67, 68, 64, 64, 68, 67, 66, 64, 66, 67, 67, 68, 67, 65, 66, 68, 67, 68, 66, 68, 64, 64, 68, 65, 67, 67, 65, 68, 64, 64, 68, 66, 68, 67, 68, 66, 65, 65, 65, 65, 66, 66, 65, 66, 66, 66, 65, 65, 66, 66, 64, 64, 66, 66, 65, 65, 66, 66, 66, 65, 66, 66, 65, 65, 65, 65, 65, 65, 65, 65, 64, 64, 64, 65, 65, 66, 64, 64, 66, 65, 65, 66, 64, 64, 66, 65, 65, 64, 64, 64, 65, 65, 65, 65, 65, 65, 65, 65, 65, 64, 64, 65, 64, 64, 65, 64, 64, 65, 64, 64, 65, 64, 64, 65, 65, 65, 65, 65, 64, 65, 65, 65, 65, 65, 64, 64, 65, 65, 65, 65, 65, 64, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 64, 64, 64, 64, 65, 65, 64, 64, 64, 64, 65, 65, 65, 64, 64, 65, 65, 65, 64, 64, 65, 65, 65, 64, 64, 65, 64, 64, 64, 64, 64, 64, 64, 64
+charfx_2_coords:
+    byte 126, 85, 86, 87, 125, 126, 127, 165, 166, 167, 45, 46, 47, 84, 85, 86, 87, 88, 124, 125, 127, 128, 164, 165, 166, 167, 168, 205, 206, 207, 6, 44, 45, 46, 47, 48, 83, 84, 85, 87, 88, 89, 124, 128, 163, 164, 165, 167, 168, 169, 204, 205, 206, 207, 208, 246, 4, 6, 8, 44, 48, 82, 83, 89, 90, 162, 163, 169, 170, 204, 208, 244, 246, 248, 4, 8, 82, 90, 162, 170, 244, 248
+;    byte 126, 125, 126, 127, 86, 125, 126, 127, 166, 85, 86, 87, 125, 126, 127, 165, 166, 167, 85, 86, 87, 124, 125, 127, 128, 165, 166, 167, 45, 46, 47, 84, 85, 86, 87, 88, 124, 125, 127, 128, 164, 165, 166, 167, 168, 205, 206, 207, 45, 46, 47, 84, 85, 86, 87, 88, 124, 125, 127, 128, 164, 165, 166, 167, 168, 205, 206, 207, 6, 44, 45, 46, 47, 48, 84, 85, 87, 88, 123, 124, 128, 129, 164, 165, 167, 168, 204, 205, 206, 207, 208, 246, 5, 6, 7, 44, 45, 46, 47, 48, 83, 84, 88, 89, 123, 124, 128, 129, 163, 164, 168, 169, 204, 205, 206, 207, 208, 245, 246, 247, 5, 6, 7, 43, 44, 45, 46, 47, 48, 49, 83, 84, 88, 89, 123, 129, 163, 164, 168, 169, 203, 204, 205, 206, 207, 208, 209, 245, 246, 247, 5, 6, 7, 43, 44, 48, 49, 83, 89, 122, 123, 129, 130, 163, 169, 203, 204, 208, 209, 245, 246, 247, 5, 6, 7, 43, 49, 82, 90, 122, 130, 162, 170, 203, 209, 245, 246, 247, 5, 7, 43, 49, 82, 90, 162, 170, 203, 209, 245, 247, 5, 7, 43, 49, 82, 90, 121, 131, 162, 170, 203, 209, 245, 247, 3, 5, 7, 9, 81, 91, 121, 131, 161, 171, 243, 245, 247, 249, 3, 9, 81, 91, 161, 171, 243, 249
+
+    org SOUND
+    include sound.s
 
     org FONT
     incbin font.bin             ; 1kb font
 
-    org $4800
+    org SCREENSPR
     incbin sprite_logo_0.bin    ; 8 slots for logo
-    incbin spritesheet_0.bin
+    incbin spritesheet_0.bin    ; game sprites
 
 
