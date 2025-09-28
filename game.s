@@ -377,8 +377,8 @@ maxspeed:                   ; check each sprite against speed limit
     stx CHARFX_SPR_2
     lda #2
     sta CHARFX_ACT_2
-;    lda #12                  ; load 1 to retrigger ch1
-;    sta PLAY_TABLE
+    lda #12                  ; load 1 to retrigger ch1
+    sta PLAY_TABLE
     
     jmp :++
 :                           ; end

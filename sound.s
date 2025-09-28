@@ -12,7 +12,8 @@ PLAY_FRAME  = $e9
 PLAY_RETRIG = $ea
 PLAY_OFFSET = $eb
 PLAY_DELAY  = $ec
-PLAY_TABLE  = $ed           ; +$ee
+PLAY_ENVFRM = $ed
+PLAY_TABLE  = $ee           ; +$ef
 
 ; sound constants
 NOTEDELAY   = 6
@@ -33,7 +34,7 @@ play_call:                  ; PLAY_TABLE has address that hits one of the
     jmp (PLAY_TABLE)        ; jump-instructions in play_table
 
 play_init:
-    clc
+;    clc
     lda #0
     sta PLAY_FRAME
     sta PLAY_OFFSET
@@ -41,6 +42,7 @@ play_init:
     sta ch2_pos
     sta ch3_pos
     sta PLAY_TABLE
+    sta PLAY_ENVFRM
 
     lda #>SOUND
     sta PLAY_TABLE+1
@@ -85,17 +87,22 @@ play_reset:
     rts
 
 play_reset_env:
-    lda #0
-    sta PLAY_TABLE
-    ldx #17
+    lda PLAY_ENVFRM
+    bne :+
+    lda #%01000000
+    sta $d404
+;    sta $d40b
+    inc PLAY_ENVFRM
+    jmp play_start
 :
-    sta $d400,x
-    dex
-    bpl :-
-
-    ldy #2
-    jsr freeze
-    rts
+    cmp #2
+    beq :+
+    inc PLAY_ENVFRM
+    jmp play_start
+:
+    lda #0
+    sta PLAY_ENVFRM
+    jmp play_start
 
 
 play_intro:
@@ -184,14 +191,19 @@ play_start_init:
     rts
 
 play_sprite:
-    lda #%00010100          ; 0-3 decay, 4-7 attack
+    jsr play_reset_env
+    lda PLAY_ENVFRM
+    bne :+
+    lda #%00011000          ; 0-3 decay, 4-7 attack
     sta $d405               ; ch 1
-    lda #%00100100          ; 0-3 release, 4-7 sustain vol
+    lda #%00101000          ; 0-3 release, 4-7 sustain vol
     sta $d406               ; ch 1
     lda #%01000001
     sta $d404
     lda #0
     sta PLAY_TABLE
+    jsr play_reset_env
+:
     rts
 
 
@@ -241,7 +253,7 @@ play_end:
     rts
 
 play_retrigger_off:
-    clc
+;    clc
     lda #%01000000
     sta $d404
     sta $d40b
