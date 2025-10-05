@@ -1,0 +1,6804 @@
+Composition {
+	CurrentTime = 0,
+	RenderRange = { 0, 0 },
+	GlobalRange = { 0, 1000 },
+	CurrentID = 4831,
+	HiQ = true,
+	PlaybackUpdateMode = 0,
+	StereoMode = false,
+	Version = "Fusion Studio 20.1 build 45",
+	SavedOutputs = 1,
+	HeldTools = 0,
+	DisabledTools = 3,
+	LockedTools = 0,
+	AudioOffset = 0,
+	Resumable = true,
+	OutputClips = {
+		"comp:font_0.tga"
+	},
+	Tools = {
+		Loader1 = Loader {
+			Clips = {
+				Clip {
+					ID = "Clip1",
+					Filename = "comp:font_spectrum.tga",
+					FormatID = "TargaFormat",
+					StartFrame = -1,
+					LengthSetManually = true,
+					TrimIn = 0,
+					TrimOut = 0,
+					ExtendFirst = 0,
+					ExtendLast = 0,
+					Loop = 0,
+					AspectMode = 0,
+					Depth = 0,
+					TimeCode = 0,
+					GlobalStart = 0,
+					GlobalEnd = 0
+				}
+			},
+			CtrlWZoom = false,
+			Inputs = {
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 605, 1765.5 } },
+		},
+		Loader2 = Loader {
+			Clips = {
+				Clip {
+					ID = "Clip1",
+					Filename = "comp:bitmappixies.png",
+					FormatID = "PNGFormat",
+					StartFrame = -1,
+					LengthSetManually = true,
+					TrimIn = 0,
+					TrimOut = 0,
+					ExtendFirst = 0,
+					ExtendLast = 0,
+					Loop = 0,
+					AspectMode = 0,
+					Depth = 0,
+					TimeCode = 0,
+					GlobalStart = 0,
+					GlobalEnd = 0
+				}
+			},
+			Inputs = {
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				["Clip1.PNGFormat.PostMultiply"] = Input { Value = 1, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 605, -775.5 } },
+		},
+		sRender1 = sRender {
+			Inputs = {
+				Width = Input { Value = 100, },
+				Height = Input { Value = 100, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				Input = Input {
+					SourceOp = "sStar1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 440, 247.5 } },
+		},
+		Rectangle3_1 = RectangleMask {
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.823529411764706, 0.970588235294118 }, },
+				Width = Input { Value = 0.352941176470588, },
+				Height = Input { Value = 0.0588235294117645, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 2585, 1666.5 } },
+		},
+		Merge2_1 = Merge {
+			Inputs = {
+				Background = Input {
+					SourceOp = "Merge2",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "Instance_Crop3_1",
+					Source = "Output",
+				},
+				Gain = Input { Value = 0, },
+				PerformDepthMerge = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1760, 49.5 } },
+		},
+		Crop9_4 = Crop {
+			Inputs = {
+				XOffset = Input { Value = -96, },
+				XSize = Input { Value = 192, },
+				YSize = Input { Value = 21, },
+				Input = Input {
+					SourceOp = "Crop8_4",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1540, -676.5 } },
+		},
+		Crop1_3 = Crop {
+			Inputs = {
+				XSize = Input { Value = 24, },
+				YSize = Input { Value = 21, },
+				Input = Input {
+					SourceOp = "PipeRouter7",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 935, 49.5 } },
+		},
+		Instance_BrightnessContrast3_4 = BrightnessContrast {
+			SourceOp = "BrightnessContrast3",
+			Inputs = {
+				EffectMask = Input {
+				},
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_FrameAverage1_4",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1540, 280.5 } },
+		},
+		Transform14Size = BezierSpline {
+			SplineColor = { Red = 225, Green = 0, Blue = 225 },
+			CtrlWZoom = false,
+			KeyFrames = {
+				[0] = { 0.97, RH = { 3.66666666666667, 0.97 } },
+				[11] = { 0.571, LH = { 7.33370006084442, 0.571 }, RH = { 13.9996999502182, 0.571 } },
+				[20] = { 0.97, LH = { 17, 0.97 } }
+			}
+		},
+		Rectangle1_7 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle1_2",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				OutputSize = Input { Value = FuID { "Custom" }, },
+				MaskWidth = Input { Value = 128, },
+				MaskHeight = Input { Value = 128, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				Depth = Input { Value = 1, },
+				Center = Input { Value = { 0.84375, 0.90625 }, },
+				Width = Input { Value = 0.3125, },
+				Height = Input { Value = 0.078125, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 220, 1732.5 } },
+		},
+		Transform7_1 = Transform {
+			Inputs = {
+				Angle = Input {
+					SourceOp = "Transform7_1Angle",
+					Source = "Value",
+				},
+				Input = Input {
+					SourceOp = "ChannelBooleans2_16",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 440, 841.5 } },
+		},
+		BrightnessContrast6 = BrightnessContrast {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle1",
+					Source = "Mask",
+				},
+				Gain = Input { Value = 0, },
+				Input = Input {
+					SourceOp = "Merge2_9",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1870, 1105.5 } },
+		},
+		Ellipse1_2 = EllipseMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Ellipse1",
+					Source = "Mask",
+				},
+				Level = Input { Value = 0, },
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				BorderWidth = Input { Value = -0.1495, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.495238304742458, 0.42037220066132 }, },
+				Width = Input {
+					SourceOp = "Ellipse1_2Width",
+					Source = "Value",
+				},
+				Height = Input {
+					Value = 0.3655,
+					Expression = "Width/2",
+				},
+				Angle = Input {
+					Value = 171,
+					Expression = "Ellipse1.Angle",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 330, -247.5 } },
+		},
+		Merge15 = Merge {
+			Inputs = {
+				Background = Input {
+					SourceOp = "Transform7",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "Transform7_1",
+					Source = "Output",
+				},
+				Gain = Input { Value = 0, },
+				PerformDepthMerge = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 660, 841.5 } },
+		},
+		Merge2_3 = Merge {
+			Inputs = {
+				Background = Input {
+					SourceOp = "Merge2_2",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "Instance_Crop3_4",
+					Source = "Output",
+				},
+				Gain = Input { Value = 0, },
+				PerformDepthMerge = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1760, 280.5 } },
+		},
+		Crop9 = Crop {
+			Inputs = {
+				XSize = Input { Value = 192, },
+				YSize = Input { Value = 21, },
+				Input = Input {
+					SourceOp = "BrightnessContrast4",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1540, -808.5 } },
+		},
+		Rectangle13_1Angle = BezierSpline {
+			SplineColor = { Red = 14, Green = 221, Blue = 144 },
+			CtrlWZoom = false,
+			KeyFrames = {
+				[0] = { 0, RH = { 6.66666666666667, -30 }, Flags = { Linear = true } },
+				[20] = { -90, LH = { 13.3333333333333, -60 }, Flags = { Linear = true } }
+			}
+		},
+		Crop7_1 = Crop {
+			Inputs = {
+				XOffset = Input { Value = -8, },
+				YOffset = Input { Value = -72, },
+				XSize = Input { Value = 128, },
+				YSize = Input { Value = 128, },
+				Input = Input {
+					SourceOp = "Instance_BrightnessContrast1_5",
+					Source = "Output",
+				},
+				ClippingMode = Input { Value = FuID { "None" }, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1540, 2359.5 } },
+		},
+		Merge2_7 = Merge {
+			Inputs = {
+				Background = Input {
+					SourceOp = "Merge2_6",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "Instance_Crop3_8",
+					Source = "Output",
+				},
+				Gain = Input { Value = 0, },
+				PerformDepthMerge = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1760, 841.5 } },
+		},
+		Rectangle1_4 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle1_3",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				OutputSize = Input { Value = FuID { "Custom" }, },
+				MaskWidth = Input { Value = 128, },
+				MaskHeight = Input { Value = 128, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				Depth = Input { Value = 1, },
+				Center = Input { Value = { 0.46875, 0.2265625 }, },
+				Width = Input { Value = 1.3125, },
+				Height = Input { Value = 0.546875, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 550, 1732.5 } },
+		},
+		ErodeDilate1 = ErodeDilate {
+			Inputs = {
+				XAmount = Input { Value = -0.00871, },
+				Input = Input {
+					SourceOp = "Instance_Crop1_1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 880, -115.5 } },
+		},
+		Path1_3Displacement = BezierSpline {
+			SplineColor = { Red = 255, Green = 0, Blue = 178 },
+			CtrlWZoom = false,
+			KeyFrames = {
+				[0] = { 0, RH = { 1.33333333333333, 0.0655030469548497 }, Flags = { Linear = true, LockedY = true } },
+				[4] = { 0.196509140864549, LH = { 2.66666666666667, 0.131006093909699 }, RH = { 5, 0.231046335969143 }, Flags = { Linear = true, LockedY = true } },
+				[7] = { 0.300120726178331, LH = { 6, 0.265583531073737 }, RH = { 9.66666666666667, 0.469497030061517 }, Flags = { Linear = true, LockedY = true } },
+				[15] = { 0.808249637827889, LH = { 12.3333333333333, 0.638873333944703 }, RH = { 16.6666666666667, 0.872166425218593 }, Flags = { Linear = true, LockedY = true } },
+				[20] = { 1, LH = { 18.3333333333333, 0.936083212609296 }, Flags = { Linear = true, LockedY = true } }
+			}
+		},
+		ChangeDepth1 = ChangeDepth {
+			Inputs = {
+				Depth = Input { Value = 2, },
+				Input = Input {
+					SourceOp = "Crop2",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1320, -214.5 } },
+		},
+		Crop11 = Crop {
+			Inputs = {
+				YOffset = Input { Value = 64, },
+				XSize = Input { Value = 128, },
+				YSize = Input { Value = 64, },
+				Input = Input {
+					SourceOp = "Merge7",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 2255, 1831.5 } },
+		},
+		Transform14_2 = Transform {
+			Inputs = {
+				Center = Input {
+					SourceOp = "Path1_2",
+					Source = "Position",
+				},
+				Size = Input {
+					SourceOp = "Transform14_2Size",
+					Source = "Value",
+				},
+				Input = Input {
+					SourceOp = "Transform13_2",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 715, 412.5 } },
+		},
+		Transform3_1 = Transform {
+			Inputs = {
+				Angle = Input {
+					SourceOp = "Transform3_1Angle",
+					Source = "Value",
+				},
+				Input = Input {
+					SourceOp = "Instance_Merge3_1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 660, 610.5 } },
+		},
+		Transform14_2Size = BezierSpline {
+			SplineColor = { Red = 225, Green = 0, Blue = 225 },
+			CtrlWZoom = false,
+			KeyFrames = {
+				[0] = { 0.97, RH = { 3.66666666666667, 0.97 } },
+				[11] = { 0.571, LH = { 7.33370006084442, 0.571 }, RH = { 13.9996999502182, 0.571 } },
+				[20] = { 0.97, LH = { 17, 0.97 } }
+			}
+		},
+		Instance_ChangeDepth1_2 = ChangeDepth {
+			SourceOp = "ChangeDepth1",
+			Inputs = {
+				SettingsNest = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_Crop2_2",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1320, 148.5 } },
+		},
+		Crop2_1 = Crop {
+			Inputs = {
+				XOffset = Input {
+					SourceOp = "Crop2_1XOffset",
+					Source = "Value",
+				},
+				XSize = Input { Value = 128, },
+				YSize = Input { Value = 8, },
+				Input = Input {
+					SourceOp = "BrightnessContrast1_2",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1100, 2293.5 } },
+		},
+		Rectangle6_1 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle6",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				PaintMode = Input { Value = FuID { "Multiply" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.4921875, 0.8515625 }, },
+				Width = Input { Value = 1.078125, },
+				Height = Input { Value = 0.078125, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 550, 1666.5 } },
+		},
+		Instance_Crop2_3 = Crop {
+			SourceOp = "Crop2",
+			Inputs = {
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				ResetSize = Input {
+				},
+				ResetOffset = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_BrightnessContrast1_7",
+					Source = "Output",
+				},
+				AutoCrop = Input {
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1210, -115.5 } },
+		},
+		Instance_Resize1_1 = BetterResize {
+			SourceOp = "Resize1",
+			Inputs = {
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				ResetSize = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_ChannelBooleans2_10",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 825, 2425.5 } },
+		},
+		Ellipse7_1 = EllipseMask {
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				BorderWidth = Input { Value = 0.0532, },
+				Solid = Input { Value = 0, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.461985579412087, 0.585690144559932 }, },
+				Width = Input { Value = 0.774035863506118, },
+				Height = Input { Value = 0.737175548541081, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 165, 841.5 } },
+		},
+		Transform13_3 = Transform {
+			Inputs = {
+				Angle = Input {
+					SourceOp = "Transform13_3Angle",
+					Source = "Value",
+				},
+				Input = Input {
+					SourceOp = "Merge11_4",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 495, 907.5 } },
+		},
+		Rectangle13 = RectangleMask {
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				BorderWidth = Input { Value = 0.0705, },
+				Solid = Input { Value = 0, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.5, 0.431526659959758 }, },
+				Width = Input {
+					SourceOp = "Rectangle13Width",
+					Source = "Value",
+				},
+				Height = Input {
+					Value = 0.7309,
+					Expression = "Width",
+				},
+				Angle = Input {
+					SourceOp = "Rectangle13Angle",
+					Source = "Value",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 330, -148.5 } },
+		},
+		TimeStretcher5 = TimeStretcher {
+			Inputs = {
+				SourceTime = Input {
+					SourceOp = "TimeStretcher5SourceTime",
+					Source = "Value",
+				},
+				InterpolateBetweenFrames = Input { Value = 0, },
+				SampleSpread = Input { Disabled = true, },
+				Input = Input {
+					SourceOp = "Transform16",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 715, 1006.5 } },
+		},
+		Instance_Crop1_7 = Crop {
+			SourceOp = "Crop1_3",
+			Inputs = {
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				ResetSize = Input {
+				},
+				ResetOffset = Input {
+				},
+				Input = Input {
+					SourceOp = "Transform17",
+					Source = "Output",
+				},
+				AutoCrop = Input {
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 935, 1105.5 } },
+		},
+		Instance_Crop3_7 = Crop {
+			SourceOp = "Crop3",
+			Inputs = {
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				XOffset = Input {
+					Value = -168,
+				},
+				ResetSize = Input {
+				},
+				ResetOffset = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_BrightnessContrast3_7",
+					Source = "Output",
+				},
+				AutoCrop = Input {
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1650, 709.5 } },
+		},
+		ChannelBooleans2_6 = ChannelBoolean {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Ellipse2",
+					Source = "Mask",
+				},
+				ToRed = Input { Value = 16, },
+				ToGreen = Input { Value = 16, },
+				ToBlue = Input { Value = 16, },
+				ToAlpha = Input { Value = 16, },
+				Background = Input {
+					SourceOp = "PipeRouter6",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 110, 16.5 } },
+		},
+		Instance_FrameAverage1_4 = Fuse.FrameAverage {
+			SourceOp = "FrameAverage1",
+			Inputs = {
+				LayersNest = Input {
+				},
+				ScriptEdit = Input {
+				},
+				ScriptReload = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_ChangeDepth1_4",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1430, 280.5 } },
+		},
+		Crop8_3 = Crop {
+			Inputs = {
+				XOffset = Input { Value = 59, },
+				YOffset = Input { Value = 7, },
+				XSize = Input { Value = 24, },
+				YSize = Input { Value = 21, },
+				Input = Input {
+					SourceOp = "Loader2",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 715, -709.5 } },
+		},
+		Instance_BrightnessContrast1_9 = BrightnessContrast {
+			SourceOp = "BrightnessContrast1_1",
+			Inputs = {
+				EffectMask = Input {
+				},
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_Crop1_5",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1100, 511.5 } },
+		},
+		Transform7Angle = BezierSpline {
+			SplineColor = { Red = 14, Green = 221, Blue = 144 },
+			CtrlWZoom = false,
+			KeyFrames = {
+				[0] = { 0, RH = { 6.66666666666667, -120 }, Flags = { Linear = true } },
+				[20] = { -360, LH = { 13.3333333333333, -240 }, Flags = { Linear = true } }
+			}
+		},
+		Instance_FrameAverage1_8 = Fuse.FrameAverage {
+			SourceOp = "FrameAverage1",
+			Inputs = {
+				LayersNest = Input {
+				},
+				ScriptEdit = Input {
+				},
+				ScriptReload = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_ChangeDepth1_8",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1430, 841.5 } },
+		},
+		Transform16Size = BezierSpline {
+			SplineColor = { Red = 225, Green = 0, Blue = 157 },
+			CtrlWZoom = false,
+			KeyFrames = {
+				[0] = { 0.5, RH = { 3.33333333333333, 0.5 } },
+				[10] = { 0.5, LH = { 6.66700005531311, 0.5 }, RH = { 13.6662999391556, 0.5 } },
+				[21] = { 0.5, LH = { 17.3333333333333, 0.5 } }
+			}
+		},
+		Merge2 = Merge {
+			Inputs = {
+				Background = Input {
+					SourceOp = "Crop3",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "Instance_Crop3_3",
+					Source = "Output",
+				},
+				Gain = Input { Value = 0, },
+				PerformDepthMerge = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1760, -115.5 } },
+		},
+		PipeRouter5 = PipeRouter {
+			Inputs = {
+				Input = Input {
+					SourceOp = "PipeRouter6",
+					Source = "Output",
+				}
+			},
+			ViewInfo = PipeRouterInfo { Pos = { 165, 610.5 } },
+		},
+		Instance_FrameAverage1_7 = Fuse.FrameAverage {
+			SourceOp = "FrameAverage1",
+			Inputs = {
+				LayersNest = Input {
+				},
+				ScriptEdit = Input {
+				},
+				ScriptReload = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_ChangeDepth1_7",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1430, 709.5 } },
+		},
+		Ellipse2_5 = EllipseMask {
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				BorderWidth = Input { Value = -0.0057, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.350884012303647, 0.657130956291557 }, },
+				Width = Input { Value = 0.44487631764704, },
+				Height = Input { Value = 0.44487631764704, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 275, 577.5 } },
+		},
+		Ellipse5 = EllipseMask {
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Width = Input { Value = 0.530330085889911, },
+				Height = Input { Value = 0.530330085889911, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 495, 2359.5 } },
+		},
+		Transform14_1 = Transform {
+			Inputs = {
+				Center = Input {
+					SourceOp = "Path1_1",
+					Source = "Position",
+				},
+				Size = Input {
+					SourceOp = "Transform14_1Size",
+					Source = "Value",
+				},
+				Input = Input {
+					SourceOp = "Transform13_1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 770, 511.5 } },
+		},
+		Instance_Crop2_6 = Crop {
+			SourceOp = "Crop2",
+			Inputs = {
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				ResetSize = Input {
+				},
+				ResetOffset = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_BrightnessContrast1_10",
+					Source = "Output",
+				},
+				AutoCrop = Input {
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1210, 610.5 } },
+		},
+		Instance_ChangeDepth1_8 = ChangeDepth {
+			SourceOp = "ChangeDepth1",
+			Inputs = {
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_Crop2_8",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1320, 841.5 } },
+		},
+		Rectangle8_16 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle8_14",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.18359375, 0.69140625 }, },
+				Width = Input { Value = 0.00781249999999995, },
+				Height = Input { Value = 0.0078125, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1650, 1402.5 } },
+		},
+		sStar1_1Angle = BezierSpline {
+			SplineColor = { Red = 14, Green = 221, Blue = 144 },
+			CtrlWZoom = false,
+			KeyFrames = {
+				[0] = { 0, RH = { 6.66666666666667, 17.1428571428571 }, Flags = { Linear = true } },
+				[20] = { 51.4285714285714, LH = { 13.3333333333333, 34.2857142857143 }, Flags = { Linear = true } }
+			}
+		},
+		Rectangle13_1 = RectangleMask {
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				BorderWidth = Input { Value = 0.0705, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.5, 0.431526659959758 }, },
+				Width = Input {
+					SourceOp = "Rectangle13_1Width",
+					Source = "Value",
+				},
+				Height = Input {
+					Value = 0.7309,
+					Expression = "Width",
+				},
+				Angle = Input {
+					SourceOp = "Rectangle13_1Angle",
+					Source = "Value",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 330, 973.5 } },
+		},
+		Merge3_2 = Merge {
+			Inputs = {
+				Background = Input {
+					SourceOp = "ChannelBooleans2_18",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "Transform2_2",
+					Source = "Output",
+				},
+				Gain = Input { Value = 0, },
+				PerformDepthMerge = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 440, 676.5 } },
+		},
+		Rectangle8_2 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle8_1",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.06640625, 0.74609375 }, },
+				Width = Input { Value = 0.0234374999999999, },
+				Height = Input { Value = 0.00781250000000001, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1485, 1501.5 } },
+		},
+		Instance_Crop2_2 = Crop {
+			SourceOp = "Crop2",
+			Inputs = {
+				SettingsNest = Input {
+				},
+				ResetSize = Input {
+				},
+				ResetOffset = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_BrightnessContrast1_3",
+					Source = "Output",
+				},
+				AutoCrop = Input {
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1210, 148.5 } },
+		},
+		Rectangle9 = RectangleMask {
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.5, 0.0238095238095238 }, },
+				Width = Input { Value = 1.20833333333333, },
+				Height = Input { Value = 0.285714285714286, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1155, -841.5 } },
+		},
+		Instance_Crop3_1 = Crop {
+			SourceOp = "Crop3",
+			Inputs = {
+				SettingsNest = Input {
+				},
+				XOffset = Input {
+					Value = -72,
+				},
+				ResetSize = Input {
+				},
+				ResetOffset = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_BrightnessContrast3_1",
+					Source = "Output",
+				},
+				AutoCrop = Input {
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1650, 49.5 } },
+		},
+		Background1_1 = Background {
+			Inputs = {
+				Width = Input { Value = 24, },
+				Height = Input { Value = 24, },
+				Depth = Input { Value = 1, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, }
+			},
+			ViewInfo = OperatorInfo { Pos = { -275, -214.5 } },
+		},
+		Polygon1_1 = PolylineMask {
+			DrawMode = "InsertAndModify",
+			DrawMode2 = "InsertAndModify",
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Polyline = Input {
+					Value = Polyline {
+						Closed = true,
+						Points = {
+							{ Linear = true, X = 0.229166666666667, Y = -0.572821329088739, LX = 0.156944444444444, LY = -0.0137949330149888, RX = 0.00911246612466133, RY = 0.121302560021223 },
+							{ Linear = true, X = 0.256504065040651, Y = -0.20891364902507, LX = -0.00911246612466133, LY = -0.121302560021223, RX = 0, RY = 0.165738161559889 },
+							{ X = 0.256504065040651, Y = 0.288300835654596, LX = -0.0143292682926829, LY = -0.0450324976787373, RX = 0.0345892448525155, RY = 0.108703393412319 },
+							{ X = 0.246341463414634, Y = 0.635097493036212, LX = 0.00905987173195748, LY = -0.115747799104598, RX = 0.163414634146341, RY = 0.00278551532033429 },
+							{ Linear = true, X = 0.736585365853659, Y = 0.643454038997215, LX = -0.163414634146341, LY = -0.00278551532033429, RX = -0.0121951219512195, RY = -0.419220055710306 },
+							{ Linear = true, X = 0.7, Y = -0.614206128133705, LX = 0.0121951219512195, LY = 0.419220055710306, RX = -0.156944444444444, RY = 0.0137949330149888 }
+						}
+					},
+				},
+				Polyline2 = Input {
+					Value = Polyline {
+					},
+					Disabled = true,
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 935, -841.5 } },
+		},
+		Transform13_3Angle = BezierSpline {
+			SplineColor = { Red = 14, Green = 221, Blue = 144 },
+			CtrlWZoom = false,
+			KeyFrames = {
+				[0] = { 0, RH = { 6.66666666666667, -40 }, Flags = { Linear = true } },
+				[20] = { -120, LH = { 13.3333333333333, -80 }, Flags = { Linear = true } }
+			}
+		},
+		Rectangle12_2 = RectangleMask {
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 1, 0.5 }, },
+				Height = Input { Value = 1, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 715, 1996.5 } },
+		},
+		Instance_Crop1_6 = Crop {
+			Inputs = {
+				XSize = Input { Value = 24, },
+				YSize = Input { Value = 21, },
+				Input = Input {
+					SourceOp = "ChannelBooleans2_15",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 440, 1006.5 } },
+		},
+		Transform14_3 = Transform {
+			Inputs = {
+				Center = Input {
+					SourceOp = "Path1_3",
+					Source = "Position",
+				},
+				Size = Input {
+					SourceOp = "Transform14_3Size",
+					Source = "Value",
+				},
+				Input = Input {
+					SourceOp = "Transform13_3",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 605, 907.5 } },
+		},
+		Crop8_7 = Crop {
+			Inputs = {
+				XOffset = Input { Value = 142, },
+				YOffset = Input { Value = 7, },
+				XSize = Input { Value = 24, },
+				YSize = Input { Value = 21, },
+				Input = Input {
+					SourceOp = "Loader2",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 715, -577.5 } },
+		},
+		Merge12 = Merge {
+			Inputs = {
+				Background = Input {
+					SourceOp = "ErodeDilate1",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "Transform1",
+					Source = "Output",
+				},
+				Gain = Input { Value = 0, },
+				PerformDepthMerge = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 990, -115.5 } },
+		},
+		BrightnessContrast4 = BrightnessContrast {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Polygon1",
+					Source = "Mask",
+				},
+				Gain = Input { Value = 0, },
+				Input = Input {
+					SourceOp = "Crop8",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 825, -808.5 } },
+		},
+		BrightnessContrast3 = BrightnessContrast {
+			Inputs = {
+				Gain = Input { Value = 20, },
+				Input = Input {
+					SourceOp = "FrameAverage1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1540, -214.5 } },
+		},
+		Transform4_2Size = BezierSpline {
+			SplineColor = { Red = 225, Green = 0, Blue = 225 },
+			CtrlWZoom = false,
+			KeyFrames = {
+				[0] = { 1.1, RH = { 3.33333333333333, 1.1 } },
+				[10] = { 0.665, LH = { 6.66700005531311, 0.665 }, RH = { 13.3329999446869, 0.665 } },
+				[20] = { 1.1, LH = { 16.6666666666667, 1.1 } }
+			}
+		},
+		Rectangle8_30 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle8_29",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.24609375, 0.69140625 }, },
+				Width = Input { Value = 0.00781249999999999, },
+				Height = Input { Value = 0.0234375, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1815, 1435.5 } },
+		},
+		Rectangle8_16_1 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle8_16",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.16015625, 0.69921875 }, },
+				Width = Input { Value = 0.00781249999999995, },
+				Height = Input { Value = 0.0078125, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1650, 1435.5 } },
+		},
+		Transform3Angle = BezierSpline {
+			SplineColor = { Red = 14, Green = 221, Blue = 144 },
+			CtrlWZoom = false,
+			KeyFrames = {
+				[0] = { 0, RH = { 6.66666666666667, -40 }, Flags = { Linear = true } },
+				[20] = { -120, LH = { 13.3333333333333, -80 }, Flags = { Linear = true } }
+			}
+		},
+		Instance_Merge3_2 = Merge {
+			SourceOp = "Merge3_2",
+			Inputs = {
+				EffectMask = Input {
+				},
+				SettingsNest = Input {
+				},
+				Background = Input {
+					SourceOp = "Merge3_2",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "Instance_Transform2_2",
+					Source = "Output",
+				},
+				Merge = Input {
+				},
+				Channels = Input {
+				},
+				ReferenceSize = Input {
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 550, 676.5 } },
+		},
+		Rectangle5_6 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle5_5",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.28125, 0.84375 }, },
+				Width = Input { Value = 0.0625, },
+				Height = Input { Value = 0.0625, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 880, 1633.5 } },
+		},
+		Instance_BrightnessContrast1_8 = BrightnessContrast {
+			SourceOp = "BrightnessContrast1_1",
+			Inputs = {
+				EffectMask = Input {
+				},
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_Crop1_4",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1100, 280.5 } },
+		},
+		Transform4_2 = Transform {
+			Inputs = {
+				Center = Input { Value = { 0.5, 0.458185840707965 }, },
+				Size = Input {
+					SourceOp = "Transform4_2Size",
+					Source = "Value",
+				},
+				Input = Input {
+					SourceOp = "Transform3_2",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 770, 676.5 } },
+		},
+		Transform10 = Transform {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle7",
+					Source = "Mask",
+				},
+				Center = Input { Value = { 0.5625, 0.5 }, },
+				Input = Input {
+					SourceOp = "ChannelBooleans2_8",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1375, 1765.5 } },
+		},
+		Instance_FrameAverage1_1 = Fuse.FrameAverage {
+			SourceOp = "FrameAverage1",
+			Inputs = {
+				ScriptEdit = Input {
+				},
+				ScriptReload = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_ChangeDepth1_1",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1430, 49.5 } },
+		},
+		PipeRouter1 = PipeRouter {
+			Inputs = {
+				Input = Input {
+					SourceOp = "PipeRouter6",
+					Source = "Output",
+				}
+			},
+			ViewInfo = PipeRouterInfo { Pos = { 275, 280.5 } },
+		},
+		Path4Displacement = BezierSpline {
+			SplineColor = { Red = 255, Green = 0, Blue = 178 },
+			CtrlWZoom = false,
+			KeyFrames = {
+				[0] = { 0, RH = { 1.66666666666667, 0.0786262464135793 }, Flags = { LockedY = true } },
+				[5] = { 0.235878739240738, LH = { 3.33333333333333, 0.157252492827159 }, RH = { 6.66666666666667, 0.312789637372046 }, Flags = { Linear = true, LockedY = true } },
+				[10] = { 0.466611433634662, LH = { 8.33333333333333, 0.389700535503354 }, RH = { 11.6666666666667, 0.542470201653516 }, Flags = { Linear = true, LockedY = true } },
+				[15] = { 0.694187737691224, LH = { 13.3333333333333, 0.61832896967237 }, RH = { 16.6666666666667, 0.796125158460816 }, Flags = { Linear = true, LockedY = true } },
+				[20] = { 1, LH = { 18.3333333333333, 0.898062579230408 }, Flags = { Linear = true, LockedY = true } }
+			}
+		},
+		Merge2_5 = Merge {
+			Inputs = {
+				Background = Input {
+					SourceOp = "Merge2_4",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "Instance_Crop3_6",
+					Source = "Output",
+				},
+				Gain = Input { Value = 0, },
+				PerformDepthMerge = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1760, 610.5 } },
+		},
+		Instance_Crop1_5 = Crop {
+			Inputs = {
+				YOffset = Input { Value = 2, },
+				XSize = Input { Value = 24, },
+				YSize = Input { Value = 21, },
+				Input = Input {
+					SourceOp = "Transform14_1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 935, 511.5 } },
+		},
+		Merge8_2 = Merge {
+			Inputs = {
+				Background = Input {
+					SourceOp = "Merge8_1",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "Crop9_3",
+					Source = "Output",
+				},
+				PerformDepthMerge = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1705, -709.5 } },
+		},
+		SetCanvasColor2 = SetCanvasColor {
+			Inputs = {
+				Alpha = Input { Value = 1, },
+				Input = Input {
+					SourceOp = "Loader1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 715, 1765.5 } },
+		},
+		ChannelBooleans2_10 = ChannelBoolean {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Ellipse2_2",
+					Source = "Mask",
+				},
+				ToRed = Input { Value = 16, },
+				ToGreen = Input { Value = 16, },
+				ToBlue = Input { Value = 16, },
+				ToAlpha = Input { Value = 16, },
+				Background = Input {
+					SourceOp = "SetCanvasColor2_1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 715, 2293.5 } },
+		},
+		Instance_FrameAverage1_3 = Fuse.FrameAverage {
+			SourceOp = "FrameAverage1",
+			Inputs = {
+				LayersNest = Input {
+				},
+				ScriptEdit = Input {
+				},
+				ScriptReload = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_ChangeDepth1_3",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1430, -115.5 } },
+		},
+		Transform2 = Transform {
+			Inputs = {
+				Angle = Input { Value = -120, },
+				Input = Input {
+					SourceOp = "ChannelBooleans2_6",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 220, -16.5 } },
+		},
+		Merge2_6 = Merge {
+			Inputs = {
+				Background = Input {
+					SourceOp = "Merge2_5",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "Instance_Crop3_7",
+					Source = "Output",
+				},
+				Gain = Input { Value = 0, },
+				PerformDepthMerge = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1760, 709.5 } },
+		},
+		Crop8_6 = Crop {
+			Inputs = {
+				XOffset = Input { Value = 121, },
+				YOffset = Input { Value = 7, },
+				XSize = Input { Value = 24, },
+				YSize = Input { Value = 21, },
+				Input = Input {
+					SourceOp = "Loader2",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 715, -610.5 } },
+		},
+		Rectangle8_27 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle8_26",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.1953125, 0.7421875 }, },
+				Width = Input { Value = 0.0156250000000001, },
+				Height = Input { Value = 0.03125, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1815, 1336.5 } },
+		},
+		Instance_ChangeDepth1_10 = ChangeDepth {
+			SourceOp = "ChangeDepth1",
+			Inputs = {
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_Crop2_10",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1320, 1105.5 } },
+		},
+		Crop1 = Crop {
+			Inputs = {
+				XSize = Input { Value = 8, },
+				YSize = Input { Value = 8, },
+				Input = Input {
+					SourceOp = "SetCanvasColor2",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 715, 1831.5 } },
+		},
+		Instance_Crop3_3 = Crop {
+			SourceOp = "Crop3",
+			Inputs = {
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				XOffset = Input {
+					Value = -240,
+				},
+				ResetSize = Input {
+				},
+				ResetOffset = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_BrightnessContrast3_3",
+					Source = "Output",
+				},
+				AutoCrop = Input {
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1650, -115.5 } },
+		},
+		sStar1_1 = sStar {
+			Inputs = {
+				Points = Input { Value = 7, },
+				Depth = Input { Value = 0.376, },
+				Solid = Input { Value = 0, },
+				BorderWidth = Input { Value = 0.0662, },
+				Width = Input { Value = 1, },
+				Height = Input { Value = 1, },
+				Angle = Input {
+					SourceOp = "sStar1_1Angle",
+					Source = "Value",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 385, 1072.5 } },
+		},
+		Rectangle4 = RectangleMask {
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.544117647058823, 0.470588235294118 }, },
+				Width = Input { Value = 0.970588235294118, },
+				Height = Input { Value = 0.941176470588235, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 2805, 1666.5 } },
+		},
+		Crop1_1 = Crop {
+			Inputs = {
+				XSize = Input { Value = 24, },
+				YSize = Input { Value = 21, },
+				Input = Input {
+					SourceOp = "ChannelBooleans2_3",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 605, -214.5 } },
+		},
+		Ellipse2 = EllipseMask {
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				BorderWidth = Input { Value = 0.0705, },
+				Solid = Input { Value = 0, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.284280936454849, 0.666666666666667 }, },
+				Width = Input { Value = 0.299071065857472, },
+				Height = Input { Value = 0.3144843827223, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 55, -82.5 } },
+		},
+		Instance_Crop2_1 = Crop {
+			SourceOp = "Crop2",
+			Inputs = {
+				SettingsNest = Input {
+				},
+				ResetSize = Input {
+				},
+				ResetOffset = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_BrightnessContrast1_2",
+					Source = "Output",
+				},
+				AutoCrop = Input {
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1210, 49.5 } },
+		},
+		Transform14 = Transform {
+			Inputs = {
+				Center = Input {
+					SourceOp = "Path1",
+					Source = "Position",
+				},
+				Size = Input {
+					SourceOp = "Transform14Size",
+					Source = "Value",
+				},
+				Input = Input {
+					SourceOp = "Transform13",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 770, 280.5 } },
+		},
+		Crop3 = Crop {
+			Inputs = {
+				XSize = Input { Value = 264, },
+				YSize = Input { Value = 420, },
+				Input = Input {
+					SourceOp = "BrightnessContrast3",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1650, -214.5 } },
+		},
+		Crop2_1XOffset = BezierSpline {
+			SplineColor = { Red = 250, Green = 59, Blue = 49 },
+			CtrlWZoom = false,
+			KeyFrames = {
+				[0] = { 0, RH = { 0.333333333333333, 0 }, Flags = { StepIn = true, Loop = true, LoopRel = true } },
+				[1] = { -8, LH = { 1, -5.33333333333333 }, Flags = { StepIn = true, Loop = true, LoopRel = true } }
+			}
+		},
+		Instance_BrightnessContrast3_6 = BrightnessContrast {
+			SourceOp = "BrightnessContrast3",
+			Inputs = {
+				EffectMask = Input {
+				},
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_FrameAverage1_6",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1540, 610.5 } },
+		},
+		ChannelBooleans2_13 = ChannelBoolean {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle13",
+					Source = "Mask",
+				},
+				ToRed = Input { Value = 16, },
+				ToGreen = Input { Value = 16, },
+				ToBlue = Input { Value = 16, },
+				ToAlpha = Input { Value = 16, },
+				Background = Input {
+					SourceOp = "SetCanvasColor1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 330, -115.5 } },
+		},
+		Instance_BrightnessContrast3_2 = BrightnessContrast {
+			SourceOp = "BrightnessContrast3",
+			Inputs = {
+				EffectMask = Input {
+				},
+				SettingsNest = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_FrameAverage1_2",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1540, 148.5 } },
+		},
+		Rectangle8_24 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle8_21",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.22265625, 0.71484375 }, },
+				Width = Input { Value = 0.0390625000000001, },
+				Height = Input { Value = 0.0234375, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1815, 1237.5 } },
+		},
+		FrameAverage1 = Fuse.FrameAverage {
+			Inputs = {
+				SampleDirection = Input { Value = 2, },
+				Frames = Input { Value = 19, },
+				Input = Input {
+					SourceOp = "ChangeDepth1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1430, -214.5 } },
+		},
+		Rectangle12_1 = RectangleMask {
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Height = Input { Value = 1, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 715, 1963.5 } },
+		},
+		Rectangle1_6 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle1_7",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				OutputSize = Input { Value = FuID { "Custom" }, },
+				MaskWidth = Input { Value = 128, },
+				MaskHeight = Input { Value = 128, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				Depth = Input { Value = 1, },
+				Center = Input { Value = { 0.03125, 0.96875 }, },
+				Width = Input { Value = 0.0625, },
+				Height = Input { Value = 0.0625, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 330, 1732.5 } },
+		},
+		Ellipse1_2Width = BezierSpline {
+			SplineColor = { Red = 225, Green = 255, Blue = 0 },
+			CtrlWZoom = false,
+			KeyFrames = {
+				[0] = { 0.748, RH = { 3.33333333333333, 0.691333333333333 }, Flags = { Linear = true } },
+				[10] = { 0.578, LH = { 6.66666666666667, 0.634666666666667 }, RH = { 13.3333333333333, 0.634666666666667 }, Flags = { Linear = true } },
+				[20] = { 0.748, LH = { 16.6666666666667, 0.691333333333333 }, Flags = { Linear = true } }
+			}
+		},
+		Transform20 = Transform {
+			Inputs = {
+				Center = Input { Value = { 0.5, 0.431984373753844 }, },
+				UseSizeAndAspect = Input { Value = 0, },
+				Size = Input { Value = 0.936, },
+				XSize = Input { Value = 0.8799, },
+				YSize = Input { Value = 0.8684, },
+				Input = Input {
+					SourceOp = "Merge15",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 825, 841.5 } },
+		},
+		Rectangle8_16_1_1_1 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle8_16_1_1",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.14453125, 0.71484375 }, },
+				Width = Input { Value = 0.00781249999999995, },
+				Height = Input { Value = 0.0078125, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1650, 1501.5 } },
+		},
+		Instance_Crop3_2 = Crop {
+			SourceOp = "Crop3",
+			Inputs = {
+				SettingsNest = Input {
+				},
+				XOffset = Input {
+					Value = -24,
+				},
+				ResetSize = Input {
+				},
+				ResetOffset = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_BrightnessContrast3_2",
+					Source = "Output",
+				},
+				AutoCrop = Input {
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1650, 148.5 } },
+		},
+		Resize1 = BetterResize {
+			Inputs = {
+				Width = Input { Value = 8, },
+				Height = Input { Value = 8, },
+				HiQOnly = Input { Value = 0, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				Input = Input {
+					SourceOp = "ChannelBooleans2_10",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 825, 2293.5 } },
+		},
+		Instance_BrightnessContrast1_7 = BrightnessContrast {
+			SourceOp = "BrightnessContrast1_1",
+			Inputs = {
+				EffectMask = Input {
+				},
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				Input = Input {
+					SourceOp = "Merge12",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1100, -115.5 } },
+		},
+		Rectangle5_4 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle5_3",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.2578125, 0.84375 }, },
+				Width = Input { Value = 0.0468750000000001, },
+				Height = Input { Value = 0.0625, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 770, 1633.5 } },
+		},
+		ChannelBooleans2_16 = ChannelBoolean {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Ellipse7_1",
+					Source = "Mask",
+				},
+				ToRed = Input { Value = 16, },
+				ToGreen = Input { Value = 16, },
+				ToBlue = Input { Value = 16, },
+				ToAlpha = Input { Value = 16, },
+				Background = Input {
+					SourceOp = "PipeRouter4",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 330, 841.5 } },
+		},
+		Transform12 = Transform {
+			Inputs = {
+				Center = Input {
+					SourceOp = "Path4",
+					Source = "Position",
+				},
+				Size = Input { Value = 0.871, },
+				Input = Input {
+					SourceOp = "Merge11_2",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 715, 1105.5 } },
+		},
+		BrightnessContrast4_1 = BrightnessContrast {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Polygon1_1",
+					Source = "Mask",
+				},
+				Gain = Input { Value = 0, },
+				Input = Input {
+					SourceOp = "Crop8_1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 935, -775.5 } },
+		},
+		Transform7_1Angle = BezierSpline {
+			SplineColor = { Red = 14, Green = 221, Blue = 144 },
+			CtrlWZoom = false,
+			KeyFrames = {
+				[0] = { 0, RH = { 6.66666666666667, 120 }, Flags = { Linear = true } },
+				[20] = { 360, LH = { 13.3333333333333, 240 }, Flags = { Linear = true } }
+			}
+		},
+		Instance_BrightnessContrast1_5 = BrightnessContrast {
+			SourceOp = "BrightnessContrast1_2",
+			Inputs = {
+				EffectMask = Input {
+				},
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_Resize1",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 935, 2359.5 } },
+		},
+		Transform8 = Transform {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle3",
+					Source = "Mask",
+				},
+				Center = Input { Value = { 0.5, 0.735294117647059 }, },
+				Input = Input {
+					SourceOp = "Crop5",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 2475, 1699.5 } },
+		},
+		Crop1_5 = Crop {
+			Inputs = {
+				XSize = Input { Value = 24, },
+				YSize = Input { Value = 21, },
+				Input = Input {
+					SourceOp = "ChannelBooleans2_9",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 605, -379.5 } },
+		},
+		Crop8_1 = Crop {
+			Inputs = {
+				XOffset = Input { Value = 17, },
+				YOffset = Input { Value = 7, },
+				XSize = Input { Value = 24, },
+				YSize = Input { Value = 21, },
+				Input = Input {
+					SourceOp = "Loader2",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 715, -775.5 } },
+		},
+		Transform13_2 = Transform {
+			Inputs = {
+				Angle = Input {
+					SourceOp = "Transform13_2Angle",
+					Source = "Value",
+				},
+				Input = Input {
+					SourceOp = "Merge11_3",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 605, 412.5 } },
+		},
+		Transform13 = Transform {
+			Inputs = {
+				Angle = Input {
+					SourceOp = "Transform13Angle",
+					Source = "Value",
+				},
+				Input = Input {
+					SourceOp = "Merge11",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 660, 280.5 } },
+		},
+		Transform4_1 = Transform {
+			Inputs = {
+				Center = Input { Value = { 0.5, 0.458185840707965 }, },
+				Size = Input {
+					SourceOp = "Transform4_1Size",
+					Source = "Value",
+				},
+				Input = Input {
+					SourceOp = "Transform3_1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 770, 610.5 } },
+		},
+		Transform3_2 = Transform {
+			Inputs = {
+				Angle = Input {
+					SourceOp = "Transform3_2Angle",
+					Source = "Value",
+				},
+				Input = Input {
+					SourceOp = "Instance_Merge3_2",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 660, 676.5 } },
+		},
+		Path1 = PolyPath {
+			DrawMode = "InsertAndModify",
+			CtrlWZoom = false,
+			Inputs = {
+				Displacement = Input {
+					SourceOp = "Path1Displacement",
+					Source = "Value",
+				},
+				PolyLine = Input {
+					Value = Polyline {
+						Points = {
+							{ LockY = true, X = 0.0413656431868353, Y = 0.0218346159991098, RX = -0.061021861712223, RY = 0.0557884493206921 },
+							{ LockY = true, X = -0.125, Y = 0.0204988052005199, LX = 0.0285297739613074, LY = 0.0543467777431548, RX = -0.0223231232709862, RY = -0.0425236393595925 },
+							{ X = -0.0833333333333332, Y = -0.120405336740915, LX = -0.0385123405418126, LY = 0.0228448666421076, RX = 0.0493094001723137, RY = -0.0292494991291383 },
+							{ LockY = true, X = 0.0833333333333336, Y = -0.120822289959041, LX = -0.0285814833110411, LY = -0.0544452796289751, RX = 0.022711353918372, RY = 0.043263185517062 },
+							{ LockY = true, X = 0.0409346022449976, Y = 0.0225772717380678, LX = 0.053603798548753, LY = -0.0235202496900454 }
+						}
+					},
+				}
+			},
+		},
+		Crop4 = Crop {
+			Inputs = {
+				XSize = Input { Value = 32, },
+				YSize = Input { Value = 8, },
+				Input = Input {
+					SourceOp = "BrightnessContrast7",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 935, 1831.5 } },
+		},
+		Instance_ChannelBooleans2_11 = ChannelBoolean {
+			SourceOp = "ChannelBooleans2_10",
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Ellipse4",
+					Source = "Mask",
+				},
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				Background = Input {
+					SourceOp = "SetCanvasColor2_1",
+					Source = "Output",
+				},
+				Foreground = Input {
+				},
+				Matte = Input {
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 715, 2359.5 } },
+		},
+		Rectangle8_16_1_1 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle8_16_1",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.16015625, 0.73046875 }, },
+				Width = Input { Value = 0.00781249999999995, },
+				Height = Input { Value = 0.0078125, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1650, 1468.5 } },
+		},
+		Instance_Crop2_4 = Crop {
+			SourceOp = "Crop2",
+			Inputs = {
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				ResetSize = Input {
+				},
+				ResetOffset = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_BrightnessContrast1_8",
+					Source = "Output",
+				},
+				AutoCrop = Input {
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1210, 280.5 } },
+		},
+		sRender1_2 = sRender {
+			Inputs = {
+				Width = Input { Value = 100, },
+				Height = Input { Value = 100, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				Input = Input {
+					SourceOp = "sStar1_1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 495, 1072.5 } },
+		},
+		Instance_Merge3 = Merge {
+			SourceOp = "Merge3",
+			Inputs = {
+				EffectMask = Input {
+				},
+				SettingsNest = Input {
+				},
+				Background = Input {
+					SourceOp = "Merge3",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "Instance_Transform2",
+					Source = "Output",
+				},
+				Merge = Input {
+				},
+				Channels = Input {
+				},
+				ReferenceSize = Input {
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 385, 16.5 } },
+		},
+		Saver3_4 = Saver {
+			PassThrough = true,
+			CtrlWZoom = false,
+			Inputs = {
+				["OpenEXRFormat.Channels"] = Input {
+					Value = Number {
+						Value = 1
+					},
+				},
+				["OpenEXRFormat.Depth"] = Input {
+					Value = Number {
+						Value = 1
+					},
+				},
+				["OpenEXRFormat.Compression"] = Input {
+					Value = Number {
+						Value = 6
+					},
+				},
+				ProcessWhenBlendIs00 = Input { Value = 0, },
+				ProcessGreen = Input { Value = 0, },
+				ProcessBlue = Input { Value = 0, },
+				ProcessAlpha = Input { Value = 0, },
+				Clip = Input {
+					Value = Clip {
+						Filename = "comp:sprite_logo_0.tga",
+						FormatID = "TargaFormat",
+						Length = 0,
+						Saving = true,
+						TrimIn = 0,
+						ExtendFirst = 0,
+						ExtendLast = 0,
+						Loop = 1,
+						AspectMode = 0,
+						Depth = 0,
+						TimeCode = 0,
+						GlobalStart = -2000000000,
+						GlobalEnd = 0
+					},
+				},
+				OutputFormat = Input { Value = FuID { "TargaFormat" }, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				Input = Input {
+					SourceOp = "ChannelBooleans2_12",
+					Source = "Output",
+				},
+				["TargaFormat.SaveAlpha"] = Input { Value = 0, },
+				["TargaFormat.Compress"] = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1925, -577.5 } },
+		},
+		Ellipse6 = EllipseMask {
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				BorderWidth = Input { Value = 0.0736, },
+				Solid = Input { Value = 0, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.588456241124628, 0.389382839887638 }, },
+				Width = Input { Value = 0.387, },
+				Height = Input { Value = 0.538, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 330, -181.5 } },
+		},
+		Instance_ChannelBooleans2_10 = ChannelBoolean {
+			SourceOp = "ChannelBooleans2_10",
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Ellipse5",
+					Source = "Mask",
+				},
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				Background = Input {
+					SourceOp = "SetCanvasColor2_1",
+					Source = "Output",
+				},
+				Foreground = Input {
+				},
+				Matte = Input {
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 715, 2425.5 } },
+		},
+		Rectangle8_3 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle8_2",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.09765625, 0.71484375 }, },
+				Width = Input { Value = 0.0234375, },
+				Height = Input { Value = 0.00781250000000001, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1485, 1534.5 } },
+		},
+		Rectangle8_1 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle8",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.03515625, 0.71484375 }, },
+				Width = Input { Value = 0.00781249999999994, },
+				Height = Input { Value = 0.00781250000000001, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1485, 1468.5 } },
+		},
+		Instance_BrightnessContrast3_8 = BrightnessContrast {
+			SourceOp = "BrightnessContrast3",
+			Inputs = {
+				EffectMask = Input {
+				},
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_FrameAverage1_8",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1540, 841.5 } },
+		},
+		Crop8 = Crop {
+			Inputs = {
+				YOffset = Input { Value = 7, },
+				XSize = Input { Value = 24, },
+				YSize = Input { Value = 21, },
+				Input = Input {
+					SourceOp = "Loader2",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 715, -808.5 } },
+		},
+		BrightnessContrast1 = BrightnessContrast {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle11",
+					Source = "Mask",
+				},
+				Gain = Input { Value = 0, },
+				Input = Input {
+					SourceOp = "SetCanvasColor2",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 825, 1765.5 } },
+		},
+		ChannelBooleans2_15 = ChannelBoolean {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle13_1",
+					Source = "Mask",
+				},
+				ToRed = Input { Value = 16, },
+				ToGreen = Input { Value = 16, },
+				ToBlue = Input { Value = 16, },
+				ToAlpha = Input { Value = 16, },
+				Background = Input {
+					SourceOp = "PipeRouter5",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 330, 1006.5 } },
+		},
+		Instance_ChangeDepth1_7 = ChangeDepth {
+			SourceOp = "ChangeDepth1",
+			Inputs = {
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_Crop2_7",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1320, 709.5 } },
+		},
+		sRender1_4 = sRender {
+			Inputs = {
+				Width = Input { Value = 100, },
+				Height = Input { Value = 100, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				Input = Input {
+					SourceOp = "sNGon1_1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 275, 907.5 } },
+		},
+		SetCanvasColor1 = SetCanvasColor {
+			Inputs = {
+				Alpha = Input { Value = 1, },
+				Input = Input {
+					SourceOp = "Background1_1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { -165, -214.5 } },
+		},
+		Instance_BrightnessContrast1_3 = BrightnessContrast {
+			SourceOp = "BrightnessContrast1_1",
+			Inputs = {
+				EffectMask = Input {
+				},
+				SettingsNest = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_Crop1_1",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1100, 148.5 } },
+		},
+		Merge11_1 = Merge {
+			Inputs = {
+				Background = Input {
+					SourceOp = "PipeRouter1",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "sRender1_1",
+					Source = "Output",
+				},
+				Size = Input { Value = 0.236, },
+				PerformDepthMerge = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 550, 511.5 } },
+		},
+		PipeRouter7 = PipeRouter {
+			Inputs = {
+				Input = Input {
+					SourceOp = "Transform4",
+					Source = "Output",
+				}
+			},
+			ViewInfo = PipeRouterInfo { Pos = { 643.783, 32.586 } },
+		},
+		Instance_Crop2_8 = Crop {
+			SourceOp = "Crop2",
+			Inputs = {
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				ResetSize = Input {
+				},
+				ResetOffset = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_BrightnessContrast1_12",
+					Source = "Output",
+				},
+				AutoCrop = Input {
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1210, 841.5 } },
+		},
+		ChannelBooleans2_9 = ChannelBoolean {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Ellipse3",
+					Source = "Mask",
+				},
+				ToRed = Input { Value = 16, },
+				ToGreen = Input { Value = 16, },
+				ToBlue = Input { Value = 16, },
+				ToAlpha = Input { Value = 16, },
+				Background = Input {
+					SourceOp = "SetCanvasColor1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 330, -379.5 } },
+		},
+		Transform2_1 = Transform {
+			Inputs = {
+				Angle = Input { Value = -120, },
+				Input = Input {
+					SourceOp = "ChannelBooleans2_17",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 385, 577.5 } },
+		},
+		Polygon1 = PolylineMask {
+			DrawMode = "InsertAndModify",
+			DrawMode2 = "InsertAndModify",
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Polyline = Input {
+					Value = Polyline {
+						Closed = true,
+						Points = {
+							{ Linear = true, X = 0.145833333333333, Y = -0.572821329088739, LX = 0.184722222222222, LY = -0.0137949330149888, RX = 0.00911246612466125, RY = 0.121302560021223 },
+							{ Linear = true, X = 0.173170731707317, Y = -0.20891364902507, LX = -0.00911246612466125, LY = -0.121302560021223, RX = 0, RY = 0.165738161559889 },
+							{ X = 0.173170731707317, Y = 0.288300835654596, LX = -0.0143292682926829, LY = -0.0450324976787373, RX = 0.0355593556644891, RY = 0.111752154311759 },
+							{ X = 0.246341463414634, Y = 0.635097493036212, LX = -0.018805688021414, LY = -0.117522251534928, RX = 0.163414634146341, RY = 0.00278551532033429 },
+							{ Linear = true, X = 0.736585365853659, Y = 0.643454038997215, LX = -0.163414634146341, LY = -0.00278551532033429, RX = -0.0121951219512195, RY = -0.419220055710306 },
+							{ Linear = true, X = 0.7, Y = -0.614206128133705, LX = 0.0121951219512195, LY = 0.419220055710306, RX = -0.184722222222222, RY = 0.0137949330149888 }
+						}
+					},
+				},
+				Polyline2 = Input {
+					Value = Polyline {
+					},
+					Disabled = true,
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 825, -841.5 } },
+		},
+		Crop2YOffset = BezierSpline {
+			SplineColor = { Red = 252, Green = 57, Blue = 47 },
+			CtrlWZoom = false,
+			KeyFrames = {
+				[0] = { -399, RH = { 0.333333333333333, -392 }, Flags = { Linear = true, Loop = true, LoopRel = true } },
+				[1] = { -378, LH = { 0.666666666666667, -385 }, Flags = { Linear = true, Loop = true, LoopRel = true } }
+			}
+		},
+		Rectangle8_35 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle8_34",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.24609375, 0.73046875 }, },
+				Width = Input { Value = 0.00781249999999995, },
+				Height = Input { Value = 0.0078125, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1815, 1600.5 } },
+		},
+		Merge2_8 = Merge {
+			Inputs = {
+				Background = Input {
+					SourceOp = "Merge2_7",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "Instance_Crop3_9",
+					Source = "Output",
+				},
+				Gain = Input { Value = 0, },
+				PerformDepthMerge = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1760, 1006.5 } },
+		},
+		Rectangle2 = RectangleMask {
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.625, 0.375 }, },
+				Width = Input { Value = 1, },
+				Height = Input { Value = 1, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 825, 1798.5 } },
+		},
+		Instance_Merge3_1 = Merge {
+			SourceOp = "Merge3_1",
+			Inputs = {
+				EffectMask = Input {
+				},
+				SettingsNest = Input {
+				},
+				Background = Input {
+					SourceOp = "Merge3_1",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "Instance_Transform2_1",
+					Source = "Output",
+				},
+				Merge = Input {
+				},
+				Channels = Input {
+				},
+				ReferenceSize = Input {
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 550, 610.5 } },
+		},
+		Crop9_5 = Crop {
+			Inputs = {
+				XOffset = Input { Value = -120, },
+				XSize = Input { Value = 192, },
+				YSize = Input { Value = 21, },
+				Input = Input {
+					SourceOp = "BrightnessContrast4_3",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1540, -643.5 } },
+		},
+		Ellipse7 = EllipseMask {
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				BorderWidth = Input { Value = 0.0475, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.635194851117977, 0.411491361553604 }, },
+				Width = Input { Value = 0.331733813838347, },
+				Height = Input { Value = 0.324152960181091, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 165, 775.5 } },
+		},
+		Crop2 = Crop {
+			Inputs = {
+				YOffset = Input {
+					SourceOp = "Crop2YOffset",
+					Source = "Value",
+				},
+				XSize = Input { Value = 24, },
+				YSize = Input { Value = 420, },
+				Input = Input {
+					SourceOp = "BrightnessContrast1_1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1210, -214.5 } },
+		},
+		Instance_FrameAverage1_2 = Fuse.FrameAverage {
+			SourceOp = "FrameAverage1",
+			Inputs = {
+				ScriptEdit = Input {
+				},
+				ScriptReload = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_ChangeDepth1_2",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1430, 148.5 } },
+		},
+		Transform5 = Transform {
+			Inputs = {
+				Input = Input {
+					SourceOp = "Crop4",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 825, 1897.5 } },
+		},
+		sRender1_1 = sRender {
+			Inputs = {
+				Width = Input { Value = 100, },
+				Height = Input { Value = 100, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				Input = Input {
+					SourceOp = "sNGon1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 440, 511.5 } },
+		},
+		Ellipse1 = EllipseMask {
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.512453199599177, 0.436509495743287 }, },
+				Width = Input {
+					SourceOp = "Ellipse1Width",
+					Source = "Value",
+				},
+				Height = Input {
+					Value = 0.406964490026417,
+					Expression = "Width/2",
+				},
+				Angle = Input {
+					SourceOp = "Ellipse1Angle",
+					Source = "Value",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 330, -280.5 } },
+		},
+		Instance_BrightnessContrast3_9 = BrightnessContrast {
+			SourceOp = "BrightnessContrast3",
+			Inputs = {
+				EffectMask = Input {
+				},
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_FrameAverage1_9",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1540, 1006.5 } },
+		},
+		Instance_BrightnessContrast3_1 = BrightnessContrast {
+			SourceOp = "BrightnessContrast3",
+			Inputs = {
+				EffectMask = Input {
+				},
+				SettingsNest = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_FrameAverage1_1",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1540, 49.5 } },
+		},
+		Merge2_2 = Merge {
+			Inputs = {
+				Background = Input {
+					SourceOp = "Merge2_1",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "Instance_Crop3_2",
+					Source = "Output",
+				},
+				Gain = Input { Value = 0, },
+				PerformDepthMerge = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1760, 148.5 } },
+		},
+		Instance_BrightnessContrast3_7 = BrightnessContrast {
+			SourceOp = "BrightnessContrast3",
+			Inputs = {
+				EffectMask = Input {
+				},
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_FrameAverage1_7",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1540, 709.5 } },
+		},
+		Crop1_7 = Crop {
+			Inputs = {
+				XSize = Input { Value = 24, },
+				YSize = Input { Value = 21, },
+				Input = Input {
+					SourceOp = "Transform4_2",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 880, 676.5 } },
+		},
+		Transform8_1 = Transform {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle3_1",
+					Source = "Mask",
+				},
+				Center = Input { Value = { 1.02941176470588, 0.558823529411765 }, },
+				FlattenTransform = Input { Value = 1, },
+				Input = Input {
+					SourceOp = "Transform8",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 2585, 1699.5 } },
+		},
+		Instance_Crop3_4 = Crop {
+			SourceOp = "Crop3",
+			Inputs = {
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				XOffset = Input {
+					Value = -96,
+				},
+				ResetSize = Input {
+				},
+				ResetOffset = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_BrightnessContrast3_4",
+					Source = "Output",
+				},
+				AutoCrop = Input {
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1650, 280.5 } },
+		},
+		Crop9_1 = Crop {
+			Inputs = {
+				XOffset = Input { Value = -24, },
+				XSize = Input { Value = 192, },
+				YSize = Input { Value = 21, },
+				Input = Input {
+					SourceOp = "BrightnessContrast4_1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1540, -775.5 } },
+		},
+		Instance_Resize1 = BetterResize {
+			SourceOp = "Resize1",
+			Inputs = {
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				ResetSize = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_ChannelBooleans2_11",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 825, 2359.5 } },
+		},
+		Instance_BrightnessContrast1_11 = BrightnessContrast {
+			SourceOp = "BrightnessContrast1_1",
+			Inputs = {
+				EffectMask = Input {
+				},
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				Input = Input {
+					SourceOp = "Merge14",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1100, 709.5 } },
+		},
+		sStar1_2 = sStar {
+			Inputs = {
+				Points = Input { Value = 5, },
+				Depth = Input { Value = 0.376, },
+				BorderWidth = Input { Value = 0.0921, },
+				Width = Input { Value = 0.8, },
+				Height = Input { Value = 0.8, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 275, 379.5 } },
+		},
+		Merge7_1 = Merge {
+			Inputs = {
+				Background = Input {
+					SourceOp = "ChannelBooleans2_20",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "Crop7",
+					Source = "Output",
+				},
+				Gain = Input { Value = 0, },
+				PerformDepthMerge = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1980, 1765.5 } },
+		},
+		Instance_Crop2_5 = Crop {
+			SourceOp = "Crop2",
+			Inputs = {
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				ResetSize = Input {
+				},
+				ResetOffset = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_BrightnessContrast1_9",
+					Source = "Output",
+				},
+				AutoCrop = Input {
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1210, 511.5 } },
+		},
+		Transform5_2 = Transform {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle12_1",
+					Source = "Mask",
+				},
+				Center = Input { Value = { 0.75, 0.5 }, },
+				Input = Input {
+					SourceOp = "Transform5_1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 825, 1963.5 } },
+		},
+		FrameAverage1_1 = Fuse.FrameAverage {
+			Inputs = {
+				SampleDirection = Input { Value = 2, },
+				Frames = Input { Value = 15, },
+				Input = Input {
+					SourceOp = "ChangeDepth1_1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1320, 2293.5 } },
+		},
+		Transform2_2 = Transform {
+			Inputs = {
+				Angle = Input { Value = -120, },
+				Input = Input {
+					SourceOp = "ChannelBooleans2_18",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 385, 643.5 } },
+		},
+		Instance_ChangeDepth1_9 = ChangeDepth {
+			SourceOp = "ChangeDepth1",
+			Inputs = {
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_Crop2_9",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1320, 1006.5 } },
+		},
+		Ellipse3 = EllipseMask {
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				BorderWidth = Input { Value = 0.0398, },
+				Solid = Input { Value = 0, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.5, 0.437098258729335 }, },
+				Width = Input { Value = 0.875, },
+				Height = Input { Value = 0.852261031555558, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 330, -412.5 } },
+		},
+		ChangeDepth1_1 = ChangeDepth {
+			Inputs = {
+				Depth = Input { Value = 2, },
+				Input = Input {
+					SourceOp = "Crop2_1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1210, 2293.5 } },
+		},
+		Merge2_4 = Merge {
+			Inputs = {
+				Background = Input {
+					SourceOp = "Merge2_3",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "Instance_Crop3_5",
+					Source = "Output",
+				},
+				Gain = Input { Value = 0, },
+				PerformDepthMerge = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1760, 511.5 } },
+		},
+		Rectangle5 = RectangleMask {
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.03125, 0.875 }, },
+				Width = Input { Value = 0.0624999999999999, },
+				Height = Input { Value = 0.03125, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 550, 1567.5 } },
+		},
+		sRender1_3 = sRender {
+			Inputs = {
+				Width = Input { Value = 100, },
+				Height = Input { Value = 100, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				Input = Input {
+					SourceOp = "sStar1_2",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 385, 379.5 } },
+		},
+		Instance_Crop3_8 = Crop {
+			SourceOp = "Crop3",
+			Inputs = {
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				XOffset = Input {
+					Value = -120,
+				},
+				ResetSize = Input {
+				},
+				ResetOffset = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_BrightnessContrast3_8",
+					Source = "Output",
+				},
+				AutoCrop = Input {
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1650, 841.5 } },
+		},
+		Merge11_3 = Merge {
+			Inputs = {
+				Background = Input {
+					SourceOp = "PipeRouter1",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "sRender1_3",
+					Source = "Output",
+				},
+				Size = Input { Value = 0.236, },
+				PerformDepthMerge = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 495, 412.5 } },
+		},
+		Rectangle5_7 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle5_6",
+					Source = "Mask",
+				},
+				Level = Input { Value = 0, },
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.296875, 0.828125 }, },
+				Width = Input { Value = 0.0625, },
+				Height = Input { Value = 0.0625, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 880, 1666.5 } },
+		},
+		Crop7 = Crop {
+			Inputs = {
+				YOffset = Input { Value = -80, },
+				XSize = Input { Value = 128, },
+				YSize = Input { Value = 128, },
+				Input = Input {
+					SourceOp = "BrightnessContrast3_1",
+					Source = "Output",
+				},
+				ClippingMode = Input { Value = FuID { "None" }, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1540, 2293.5 } },
+		},
+		Merge8_4 = Merge {
+			Inputs = {
+				Background = Input {
+					SourceOp = "Merge8_3",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "Crop9_5",
+					Source = "Output",
+				},
+				PerformDepthMerge = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1705, -643.5 } },
+		},
+		Rectangle8_15 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle8_13",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.1328125, 0.6875 }, },
+				Width = Input { Value = 0.015625, },
+				Height = Input { Value = 0.015625, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1650, 1336.5 } },
+		},
+		Merge1 = Merge {
+			Inputs = {
+				Blend = Input { Value = 0.405, },
+				Background = Input {
+					SourceOp = "ChannelBooleans2_8",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "Transform5_3",
+					Source = "Output",
+				},
+				Center = Input { Value = { 0.375, 0.90625 }, },
+				Gain = Input { Value = 0, },
+				PerformDepthMerge = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1265, 1831.5 } },
+		},
+		Path1_2Displacement = BezierSpline {
+			SplineColor = { Red = 255, Green = 0, Blue = 178 },
+			CtrlWZoom = false,
+			KeyFrames = {
+				[0] = { 0, RH = { 2.33333333333333, 0.0996801240704347 }, Flags = { Linear = true, LockedY = true } },
+				[7] = { 0.299040372211304, LH = { 4.66666666666667, 0.199360248140869 }, RH = { 9.66666666666667, 0.431944294949909 }, Flags = { Linear = true, LockedY = true } },
+				[15] = { 0.697752140427119, LH = { 12.3333333333333, 0.564848217688514 }, RH = { 16.6666666666667, 0.798501426951413 }, Flags = { Linear = true, LockedY = true } },
+				[20] = { 1, LH = { 18.3333333333333, 0.899250713475706 }, Flags = { Linear = true, LockedY = true } }
+			}
+		},
+		Path1_1 = PolyPath {
+			DrawMode = "InsertAndModify",
+			CtrlWZoom = false,
+			Inputs = {
+				Displacement = Input {
+					SourceOp = "Path1_1Displacement",
+					Source = "Value",
+				},
+				PolyLine = Input {
+					Value = Polyline {
+						Points = {
+							{ LockY = true, X = 0.0410749506903354, Y = 0.0234186071850493, RX = -0.0500649585266649, RY = 0.07052702220068 },
+							{ LockY = true, X = -0.125591715976331, Y = 0.0712755614645905, LX = 0.0448053621101723, LY = 0.0113042396305646, RX = -0.0406646067776799, RY = -0.0102595412211435 },
+							{ LockY = true, X = -0.208925049309665, Y = 0.023466371684994, LX = 0.0280678777994166, LY = 0.0320033020071768, RX = -0.0491436509410152, RY = -0.0560341296210602 },
+							{ X = -0.0840863916781706, Y = -0.167046482902871, LX = -0.056702382728235, LY = 0.0457694770774679, RX = 0.0578600325427038, RY = -0.0467039179968383 },
+							{ LockY = true, X = 0.124408284023669, Y = -0.120063442073964, LX = -0.050146979825215, LY = -0.057178136215468, RX = 0.0355625582928544, RY = 0.0405488188785582 },
+							{ LockY = true, X = 0.0410749506903354, Y = 0.0234186071850493, LX = 0.0569971856971159, LY = -0.0561890102236564 }
+						}
+					},
+				}
+			},
+		},
+		Transform1 = Transform {
+			Inputs = {
+				Size = Input { Value = 0.75, },
+				Input = Input {
+					SourceOp = "Instance_Crop1_5",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 990, -16.5 } },
+		},
+		Saver3_3 = Saver {
+			PassThrough = true,
+			Inputs = {
+				["OpenEXRFormat.Channels"] = Input {
+					Value = Number {
+						Value = 1
+					},
+				},
+				["OpenEXRFormat.Depth"] = Input {
+					Value = Number {
+						Value = 1
+					},
+				},
+				["OpenEXRFormat.Compression"] = Input {
+					Value = Number {
+						Value = 6
+					},
+				},
+				ProcessWhenBlendIs00 = Input { Value = 0, },
+				ProcessGreen = Input { Value = 0, },
+				ProcessBlue = Input { Value = 0, },
+				ProcessAlpha = Input { Value = 0, },
+				Clip = Input {
+					Value = Clip {
+						Filename = "comp:sprite_ball_0.tga",
+						FormatID = "TargaFormat",
+						Length = 0,
+						Saving = true,
+						TrimIn = 0,
+						ExtendFirst = 0,
+						ExtendLast = 0,
+						Loop = 1,
+						AspectMode = 0,
+						Depth = 0,
+						TimeCode = 0,
+						GlobalStart = -2000000000,
+						GlobalEnd = 0
+					},
+				},
+				OutputFormat = Input { Value = FuID { "TargaFormat" }, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				Input = Input {
+					SourceOp = "Instance_BrightnessContrast1_4",
+					Source = "Output",
+				},
+				["TargaFormat.SaveAlpha"] = Input { Value = 0, },
+				["TargaFormat.Compress"] = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1760, -379.5 } },
+		},
+		Rectangle1_3 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle1_6",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				OutputSize = Input { Value = FuID { "Custom" }, },
+				MaskWidth = Input { Value = 128, },
+				MaskHeight = Input { Value = 128, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				Depth = Input { Value = 1, },
+				Center = Input { Value = { 0.84375, 0.78125 }, },
+				Width = Input { Value = 0.4375, },
+				Height = Input { Value = 0.0625, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 440, 1732.5 } },
+		},
+		Rectangle8_16_1_1_2 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle8_16_1_1_1",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.17578125, 0.71484375 }, },
+				Width = Input { Value = 0.00781249999999995, },
+				Height = Input { Value = 0.0078125, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1650, 1534.5 } },
+		},
+		BrightnessContrast1_2 = BrightnessContrast {
+			Inputs = {
+				Alpha = Input { Value = 1, },
+				Low = Input { Value = 0.4999, },
+				High = Input { Value = 0.5, },
+				Input = Input {
+					SourceOp = "Resize1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 935, 2293.5 } },
+		},
+		Merge8_6 = Merge {
+			Inputs = {
+				Background = Input {
+					SourceOp = "Merge8_5",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "Crop9_7",
+					Source = "Output",
+				},
+				PerformDepthMerge = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1705, -577.5 } },
+		},
+		Rectangle8_31 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle8_30",
+					Source = "Mask",
+				},
+				Level = Input { Value = 0, },
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.2578125, 0.69140625 }, },
+				Width = Input { Value = 0.015625, },
+				Height = Input { Value = 0.0234375, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1815, 1468.5 } },
+		},
+		Instance_Crop3_6 = Crop {
+			SourceOp = "Crop3",
+			Inputs = {
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				XOffset = Input {
+					Value = -144,
+				},
+				ResetSize = Input {
+				},
+				ResetOffset = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_BrightnessContrast3_6",
+					Source = "Output",
+				},
+				AutoCrop = Input {
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1650, 610.5 } },
+		},
+		PipeRouter5_1 = PipeRouter {
+			Inputs = {
+				Input = Input {
+					SourceOp = "PipeRouter5",
+					Source = "Output",
+				}
+			},
+			ViewInfo = PipeRouterInfo { Pos = { 165, 676.5 } },
+		},
+		Instance_BrightnessContrast1_4 = BrightnessContrast {
+			SourceOp = "BrightnessContrast1_1",
+			Inputs = {
+				EffectMask = Input {
+				},
+				SettingsNest = Input {
+				},
+				Input = Input {
+					SourceOp = "Crop1_5",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1100, -379.5 } },
+		},
+		Transform13_1Angle = BezierSpline {
+			SplineColor = { Red = 14, Green = 221, Blue = 144 },
+			CtrlWZoom = false,
+			KeyFrames = {
+				[0] = { 0, RH = { 6.66666666666667, -40 }, Flags = { Linear = true } },
+				[20] = { -120, LH = { 13.3333333333333, -80 }, Flags = { Linear = true } }
+			}
+		},
+		Transform21 = Transform {
+			Inputs = {
+				Input = Input {
+					SourceOp = "PipeRouter3",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 825, 709.5 } },
+		},
+		Merge11 = Merge {
+			Inputs = {
+				Background = Input {
+					SourceOp = "PipeRouter1",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "sRender1",
+					Source = "Output",
+				},
+				Size = Input { Value = 0.236, },
+				PerformDepthMerge = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 550, 280.5 } },
+		},
+		ChannelBooleans2_8 = ChannelBoolean {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle5_13",
+					Source = "Mask",
+				},
+				ToRed = Input { Value = 16, },
+				ToGreen = Input { Value = 16, },
+				ToBlue = Input { Value = 16, },
+				Background = Input {
+					SourceOp = "BrightnessContrast1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1155, 1765.5 } },
+		},
+		Ellipse1Width = BezierSpline {
+			SplineColor = { Red = 225, Green = 255, Blue = 0 },
+			CtrlWZoom = false,
+			KeyFrames = {
+				[0] = { 0.84758775561426, RH = { 3.33333333333333, 0.735391837076173 }, Flags = { Linear = true } },
+				[10] = { 0.511, LH = { 6.66666666666667, 0.623195918538087 }, RH = { 13.3333333333333, 0.623195918538087 }, Flags = { Linear = true } },
+				[20] = { 0.84758775561426, LH = { 16.6666666666667, 0.735391837076173 }, Flags = { Linear = true } }
+			}
+		},
+		Path1_1Displacement = BezierSpline {
+			SplineColor = { Red = 255, Green = 0, Blue = 178 },
+			CtrlWZoom = false,
+			KeyFrames = {
+				[0] = { 0, RH = { 1.33333333333333, 0.0655030469548497 }, Flags = { Linear = true, LockedY = true } },
+				[4] = { 0.196509140864549, LH = { 2.66666666666667, 0.131006093909699 }, RH = { 5, 0.231046335969143 }, Flags = { Linear = true, LockedY = true } },
+				[7] = { 0.300120726178331, LH = { 6, 0.265583531073737 }, RH = { 9.66666666666667, 0.469497030061517 }, Flags = { Linear = true, LockedY = true } },
+				[15] = { 0.808249637827889, LH = { 12.3333333333333, 0.638873333944703 }, RH = { 16.6666666666667, 0.872166425218593 }, Flags = { Linear = true, LockedY = true } },
+				[20] = { 1, LH = { 18.3333333333333, 0.936083212609296 }, Flags = { Linear = true, LockedY = true } }
+			}
+		},
+		Ellipse1Angle = BezierSpline {
+			SplineColor = { Red = 14, Green = 221, Blue = 144 },
+			CtrlWZoom = false,
+			KeyFrames = {
+				[0] = { 0, RH = { 6.66666666666667, 60 }, Flags = { Linear = true } },
+				[20] = { 180, LH = { 13.3333333333333, 120 }, Flags = { Linear = true } }
+			}
+		},
+		Rectangle5_5 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle5_4",
+					Source = "Mask",
+				},
+				Level = Input { Value = 0, },
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.2109375, 0.84375 }, },
+				Width = Input { Value = 0.0156249999999999, },
+				Height = Input { Value = 0.0625, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 770, 1666.5 } },
+		},
+		sNGon1 = sNGon {
+			Inputs = {
+				Sides = Input { Value = 3, },
+				Solid = Input { Value = 0, },
+				BorderWidth = Input { Value = 0.0978, },
+				Width = Input { Value = 0.853, },
+				Height = Input { Expression = "Width", }
+			},
+			ViewInfo = OperatorInfo { Pos = { 330, 511.5 } },
+		},
+		Transform3_2Angle = BezierSpline {
+			SplineColor = { Red = 14, Green = 221, Blue = 144 },
+			CtrlWZoom = false,
+			KeyFrames = {
+				[0] = { 0, RH = { 6.66666666666667, -40 }, Flags = { Linear = true } },
+				[20] = { -120, LH = { 13.3333333333333, -80 }, Flags = { Linear = true } }
+			}
+		},
+		Rectangle5_2 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle6_1",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.140625, 0.84375 }, },
+				Width = Input { Value = 0.0312500000000001, },
+				Height = Input { Value = 0.0625, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 660, 1633.5 } },
+		},
+		PipeRouter4 = PipeRouter {
+			Inputs = {
+				Input = Input {
+					SourceOp = "PipeRouter6",
+					Source = "Output",
+				}
+			},
+			ViewInfo = PipeRouterInfo { Pos = { 330, 742.5 } },
+		},
+		Rectangle6 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle5_1",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				PaintMode = Input { Value = FuID { "Multiply" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.4921875, 0.8359375 }, },
+				Width = Input { Value = 1.078125, },
+				Height = Input { Value = 0.078125, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 550, 1633.5 } },
+		},
+		Rectangle8_11 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle8_10",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.1328125, 0.7421875 }, },
+				Width = Input { Value = 0.0156249999999999, },
+				Height = Input { Value = 0.015625, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1650, 1237.5 } },
+		},
+		sStar1 = sStar {
+			Inputs = {
+				Points = Input { Value = 5, },
+				Depth = Input { Value = 0.376, },
+				Solid = Input { Value = 0, },
+				BorderWidth = Input { Value = 0.0921, },
+				Width = Input { Value = 0.8, },
+				Height = Input { Value = 0.8, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 330, 247.5 } },
+		},
+		Transform4Size = BezierSpline {
+			SplineColor = { Red = 225, Green = 0, Blue = 225 },
+			CtrlWZoom = false,
+			KeyFrames = {
+				[0] = { 1.1, RH = { 3.33333333333333, 1.1 } },
+				[10] = { 0.665, LH = { 6.66700005531311, 0.665 }, RH = { 13.3329999446869, 0.665 } },
+				[20] = { 1.1, LH = { 16.6666666666667, 1.1 } }
+			}
+		},
+		ChannelBooleans2_18 = ChannelBoolean {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Ellipse2_6",
+					Source = "Mask",
+				},
+				ToRed = Input { Value = 16, },
+				ToGreen = Input { Value = 16, },
+				ToBlue = Input { Value = 16, },
+				ToAlpha = Input { Value = 16, },
+				Background = Input {
+					SourceOp = "PipeRouter5_1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 275, 676.5 } },
+		},
+		Rectangle8_8 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle8_9",
+					Source = "Mask",
+				},
+				Level = Input { Value = 0, },
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.05859375, 0.74609375 }, },
+				Width = Input { Value = 0.00781249999999994, },
+				Height = Input { Value = 0.00781250000000001, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1485, 1732.5 } },
+		},
+		Instance_Crop1_3 = Crop {
+			SourceOp = "Crop1_3",
+			Inputs = {
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				ResetSize = Input {
+				},
+				ResetOffset = Input {
+				},
+				Input = Input {
+					SourceOp = "Transform20",
+					Source = "Output",
+				},
+				AutoCrop = Input {
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 935, 841.5 } },
+		},
+		Transform5_3 = Transform {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle12_2",
+					Source = "Mask",
+				},
+				Center = Input { Value = { 0.75, 0.5 }, },
+				Input = Input {
+					SourceOp = "Transform5_2",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 825, 1996.5 } },
+		},
+		Transform3 = Transform {
+			Inputs = {
+				Size = Input { Value = 0.9464, },
+				Angle = Input {
+					SourceOp = "Transform3Angle",
+					Source = "Value",
+				},
+				Input = Input {
+					SourceOp = "Instance_Merge3",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 385, -49.5 } },
+		},
+		Rectangle8_6 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle8_5",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.06640625, 0.69140625 }, },
+				Width = Input { Value = 0.00781249999999994, },
+				Height = Input { Value = 0.00781250000000001, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1485, 1633.5 } },
+		},
+		Instance_BrightnessContrast3_3 = BrightnessContrast {
+			SourceOp = "BrightnessContrast3",
+			Inputs = {
+				EffectMask = Input {
+				},
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_FrameAverage1_3",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1540, -115.5 } },
+		},
+		Instance_Crop3_5 = Crop {
+			SourceOp = "Crop3",
+			Inputs = {
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				XOffset = Input {
+					Value = -192,
+				},
+				ResetSize = Input {
+				},
+				ResetOffset = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_BrightnessContrast3_5",
+					Source = "Output",
+				},
+				AutoCrop = Input {
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1650, 511.5 } },
+		},
+		Rectangle1_5 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle1_4",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				OutputSize = Input { Value = FuID { "Custom" }, },
+				MaskWidth = Input { Value = 128, },
+				MaskHeight = Input { Value = 128, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				Depth = Input { Value = 1, },
+				Center = Input { Value = { 0.546875, 0.609375 }, },
+				Width = Input { Value = 1.1875, },
+				Height = Input { Value = 0.28125, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 660, 1732.5 } },
+		},
+		ChannelBooleans2_17 = ChannelBoolean {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Ellipse2_5",
+					Source = "Mask",
+				},
+				ToRed = Input { Value = 16, },
+				ToGreen = Input { Value = 16, },
+				ToBlue = Input { Value = 16, },
+				ToAlpha = Input { Value = 16, },
+				Background = Input {
+					SourceOp = "PipeRouter5",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 275, 610.5 } },
+		},
+		BrightnessContrast4_3 = BrightnessContrast {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Polygon1_3",
+					Source = "Mask",
+				},
+				Gain = Input { Value = 0, },
+				Input = Input {
+					SourceOp = "Crop8_5",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1265, -643.5 } },
+		},
+		Rectangle8_33 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle8_32",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.2421875, 0.7421875 }, },
+				Width = Input { Value = 0.015625, },
+				Height = Input { Value = 0.015625, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1815, 1534.5 } },
+		},
+		Rectangle8_16_1_1_2_1_1_2 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle8_16_1_1_2_1_1_1",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.17578125, 0.74609375 }, },
+				Width = Input { Value = 0.00781249999999995, },
+				Height = Input { Value = 0.0078125, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1650, 1666.5 } },
+		},
+		ChannelBooleans2_11 = ChannelBoolean {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle8_8",
+					Source = "Mask",
+				},
+				ToRed = Input { Value = 16, },
+				ToGreen = Input { Value = 16, },
+				ToBlue = Input { Value = 16, },
+				Background = Input {
+					SourceOp = "Transform10",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1485, 1765.5 } },
+		},
+		Instance_FrameAverage1_5 = Fuse.FrameAverage {
+			SourceOp = "FrameAverage1",
+			Inputs = {
+				LayersNest = Input {
+				},
+				ScriptEdit = Input {
+				},
+				ScriptReload = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_ChangeDepth1_5",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1430, 511.5 } },
+		},
+		Merge3 = Merge {
+			Inputs = {
+				Background = Input {
+					SourceOp = "ChannelBooleans2_6",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "Transform2",
+					Source = "Output",
+				},
+				Gain = Input { Value = 0, },
+				PerformDepthMerge = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 275, 16.5 } },
+		},
+		Instance_BrightnessContrast1_2 = BrightnessContrast {
+			SourceOp = "BrightnessContrast1_1",
+			Inputs = {
+				EffectMask = Input {
+				},
+				SettingsNest = Input {
+				},
+				Input = Input {
+					SourceOp = "Crop1_3",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1100, 49.5 } },
+		},
+		Instance_Crop2_7 = Crop {
+			SourceOp = "Crop2",
+			Inputs = {
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				ResetSize = Input {
+				},
+				ResetOffset = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_BrightnessContrast1_11",
+					Source = "Output",
+				},
+				AutoCrop = Input {
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1210, 709.5 } },
+		},
+		Instance_ChangeDepth1_5 = ChangeDepth {
+			SourceOp = "ChangeDepth1",
+			Inputs = {
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_Crop2_5",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1320, 511.5 } },
+		},
+		Rectangle8_16_1_1_2_1_1_1 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle8_16_1_1_2_1_1",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.12890625, 0.69921875 }, },
+				Width = Input { Value = 0.00781249999999995, },
+				Height = Input { Value = 0.0078125, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1650, 1633.5 } },
+		},
+		Rectangle13_1Width = BezierSpline {
+			SplineColor = { Red = 225, Green = 255, Blue = 0 },
+			CtrlWZoom = false,
+			KeyFrames = {
+				[0] = { 0.75, RH = { 3.33333333333333, 0.686333333333333 }, Flags = { Linear = true } },
+				[10] = { 0.559, LH = { 6.66666666666667, 0.622666666666667 }, RH = { 13.3333333333333, 0.622666666666667 }, Flags = { Linear = true } },
+				[20] = { 0.75, LH = { 16.6666666666667, 0.686333333333333 }, Flags = { Linear = true } }
+			}
+		},
+		Instance_Crop2_9 = Crop {
+			SourceOp = "Crop2",
+			Inputs = {
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				ResetSize = Input {
+				},
+				ResetOffset = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_BrightnessContrast1_13",
+					Source = "Output",
+				},
+				AutoCrop = Input {
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1210, 1006.5 } },
+		},
+		Transform16 = Transform {
+			Inputs = {
+				Center = Input {
+					SourceOp = "Path3",
+					Source = "Position",
+				},
+				Size = Input {
+					SourceOp = "Transform16Size",
+					Source = "Value",
+				},
+				Input = Input {
+					SourceOp = "Instance_Crop1_6",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 605, 1006.5 } },
+		},
+		sNGon1_1 = sNGon {
+			Inputs = {
+				Sides = Input { Value = 3, },
+				Width = Input { Value = 1, },
+				Height = Input { Expression = "Width", }
+			},
+			ViewInfo = OperatorInfo { Pos = { 165, 907.5 } },
+		},
+		Ellipse2_2 = EllipseMask {
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.4375, 0.5625 }, },
+				Width = Input {
+					SourceOp = "Ellipse2_2Width",
+					Source = "Value",
+				},
+				Height = Input {
+					Value = 0.210264136412354,
+					Expression = "Width",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 715, 2227.5 } },
+		},
+		BrightnessContrast3_1 = BrightnessContrast {
+			Inputs = {
+				Gain = Input { Value = 20, },
+				Input = Input {
+					SourceOp = "FrameAverage1_1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1430, 2293.5 } },
+		},
+		Transform14_3Size = BezierSpline {
+			SplineColor = { Red = 225, Green = 0, Blue = 225 },
+			CtrlWZoom = false,
+			KeyFrames = {
+				[0] = { 0.864, RH = { 3.66666666666667, 0.864 } },
+				[11] = { 0.571, LH = { 7.33370006084442, 0.571 }, RH = { 13.9996999502182, 0.571 } },
+				[20] = { 0.864, LH = { 17, 0.864 } }
+			}
+		},
+		Transform4_1Size = BezierSpline {
+			SplineColor = { Red = 225, Green = 0, Blue = 225 },
+			CtrlWZoom = false,
+			KeyFrames = {
+				[0] = { 1.1, RH = { 3.33333333333333, 1.1 } },
+				[10] = { 0.665, LH = { 6.66700005531311, 0.665 }, RH = { 13.3329999446869, 0.665 } },
+				[20] = { 1.1, LH = { 16.6666666666667, 1.1 } }
+			}
+		},
+		Crop9_7 = Crop {
+			Inputs = {
+				XOffset = Input { Value = -168, },
+				XSize = Input { Value = 192, },
+				YSize = Input { Value = 21, },
+				Input = Input {
+					SourceOp = "Crop8_7",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1540, -577.5 } },
+		},
+		Instance_Crop1_4 = Crop {
+			SourceOp = "Instance_Crop1_5",
+			Inputs = {
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				ResetSize = Input {
+				},
+				ResetOffset = Input {
+				},
+				Input = Input {
+					SourceOp = "Transform14",
+					Source = "Output",
+				},
+				AutoCrop = Input {
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 935, 280.5 } },
+		},
+		Merge5 = Merge {
+			Inputs = {
+				Background = Input {
+					SourceOp = "TimeStretcher5",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "Instance_Crop1_9",
+					Source = "Output",
+				},
+				ApplyMode = Input { Value = FuID { "Difference" }, },
+				PerformDepthMerge = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 990, 1006.5 } },
+		},
+		Instance_BrightnessContrast3_5 = BrightnessContrast {
+			SourceOp = "BrightnessContrast3",
+			Inputs = {
+				EffectMask = Input {
+				},
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_FrameAverage1_5",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1540, 511.5 } },
+		},
+		Crop1_6 = Crop {
+			Inputs = {
+				XSize = Input { Value = 24, },
+				YSize = Input { Value = 21, },
+				Input = Input {
+					SourceOp = "Transform4_1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 880, 610.5 } },
+		},
+		Instance_ChangeDepth1_6 = ChangeDepth {
+			SourceOp = "ChangeDepth1",
+			Inputs = {
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_Crop2_6",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1320, 610.5 } },
+		},
+		Instance_BrightnessContrast1_13 = BrightnessContrast {
+			SourceOp = "BrightnessContrast1_1",
+			Inputs = {
+				EffectMask = Input {
+				},
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				Input = Input {
+					SourceOp = "Merge5",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1100, 1006.5 } },
+		},
+		Instance_Transform2 = Transform {
+			SourceOp = "Transform2",
+			Inputs = {
+				EffectMask = Input {
+				},
+				SettingsNest = Input {
+				},
+				TransformNest = Input {
+				},
+				ReferenceSize = Input {
+				},
+				Input = Input {
+					SourceOp = "Transform2",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 330, -16.5 } },
+		},
+		Instance_FrameAverage1_9 = Fuse.FrameAverage {
+			SourceOp = "FrameAverage1",
+			Inputs = {
+				LayersNest = Input {
+				},
+				ScriptEdit = Input {
+				},
+				ScriptReload = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_ChangeDepth1_9",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1430, 1006.5 } },
+		},
+		Transform7 = Transform {
+			Inputs = {
+				Angle = Input {
+					SourceOp = "Transform7Angle",
+					Source = "Value",
+				},
+				Input = Input {
+					SourceOp = "ChannelBooleans2_14",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 440, 775.5 } },
+		},
+		Crop7_2 = Crop {
+			Inputs = {
+				YOffset = Input { Value = -72, },
+				XSize = Input { Value = 128, },
+				YSize = Input { Value = 128, },
+				Input = Input {
+					SourceOp = "Instance_BrightnessContrast1_6",
+					Source = "Output",
+				},
+				ClippingMode = Input { Value = FuID { "None" }, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1540, 2425.5 } },
+		},
+		Transform14_1Size = BezierSpline {
+			SplineColor = { Red = 225, Green = 0, Blue = 225 },
+			CtrlWZoom = false,
+			KeyFrames = {
+				[0] = { 0.864, RH = { 3.66666666666667, 0.864 } },
+				[11] = { 0.571, LH = { 7.33370006084442, 0.571 }, RH = { 13.9996999502182, 0.571 } },
+				[20] = { 0.864, LH = { 17, 0.864 } }
+			}
+		},
+		Instance_Crop3_9 = Crop {
+			SourceOp = "Crop3",
+			Inputs = {
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				XOffset = Input {
+					Value = -216,
+				},
+				ResetSize = Input {
+				},
+				ResetOffset = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_BrightnessContrast3_9",
+					Source = "Output",
+				},
+				AutoCrop = Input {
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1650, 1006.5 } },
+		},
+		Transform13Angle = BezierSpline {
+			SplineColor = { Red = 14, Green = 221, Blue = 144 },
+			CtrlWZoom = false,
+			KeyFrames = {
+				[0] = { 0, RH = { 6.66666666666667, -24 }, Flags = { Linear = true } },
+				[20] = { -72, LH = { 13.3333333333333, -48 }, Flags = { Linear = true } }
+			}
+		},
+		Rectangle8_34 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle8_33",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.1953125, 0.6953125 }, },
+				Width = Input { Value = 0.015625, },
+				Height = Input { Value = 0.015625, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1815, 1567.5 } },
+		},
+		Rectangle13Angle = BezierSpline {
+			SplineColor = { Red = 14, Green = 221, Blue = 144 },
+			CtrlWZoom = false,
+			KeyFrames = {
+				[0] = { 0, RH = { 6.66666666666667, -30 }, Flags = { Linear = true } },
+				[20] = { -90, LH = { 13.3333333333333, -60 }, Flags = { Linear = true } }
+			}
+		},
+		PipeRouter1_1 = PipeRouter {
+			Inputs = {
+				Input = Input {
+					SourceOp = "PipeRouter2",
+					Source = "Output",
+				}
+			},
+			ViewInfo = PipeRouterInfo { Pos = { 330, 1105.5 } },
+		},
+		Path4 = PolyPath {
+			DrawMode = "InsertAndModify",
+			CtrlWZoom = false,
+			Inputs = {
+				Displacement = Input {
+					SourceOp = "Path4Displacement",
+					Source = "Value",
+				},
+				PolyLine = Input {
+					Value = Polyline {
+						Points = {
+							{ LockY = true, X = 0.0833333333333334, Y = -0.0416666666666667, RX = 0.0180976806050067, RY = 0.0623862150587893 },
+							{ LockY = true, X = 0.0416666666666665, Y = 0.0833333333333334, LX = 0.0415923634671798, LY = -0.0364565283126078, RX = -0.0380995439954698, RY = 0.0333950030385824 },
+							{ LockY = true, X = -0.0840818363273454, Y = 0.0833333333333335, LX = 0.0358245829048271, LY = 0.0358245829048271, RX = -0.0296403516468575, RY = -0.0296403516468575 },
+							{ LockY = true, X = -0.0833333333333331, Y = -0.0424140508221226, LX = -0.0315225967769321, LY = 0.0276301788618474, RX = 0.041778756596724, RY = -0.0366199055731923 },
+							{ LockY = true, X = 0.0833333333333334, Y = -0.0416666666666667, LX = -0.062121171683281, LY = -0.0554637514039873 }
+						}
+					},
+				}
+			},
+		},
+		BrightnessContrast1_1 = BrightnessContrast {
+			Inputs = {
+				Alpha = Input { Value = 1, },
+				Low = Input { Value = 0.4999, },
+				High = Input { Value = 0.5, },
+				Input = Input {
+					SourceOp = "Crop1_1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1100, -214.5 } },
+		},
+		Transform17 = Transform {
+			Inputs = {
+				Center = Input { Value = { 0.5, 0.442519799890759 }, },
+				Input = Input {
+					SourceOp = "Transform12",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 825, 1105.5 } },
+		},
+		Rectangle13Width = BezierSpline {
+			SplineColor = { Red = 225, Green = 255, Blue = 0 },
+			CtrlWZoom = false,
+			KeyFrames = {
+				[0] = { 0.75, RH = { 3.33333333333333, 0.686333333333333 }, Flags = { Linear = true } },
+				[10] = { 0.559, LH = { 6.66666666666667, 0.622666666666667 }, RH = { 13.3333333333333, 0.622666666666667 }, Flags = { Linear = true } },
+				[20] = { 0.75, LH = { 16.6666666666667, 0.686333333333333 }, Flags = { Linear = true } }
+			}
+		},
+		Instance_ChangeDepth1_1 = ChangeDepth {
+			SourceOp = "ChangeDepth1",
+			Inputs = {
+				SettingsNest = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_Crop2_1",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1320, 49.5 } },
+		},
+		Instance_BrightnessContrast1_14 = BrightnessContrast {
+			SourceOp = "BrightnessContrast1_1",
+			Inputs = {
+				EffectMask = Input {
+				},
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_Crop1_7",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1100, 1105.5 } },
+		},
+		SetCanvasColor2_1 = SetCanvasColor {
+			Inputs = {
+				Alpha = Input { Value = 1, },
+				Input = Input {
+					SourceOp = "Background1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 605, 2293.5 } },
+		},
+		Crop9_3 = Crop {
+			Inputs = {
+				XOffset = Input { Value = -72, },
+				XSize = Input { Value = 192, },
+				YSize = Input { Value = 21, },
+				Input = Input {
+					SourceOp = "BrightnessContrast4_2",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1540, -709.5 } },
+		},
+		Instance_ChangeDepth1_4 = ChangeDepth {
+			SourceOp = "ChangeDepth1",
+			Inputs = {
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_Crop2_4",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1320, 280.5 } },
+		},
+		PipeRouter2 = PipeRouter {
+			Inputs = {
+				Input = Input {
+					SourceOp = "PipeRouter6",
+					Source = "Output",
+				}
+			},
+			ViewInfo = PipeRouterInfo { Pos = { 220.238, 1016.07 } },
+		},
+		Instance_Crop2_10 = Crop {
+			SourceOp = "Crop2",
+			Inputs = {
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				ResetSize = Input {
+				},
+				ResetOffset = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_BrightnessContrast1_14",
+					Source = "Output",
+				},
+				AutoCrop = Input {
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1210, 1105.5 } },
+		},
+		Rectangle8_5 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle8_4",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.09765625, 0.71484375 }, },
+				Width = Input { Value = 0.00781249999999994, },
+				Height = Input { Value = 0.0234375, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1485, 1600.5 } },
+		},
+		Instance_Crop3_10 = Crop {
+			Inputs = {
+				XOffset = Input { Value = -48, },
+				XSize = Input { Value = 264, },
+				YSize = Input { Value = 420, },
+				Input = Input {
+					SourceOp = "Instance_BrightnessContrast3_10",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1650, 1105.5 } },
+		},
+		ChannelBooleans2_14 = ChannelBoolean {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Ellipse7",
+					Source = "Mask",
+				},
+				ToRed = Input { Value = 16, },
+				ToGreen = Input { Value = 16, },
+				ToBlue = Input { Value = 16, },
+				ToAlpha = Input { Value = 16, },
+				Background = Input {
+					SourceOp = "PipeRouter4",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 330, 775.5 } },
+		},
+		Merge11_4 = Merge {
+			Inputs = {
+				Background = Input {
+					SourceOp = "PipeRouter2",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "sRender1_4",
+					Source = "Output",
+				},
+				Size = Input { Value = 0.236, },
+				PerformDepthMerge = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 385, 907.5 } },
+		},
+		Rectangle3 = RectangleMask {
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.352941176470588, 0.970588235294118 }, },
+				Width = Input { Value = 0.588235294117647, },
+				Height = Input { Value = 0.0588235294117645, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 2475, 1666.5 } },
+		},
+		ChannelBooleans2_20 = ChannelBoolean {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle8_36",
+					Source = "Mask",
+				},
+				ToRed = Input { Value = 16, },
+				ToGreen = Input { Value = 16, },
+				ToBlue = Input { Value = 16, },
+				Background = Input {
+					SourceOp = "ChannelBooleans2_19",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1815, 1765.5 } },
+		},
+		Transform3_1Angle = BezierSpline {
+			SplineColor = { Red = 14, Green = 221, Blue = 144 },
+			CtrlWZoom = false,
+			KeyFrames = {
+				[0] = { 0, RH = { 6.66666666666667, -40 }, Flags = { Linear = true } },
+				[20] = { -120, LH = { 13.3333333333333, -80 }, Flags = { Linear = true } }
+			}
+		},
+		Instance_FrameAverage1_10 = Fuse.FrameAverage {
+			SourceOp = "FrameAverage1",
+			Inputs = {
+				LayersNest = Input {
+				},
+				ScriptEdit = Input {
+				},
+				ScriptReload = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_ChangeDepth1_10",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1430, 1105.5 } },
+		},
+		Merge7_2 = Merge {
+			Inputs = {
+				Background = Input {
+					SourceOp = "Crop7_1",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "Crop7_2",
+					Source = "Output",
+				},
+				Gain = Input { Value = 0, },
+				PerformDepthMerge = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1650, 2359.5 } },
+		},
+		Rectangle5_3 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle5_2",
+					Source = "Mask",
+				},
+				Level = Input { Value = 0, },
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.1484375, 0.84375 }, },
+				Width = Input { Value = 0.015625, },
+				Height = Input { Value = 0.0625, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 660, 1666.5 } },
+		},
+		Crop5 = Crop {
+			Inputs = {
+				XOffset = Input { Value = -8, },
+				XSize = Input { Value = 136, },
+				YSize = Input { Value = 136, },
+				Input = Input {
+					SourceOp = "Merge7",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 2365, 1699.5 } },
+		},
+		Merge2_9 = Merge {
+			Inputs = {
+				Background = Input {
+					SourceOp = "Merge2_8",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "Instance_Crop3_10",
+					Source = "Output",
+				},
+				Gain = Input { Value = 0, },
+				PerformDepthMerge = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1760, 1105.5 } },
+		},
+		Saver3_1 = Saver {
+			PassThrough = true,
+			Inputs = {
+				["OpenEXRFormat.Channels"] = Input {
+					Value = Number {
+						Value = 1
+					},
+				},
+				["OpenEXRFormat.Depth"] = Input {
+					Value = Number {
+						Value = 1
+					},
+				},
+				["OpenEXRFormat.Compression"] = Input {
+					Value = Number {
+						Value = 6
+					},
+				},
+				ProcessWhenBlendIs00 = Input { Value = 0, },
+				ProcessGreen = Input { Value = 0, },
+				ProcessBlue = Input { Value = 0, },
+				ProcessAlpha = Input { Value = 0, },
+				Clip = Input {
+					Value = Clip {
+						Filename = "comp:spritesheet_0.tga",
+						FormatID = "TargaFormat",
+						Length = 0,
+						Saving = true,
+						TrimIn = 0,
+						ExtendFirst = 0,
+						ExtendLast = 0,
+						Loop = 1,
+						AspectMode = 0,
+						Depth = 0,
+						TimeCode = 0,
+						GlobalStart = -2000000000,
+						GlobalEnd = 0
+					},
+				},
+				OutputFormat = Input { Value = FuID { "TargaFormat" }, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				Input = Input {
+					SourceOp = "BrightnessContrast6",
+					Source = "Output",
+				},
+				["TargaFormat.SaveAlpha"] = Input { Value = 0, },
+				["TargaFormat.Compress"] = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 2090, 1105.5 } },
+		},
+		ChannelBooleans2_12 = ChannelBoolean {
+			Inputs = {
+				ToRed = Input { Value = 5, },
+				ToGreen = Input { Value = 6, },
+				ToBlue = Input { Value = 7, },
+				ToAlpha = Input { Value = 16, },
+				Background = Input {
+					SourceOp = "Merge8_6",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1815, -577.5 } },
+		},
+		BrightnessContrast4_4 = BrightnessContrast {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Polygon1_4",
+					Source = "Mask",
+				},
+				Gain = Input { Value = 0, },
+				Input = Input {
+					SourceOp = "Crop8_6",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1375, -610.5 } },
+		},
+		Rectangle7 = RectangleMask {
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.2421875, 0.84375 }, },
+				Width = Input { Value = 0.78125, },
+				Height = Input { Value = 0.0625, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1375, 1732.5 } },
+		},
+		Saver3_2 = Saver {
+			Inputs = {
+				["OpenEXRFormat.Channels"] = Input {
+					Value = Number {
+						Value = 1
+					},
+				},
+				["OpenEXRFormat.Depth"] = Input {
+					Value = Number {
+						Value = 1
+					},
+				},
+				["OpenEXRFormat.Compression"] = Input {
+					Value = Number {
+						Value = 6
+					},
+				},
+				ProcessWhenBlendIs00 = Input { Value = 0, },
+				ProcessGreen = Input { Value = 0, },
+				ProcessBlue = Input { Value = 0, },
+				ProcessAlpha = Input { Value = 0, },
+				Clip = Input {
+					Value = Clip {
+						Filename = "comp:font_0.tga",
+						FormatID = "TargaFormat",
+						Length = 0,
+						Saving = true,
+						TrimIn = 0,
+						ExtendFirst = 0,
+						ExtendLast = 0,
+						Loop = 1,
+						AspectMode = 0,
+						Depth = 0,
+						TimeCode = 0,
+						GlobalStart = -2000000000,
+						GlobalEnd = 0
+					},
+				},
+				OutputFormat = Input { Value = FuID { "TargaFormat" }, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				Input = Input {
+					SourceOp = "Crop11",
+					Source = "Output",
+				},
+				["TargaFormat.SaveAlpha"] = Input { Value = 0, },
+				["TargaFormat.Compress"] = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 2420, 1831.5 } },
+		},
+		Merge8 = Merge {
+			Inputs = {
+				Background = Input {
+					SourceOp = "Crop9",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "Crop9_1",
+					Source = "Output",
+				},
+				PerformDepthMerge = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1705, -775.5 } },
+		},
+		ChannelBooleans2_19 = ChannelBoolean {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle8_16_1_1_2_1_1_2",
+					Source = "Mask",
+				},
+				ToRed = Input { Value = 16, },
+				ToGreen = Input { Value = 16, },
+				ToBlue = Input { Value = 16, },
+				Background = Input {
+					SourceOp = "ChannelBooleans2_11",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1650, 1765.5 } },
+		},
+		Instance_Transform2_1 = Transform {
+			SourceOp = "Transform2_1",
+			Inputs = {
+				EffectMask = Input {
+				},
+				SettingsNest = Input {
+				},
+				TransformNest = Input {
+				},
+				ReferenceSize = Input {
+				},
+				Input = Input {
+					SourceOp = "Transform2_1",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 495, 577.5 } },
+		},
+		Rectangle8 = RectangleMask {
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.00390625, 0.74609375 }, },
+				Width = Input { Value = 0.00781249999999994, },
+				Height = Input { Value = 0.00781250000000001, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1485, 1435.5 } },
+		},
+		Crop8_2 = Crop {
+			Inputs = {
+				XOffset = Input { Value = 35, },
+				YOffset = Input { Value = 7, },
+				XSize = Input { Value = 24, },
+				YSize = Input { Value = 21, },
+				Input = Input {
+					SourceOp = "Loader2",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 715, -742.5 } },
+		},
+		Merge11_2 = Merge {
+			Inputs = {
+				Background = Input {
+					SourceOp = "PipeRouter1_1",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "sRender1_2",
+					Source = "Output",
+				},
+				Size = Input { Value = 0.2, },
+				PerformDepthMerge = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 605, 1105.5 } },
+		},
+		Merge8_3 = Merge {
+			Inputs = {
+				Background = Input {
+					SourceOp = "Merge8_2",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "Crop9_4",
+					Source = "Output",
+				},
+				PerformDepthMerge = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1705, -676.5 } },
+		},
+		Polygon1_2 = PolylineMask {
+			DrawMode = "InsertAndModify",
+			DrawMode2 = "InsertAndModify",
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Polyline = Input {
+					Value = Polyline {
+						Closed = true,
+						Points = {
+							{ Linear = true, X = 0.0196138211382115, Y = -0.620440376707786, LX = 0.226795392953929, LY = 0.00207808285802706, RX = 0.00911246612466134, RY = 0.121302560021223 },
+							{ Linear = true, X = 0.0469512195121955, Y = -0.256532696644117, LX = -0.00911246612466134, LY = -0.121302560021223, RX = 0, RY = 0.165738161559889 },
+							{ X = 0.0469512195121955, Y = 0.240681788035549, LX = -0.0143292682926829, LY = -0.0450324976787373, RX = 0.0345892448525155, RY = 0.108703393412319 },
+							{ X = 0.0367886178861785, Y = 0.587478445417165, LX = 0.00905987173195748, LY = -0.115747799104598, RX = 0.233265582655827, RY = 0.0186585311933501 },
+							{ Linear = true, X = 0.736585365853659, Y = 0.643454038997215, LX = -0.233265582655827, LY = -0.0186585311933501, RX = -0.0121951219512195, RY = -0.419220055710306 },
+							{ Linear = true, X = 0.7, Y = -0.614206128133705, LX = 0.0121951219512195, LY = 0.419220055710306, RX = -0.226795392953929, RY = -0.00207808285802706 }
+						}
+					},
+				},
+				Polyline2 = Input {
+					Value = Polyline {
+					},
+					Disabled = true,
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1045, -841.5 } },
+		},
+		Instance_BrightnessContrast3_10 = BrightnessContrast {
+			SourceOp = "BrightnessContrast3",
+			Inputs = {
+				EffectMask = Input {
+				},
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_FrameAverage1_10",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1540, 1105.5 } },
+		},
+		Ellipse4 = EllipseMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Ellipse5",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				BorderWidth = Input { Value = 0.1265, },
+				Solid = Input { Value = 0, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Width = Input { Value = 0.883883476483184, },
+				Height = Input { Value = 0.883883476483184, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 605, 2359.5 } },
+		},
+		Path3Displacement = BezierSpline {
+			SplineColor = { Red = 255, Green = 0, Blue = 255 },
+			CtrlWZoom = false,
+			KeyFrames = {
+				[0] = { 0, RH = { 1.66666666666667, 0.084545420850611 }, Flags = { LockedY = true } },
+				[5] = { 0.253636262551833, LH = { 3.33333333333333, 0.169090841701222 }, RH = { 6.66666666666667, 0.335568268496162 }, Flags = { Linear = true, LockedY = true } },
+				[10] = { 0.49943228038482, LH = { 8.33333333333333, 0.417500274440491 }, RH = { 11.6666666666667, 0.577680202602269 }, Flags = { Linear = true, LockedY = true } },
+				[15] = { 0.734176047037168, LH = { 13.3333333333333, 0.655928124819719 }, RH = { 17, 0.822784031358112 }, Flags = { Linear = true, LockedY = true } },
+				[21] = { 1, LH = { 19, 0.911392015679056 }, Flags = { Linear = true, LockedY = true } }
+			}
+		},
+		Rectangle5_8 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle5_7",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.34375, 0.84375 }, },
+				Width = Input { Value = 0.0625, },
+				Height = Input { Value = 0.0625, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 990, 1633.5 } },
+		},
+		Rectangle1 = RectangleMask {
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 1.1969696969697, 0.114285714285714 }, },
+				Width = Input { Value = 0.568181818181819, },
+				Height = Input { Value = 0.571428571428572, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1870, 1072.5 } },
+		},
+		Rectangle5_12 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle5_11",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.46875, 0.84375 }, },
+				Width = Input { Value = 0.0625, },
+				Height = Input { Value = 0.0625, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1210, 1633.5 } },
+		},
+		BrightnessContrast4_2 = BrightnessContrast {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Polygon1_2",
+					Source = "Mask",
+				},
+				Gain = Input { Value = 0, },
+				Input = Input {
+					SourceOp = "Crop8_3",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1045, -709.5 } },
+		},
+		Ellipse2_6 = EllipseMask {
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				BorderWidth = Input { Value = 0.0791, },
+				Solid = Input { Value = 0, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.285595610962267, 0.715288151331643 }, },
+				Width = Input { Value = 0.201768024607294, },
+				Height = Input { Value = 0.209738282392221, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 275, 643.5 } },
+		},
+		Rectangle5_10 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle5_9",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.40625, 0.84375 }, },
+				Width = Input { Value = 0.0625, },
+				Height = Input { Value = 0.0625, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1100, 1633.5 } },
+		},
+		Polygon1_3 = PolylineMask {
+			DrawMode = "InsertAndModify",
+			DrawMode2 = "InsertAndModify",
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Polyline = Input {
+					Value = Polyline {
+						Closed = true,
+						Points = {
+							{ Linear = true, X = 0.395833333333333, Y = -0.620970695970696, LX = 0.184722222222222, LY = 0.00161383030463798, RX = 0.00911246612466132, RY = 0.121302560021223 },
+							{ Linear = true, X = 0.423170731707317, Y = -0.257063015907027, LX = -0.00911246612466132, LY = -0.121302560021223, RX = 0, RY = 0.165738161559889 },
+							{ X = 0.423170731707317, Y = 0.240151468772639, LX = -0.0143292682926829, LY = -0.0450324976787373, RX = 0.033634096327141, RY = 0.105701654393046 },
+							{ X = 0.479166666666667, Y = 0.571428571428571, LX = -0.013316138475828, LY = -0.111970751385465, RX = 0.169139566395664, RY = 0.0233674635485222 },
+							{ Linear = true, X = 0.986585365853659, Y = 0.641530962074138, LX = -0.169139566395664, LY = -0.0233674635485222, RX = -0.0121951219512197, RY = -0.419220055710307 },
+							{ Linear = true, X = 0.95, Y = -0.616129205056782, LX = 0.0121951219512197, LY = 0.419220055710307, RX = -0.184722222222222, RY = -0.00161383030463798 }
+						}
+					},
+				},
+				Polyline2 = Input {
+					Value = Polyline {
+					},
+					Disabled = true,
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1265, -841.5 } },
+		},
+		Crop8_5 = Crop {
+			Inputs = {
+				XOffset = Input { Value = 99, },
+				YOffset = Input { Value = 7, },
+				XSize = Input { Value = 24, },
+				YSize = Input { Value = 21, },
+				Input = Input {
+					SourceOp = "Loader2",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 715, -643.5 } },
+		},
+		Polygon1_4 = PolylineMask {
+			DrawMode = "InsertAndModify",
+			DrawMode2 = "InsertAndModify",
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Polyline = Input {
+					Value = Polyline {
+						Closed = true,
+						Points = {
+							{ Linear = true, X = 0.270833333333333, Y = -0.620440376707786, LX = 0.184722222222222, LY = 0.00161383030463798, RX = 0.00911246612466132, RY = 0.121302560021223 },
+							{ Linear = true, X = 0.298170731707317, Y = -0.256532696644117, LX = -0.00911246612466132, LY = -0.121302560021223, RX = 0.0323046995440013, RY = 0.164875978246452 },
+							{ X = 0.395084830339321, Y = 0.238095238095238, LX = -0.0146071387029989, LY = -0.0459057591985831, RX = 0.0345892448525155, RY = 0.108703393412319 },
+							{ X = 0.384922228713304, Y = 0.584891895476854, LX = 0.00905987173195748, LY = -0.115747799104598, RX = 0.158887712380118, RY = 0.0190564619533978 },
+							{ Linear = true, X = 0.861585365853659, Y = 0.642061281337048, LX = -0.158887712380118, LY = -0.0190564619533978, RX = -0.0121951219512196, RY = -0.419220055710307 },
+							{ Linear = true, X = 0.825, Y = -0.615598885793872, LX = 0.0121951219512196, LY = 0.419220055710307, RX = -0.184722222222222, RY = -0.00161383030463798 }
+						}
+					},
+				},
+				Polyline2 = Input {
+					Value = Polyline {
+					},
+					Disabled = true,
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1375, -841.5 } },
+		},
+		Instance_FrameAverage1_6 = Fuse.FrameAverage {
+			SourceOp = "FrameAverage1",
+			Inputs = {
+				LayersNest = Input {
+				},
+				ScriptEdit = Input {
+				},
+				ScriptReload = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_ChangeDepth1_6",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1430, 610.5 } },
+		},
+		Transform13_1 = Transform {
+			Inputs = {
+				Angle = Input {
+					SourceOp = "Transform13_1Angle",
+					Source = "Value",
+				},
+				Input = Input {
+					SourceOp = "Merge11_1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 660, 511.5 } },
+		},
+		Rectangle1_2 = RectangleMask {
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				OutputSize = Input { Value = FuID { "Custom" }, },
+				MaskWidth = Input { Value = 128, },
+				MaskHeight = Input { Value = 128, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				Depth = Input { Value = 1, },
+				Center = Input { Value = { 0.5, 0.84375 }, },
+				Width = Input { Value = 1.16, },
+				Height = Input { Value = 0.078125, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 110, 1732.5 } },
+		},
+		Path3 = PolyPath {
+			DrawMode = "InsertAndModify",
+			CtrlWZoom = false,
+			Inputs = {
+				Displacement = Input {
+					SourceOp = "Path3Displacement",
+					Source = "Value",
+				},
+				PolyLine = Input {
+					Value = Polyline {
+						Points = {
+							{ LockY = true, X = 0, Y = -0.27, RX = -0.103283274440518, RY = -0.0196623896821237 },
+							{ LockY = true, X = -0.208333333333333, Y = -0.00404761904761908, LX = 0, LY = -0.100630695670162, RX = 0, RY = 0.100630695670162 },
+							{ LockY = true, X = 0, Y = 0.261904761904762, LX = -0.0877382831337461, LY = -0.00848516556367051, RX = 0.0816158990964316, RY = 0.0078930700684601 },
+							{ LockY = true, X = 0.208333333333333, Y = 0.0201298701298701, LX = 0, LY = 0.0936086781103278, RX = 0, RY = -0.107797910104913 },
+							{ LockY = true, X = 0, Y = -0.27, LX = 0.105050058892815, LY = -0.0121673533208543 }
+						}
+					},
+				}
+			},
+		},
+		Merge8_5 = Merge {
+			Inputs = {
+				Background = Input {
+					SourceOp = "Merge8_4",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "Crop9_6",
+					Source = "Output",
+				},
+				PerformDepthMerge = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1705, -610.5 } },
+		},
+		Transform4 = Transform {
+			Inputs = {
+				Center = Input { Value = { 0.5, 0.458185840707965 }, },
+				Size = Input {
+					SourceOp = "Transform4Size",
+					Source = "Value",
+				},
+				Input = Input {
+					SourceOp = "Transform3",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 495, -49.5 } },
+		},
+		Merge13 = Merge {
+			Inputs = {
+				Background = Input {
+					SourceOp = "Crop1_6",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "Instance_Crop1_8",
+					Source = "Output",
+				},
+				ApplyMode = Input { Value = FuID { "Exclusion" }, },
+				PerformDepthMerge = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1045, 577.5 } },
+		},
+		Rectangle8_21 = RectangleMask {
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.22265625, 0.71484375 }, },
+				Width = Input { Value = 0.0234375, },
+				Height = Input { Value = 0.0390625, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1815, 1204.5 } },
+		},
+		Crop8_4 = Crop {
+			Inputs = {
+				XOffset = Input { Value = 71, },
+				YOffset = Input { Value = 1, },
+				XSize = Input { Value = 24, },
+				YSize = Input { Value = 21, },
+				Input = Input {
+					SourceOp = "Loader2",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 715, -676.5 } },
+		},
+		Transform5_1 = Transform {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle12",
+					Source = "Mask",
+				},
+				Center = Input { Value = { 0.75, 0.5 }, },
+				Input = Input {
+					SourceOp = "Transform5",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 825, 1930.5 } },
+		},
+		Rectangle8_26 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle8_25",
+					Source = "Mask",
+				},
+				Level = Input { Value = 0, },
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.22265625, 0.7421875 }, },
+				Width = Input { Value = 0.0234375, },
+				Height = Input { Value = 0.015625, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1815, 1303.5 } },
+		},
+		Rectangle8_29 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle8_28",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.24609375, 0.69140625 }, },
+				Width = Input { Value = 0.0234375000000001, },
+				Height = Input { Value = 0.0078125, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1815, 1402.5 } },
+		},
+		Rectangle8_32 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle8_31",
+					Source = "Mask",
+				},
+				Level = Input { Value = 0, },
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.2421875, 0.6796875 }, },
+				Width = Input { Value = 0.03125, },
+				Height = Input { Value = 0.015625, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1815, 1501.5 } },
+		},
+		Path1Displacement = BezierSpline {
+			SplineColor = { Red = 255, Green = 0, Blue = 178 },
+			CtrlWZoom = false,
+			KeyFrames = {
+				[0] = { 0, RH = { 2.33333333333333, 0.091765228555867 }, Flags = { Linear = true, LockedY = true } },
+				[7] = { 0.275295685667601, LH = { 4.66666666666667, 0.183530457111734 }, RH = { 9.66666666666667, 0.438176404424176 }, Flags = { Linear = true, LockedY = true } },
+				[15] = { 0.763937841937325, LH = { 12.3333333333333, 0.60105712318075 }, RH = { 16.6666666666667, 0.842625227958217 }, Flags = { Linear = true, LockedY = true } },
+				[20] = { 1, LH = { 18.3333333333333, 0.921312613979108 }, Flags = { Linear = true, LockedY = true } }
+			}
+		},
+		Rectangle8_10 = RectangleMask {
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.16015625, 0.71484375 }, },
+				Width = Input { Value = 0.0234375, },
+				Height = Input { Value = 0.0234375, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1650, 1204.5 } },
+		},
+		Rectangle8_36 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle8_35",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.20703125, 0.69140625 }, },
+				Width = Input { Value = 0.00781249999999995, },
+				Height = Input { Value = 0.0078125, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1815, 1633.5 } },
+		},
+		PipeRouter6 = PipeRouter {
+			Inputs = {
+				Input = Input {
+					SourceOp = "SetCanvasColor1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = PipeRouterInfo { Pos = { -55, 49.5 } },
+		},
+		Instance_Transform2_2 = Transform {
+			SourceOp = "Transform2_2",
+			Inputs = {
+				EffectMask = Input {
+				},
+				SettingsNest = Input {
+				},
+				TransformNest = Input {
+				},
+				ReferenceSize = Input {
+				},
+				Input = Input {
+					SourceOp = "Transform2_2",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 495, 643.5 } },
+		},
+		TimeStretcher5SourceTime = BezierSpline {
+			SplineColor = { Red = 233, Green = 217, Blue = 243 },
+			CtrlWZoom = false,
+			KeyFrames = {
+				[0] = { 20, RH = { 6.66666666666667, 13.3333333333333 }, Flags = { Linear = true } },
+				[20] = { 0, LH = { 13.3333333333333, 6.66666666666667 }, Flags = { Linear = true } }
+			}
+		},
+		Rectangle8_14 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle8_15",
+					Source = "Mask",
+				},
+				Level = Input { Value = 0, },
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.1328125, 0.6796875 }, },
+				Width = Input { Value = 0.015625, },
+				Height = Input { Value = 0.015625, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1650, 1369.5 } },
+		},
+		Transform9 = Transform {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle4_1",
+					Source = "Mask",
+				},
+				ApplyMaskInverted = Input { Value = 1, },
+				Center = Input { Value = { -0.441176470588235, 0.5 }, },
+				Angle = Input { Value = -90, },
+				Input = Input {
+					SourceOp = "Transform8_1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 2695, 1699.5 } },
+		},
+		Rectangle8_16_1_1_2_1 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle8_16_1_1_2",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.12890625, 0.73046875 }, },
+				Width = Input { Value = 0.00781249999999995, },
+				Height = Input { Value = 0.0078125, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1650, 1567.5 } },
+		},
+		BrightnessContrast2 = BrightnessContrast {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle4",
+					Source = "Mask",
+				},
+				Lift = Input { Value = 0.198, },
+				Input = Input {
+					SourceOp = "Transform9",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 2805, 1699.5 } },
+		},
+		Merge8_1 = Merge {
+			Inputs = {
+				Background = Input {
+					SourceOp = "Merge8",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "Crop9_2",
+					Source = "Output",
+				},
+				PerformDepthMerge = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1705, -742.5 } },
+		},
+		Rectangle12 = RectangleMask {
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Height = Input { Value = 1, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 715, 1930.5 } },
+		},
+		Rectangle8_16_1_1_2_1_1 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle8_16_1_1_2_1",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.14453125, 0.74609375 }, },
+				Width = Input { Value = 0.00781249999999995, },
+				Height = Input { Value = 0.0078125, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1650, 1600.5 } },
+		},
+		Merge3_1 = Merge {
+			Inputs = {
+				Background = Input {
+					SourceOp = "ChannelBooleans2_17",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "Transform2_1",
+					Source = "Output",
+				},
+				Gain = Input { Value = 0, },
+				PerformDepthMerge = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 440, 610.5 } },
+		},
+		BrightnessContrast7 = BrightnessContrast {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle2",
+					Source = "Mask",
+				},
+				Gain = Input { Value = 0, },
+				Input = Input {
+					SourceOp = "Crop1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 825, 1831.5 } },
+		},
+		PipeRouter3 = PipeRouter {
+			Inputs = {
+				Input = Input {
+					SourceOp = "Crop1_1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = PipeRouterInfo { Pos = { 715, 709.5 } },
+		},
+		Rectangle8_4 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle8_3",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.06640625, 0.74609375 }, },
+				Width = Input { Value = 0.00781250000000006, },
+				Height = Input { Value = 0.0234375, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1485, 1567.5 } },
+		},
+		Rectangle8_28 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle8_27",
+					Source = "Mask",
+				},
+				Level = Input { Value = 0, },
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.19921875, 0.75390625 }, },
+				Width = Input { Value = 0.0468749999999999, },
+				Height = Input { Value = 0.0078125, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1815, 1369.5 } },
+		},
+		Merge14 = Merge {
+			Inputs = {
+				Background = Input {
+					SourceOp = "Transform21",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "Crop1_7",
+					Source = "Output",
+				},
+				Gain = Input { Value = 0, },
+				PerformDepthMerge = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 990, 709.5 } },
+		},
+		Instance_BrightnessContrast1_12 = BrightnessContrast {
+			SourceOp = "BrightnessContrast1_1",
+			Inputs = {
+				EffectMask = Input {
+				},
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_Crop1_3",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1100, 841.5 } },
+		},
+		ChannelBooleans2_3 = ChannelBoolean {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Ellipse1_2",
+					Source = "Mask",
+				},
+				ToRed = Input { Value = 16, },
+				ToGreen = Input { Value = 16, },
+				ToBlue = Input { Value = 16, },
+				ToAlpha = Input { Value = 16, },
+				Background = Input {
+					SourceOp = "SetCanvasColor1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 330, -214.5 } },
+		},
+		Transform13_2Angle = BezierSpline {
+			SplineColor = { Red = 14, Green = 221, Blue = 144 },
+			CtrlWZoom = false,
+			KeyFrames = {
+				[0] = { 0, RH = { 6.66666666666667, -24 }, Flags = { Linear = true } },
+				[20] = { -72, LH = { 13.3333333333333, -48 }, Flags = { Linear = true } }
+			}
+		},
+		Rectangle8_7 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle8_6",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.12109375, 0.74609375 }, },
+				Width = Input { Value = 0.00781249999999994, },
+				Height = Input { Value = 0.00781250000000001, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1485, 1666.5 } },
+		},
+		Merge7 = Merge {
+			Inputs = {
+				Background = Input {
+					SourceOp = "Merge7_1",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "Merge7_2",
+					Source = "Output",
+				},
+				Gain = Input { Value = 0, },
+				PerformDepthMerge = Input { Value = 0, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 2090, 1765.5 } },
+		},
+		Rectangle4_1 = RectangleMask {
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.544117647058823, 0.470588235294118 }, },
+				Width = Input { Value = 0.970588235294118, },
+				Height = Input { Value = 1.05882352941176, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 2695, 1666.5 } },
+		},
+		Rectangle8_12 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle8_11",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.1796875, 0.7421875 }, },
+				Width = Input { Value = 0.015625, },
+				Height = Input { Value = 0.015625, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1650, 1270.5 } },
+		},
+		Rectangle8_9 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle8_7",
+					Source = "Mask",
+				},
+				Level = Input { Value = 0, },
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.06640625, 0.75390625 }, },
+				Width = Input { Value = 0.00781249999999994, },
+				Height = Input { Value = 0.00781250000000001, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1485, 1699.5 } },
+		},
+		Rectangle5_9 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle5_8",
+					Source = "Mask",
+				},
+				Level = Input { Value = 0, },
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.328125, 0.828125 }, },
+				Width = Input { Value = 0.0625, },
+				Height = Input { Value = 0.0625, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 990, 1666.5 } },
+		},
+		Crop9_2 = Crop {
+			Inputs = {
+				XOffset = Input { Value = -48, },
+				XSize = Input { Value = 192, },
+				YSize = Input { Value = 21, },
+				Input = Input {
+					SourceOp = "Crop8_2",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1540, -742.5 } },
+		},
+		Rectangle5_11 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle5_10",
+					Source = "Mask",
+				},
+				Level = Input { Value = 0, },
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.421875, 0.859375 }, },
+				Width = Input { Value = 0.0625, },
+				Height = Input { Value = 0.0625, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1100, 1666.5 } },
+		},
+		Rectangle5_13 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle5_12",
+					Source = "Mask",
+				},
+				Level = Input { Value = 0, },
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.453125, 0.859375 }, },
+				Width = Input { Value = 0.0625, },
+				Height = Input { Value = 0.0625, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1210, 1666.5 } },
+		},
+		Background1 = Background {
+			Inputs = {
+				Width = Input { Value = 16, },
+				Height = Input { Value = 16, },
+				Depth = Input { Value = 2, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 495, 2293.5 } },
+		},
+		Rectangle11 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle1_5",
+					Source = "Mask",
+				},
+				Level = Input { Value = 0, },
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.8828125, 0.8046875 }, },
+				Width = Input { Value = 0.515625, },
+				Height = Input { Value = 0.109375, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 770, 1732.5 } },
+		},
+		Rectangle5_1 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle5",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.09375, 0.8125 }, },
+				Width = Input { Value = 0.0624999999999999, },
+				Height = Input { Value = 0.03125, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 550, 1600.5 } },
+		},
+		BrightnessContrast5 = BrightnessContrast {
+			Inputs = {
+				Lift = Input { Value = 0.165, },
+				Input = Input {
+					SourceOp = "ChannelBooleans2_12",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1980, -643.5 } },
+		},
+		Path1_2 = PolyPath {
+			DrawMode = "InsertAndModify",
+			CtrlWZoom = false,
+			Inputs = {
+				Displacement = Input {
+					SourceOp = "Path1_2Displacement",
+					Source = "Value",
+				},
+				PolyLine = Input {
+					Value = Polyline {
+						Points = {
+							{ LockY = true, X = 0.0413656431868352, Y = 0.129643491581863, RX = -0.0223267928138161, RY = 0.0323930479870519 },
+							{ LockY = true, X = -0.125233426704015, Y = 0.14947554224942, LX = 0.042650612600928, LY = 0.0361737896596524, RX = -0.0237115377633324, RY = -0.0201107587265705 },
+							{ X = -0.166666666666667, Y = 0.0659087822120718, LX = -0.0172575684467057, LY = 0.0258622499208313, RX = 0.0243784350107716, RY = -0.0365336044225669 },
+							{ LockY = true, X = -0.0416666666666668, Y = 0.0242421155454052, LX = -0.04194409092439, LY = -0.0130271095107672, RX = 0.0428149667158263, RY = 0.0132975884758678 },
+							{ LockY = true, X = 0.0409346022449975, Y = 0.130386147320821, LX = 0.0659499930964128, LY = -0.093570454263503 }
+						}
+					},
+				}
+			},
+		},
+		Crop9_6 = Crop {
+			Inputs = {
+				XOffset = Input { Value = -144, },
+				XSize = Input { Value = 192, },
+				YSize = Input { Value = 21, },
+				Input = Input {
+					SourceOp = "BrightnessContrast4_4",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1540, -610.5 } },
+		},
+		Ellipse2_2Width = BezierSpline {
+			SplineColor = { Red = 225, Green = 255, Blue = 0 },
+			CtrlWZoom = false,
+			KeyFrames = {
+				[0] = { 0.176776695296637, RH = { 2.33333333333333, 0.176776695296637 } },
+				[7] = { 0.883883476483184, LH = { 2.5, 0.88 }, RH = { 13.9987855967892, 0.889923391877845 } },
+				[16] = { 0.1767766952966, LH = { 13, 0.1767766952966 } }
+			}
+		},
+		Rectangle8_13 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle8_12",
+					Source = "Mask",
+				},
+				Level = Input { Value = 0, },
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.171875, 0.7421875 }, },
+				Width = Input { Value = 0.015625, },
+				Height = Input { Value = 0.015625, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1650, 1303.5 } },
+		},
+		Path1_3 = PolyPath {
+			DrawMode = "InsertAndModify",
+			CtrlWZoom = false,
+			Inputs = {
+				Displacement = Input {
+					SourceOp = "Path1_3Displacement",
+					Source = "Value",
+				},
+				PolyLine = Input {
+					Value = Polyline {
+						Points = {
+							{ LockY = true, X = 0.0410749506903354, Y = 0.0234186071850493, RX = -0.0500649585266649, RY = 0.07052702220068 },
+							{ LockY = true, X = -0.125591715976331, Y = 0.0712755614645905, LX = 0.0448053621101723, LY = 0.0113042396305646, RX = -0.0406646067776799, RY = -0.0102595412211435 },
+							{ LockY = true, X = -0.208925049309665, Y = 0.023466371684994, LX = 0.0280678777994166, LY = 0.0320033020071768, RX = -0.0491436509410152, RY = -0.0560341296210602 },
+							{ X = -0.0840863916781706, Y = -0.167046482902871, LX = -0.056702382728235, LY = 0.0457694770774679, RX = 0.0578600325427038, RY = -0.0467039179968383 },
+							{ LockY = true, X = 0.124408284023669, Y = -0.120063442073964, LX = -0.050146979825215, LY = -0.057178136215468, RX = 0.0355625582928544, RY = 0.0405488188785582 },
+							{ LockY = true, X = 0.0410749506903354, Y = 0.0234186071850493, LX = 0.0569971856971159, LY = -0.0561890102236564 }
+						}
+					},
+				}
+			},
+		},
+		Instance_ChangeDepth1_3 = ChangeDepth {
+			SourceOp = "ChangeDepth1",
+			Inputs = {
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_Crop2_3",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1320, -115.5 } },
+		},
+		Instance_Crop1_8 = Crop {
+			Inputs = {
+				YOffset = Input { Value = 2, },
+				XSize = Input { Value = 24, },
+				YSize = Input { Value = 21, },
+				Input = Input {
+					SourceOp = "Transform14_2",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 880, 412.5 } },
+		},
+		Instance_BrightnessContrast1_10 = BrightnessContrast {
+			SourceOp = "BrightnessContrast1_1",
+			Inputs = {
+				EffectMask = Input {
+				},
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				Input = Input {
+					SourceOp = "Merge13",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 1100, 610.5 } },
+		},
+		Rectangle8_25 = RectangleMask {
+			Inputs = {
+				EffectMask = Input {
+					SourceOp = "Rectangle8_24",
+					Source = "Mask",
+				},
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Center = Input { Value = { 0.203125, 0.7421875 }, },
+				Width = Input { Value = 0.03125, },
+				Height = Input { Value = 0.015625, }
+			},
+			ViewInfo = OperatorInfo { Pos = { 1815, 1270.5 } },
+		},
+		Instance_BrightnessContrast1_6 = BrightnessContrast {
+			SourceOp = "BrightnessContrast1_2",
+			Inputs = {
+				EffectMask = Input {
+				},
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				Input = Input {
+					SourceOp = "Instance_Resize1_1",
+					Source = "Output",
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 935, 2425.5 } },
+		},
+		Instance_Crop1_1 = Crop {
+			SourceOp = "Crop1_1",
+			Inputs = {
+				SettingsNest = Input {
+				},
+				LayersNest = Input {
+				},
+				ResetSize = Input {
+				},
+				ResetOffset = Input {
+				},
+				Input = Input {
+					SourceOp = "ChannelBooleans2_13",
+					Source = "Output",
+				},
+				AutoCrop = Input {
+				},
+				CommentsNest = Input {
+				},
+				FrameRenderScriptNest = Input {
+				},
+				StartRenderScripts = Input {
+				},
+				EndRenderScripts = Input {
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 605, -115.5 } },
+		},
+		Instance_Crop1_9 = Crop {
+			Inputs = {
+				YOffset = Input { Value = 2, },
+				XSize = Input { Value = 24, },
+				YSize = Input { Value = 21, },
+				Input = Input {
+					SourceOp = "Transform14_3",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 770, 907.5 } },
+		}
+	},
+	Frames = {
+		{
+			FrameTypeID = "ChildFrame",
+			Mode = 3,
+			LayoutPreset = 0,
+			PresetName = "Default",
+			Left = 0,
+			Top = 27,
+			Width = 3072,
+			Height = 1583,
+			ZoneInfo = {
+				["!Right"] = {
+				},
+				["!Left"] = {
+				},
+				AuxLeft = { Expanded = true },
+				Right = { Expanded = false, Adjust = false },
+				Left = { Expanded = false, },
+				AuxRight = { Expanded = true }
+			},
+			ViewInfo = {
+				Viewer1 = { Show = true, RatioY = 0.01, RatioX = 1.98941368078176, },
+				InnerLeft = {
+				},
+				MainSplit = {
+					RatioX = 100,
+					RatioY = 1.46983914209115,
+				},
+				CenterSplit = {
+					RatioX = 1.73522671370121,
+					RatioY = 100,
+				},
+				Viewer2 = { Show = true, RatioY = 0.01, RatioX = 0.010586319218241, },
+				Comments = { Show = false },
+				Time = { Show = true, RatioX = 100, },
+				InnerColumns = {
+					RatioX = 100,
+					RatioY = 1.53016085790884,
+				},
+				Keyframes = { Show = false, },
+				LayoutStrip = { Show = true, RatioX = 100, },
+				Inspector = { Show = true, RatioY = 1, RatioX = 100, },
+				InnerRight = {
+					RatioY = 100,
+					PixelX = 612,
+				},
+				ActionStrip = { Show = true, RatioX = 100, },
+				OuterColumns = {
+					RatioX = 100,
+					RatioY = 1,
+				},
+				Effects = { Show = false, },
+				Clips = { Show = false, },
+				Metadata = { Show = false, },
+				OuterLeft = {
+				},
+				ViewerSplit = {
+					RatioX = 100,
+					RatioY = 1,
+				},
+				Nodes = { Show = true, RatioY = 100, RatioX = 0.376938158091694, },
+				OuterRight = {
+					RatioY = 100,
+					PixelX = 341,
+				},
+				MediaPool = { Show = false, },
+				Spline = { Show = true, Adjust = false, RatioY = 100, MRU = 1, RatioX = 0.127124241552493, }
+			},
+			Views = ordered() {
+				Effects = MultiView {
+					Active = "EffectView",
+					ViewList = ordered() {
+						EffectView = "EffectView"
+					},
+				},
+				Nodes = MultiView {
+					Active = "FlowView",
+					ViewList = ordered() {
+						FlowView = "FlowView"
+					},
+					FlowView = FlowView {
+						Flags = {
+							Navigator = true,
+							AutoHideNavigator = true,
+							GridSnap = true,
+							AutoSnap = true,
+							RemoveRouters = true
+						},
+						NavigatorSize = { 200, 140 },
+						Direction = "Horizontal",
+						PipeStyle = "Direct",
+						RootScale = 0.244855,
+						RootOffset = { 1325.1, -841.331 }
+					}
+				},
+				Keyframes = MultiView {
+					Active = "TimelineView",
+					ViewList = ordered() {
+						TimelineView = "TimelineView"
+					},
+					TimelineView = TimelineView {
+						TreeControlState = {
+						},
+						DisplayMode = "All Tools",
+						ShowCurrentTimeTools = false,
+						Filter = "Show All",
+						ShowSelectedTools = false,
+						ShowAnimatedToolsOnly = false,
+						ShowEditBoxes = false,
+						KeyFrameView = {
+							Position = { Left = 232, Bottom = 320 },
+							ScaleX = 2.14424951267057,
+							OffsetX = -51.4619883040936,
+							OffsetY = 0,
+							AutoScaling = "scroll",
+							AutoSnapTo = "frame",
+							AutoSnapToGuidelines = false,
+							GuidelinesGrabEnabled = true,
+							GuidelinesSnapTo = "frame"
+						},
+						Spreadsheet = { LeftPos = 232, Visible = false }
+					}
+				},
+				Spline = MultiView {
+					Active = "SplineView",
+					ViewList = ordered() {
+						SplineView = "SplineEditorView"
+					},
+					SplineView = SplineEditorView {
+						LeftPos = 265,
+						ScaleX = 0.2,
+						ScaleY = 0.00338983050847458,
+						OffsetX = -3.4,
+						OffsetY = 0,
+						AutoScaling = "scroll",
+						AutoSnapTo = "frame",
+						AutoSnapToGuidelines = false,
+						GuidelinesSnapTo = "frame",
+						ShowKeyMarkers = false,
+						IndependentHandles = false,
+						ShowNonSplineModifiers = true,
+						GuidelinesGrabEnabled = true,
+						ShowOneToolOnly = false,
+						ShowSelectedTools = false,
+						ShowAllInputs = false,
+						Filter = "Show All"
+					}
+				},
+				Inspector = MultiView {
+					Active = "Tools",
+					ViewList = ordered() {
+						Tools = "ControlView",
+						Modifiers = "ModifierView"
+					},
+				},
+				Viewer1 = MultiView {
+					Active = "LeftView",
+					ViewList = ordered() {
+						LeftView = "PreviewContainer"
+					},
+				},
+				Viewer2 = MultiView {
+					Active = "RightView",
+					ViewList = ordered() {
+						RightView = "PreviewContainer"
+					},
+				},
+				Time = TimeView { VisibleRange = { 0, 28 } },
+				ActionStrip = "ActionStripView",
+				LayoutStrip = "LayoutStripView"
+			},
+			Layout = {
+				{ ID = "LayoutStrip", FixedY = 36, Resolve = false, Flat = true },
+				{
+					{
+						{ ID = "MediaPool", Fusion = false, RatioX = 1 },
+						{ ID = "Effects", RatioX = 1 },
+						Zone = "Left",
+						Rows = 2,
+						PaneID = "OuterLeft",
+						PixelX = 420
+					},
+					{
+						{
+							{
+								{ ID = "MediaPool", Fusion = false, RatioX = 1 },
+								{ ID = "Effects", RatioX = 1 },
+								PaneID = "InnerLeft",
+								MaxViews = 1,
+								PixelX = 420,
+								Rows = 2,
+								Zone = "!Left"
+							},
+							{
+								{
+									{ ID = "Viewer1", RatioY = 0.01, RatioX = 1 },
+									{ ID = "Viewer2", RatioX = 1 },
+									RatioY = 1,
+									Columns = 2,
+									PaneID = "ViewerSplit"
+								},
+								{ ID = "Time", FixedY = 83, Flat = true },
+								RatioX = 1,
+								Rows = 2
+							},
+							{
+								{ ID = "Inspector", RatioY = 1 },
+								{ ID = "Metadata", RatioY = 1, Fusion = false },
+								PaneID = "InnerRight",
+								MaxViews = 1,
+								PixelX = 420,
+								Rows = 2,
+								Zone = "!Right"
+							},
+							RatioY = 2,
+							Columns = 3,
+							PaneID = "InnerColumns"
+						},
+						{ ID = "ActionStrip", FixedY = 50, Flat = true },
+						{
+							{ ID = "Nodes", RatioX = 1 },
+							{ ID = "Spline", RatioX = 1 },
+							{ ID = "Keyframes", RatioX = 1 },
+							RatioY = 1,
+							Columns = 3,
+							PaneID = "MainSplit"
+						},
+						{ Fusion = false, ID = "Clips", LARGE_FixedY = 160, MEDIUM_FixedY = 138, SMALL_FixedY = 110 },
+						RatioX = 1,
+						Rows = 4,
+						PaneID = "CenterSplit"
+					},
+					{
+						{ ID = "Inspector", RatioY = 1 },
+						{ ID = "Metadata", RatioY = 1, Fusion = false },
+						Zone = "Right",
+						Rows = 2,
+						PaneID = "OuterRight",
+						PixelX = 420
+					},
+					RatioY = 1,
+					Columns = 3,
+					PaneID = "OuterColumns"
+				},
+				RatioX = 1,
+				Rows = 2,
+				RatioY = 1
+			},
+			TopBar = {
+				Left = { "Left", "MediaPool", "Effects", "Clips", "Nodes", "Console" },
+				Right = { "Spline", "Keyframes", "Metadata", "Inspector", "Right" }
+			}
+		}
+	},
+	Prefs = {
+		Comp = {
+			Memory = {
+				FramesAtOnce = 1,
+			},
+			Views = {
+				RightView = {
+					Viewer = {
+						Layer = ":Default",
+						PixelGrid = true,
+						Smooth = false
+					},
+					SideB = {
+						PrevCtrlInactiveColor = 4278255360,
+						PickW = 1,
+						PickH = 1,
+						PrevCtrlActiveColor = 4278190335,
+						Viewer = {
+							EnableLUTs = false,
+							LUTPlugin = "FusionViewLUT",
+							FitMarginY = 0,
+							FitMarginX = 0,
+							FitMarginType = 0,
+							FarZ = -1000,
+							NearZ = 0
+						}
+					},
+					Controls = {
+						SnapPixel = true,
+						SnapPixelMode = 0,
+					},
+				},
+				LeftView = {
+					Viewer = {
+						Channel = 4294967295,
+						Layer = ":Default",
+						PixelGrid = true,
+						Smooth = false,
+					},
+					SideB = {
+						PrevCtrlInactiveColor = 4278255360,
+						PickW = 1,
+						PickH = 1,
+						PrevCtrlActiveColor = 4278190335,
+						Viewer = {
+							EnableLUTs = false,
+							LUTPlugin = "FusionViewLUT",
+							FitMarginY = 0,
+							FitMarginX = 0,
+							FitMarginType = 0,
+							FarZ = -1000,
+							NearZ = 0
+						}
+					},
+					Controls = {
+						SnapPixel = true,
+						SnapPixelMode = 1,
+					},
+				},
+				View1 = {
+					PrevCtrlInactiveColor = 4278255360,
+					FullScreen = false,
+					SideB = {
+						PrevCtrlInactiveColor = 4278255360,
+						PickW = 1,
+						PickH = 1,
+						PrevCtrlActiveColor = 4278190335,
+						Viewer = {
+							EnableLUTs = false,
+							LUTPlugin = "FusionViewLUT",
+							FitMarginY = 0,
+							FitMarginX = 0,
+							FitMarginType = 0,
+							FarZ = -1000,
+							NearZ = 0
+						}
+					},
+					PickH = 1,
+					PrevCtrlActiveColor = 4278190335,
+					AlwaysOnTop = true,
+					PickW = 1
+				},
+				Defaults = {
+					View3D = {
+						Options = {
+							ShowUVTangentVectors = false
+						},
+						TextureDepth = "int8"
+					},
+					MaterialViewer = {
+						Options = {
+							TextureDepth = "int8"
+						},
+					},
+				},
+			},
+			Paths = {
+				Map = {
+				},
+			},
+			FrameFormat = {
+				Rate = 50,
+				GuideRatio = 1.77777777777778,
+				DepthFull = 2,
+				DepthPreview = 2,
+				DepthInteractive = 2,
+			},
+			LastFile = "G:\\projects_2024\\Airball\\Versions\\torches_2\\torches_2.0001.exr",
+			PolyKeyListDlg = {
+				Window = {
+					Left = 1802,
+					Top = 560
+				}
+			},
+			Unsorted = {
+				RenderSettings = {
+					Configs = {
+						Preview = {
+							StepRender = false,
+							PriorityClasses = "all",
+							ShowRenderNodes = false,
+							SizeType = 1,
+							CustomAspect = true,
+							CustomHeight = 160,
+							StepSize = 5,
+							CustomWidth = 200,
+							MotionBlur = true,
+							UpdateMode = "Some",
+							UseNetwork = false,
+							Quality = true
+						},
+						Final = {
+							StepRender = false,
+							PriorityClasses = "all",
+							ShowRenderNodes = false,
+							SizeType = 1,
+							CustomAspect = true,
+							CustomHeight = 160,
+							StepSize = 5,
+							CustomWidth = 200,
+							MotionBlur = true,
+							UpdateMode = "Some",
+							UseNetwork = false,
+							Quality = true
+						}
+					},
+					PreviewConfig = "Preview",
+					CurrentConfig = "Final"
+				}
+			},
+			SplineEditor = {
+				FollowActive = true,
+			},
+			Tweaks = {
+				GPU = {
+					Enable = 1,
+				}
+			},
+			FlowView = {
+				GridSnap = true,
+				FullToolIndicator = false
+			},
+			QuickTime = {
+			},
+		}
+	},
+}
+

@@ -1352,7 +1352,6 @@ charfx:
     rts
 
 
-
 charfx_2:
 
     cmp #2                  ; accumulator should have the value of CHARFX_ACT
@@ -1360,7 +1359,10 @@ charfx_2:
 ; calculate the coordinates the first time charfx is called,
 ; subsequently it can be skipped until next location is needed
 
-    lda CHARFX_SPR_2                  ; load xreg with sprite number*2 to calculate
+    ldx CHARFX_SPR_2
+    lda spritecolor,x
+    sta CHARFX_CLR_2
+    txa
     asl
     tax
     jsr spr_to_char
@@ -1375,9 +1377,6 @@ charfx_2:
 
     dec CHARFX_ACT_2          ; no need to recalculate coordinates for the rest of
                             ; the animation so value goes from 2 to 1
-    ldy PREV
-    lda spritecolor,y
-    sta CHARFX_CLR_2
 
 .anim:
     ldx CHARFX_FRM_2

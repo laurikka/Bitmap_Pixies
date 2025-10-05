@@ -34,7 +34,6 @@ play_call:                  ; PLAY_TABLE has address that hits one of the
     jmp (PLAY_TABLE)        ; jump-instructions in play_table
 
 play_init:
-;    clc
     lda #0
     sta PLAY_FRAME
     sta PLAY_OFFSET
@@ -91,7 +90,6 @@ play_reset_env:
     bne :+
     lda #%01000000
     sta $d404
-;    sta $d40b
     inc PLAY_ENVFRM
     jmp play_start
 :
@@ -194,12 +192,16 @@ play_sprite:
     jsr play_reset_env
     lda PLAY_ENVFRM
     bne :+
-    lda #%00011000          ; 0-3 decay, 4-7 attack
+    lda #%00001000          ; 0-3 decay, 4-7 attack
     sta $d405               ; ch 1
-    lda #%00101000          ; 0-3 release, 4-7 sustain vol
+    lda #%11101000          ; 0-3 release, 4-7 sustain vol
     sta $d406               ; ch 1
     lda #%01000001
     sta $d404
+
+    lda #4
+    sta ch1_pos
+
     lda #0
     sta PLAY_TABLE
     jsr play_reset_env
@@ -253,7 +255,6 @@ play_end:
     rts
 
 play_retrigger_off:
-;    clc
     lda #%01000000
     sta $d404
     sta $d40b
@@ -372,6 +373,11 @@ pw_update:
     sta $d402
     lda #0                  ; add carry bit
     adc ch1pwh              ; to pulse high byte
+    clc
+    cmp #$e0
+    bcc :+
+    lda #$20
+:
     sta ch1pwh
     sta $d403
 
@@ -382,6 +388,11 @@ pw_update:
     sta $d409
     lda #0
     adc ch2pwh
+    clc
+    cmp #$e0
+    bcc :+
+    lda #$20
+:
     sta ch2pwh
     sta $d40a
 
@@ -392,6 +403,11 @@ pw_update:
     sta $d410
     lda #0
     adc ch3pwh
+    clc
+    cmp #$e0
+    bcc :+
+    lda #$20
+:
     sta ch3pwh
     sta $d411
     rts
