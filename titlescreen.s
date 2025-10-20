@@ -6,7 +6,33 @@ titlescreen:
     lda #$20                ; character to fill screen
     ldy #12                 ; color to fill screen
     jsr clearscreen
+    lda #0
+    sta SPEEDX
+    lda #-1
+    sta SPEEDX+1
 
+    lda #$40                ; character to fill screen
+    ldx #$00
+:
+    lda #$43
+    sta SCREEN+0,x
+    lda #$42
+    sta SCREEN+40,x
+    lda #$41                ; character to fill screen
+    sta SCREEN+80,x
+    lda #$40                ; character to fill screen
+    sta SCREEN+120,x
+
+
+    lda #6
+    sta $d800+0,x
+    sta $d800+40,x
+    sta $d800+80,x
+    sta $d800+120,x
+    inx
+    cpx #40
+    bne :-
+:
 ;# sprite init ################################################
 
     clc
@@ -291,12 +317,31 @@ title_main:
 
 :
     ldx $D012               ; wait for specific line to
+    cpx #$a0                ; use screen control register 
+    bne :-
+
+    if DEBUG=1
+    lda #1
+    sta $d020               ; border color
+    endif
+
+    jsr bgfx
+;    jsr bgfx
+
+    if DEBUG=1
+    lda #0
+    sta $d020               ; border color
+    endif
+
+
+
+:
+    ldx $D012               ; wait for specific line to
     cpx #$f0                ; use screen control register 
     bne :-
 
     lda SCROLLER_F          ; use 
     sta $d016
-
 
 :
     ldx $D012               ; load current raster line

@@ -6,7 +6,7 @@
 
 
 gameinit:
-    lda #0
+    lda #STARTLEVEL
     sta LEVEL
 
     lda #$C8                ; reset screen control register
@@ -16,11 +16,28 @@ gameinit:
     ldy #12                 ; color to fill screen
     jsr clearscreen
 
+
+
     lda #<levels            ; indirect 16-bit adress of levels
     sta LEVELS_P            ; location is stored in two bytes
     lda #>levels            ; in zero page
     sta LEVELS_P+1
 
+    ldy #STARTLEVEL
+    beq :++
+:
+    clc
+    lda #$10                ; offset for next level
+    adc LEVELS_P            ; add to current level offset
+    sta LEVELS_P
+    lda #0                  ; possible carry add
+    adc LEVELS_P+1
+    sta LEVELS_P+1
+    dey
+    beq :+
+    bne :-
+
+:
     clc
     lda #SPRITE_MEM         ; vic-relative sprite memory
     adc #8

@@ -13,7 +13,7 @@ Compiling the game:
 Vasm needs to be compiled with CPU=6502 and SYNTAX=oldstyle.
 - The executable is compressed with Exomizer: https://bitbucket.org/magli143/exomizer/src/master/
 
-Only Vasm is strictly necessary for getting a runnable c64-program. Exomizer adds autorun but that can also be skipped by editing the COMPRESS-directive at the beginning of game.s to include basic autorun that doesn't rely on exomizer. Edit the makefile if you don't want to autorun exomizer or run the program after compiling.
+Only Vasm is strictly necessary for getting a runnable c64-program. Exomizer adds autorun but that can also be skipped by zeroing the COMPRESS-directive at the beginning of game.s to include basic autorun that doesn't rely on exomizer. Edit the makefile if you don't want to autorun exomizer or run the program after compiling.
 
 - I can recommend Denise C64 emulator: https://bitbucket.org/piciji/denise/src/master/
 - Retro Debugger is great for checking what's going on under the hood https://github.com/slajerek/RetroDebugger

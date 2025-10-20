@@ -4,6 +4,7 @@
 DEBUG        = 0            ; if 1 includes debug-related stuff
 SKIPINTRO    = 0            ; go straight to game
 COMPRESS     = 1            ; if on skip the autorun part
+STARTLEVEL   = 0
 
 ;## constants ###########################################
 SOUND        = $3000
@@ -362,12 +363,12 @@ maxspeed:                   ; check each sprite against speed limit
     lda LEVEL_F             ; check level timer
     cmp REVEALTIMER         ; compare against reveal delay
     beq :+                  ; if equals, proceed with reveal
-    bne :+++                ; otherwise skip to end
+    bne :++++                ; otherwise skip to end
 :                           ;.reveal
     ldx LEVEL_R             ; copy sprite count to x
     clc
     cpx #7
-    bcs :+
+    bcs :++
     lda #0
     sta LEVEL_F             ; zero out level timer
     inx                     ; increase revealed sprites count
@@ -376,8 +377,11 @@ maxspeed:                   ; check each sprite against speed limit
     adc $d015
     sta $d015               ; commit it back
     stx CHARFX_SPR_2
+    lda CHARFX_ACT_2
+    bne :+
     lda #2
     sta CHARFX_ACT_2
+:
     lda #12                  ; load 1 to retrigger ch1
     sta PLAY_TABLE
     
