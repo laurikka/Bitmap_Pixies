@@ -92,23 +92,13 @@ titlescreen:
     lda #%10000000
     sta $d010
 
-;## bottom text #########################################
-    ldx #79
-.textloop_bottom:
-    lda text+80,x
-    cmp #$60
-    bcc :+
-    sbc #$60
-:
-    sta SCREEN+20*40,x          ; text location with row offset
-    dex
-    bpl .textloop_bottom
+
 
 ;## high score #########################################
     clc
     ldx #39
 .textloop_score:
-    lda text+160,x
+    lda text+80,x
     cmp #$60
     bcc :+
     sbc #$60
@@ -150,7 +140,9 @@ titlescreen:
     sta $d020               ; border color
     endif
 
+    if SKIPSOUND=0
     jsr play_init           ; start intro sound
+    endif
 
 ;#######################################################
 ;## title main                                        ##
@@ -163,7 +155,9 @@ title_main:
     sta $d020               ; border color
     endif
 
+    if SKIPSOUND=0
     jsr play_intro
+    endif
 
     clc
     lda TITLE_READY
@@ -173,7 +167,7 @@ title_main:
     and #%00001111
     cmp #%00001111
     beq :+
-    jmp .start_game
+    jmp to_the_game
 :
     ldx #7    
 .coloranim
@@ -186,6 +180,71 @@ title_main:
     sta SCREEN+(18*40)+14,x
     dex                     ; decrement x
     bpl .coloranim          ; if positive, loop back
+
+
+;## tips ###############################################
+set_tips:
+    lda TIPS_COLOR
+    cmp #20
+    beq :++
+    tax
+    ldy #79
+    lda colorfade,x
+:
+    sta $d800+20*40,y
+    dey
+    bpl :-
+    inc TIPS_COLOR
+:
+    dec TIPS_TIMER
+    bne .end
+    lda TIPS_SET
+    cmp #6
+    bne :+
+    lda #<tips              ; indirect 16-bit adress of scrolltext
+    sta TIPS_OFFSET         ; location is stored in two bytes
+    lda #>tips              ; in zero page
+    sta TIPS_OFFSET+1
+    lda #0
+    sta TIPS_SET
+:
+    clc
+    ldy #79
+:                               ;.textloop_bottom:
+    lda (TIPS_OFFSET),y
+    cmp #$60
+    bcc :+
+    sbc #$60
+:
+    sta SCREEN+20*40,y          ; text location with row offset
+    dey
+    bpl :--                     ; .textloop_bottom
+
+    inc TIPS_SET
+    clc
+    lda #0
+    sta TIPS_COLOR
+    lda TIPS_OFFSET
+    adc #80
+    sta TIPS_OFFSET
+    lda #0
+    adc TIPS_OFFSET+1
+    sta TIPS_OFFSET+1
+    lda #TIPS_WAIT
+    sta TIPS_TIMER
+
+.end
+    lda TIPS_TIMER
+    cmp #13
+    bcs :++
+    ldy #79
+    ldx TIPS_TIMER
+    lda colorfade,x
+:
+    sta $d800+20*40,y
+    dey
+    bpl :-
+:
 
 ;## scroller ############################################
     lda SCROLLER_F          ; current value between 0-7
@@ -361,7 +420,7 @@ title_main:
     inc TITLE_F
     jmp title_main
 
-.start_game
+to_the_game:
     lda #0
     sta TITLE_READY
     rts

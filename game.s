@@ -4,7 +4,8 @@
 DEBUG        = 0            ; if 1 includes debug-related stuff
 SKIPINTRO    = 0            ; go straight to game
 COMPRESS     = 1            ; if on skip the autorun part
-STARTLEVEL   = 0
+SKIPSOUND    = 0            ; skip sound routines
+STARTLEVEL   = 0            ; override start level
 
 ;## constants ###########################################
 SOUND        = $3000
@@ -20,6 +21,8 @@ LEFT_LIMIT   = 5            ; limits for sprites before they wrap around
 RIGHT_LIMIT  = 90
 UP_LIMIT     = 24
 DOWN_LIMIT   = 250
+
+TIPS_WAIT    = 250
 
 ;## zero page addresses #############################################
 VAR0         = $10          ; reusable variables
@@ -71,6 +74,10 @@ CHARFX_CMEM_2= $78          ; +$37, memory pointer for charfx color
 CHARFX_CLR_2 = $7a          ; color for the effect
 CHARFX_SPR_2 = $7b          ; sprite number to calculate
 
+TIPS_TIMER   = $7c
+TIPS_OFFSET  = $7d
+TIPS_COLOR   = $7f
+TIPS_SET     = $80
 
 COLLISION    = $40          ; $40-47 bitmasks to compare collided sprites
 CARRYBIT     = $48          ; $48-57 for calculating the extra x bit
@@ -103,6 +110,17 @@ init:
     dex
     bpl :-                  ; jump to previous anonymous label
 
+    sta TIPS_SET
+    sta TIPS_COLOR
+    lda #50
+    sta TIPS_TIMER
+
+    lda #<tips              ; indirect 16-bit adress of scrolltext
+    sta TIPS_OFFSET         ; location is stored in two bytes
+    lda #>tips              ; in zero page
+    sta TIPS_OFFSET+1
+
+
     ldx #$20
 :                           ; copy to zeropage from tables
     lda to_zeropage,x
@@ -134,8 +152,10 @@ init:
     dex
     bpl :-
 
-    jsr play_init           ; init sound
 
+    if SKIPSOUND=0
+    jsr play_init           ; init sound
+    endif
 
 ;# first go to title screen ###################################
 
@@ -419,7 +439,9 @@ idlewait1:
     sta $d020               ; border color
     endif
 
+    if SKIPSOUND=0
     jsr play_call           ; init sound once a frame
+    endif
 
 
 ;## joystick read  ##################################################
@@ -695,10 +717,26 @@ invertbits      byte %11111110,%11111101,%11111011,%11110111,%11101111,%11011111
 text:
     ascii " level 000               hi-score       "
     ascii " time 000                   score 00000 "
-
-    ascii "       collect colors in order          "
-    ascii "         for maximum score              "
     ascii "          hi-scores                     "
+
+tips:
+    ascii "       collect colors in order          "
+    ascii "          for maximum score             "
+
+    ascii "     push joystick to any direction     "
+    ascii "           to start the game            "
+
+    ascii "      fire button or keyboard is        "
+    ascii "       not needed in this game          "
+
+    ascii "      start collecting the pixies       "
+    ascii "      immediately as level starts       "
+
+    ascii "        border color shows the          "
+    ascii "        next color  to collect          "
+
+    ascii "        correct sequence gives          "
+    ascii "          bigger time bonus             "
 
 feedback:
     ascii "level up"
@@ -749,6 +787,9 @@ posbuffer:  ; used to store previous positions of hero sprite
 
 highscore:
     blk 20,$30              ; 4 rows of 5 zeroes
+
+colorfade:  ; fade text in and out
+    byte 0,0,0,0,0,0,0,0,0,11,11,12,12,15,15,1,1,15,15,12
 
 posx:   ; sprite position divided by 4 mapped to character pos in 40x25 grid
     byte 36, 36, 36, 36, 36, 36, 36, 37, 37, 38, 38, 39, 39, 0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19, 20, 20, 21, 21, 22, 22, 23, 23, 24, 24, 25, 25, 26, 26, 27, 27, 28, 28, 29, 29, 30, 30, 31, 31, 32, 32, 33, 33, 34, 34, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35

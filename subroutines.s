@@ -286,8 +286,12 @@ set_level:
     sta PLAY_OFFSET
     lda #6
     sta PLAY_DELAY
+
+    if SKIPSOUND=0
     jsr play_reset          ; to reset sound envelopes
     jsr play_start_init
+    endif
+    
     rts
 
 ;## move pixies ##########################
@@ -745,7 +749,11 @@ freeze:
     bne :-                  ; wait until true
     sty VAR0                ; save y to temp var
     jsr bgfx                ; continue bgfx during freeze
-    jsr play_call           ; keep playing sound
+
+    if SKIPSOUND=0
+    jsr play_call           ; init sound once a frame
+    endif
+
     jsr sprite_animation    ; keep updating sprites
     lda CHARFX_ACT          ; if charfx is not zero, jump to subroutine
     beq :+
@@ -915,7 +923,9 @@ feedback_clear:
     dex
     bpl :-
 
+    if SKIPSOUND=0
     jsr play_retrigger_off
+    endif
 
     rts
 
