@@ -954,82 +954,82 @@ game_over:
 ;compare_scores
 ;## round 1 #########################################################
     clc
-    lda highscore+10    ;14
-    cmp highscore+15    ;20
+    lda highscore+10
+    cmp highscore+15
     bcc :+
     bne :++
-    lda highscore+11    ;14
-    cmp highscore+16    ;20
+    lda highscore+11
+    cmp highscore+16
     bcc :+
     bne :++
-    lda highscore+12    ;15
-    cmp highscore+17    ;21
+    lda highscore+12
+    cmp highscore+17
     bcc :+
     bne :++
-    lda highscore+13    ;16
-    cmp highscore+18    ;22
+    lda highscore+13
+    cmp highscore+18
     bcc :+
     bne :++
-    lda highscore+14    ;17
-    cmp highscore+19    ;23
+    lda highscore+14
+    cmp highscore+19
     bcs :++
 :
-    lda highscore+15    ;20
-    sta highscore+10    ;14
-    lda highscore+16    ;20
-    sta highscore+11    ;14
-    lda highscore+17    ;21
-    sta highscore+12    ;15
-    lda highscore+18    ;22
-    sta highscore+13    ;16
-    lda highscore+19    ;23
-    sta highscore+14    ;17
+    lda highscore+15
+    sta highscore+10
+    lda highscore+16
+    sta highscore+11
+    lda highscore+17
+    sta highscore+12
+    lda highscore+18
+    sta highscore+13
+    lda highscore+19
+    sta highscore+14
 :;## round 2 ########################################################
     clc
-    lda highscore+5     ;8
-    cmp highscore+10     ;14
+    lda highscore+5 
+    cmp highscore+10
     bcc :+
     bne :++
-    lda highscore+6     ;8
-    cmp highscore+11     ;14
+    lda highscore+6 
+    cmp highscore+11
     bcc :+
     bne :++
-    lda highscore+7     ;9
-    cmp highscore+12     ;15
+    lda highscore+7 
+    cmp highscore+12
     bcc :+
     bne :++
-    lda highscore+8     ;10
-    cmp highscore+13     ;16
+    lda highscore+8 
+    cmp highscore+13
     bcc :+
     bne :++
-    lda highscore+9     ;11
-    cmp highscore+14     ;17
+    lda highscore+9 
+    cmp highscore+14
     bcs :++
 :
-    ldy highscore+5     ;8
-    lda highscore+10     ;14
-    sta highscore+5     ;8
-    sty highscore+10     ;14
+    ldy highscore+5 
+    lda highscore+10
+    sta highscore+5 
+    sty highscore+10
 
-    ldy highscore+6     ;8
-    lda highscore+11     ;14
-    sta highscore+6     ;8
-    sty highscore+11     ;14
+    ldy highscore+6 
+    lda highscore+11
+    sta highscore+6 
+    sty highscore+11
 
-    ldy highscore+7     ;9
-    lda highscore+12     ;15
-    sta highscore+7     ;9
-    sty highscore+12     ;15
+    ldy highscore+7 
+    lda highscore+12
+    sta highscore+7 
+    sty highscore+12
 
-    ldy highscore+8     ;10
-    lda highscore+13     ;16
-    sta highscore+8     ;10
-    sty highscore+13     ;16
+    ldy highscore+8 
+    lda highscore+13
+    sta highscore+8 
+    sty highscore+13
 
-    ldy highscore+9     ;11
-    lda highscore+14     ;17
-    sta highscore+9     ;11
-    sty highscore+14     ;17
+    ldy highscore+9 
+    lda highscore+14
+    sta highscore+9 
+    sty highscore+14
 :
 :;## round 3 ########################################################
     clc

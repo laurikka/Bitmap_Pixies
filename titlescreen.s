@@ -169,6 +169,12 @@ title_main:
     beq :+
     jmp to_the_game
 :
+    lda $dc01               ; read port A joystick 2 bits
+    and #%00001111
+    cmp #%00001111
+    beq :+
+    jmp to_the_game
+:
     ldx #7    
 .coloranim
     inc SCREEN+(18*40)+14,x

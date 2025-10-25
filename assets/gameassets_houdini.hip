@@ -19,17 +19,20 @@ Content-Disposition: attachment; filename=".variables"
 Content-Type: text/plain
 
 set -g ACTIVETAKE = 'Main'
+set -g DRIVER = 'shell1'
+set -g DRIVERPATH = '/out/csv_exporter_levels/shell1'
 set -g E = '2.7182818284590452354'
 set -g EYE = 'stereo'
 set -g HIP = '/home/laurikka/Documents/Bitmap_Pixies/assets'
-set -g HIPFILE = '/home/laurikka/Documents/Bitmap_Pixies/assets/gameassets.hip'
-set -g HIPNAME = 'gameassets'
-set -g JOB = '/mnt/wdblack/projects_2025/c64game'
+set -g HIPFILE = '/home/laurikka/Documents/Bitmap_Pixies/assets/gameassets_houdini.hip'
+set -g HIPNAME = 'gameassets_houdini'
+set -g JOB = '/home/laurikka/Documents/Bitmap_Pixies/assets'
 set -g PI = '3.1415926535897932384'
 set -g POSE = 'C:/Users/Laurikka/Documents/houdini21.0/poselib'
 set -g _HIP_SAVEPLATFORM = 'linux-x86_64-gcc11.2'
-set -g _HIP_SAVETIME = 'Sun Oct  5 11:35:29 2025'
-set -g _HIP_SAVEVERSION = '21.0.440'
+set -g _HIP_SAVETIME = 'Sat Oct 25 19:16:31 2025'
+set -g _HIP_SAVEVERSION = '21.0.512'
+set -g _HIP_SHELFTOOLCOUNT = '1'
 set -g status = '0'
 
 --HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
@@ -74,29 +77,31 @@ Sop/circle $HOUDINI_USER_PREF_DIR/otls/OPcustom.hda
 Content-Disposition: attachment; filename=".OPfallbacks"
 Content-Type: text/plain
 
-Sop/attribdelete /opt/hfs21.0.440/houdini/otls/OPlibSop.hda
+Sop/attribdelete /opt/hfs21.0.512/houdini/otls/OPlibSop.hda
 Sop/attribdelete otls/OPlibSop.hda
-Sop/attribwrangle /opt/hfs21.0.440/houdini/otls/OPlibSop.hda
+Sop/attribwrangle /opt/hfs21.0.512/houdini/otls/OPlibSop.hda
 Sop/attribwrangle otls/OPlibSop.hda
-Vop/distance /opt/hfs21.0.440/houdini/otls/OPlibScripted.hda
+Vop/distance /opt/hfs21.0.512/houdini/otls/OPlibScripted.hda
 Vop/distance otls/OPlibScripted.hda
-Vop/fit /opt/hfs21.0.440/houdini/otls/OPlibScripted.hda
+Vop/fit /opt/hfs21.0.512/houdini/otls/OPlibScripted.hda
 Vop/fit otls/OPlibScripted.hda
-Vop/floattoint /opt/hfs21.0.440/houdini/otls/OPlibScripted.hda
+Vop/floattoint /opt/hfs21.0.512/houdini/otls/OPlibScripted.hda
 Vop/floattoint otls/OPlibScripted.hda
-Vop/floor /opt/hfs21.0.440/houdini/otls/OPlibScripted.hda
+Vop/floor /opt/hfs21.0.512/houdini/otls/OPlibScripted.hda
 Vop/floor otls/OPlibScripted.hda
-Vop/geometryvopglobal::2.0 /opt/hfs21.0.440/houdini/otls/OPlibVop.hda
+Vop/geometryvopglobal::2.0 /opt/hfs21.0.512/houdini/otls/OPlibVop.hda
 Vop/geometryvopglobal::2.0 otls/OPlibVop.hda
-Vop/geometryvopoutput /opt/hfs21.0.440/houdini/otls/OPlibVop.hda
+Vop/geometryvopoutput /opt/hfs21.0.512/houdini/otls/OPlibVop.hda
 Vop/geometryvopoutput otls/OPlibVop.hda
-Vop/getattrib::2.0 /opt/hfs21.0.440/houdini/otls/OPlibScripted.hda
+Vop/getattrib::2.0 /opt/hfs21.0.512/houdini/otls/OPlibScripted.hda
 Vop/getattrib::2.0 otls/OPlibScripted.hda
-Vop/nearpoint /opt/hfs21.0.440/houdini/otls/OPlibScripted.hda
+labs::Driver/csv_exporter /opt/sidefx/sidefx_packages/SideFXLabs21.0/otls/SideFX_Labs.hda
+labs::Driver/csv_exporter otls/SideFX_Labs.hda
+Vop/nearpoint /opt/hfs21.0.512/houdini/otls/OPlibScripted.hda
 Vop/nearpoint otls/OPlibScripted.hda
-Sop/solver /opt/hfs21.0.440/houdini/otls/OPlibSop.hda
+Sop/solver /opt/hfs21.0.512/houdini/otls/OPlibSop.hda
 Sop/solver otls/OPlibSop.hda
-Vop/xyzdist /opt/hfs21.0.440/houdini/otls/OPlibScripted.hda
+Vop/xyzdist /opt/hfs21.0.512/houdini/otls/OPlibScripted.hda
 Vop/xyzdist otls/OPlibScripted.hda
 
 --HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
@@ -104,30 +109,30 @@ Content-Disposition: attachment; filename=".OPdummydefs"
 Content-Type: application/octet-stream
 Content-Transfer-Encoding: base64
 
-SU5EWAAAAAAAAAAAAAAADwAAAA1JTkRFWF9TRUNUSU9OAAAAAAAACUdo4i3RAAAAEmhvdWRpbmkuaGRhbGlicmFyeQAACUcAAAAAaOIt0QAAABBTb3AvYXR0cmliZGVsZXRlAAAJRwAADMdo4f9xAAAAEVNvcC9hdHRyaWJ3cmE=
-bmdsZQAAFg4AACDwaOH/cQAAAAxWb3AvZGlzdGFuY2UAADb+AAAEGWjh/3EAAAAHVm9wL2ZpdAAAOxcAABGFaOH/cQAAAA5Wb3AvZmxvYXR0b2ludAAATJwAAAJWaOH/cQAAAAlWb3AvZmxvb3IAAE7yAAAHEWjh/3EAAAAaVm8=
-cC9nZW9tZXRyeXZvcGdsb2JhbDo6Mi4wAABWAwAAByBo4f9xAAAAFVZvcC9nZW9tZXRyeXZvcG91dHB1dAAAXSMAAAK9aOH/cQAAABJWb3AvZ2V0YXR0cmliOjoyLjAAAF/gAAANmGjh/3EAAAAZbGFiczo6RHJpdmVyL2Nzdl8=
-ZXhwb3J0ZXIAAG14AAAOrmjh/3EAAAANVm9wL25lYXJwb2ludAAAfCYAAALHaOH/cQAAAApTb3Avc29sdmVyAAB+7QAACDto4f9xAAAAC1ZvcC94eXpkaXN0AACHKAAABC9o4f9xAAAADQAAAAQAAAAMYXR0cmliZGVsZXRlAAA=
-ABBBdHRyaWJ1dGUgRGVsZXRlAAAAKG9wbGliOi9Tb3AvYXR0cmliZGVsZXRlP1NvcC9hdHRyaWJkZWxldGUAAAAQU09QX2F0dHJpYmRlbGV0ZQAAAAAAAAAAAAAAA1NvcAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAmjiLdEBAQA=
+SU5EWAAAAAAAAAAAAAAADwAAAA1JTkRFWF9TRUNUSU9OAAAAAAAACUdo/PffAAAAEmhvdWRpbmkuaGRhbGlicmFyeQAACUcAAAAAaPz33wAAABBTb3AvYXR0cmliZGVsZXRlAAAJRwAADMdo/PeEAAAAEVNvcC9hdHRyaWJ3cmE=
+bmdsZQAAFg4AACDwaPz3hAAAAAxWb3AvZGlzdGFuY2UAADb+AAAEGWj894QAAAAHVm9wL2ZpdAAAOxcAABGFaPz3hAAAAA5Wb3AvZmxvYXR0b2ludAAATJwAAAJWaPz3hAAAAAlWb3AvZmxvb3IAAE7yAAAHEWj894QAAAAaVm8=
+cC9nZW9tZXRyeXZvcGdsb2JhbDo6Mi4wAABWAwAAByBo/PeEAAAAFVZvcC9nZW9tZXRyeXZvcG91dHB1dAAAXSMAAAK9aPz3hAAAABJWb3AvZ2V0YXR0cmliOjoyLjAAAF/gAAANmGj894QAAAAZbGFiczo6RHJpdmVyL2Nzdl8=
+ZXhwb3J0ZXIAAG14AAAOrmj894QAAAANVm9wL25lYXJwb2ludAAAfCYAAALHaPz3hAAAAApTb3Avc29sdmVyAAB+7QAACDto/PeEAAAAC1ZvcC94eXpkaXN0AACHKAAABC9o/PeEAAAADQAAAAQAAAAMYXR0cmliZGVsZXRlAAA=
+ABBBdHRyaWJ1dGUgRGVsZXRlAAAAKG9wbGliOi9Tb3AvYXR0cmliZGVsZXRlP1NvcC9hdHRyaWJkZWxldGUAAAAQU09QX2F0dHJpYmRlbGV0ZQAAAAAAAAAAAAAAA1NvcAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAmj8998BAQA=
 AAAABAAAAA1hdHRyaWJ3cmFuZ2xlAAAAEUF0dHJpYnV0ZSBXcmFuZ2xlAAAAKm9wbGliOi9Tb3AvYXR0cmlid3JhbmdsZT9Tb3AvYXR0cmlid3JhbmdsZQAAABFTT1BfYXR0cmlid3JhbmdsZQAAAAAAAAAAAAAAA1NvcAAAAAA=
 AAAAAAAAAAAAAADIaW5wdXRjb2xvcnM9JzQgIlJHQiAwLjcwMDE5NSAwLjcwMDE5NSAwLjcwMDE5NSIgIlJHQiAwLjcwMDE5NSAwLjcwMDE5NSAwLjcwMDE5NSIgIlJHQiAwLjcwMDE5NSAwLjcwMDE5NSAwLjcwMDE5NSIgIlI=
-R0IgMC43MDAxOTUgMC43MDAxOTUgMC43MDAxOTUiICcgb3V0cHV0Y29sb3JzPScxICJSR0IgMC43MDAxOTUgMC43MDAxOTUgMC43MDAxOTUiICcgAAAAAAAAAARo4i3RAQEAAAAABAAAAAhkaXN0YW5jZQAAAAhEaXN0YW5jZQA=
-AAAgb3BsaWI6L1ZvcC9kaXN0YW5jZT9Wb3AvZGlzdGFuY2UAAAAMVk9QX2Rpc3RhbmNlAAAAAAAAAAAAAAADVm9wAAAAA3ZvcAAAAAZWT1BhbGwAAAAAAAAAASoAAAAAAAAAAGjiLdEAAQAAAAAEAAAAA2ZpdAAAAAlGaXQgUmE=
-bmdlAAAAFm9wbGliOi9Wb3AvZml0P1ZvcC9maXQAAAAHVk9QX2ZpdAAAAAAAAAAAAAAAA1ZvcAAAAAN2b3AAAAAGVk9QYWxsAAAAAAAAAAEqAAAAAAAAAABo4i3RAAEAAAAABAAAAApmbG9hdHRvaW50AAAAEEZsb2F0IHRvIEk=
-bnRlZ2VyAAAAJG9wbGliOi9Wb3AvZmxvYXR0b2ludD9Wb3AvZmxvYXR0b2ludAAAAA5WT1BfZmxvYXR0b2ludAAAAAAAAAAAAAAAA1ZvcAAAAAN2b3AAAAAGVk9QYWxsAAAAAAAAAAAAAAAAAAAAAGjiLdEAAQAAAAAEAAAABWY=
-bG9vcgAAAAVGbG9vcgAAABpvcGxpYjovVm9wL2Zsb29yP1ZvcC9mbG9vcgAAAAlWT1BfZmxvb3IAAAAAAAAAAAAAAANWb3AAAAADdm9wAAAABlZPUGFsbAAAAAAAAAABKgAAAAAAAAAAaOIt0QABAAAAAAQAAAAWZ2VvbWV0cnk=
+R0IgMC43MDAxOTUgMC43MDAxOTUgMC43MDAxOTUiICcgb3V0cHV0Y29sb3JzPScxICJSR0IgMC43MDAxOTUgMC43MDAxOTUgMC43MDAxOTUiICcgAAAAAAAAAARo/PffAQEAAAAABAAAAAhkaXN0YW5jZQAAAAhEaXN0YW5jZQA=
+AAAgb3BsaWI6L1ZvcC9kaXN0YW5jZT9Wb3AvZGlzdGFuY2UAAAAMVk9QX2Rpc3RhbmNlAAAAAAAAAAAAAAADVm9wAAAAA3ZvcAAAAAZWT1BhbGwAAAAAAAAAASoAAAAAAAAAAGj8998AAQAAAAAEAAAAA2ZpdAAAAAlGaXQgUmE=
+bmdlAAAAFm9wbGliOi9Wb3AvZml0P1ZvcC9maXQAAAAHVk9QX2ZpdAAAAAAAAAAAAAAAA1ZvcAAAAAN2b3AAAAAGVk9QYWxsAAAAAAAAAAEqAAAAAAAAAABo/PffAAEAAAAABAAAAApmbG9hdHRvaW50AAAAEEZsb2F0IHRvIEk=
+bnRlZ2VyAAAAJG9wbGliOi9Wb3AvZmxvYXR0b2ludD9Wb3AvZmxvYXR0b2ludAAAAA5WT1BfZmxvYXR0b2ludAAAAAAAAAAAAAAAA1ZvcAAAAAN2b3AAAAAGVk9QYWxsAAAAAAAAAAAAAAAAAAAAAGj8998AAQAAAAAEAAAABWY=
+bG9vcgAAAAVGbG9vcgAAABpvcGxpYjovVm9wL2Zsb29yP1ZvcC9mbG9vcgAAAAlWT1BfZmxvb3IAAAAAAAAAAAAAAANWb3AAAAADdm9wAAAABlZPUGFsbAAAAAAAAAABKgAAAAAAAAAAaPz33wABAAAAAAQAAAAWZ2VvbWV0cnk=
 dm9wZ2xvYmFsOjoyLjAAAAAeR2VvbWV0cnkgVk9QIEdsb2JhbCBQYXJhbWV0ZXJzAAAAPG9wbGliOi9Wb3AvZ2VvbWV0cnl2b3BnbG9iYWw6OjIuMD9Wb3AvZ2VvbWV0cnl2b3BnbG9iYWw6OjIuMAAAABVWT1BfZ2VvbWV0cnk=
-dm9wZ2xvYmFsAAAAAAAAAAAAAAADVm9wAAAAAAAAAAAAAAAAAAAABGN2ZXgAAAAAAAAAAGjiLdEBAQAAAAAEAAAAEWdlb21ldHJ5dm9wb3V0cHV0AAAAE0dlb21ldHJ5IFZPUCBPdXRwdXQAAAAyb3BsaWI6L1ZvcC9nZW9tZXQ=
-cnl2b3BvdXRwdXQ/Vm9wL2dlb21ldHJ5dm9wb3V0cHV0AAAAGVZPUF9nZW9tZXRyeXZvcG91dHB1dC5vdGwAAAAAAAAAAAAAAANWb3AAAAAAAAAAAAAAAAAAAAAEY3ZleAAAAAAAAAAFaOIt0QEBAAAAAAQAAAAOZ2V0YXR0cmk=
+dm9wZ2xvYmFsAAAAAAAAAAAAAAADVm9wAAAAAAAAAAAAAAAAAAAABGN2ZXgAAAAAAAAAAGj8998BAQAAAAAEAAAAEWdlb21ldHJ5dm9wb3V0cHV0AAAAE0dlb21ldHJ5IFZPUCBPdXRwdXQAAAAyb3BsaWI6L1ZvcC9nZW9tZXQ=
+cnl2b3BvdXRwdXQ/Vm9wL2dlb21ldHJ5dm9wb3V0cHV0AAAAGVZPUF9nZW9tZXRyeXZvcG91dHB1dC5vdGwAAAAAAAAAAAAAAANWb3AAAAAAAAAAAAAAAAAAAAAEY3ZleAAAAAAAAAAFaPz33wEBAAAAAAQAAAAOZ2V0YXR0cmk=
 Yjo6Mi4wAAAADUdldCBBdHRyaWJ1dGUAAAAsb3BsaWI6L1ZvcC9nZXRhdHRyaWI6OjIuMD9Wb3AvZ2V0YXR0cmliOjoyLjAAAAARVk9QX2dldGF0dHJpYi0yLjAAAAAAAAAAAAAAAANWb3AAAAADdm9wAAAABlZPUGFsbAAAAAA=
-AAAAAAAAAAAAAAAAaOIt0QABAAAAAAQAAAASbGFiczo6Y3N2X2V4cG9ydGVyAAAAEUxhYnMgQ1NWIEV4cG9ydGVyAAAAOm9wbGliOi9sYWJzOjpEcml2ZXIvY3N2X2V4cG9ydGVyP2xhYnM6OkRyaXZlci9jc3ZfZXhwb3J0ZXI=
-AAAAKG9wZGVmOi9sYWJzOjpEcml2ZXIvY3N2X2V4cG9ydGVyP0ljb25TVkcAAAAAAAAAAAAAAAZEcml2ZXIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABo4i3RAQEAAAAABAAAAAluZWFycG9pbnQAAAAKTmVhciBQb2ludAAAACI=
-b3BsaWI6L1ZvcC9uZWFycG9pbnQ/Vm9wL25lYXJwb2ludAAAAA1WT1BfbmVhcnBvaW50AAAAAAAAAAAAAAADVm9wAAAAA3ZvcAAAAAZWT1BhbGwAAAAAAAAAAAAAAAAAAAAAaOIt0QABAAAAAAQAAAAGc29sdmVyAAAABlNvbHY=
+AAAAAAAAAAAAAAAAaPz33wABAAAAAAQAAAASbGFiczo6Y3N2X2V4cG9ydGVyAAAAEUxhYnMgQ1NWIEV4cG9ydGVyAAAAOm9wbGliOi9sYWJzOjpEcml2ZXIvY3N2X2V4cG9ydGVyP2xhYnM6OkRyaXZlci9jc3ZfZXhwb3J0ZXI=
+AAAAKG9wZGVmOi9sYWJzOjpEcml2ZXIvY3N2X2V4cG9ydGVyP0ljb25TVkcAAAAAAAAAAAAAAAZEcml2ZXIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABo/PffAQEAAAAABAAAAAluZWFycG9pbnQAAAAKTmVhciBQb2ludAAAACI=
+b3BsaWI6L1ZvcC9uZWFycG9pbnQ/Vm9wL25lYXJwb2ludAAAAA1WT1BfbmVhcnBvaW50AAAAAAAAAAAAAAADVm9wAAAAA3ZvcAAAAAZWT1BhbGwAAAAAAAAAAAAAAAAAAAAAaPz33wABAAAAAAQAAAAGc29sdmVyAAAABlNvbHY=
 ZXIAAAAcb3BsaWI6L1NvcC9zb2x2ZXI/U29wL3NvbHZlcgAAAApTT1Bfc29sdmVyAAAAAAAAAAAAAAADU29wAAAAAAAAAAAAAAAAAAAAyGlucHV0Y29sb3JzPSc0ICJSR0IgMC43MDAxOTUgMC43MDAxOTUgMC43MDAxOTUiICI=
 UkdCIDAuNzAwMTk1IDAuNzAwMTk1IDAuNzAwMTk1IiAiUkdCIDAuNzAwMTk1IDAuNzAwMTk1IDAuNzAwMTk1IiAiUkdCIDAuNzAwMTk1IDAuNzAwMTk1IDAuNzAwMTk1IiAnIG91dHB1dGNvbG9ycz0nMSAiUkdCIDAuNzAwMTk=
-NSAwLjcwMDE5NSAwLjcwMDE5NSIgJyAAAAAAAAAABGjiLdEBAQAAAAAEAAAAB3h5emRpc3QAAAAMWFlaIERpc3RhbmNlAAAAHm9wbGliOi9Wb3AveHl6ZGlzdD9Wb3AveHl6ZGlzdAAAAAtWT1BfeHl6ZGlzdAAAAAAAAAAAAAA=
-AANWb3AAAAADdm9wAAAABlZPUGFsbAAAAAAAAAAAAAAAAAAAAABo4i3RAAEASU5EWAAAAAAAAAAAAAAAAgAAAAhDb250ZW50cwAAAAAAAABXaOH/cQAAAAxEaWFsb2dTY3JpcHQAAABXAAAMLGibmUYwNzA3MDcwMDAwMDEwMDA=
-MDAwMDAwNjY2MDAwMDAwMDAwMDAwMDAwMDAxMDAwMDAwMTUwNzAzNzc1NjEwMDAwMTMwMDAwMDAwMDAwMFRSQUlMRVIhISEAIyBEaWFsb2cgc2NyaXB0IGZvciBhdHRyaWJkZWxldGUgYXV0b21hdGljYWxseSBnZW5lcmF0ZWQ=
+NSAwLjcwMDE5NSAwLjcwMDE5NSIgJyAAAAAAAAAABGj8998BAQAAAAAEAAAAB3h5emRpc3QAAAAMWFlaIERpc3RhbmNlAAAAHm9wbGliOi9Wb3AveHl6ZGlzdD9Wb3AveHl6ZGlzdAAAAAtWT1BfeHl6ZGlzdAAAAAAAAAAAAAA=
+AANWb3AAAAADdm9wAAAABlZPUGFsbAAAAAAAAAAAAAAAAAAAAABo/PffAAEASU5EWAAAAAAAAAAAAAAAAgAAAAhDb250ZW50cwAAAAAAAABXaPz3hAAAAAxEaWFsb2dTY3JpcHQAAABXAAAMLGiS2RUwNzA3MDcwMDAwMDEwMDA=
+MDAwMDAwNjY2MDAwMDAwMDAwMDAwMDAwMDAxMDAwMDAwMTUwNzcxNzM2MDQwMDAwMTMwMDAwMDAwMDAwMFRSQUlMRVIhISEAIyBEaWFsb2cgc2NyaXB0IGZvciBhdHRyaWJkZWxldGUgYXV0b21hdGljYWxseSBnZW5lcmF0ZWQ=
 Cgp7CiAgICBuYW1lCWF0dHJpYmRlbGV0ZQogICAgc2NyaXB0CWF0dHJpYmRlbGV0ZQogICAgbGFiZWwJIkF0dHJpYnV0ZSBEZWxldGUiCgogICAgaGVscCB7CgkiIgogICAgfQoKICAgIGlucHV0bGFiZWwJMQkiR2VvbWV0cnk=
 IHRvIFJlbW92ZSBBdHRyaWJ1dGVzIGZyb20iCiAgICBpbnB1dGxhYmVsCTIJIlJlZmVyZW5jZSBHZW9tZXRyeSIKICAgIHBhcm10YWcgeyBpbnB1dGlzcmVmMiAxIH0KICAgIGlucHV0bGFiZWwJMwkiU3ViLU5ldHdvcmsgSW4=
 cHV0ICMzIgogICAgaW5wdXRsYWJlbAk0CSJTdWItTmV0d29yayBJbnB1dCAjNCIKCiAgICBwYXJtIHsKICAgICAgICBuYW1lICAgICJ1c2VyZWZlcmVuY2UiCiAgICAgICAgbGFiZWwgICAiUHJlcGVuZCB3aXRoIEF0dHJpYnU=
@@ -152,7 +157,7 @@ bGRlbCIKICAgICAgICBsYWJlbCAgICJEZXRhaWwgQXR0cmlidXRlcyIKICAgICAgICB0eXBlICAgIHN0
 ICAgICAgICBtZW51dG9nZ2xlIHsKICAgICAgICAgICAgWyAib3BtZW51IC1sIC1hIGF0dHJpYnV0ZTEgZHRsZGVsIiBdCiAgICAgICAgfQogICAgICAgIHJhbmdlICAgeyAwIDEgfQogICAgICAgIHBhcm10YWcgeyAiYXV0b3M=
 Y29wZSIgIjAwMDAwMDAwMDAwMDAwMDAiIH0KICAgIH0KICAgIHBhcm0gewogICAgICAgIG5hbWUgICAgInVwZGF0ZXZhciIKICAgICAgICBsYWJlbCAgICJVcGRhdGUgTG9jYWwgVmFyaWFibGVzIgogICAgICAgIHR5cGUgICA=
 IHRvZ2dsZQogICAgICAgIGRlZmF1bHQgeyAib24iIH0KICAgICAgICByYW5nZSAgIHsgMCAxIH0KICAgICAgICBwYXJtdGFnIHsgImF1dG9zY29wZSIgIjAwMDAwMDAwMDAwMDAwMDAiIH0KICAgIH0KfQpJTkRYAAAAAAAAAAA=
-AAAAAgAAAAhDb250ZW50cwAAAAAAAABXaOH/cQAAAAxEaWFsb2dTY3JpcHQAAABXAAAgVWibmUYwNzA3MDcwMDAwMDEwMDAwMDAwMDA2NjYwMDAwMDAwMDAwMDAwMDAwMDEwMDAwMDAxNTA3MDM3NzU2MTAwMDAxMzAwMDAwMDA=
+AAAAAgAAAAhDb250ZW50cwAAAAAAAABXaPz3hAAAAAxEaWFsb2dTY3JpcHQAAABXAAAgVWiS2RUwNzA3MDcwMDAwMDEwMDAwMDAwMDA2NjYwMDAwMDAwMDAwMDAwMDAwMDEwMDAwMDAxNTA3NzE3MzYwNDAwMDAxMzAwMDAwMDA=
 MDAwMFRSQUlMRVIhISEAIyBEaWFsb2cgc2NyaXB0IGZvciBhdHRyaWJ3cmFuZ2xlIGF1dG9tYXRpY2FsbHkgZ2VuZXJhdGVkCgp7CiAgICBuYW1lCWF0dHJpYndyYW5nbGUKICAgIHNjcmlwdAlhdHRyaWJ3cmFuZ2xlCiAgICA=
 bGFiZWwJIkF0dHJpYnV0ZSBXcmFuZ2xlIgoKICAgIGhlbHAgewoJIiIKICAgIH0KCiAgICBpbnB1dGxhYmVsCTEJIkdlb21ldHJ5IHRvIFByb2Nlc3Mgd2l0aCBXcmFuZ2xlIgogICAgaW5wdXRsYWJlbAkyCSJBbmNpbGxhcnk=
 IElucHV0LCBwb2ludCgxLCAuLi4pIHRvIEFjY2VzcyIKICAgIGlucHV0bGFiZWwJMwkiQW5jaWxsYXJ5IElucHV0LCBwb2ludCgyLCAuLi4pIHRvIEFjY2VzcyIKICAgIGlucHV0bGFiZWwJNAkiQW5jaWxsYXJ5IElucHV0LCA=
@@ -218,7 +223,7 @@ ZWxlY3Rpb24gR3JvdXAiCiAgICAgICAgICAgIHR5cGUgICAgc3RyaW5nCiAgICAgICAgICAgIGRlZmF1
 ICAgICB9CiAgICAgICAgcGFybSB7CiAgICAgICAgICAgIG5hbWUgICAgInZleF9wcmVjaXNpb24iCiAgICAgICAgICAgIGxhYmVsICAgIlZFWCBQcmVjaXNpb24iCiAgICAgICAgICAgIHR5cGUgICAgc3RyaW5nCiAgICAgICA=
 ICAgICBkZWZhdWx0IHsgImF1dG8iIH0KICAgICAgICAgICAgbWVudSB7CiAgICAgICAgICAgICAgICAiYXV0byIgICJBdXRvIgogICAgICAgICAgICAgICAgIjMyIiAgICAiMzItYml0IgogICAgICAgICAgICAgICAgIjY0IiA=
 ICAgIjY0LWJpdCIKICAgICAgICAgICAgfQogICAgICAgICAgICBwYXJtdGFnIHsgImF1dG9zY29wZSIgIjAwMDAwMDAwMDAwMDAwMDAiIH0KICAgICAgICB9CiAgICB9Cgp9CklORFgAAAAAAAAAAAAAAAEAAAAMRGlhbG9nU2M=
-cmlwdAAAAAAAAAPtaJuZUS8qCiAqIFBST1BSSUVUQVJZIElORk9STUFUSU9OLiAgVGhpcyBzb2Z0d2FyZSBpcyBwcm9wcmlldGFyeSB0bwogKiBTaWRlIEVmZmVjdHMgU29mdHdhcmUgSW5jLiwgYW5kIGlzIG5vdCB0byBiZSA=
+cmlwdAAAAAAAAAPtaJLZHS8qCiAqIFBST1BSSUVUQVJZIElORk9STUFUSU9OLiAgVGhpcyBzb2Z0d2FyZSBpcyBwcm9wcmlldGFyeSB0bwogKiBTaWRlIEVmZmVjdHMgU29mdHdhcmUgSW5jLiwgYW5kIGlzIG5vdCB0byBiZSA=
 cmVwcm9kdWNlZCwKICogdHJhbnNtaXR0ZWQsIG9yIGRpc2Nsb3NlZCBpbiBhbnkgd2F5IHdpdGhvdXQgd3JpdHRlbiBwZXJtaXNzaW9uLgogKgogKiBQcm9kdWNlZCBieToKICoJU2lkZSBFZmZlY3RzIFNvZnR3YXJlIEluYwo=
 ICoJNDc3IFJpY2htb25kIFN0cmVldCBXZXN0CiAqCVRvcm9udG8sIE9udGFyaW8KICoJQ2FuYWRhICAgTTVWIDNFNwogKgk0MTYtNTA0LTk4NzYKICoKICovCgojaW5jbHVkZSA8cGFyYW1ldGVyLmRzPgoKewogICAgbmFtZQk=
 ImRpc3RhbmNlIgogICAgc2NyaXB0CSJkaXN0YW5jZSIKICAgIGxhYmVsCSJkaXN0YW5jZSIKCgogICAgY29kZSB7CgkiJGRpc3QgPSBkaXN0YW5jZSgkcDEsICRwMik7IgogICAgfQoKICAgIGlucHV0CXBvaW50CXAxCSJQb2k=
@@ -226,7 +231,7 @@ bnQgMSIKICAgIGlucHV0CXBvaW50CXAyCSJQb2ludCAyIgogICAgb3V0cHV0CWZsb2F0CWRpc3QJIlBv
 IjREIFBvaW50cyIJCXY0CXsgdmVjdG9yNCB2ZWN0b3I0IGZsb2F0IH0KICAgIHNpZ25hdHVyZQkiVW5pZm9ybSAzRCBQb2ludHMiCXVwCXsgdXBvaW50IHVwb2ludCB1ZmxvYXQgfQoKICAgIFZPUF9WRUNfUEFSTSAocDEsCQk=
 IlBvaW50IDEiLCAwLCAwLCAwKQogICAgVk9QX1ZFQ19QQVJNIChwMiwJCSJQb2ludCAyIiwgMCwgMCwgMCkKCiAgICBWT1BfVkVDNF9QQVJNKHAxX3Y0LAkiUG9pbnQgMSIsIDAsIDAsIDAsIDApCiAgICBWT1BfVkVDNF9QQVI=
 TShwMl92NCwJIlBvaW50IDIiLCAwLCAwLCAwLCAwKQoKICAgIFZPUF9WRUNfUEFSTSAocDFfdXAsCSJQb2ludCAxIiwgMCwgMCwgMCkKICAgIFZPUF9WRUNfUEFSTSAocDJfdXAsCSJQb2ludCAyIiwgMCwgMCwgMCkKfQpJTkQ=
-WAAAAAAAAAAAAAAAAQAAAAxEaWFsb2dTY3JpcHQAAAAAAAARWWibmVEvKgogKiBQUk9QUklFVEFSWSBJTkZPUk1BVElPTi4gIFRoaXMgc29mdHdhcmUgaXMgcHJvcHJpZXRhcnkgdG8KICogU2lkZSBFZmZlY3RzIFNvZnR3YXI=
+WAAAAAAAAAAAAAAAAQAAAAxEaWFsb2dTY3JpcHQAAAAAAAARWWiS2R0vKgogKiBQUk9QUklFVEFSWSBJTkZPUk1BVElPTi4gIFRoaXMgc29mdHdhcmUgaXMgcHJvcHJpZXRhcnkgdG8KICogU2lkZSBFZmZlY3RzIFNvZnR3YXI=
 ZSBJbmMuLCBhbmQgaXMgbm90IHRvIGJlIHJlcHJvZHVjZWQsCiAqIHRyYW5zbWl0dGVkLCBvciBkaXNjbG9zZWQgaW4gYW55IHdheSB3aXRob3V0IHdyaXR0ZW4gcGVybWlzc2lvbi4KICoKICogUHJvZHVjZWQgYnk6CiAqCVM=
 aWRlIEVmZmVjdHMgU29mdHdhcmUgSW5jCiAqCTQ3NyBSaWNobW9uZCBTdHJlZXQgV2VzdAogKglUb3JvbnRvLCBPbnRhcmlvCiAqCUNhbmFkYSAgIE01ViAzRTcKICoJNDE2LTUwNC05ODc2CiAqCiAqLwoKI2luY2x1ZGUgPHA=
 YXJhbWV0ZXIuZHM+Cgp7CiAgICBuYW1lCSJmaXQiCiAgICBzY3JpcHQJImZpdCIKICAgIGxhYmVsCSJmaXQiCgogICAgb3V0ZXJjb2RlIHsKCUlOQ0xVREVfVk9QTElCCiAgICB9CgogICAgY29kZSB7CgkiJHNoaWZ0ID0gdm8=
@@ -261,12 +266,12 @@ dW4sCSJTb3VyY2UgTWF4IiwgMSwgMSwgMSkKICAgIFZPUF9WRUNfUEFSTShkZXN0bWluX3VuLCAiRGVz
 eCIsIDEsIDEsIDEpCgogICAgVk9QX0NMUl9QQVJNKHNyY21pbl91YywJIlNvdXJjZSBNaW4iLCAwLCAwLCAwKQogICAgVk9QX0NMUl9QQVJNKHNyY21heF91YywJIlNvdXJjZSBNYXgiLCAxLCAxLCAxKQogICAgVk9QX0NMUl8=
 UEFSTShkZXN0bWluX3VjLCAiRGVzdGluYXRpb24gTWluIiwgMCwgMCwgMCkKICAgIFZPUF9DTFJfUEFSTShkZXN0bWF4X3VjLCAiRGVzdGluYXRpb24gTWF4IiwgMSwgMSwgMSkKCiAgICBncm91cCB7IG5hbWUgImdzIiBvYnM=
 b2xldGUgMTIuMCB9CiAgICBncm91cCB7IG5hbWUgImd2IiBvYnNvbGV0ZSAxMi4wIH0KICAgIGdyb3VwIHsgbmFtZSAiZ3Y0IiBvYnNvbGV0ZSAxMi4wIH0KICAgIGdyb3VwIHsgbmFtZSAiZ3UiIG9ic29sZXRlIDEyLjAgfQo=
-fQpJTkRYAAAAAAAAAAAAAAABAAAADERpYWxvZ1NjcmlwdAAAAAAAAAIqaJuZUS8qCiAqIFBST1BSSUVUQVJZIElORk9STUFUSU9OLiAgVGhpcyBzb2Z0d2FyZSBpcyBwcm9wcmlldGFyeSB0bwogKiBTaWRlIEVmZmVjdHMgU28=
+fQpJTkRYAAAAAAAAAAAAAAABAAAADERpYWxvZ1NjcmlwdAAAAAAAAAIqaJLZHS8qCiAqIFBST1BSSUVUQVJZIElORk9STUFUSU9OLiAgVGhpcyBzb2Z0d2FyZSBpcyBwcm9wcmlldGFyeSB0bwogKiBTaWRlIEVmZmVjdHMgU28=
 ZnR3YXJlIEluYy4sIGFuZCBpcyBub3QgdG8gYmUgcmVwcm9kdWNlZCwKICogdHJhbnNtaXR0ZWQsIG9yIGRpc2Nsb3NlZCBpbiBhbnkgd2F5IHdpdGhvdXQgd3JpdHRlbiBwZXJtaXNzaW9uLgogKgogKiBQcm9kdWNlZCBieTo=
 CiAqCVNpZGUgRWZmZWN0cyBTb2Z0d2FyZSBJbmMKICoJNDc3IFJpY2htb25kIFN0cmVldCBXZXN0CiAqCVRvcm9udG8sIE9udGFyaW8KICoJQ2FuYWRhICAgTTVWIDNFNwogKgk0MTYtNTA0LTk4NzYKICoKICovCgojaW5jbHU=
 ZGUgPHBhcmFtZXRlci5kcz4KCnsKICAgIG5hbWUJImZsb2F0dG9pbnQiCiAgICBzY3JpcHQJImZsb2F0dG9pbnQiCiAgICBsYWJlbAkiZmxvYXR0b2ludCIKCgogICAgY29kZSB7CgkiJGl2YWwgPSAoaW50KSRmdmFsOyIKICA=
 ICB9CgogICAgb3V0cHV0CWludAlpdmFsCSJPdXRwdXQgSW50ZWdlciIKCiAgICBWT1BfRkxUX0lOUFVUKGZ2YWwsICJGbG9hdCBJbnB1dCIsIDApCn0KCklORFgAAAAAAAAAAAAAAAEAAAAMRGlhbG9nU2NyaXB0AAAAAAAABuU=
-aJuZUS8qCiAqIFBST1BSSUVUQVJZIElORk9STUFUSU9OLiAgVGhpcyBzb2Z0d2FyZSBpcyBwcm9wcmlldGFyeSB0bwogKiBTaWRlIEVmZmVjdHMgU29mdHdhcmUgSW5jLiwgYW5kIGlzIG5vdCB0byBiZSByZXByb2R1Y2VkLAo=
+aJLZHS8qCiAqIFBST1BSSUVUQVJZIElORk9STUFUSU9OLiAgVGhpcyBzb2Z0d2FyZSBpcyBwcm9wcmlldGFyeSB0bwogKiBTaWRlIEVmZmVjdHMgU29mdHdhcmUgSW5jLiwgYW5kIGlzIG5vdCB0byBiZSByZXByb2R1Y2VkLAo=
 ICogdHJhbnNtaXR0ZWQsIG9yIGRpc2Nsb3NlZCBpbiBhbnkgd2F5IHdpdGhvdXQgd3JpdHRlbiBwZXJtaXNzaW9uLgogKgogKiBQcm9kdWNlZCBieToKICoJU2lkZSBFZmZlY3RzIFNvZnR3YXJlIEluYwogKgk0NzcgUmljaG0=
 b25kIFN0cmVldCBXZXN0CiAqCVRvcm9udG8sIE9udGFyaW8KICoJQ2FuYWRhICAgTTVWIDNFNwogKgk0MTYtNTA0LTk4NzYKICoKICovCgojaW5jbHVkZSA8cGFyYW1ldGVyLmRzPgoKewogICAgbmFtZQkiZmxvb3IiCiAgICA=
 c2NyaXB0CSJmbG9vciIKICAgIGxhYmVsCSJmbG9vciIKCiAgICBvdXRlcmNvZGUgewoJSU5DTFVERV9WT1BMSUIKICAgIH0KCiAgICBjb2RlIHsKCSIkZmxvb3IgPSB2b3BfZmxvb3IoJHZhbCk7IgogICAgfQoKICAgIGlucHU=
@@ -280,7 +285,7 @@ QVJNKHZhbF92LCAiVmFsdWUiLCAxLCAxLCAxKQogICAgVk9QX1ZFQ19QQVJNKHZhbF9wLCAiVmFsdWUi
 TSh2YWxfYywgIlZhbHVlIiwgMSwgMSwgMSkKICAgIFZPUF9WRUM0X1BBUk0odmFsX3Y0LCJWYWx1ZSIsIDEsIDEsIDEsIDEpCiAgICBWT1BfRkxUX1BBUk0odmFsX3VmLCAiVmFsdWUiLCAxKQogICAgVk9QX1ZFQ19QQVJNKHY=
 YWxfdXYsICJWYWx1ZSIsIDEsIDEsIDEpCiAgICBWT1BfVkVDX1BBUk0odmFsX3VwLCAiVmFsdWUiLCAxLCAxLCAxKQogICAgVk9QX1ZFQ19QQVJNKHZhbF91biwgIlZhbHVlIiwgMSwgMSwgMSkKICAgIFZPUF9DTFJfUEFSTSg=
 dmFsX3VjLCAiVmFsdWUiLCAxLCAxLCAxKQoKICAgIGdyb3VwIHsgbmFtZSAiZ3YiIG9ic29sZXRlIDEyLjAgfQogICAgZ3JvdXAgeyBuYW1lICJndSIgb2Jzb2xldGUgMTIuMCB9Cn0KSU5EWAAAAAAAAAAAAAAAAgAAAAhDb24=
-dGVudHMAAAAAAAAAV2jh/3EAAAAMRGlhbG9nU2NyaXB0AAAAVwAABoVUQVxfMDcwNzA3MDAwMDAxMDAwMDAwMDAwNjY2MDAwMDAwMDAwMDAwMDAwMDAxMDAwMDAwMTUwNzAzNzc1NjEwMDAwMTMwMDAwMDAwMDAwMFRSQUlMRVI=
+dGVudHMAAAAAAAAAV2j894QAAAAMRGlhbG9nU2NyaXB0AAAAVwAABoVUQVxfMDcwNzA3MDAwMDAxMDAwMDAwMDAwNjY2MDAwMDAwMDAwMDAwMDAwMDAxMDAwMDAwMTUwNzcxNzM2MDQwMDAwMTMwMDAwMDAwMDAwMFRSQUlMRVI=
 ISEhACMgRGlhbG9nIHNjcmlwdCBmb3IgZ2VvbWV0cnl2b3BnbG9iYWw6OjIuMCBhdXRvbWF0aWNhbGx5IGdlbmVyYXRlZCAxMC8xNy8xNCAxNDoxMzo1MQoKewogICAgbmFtZQlnZW9tZXRyeXZvcGdsb2JhbDo6Mi4wCiAgICA=
 c2NyaXB0CWdlb21ldHJ5dm9wZ2xvYmFsOjoyLjAKICAgIGxhYmVsCSJHZW9tZXRyeSBWT1AgR2xvYmFsIFBhcmFtZXRlcnMiCgogICAgb3V0cHV0CXZlY3RvcglQCVAKICAgIG91dHB1dAl2ZWN0b3IJdglWZWxvY2l0eQogICA=
 IG91dHB1dAl2ZWN0b3IJZm9yY2UJRm9yY2UKICAgIG91dHB1dAlmbG9hdAlhZ2UJQWdlCiAgICBvdXRwdXQJZmxvYXQJbGlmZQlMaWZlCiAgICBvdXRwdXQJaW50CWlkCUlkCiAgICBvdXRwdXQJdmVjdG9yCUNkCUNkCiAgICA=
@@ -294,12 +299,12 @@ LDApCglfX19iZWdpbglhdXRvCgkJCSgwLDAsMCkKCV9fX2JlZ2luCWF1dG8KCQkJKDAsMCwwKQoJX19f
 Z2luCWF1dG8KCQkJKDAsMCwwKQoJX19fYmVnaW4JYXV0bwoJCQkoMCwwLDApCglfX19iZWdpbglhdXRvCgkJCSgwLDAsMCkKCV9fX2JlZ2luCWF1dG8KCQkJKDApCglfX19iZWdpbglhdXRvCgkJCSgwKQoJX19fYmVnaW4JYXU=
 dG8KCQkJKDApCglfX19iZWdpbglhdXRvCgkJCSgwKQoJX19fYmVnaW4JYXV0bwoJCQkoMCkKCV9fX2JlZ2luCWF1dG8KCQkJKDApCglfX19iZWdpbglhdXRvCgkJCSgwKQoJX19fYmVnaW4JYXV0bwoJCQkoMCkKCV9fX2JlZ2k=
 bglhdXRvCgkJCSgwKQoJX19fYmVnaW4JYXV0bwoJCQkoIiIpCglfX19iZWdpbglhdXRvCgkJCSgiIikKCV9fX2JlZ2luCWF1dG8KCQkJKCIiKQoJX19fYmVnaW4JYXV0bwoJCQkoIiIpCiAgICB9CgogICAgaGVscCB7CgkiIgo=
-ICAgIH0KCn0KSU5EWAAAAAAAAAAAAAAAAgAAAAhDb250ZW50cwAAAAAAAABXaOH/cQAAAAxEaWFsb2dTY3JpcHQAAABXAAACIlGU5SEwNzA3MDcwMDAwMDEwMDAwMDAwMDA2NjYwMDAwMDAwMDAwMDAwMDAwMDEwMDAwMDAxNTA=
-NzAzNzc1NjEwMDAwMTMwMDAwMDAwMDAwMFRSQUlMRVIhISEAIyBEaWFsb2cgc2NyaXB0IGZvciBnZW9tZXRyeXZvcG91dHB1dCBhdXRvbWF0aWNhbGx5IGdlbmVyYXRlZCAwNS8xNi8xMyAwOTo1NDo0MQoKewogICAgbmFtZQk=
+ICAgIH0KCn0KSU5EWAAAAAAAAAAAAAAAAgAAAAhDb250ZW50cwAAAAAAAABXaPz3hAAAAAxEaWFsb2dTY3JpcHQAAABXAAACIlGU5SEwNzA3MDcwMDAwMDEwMDAwMDAwMDA2NjYwMDAwMDAwMDAwMDAwMDAwMDEwMDAwMDAxNTA=
+NzcxNzM2MDQwMDAwMTMwMDAwMDAwMDAwMFRSQUlMRVIhISEAIyBEaWFsb2cgc2NyaXB0IGZvciBnZW9tZXRyeXZvcG91dHB1dCBhdXRvbWF0aWNhbGx5IGdlbmVyYXRlZCAwNS8xNi8xMyAwOTo1NDo0MQoKewogICAgbmFtZQk=
 Z2VvbWV0cnl2b3BvdXRwdXQKICAgIHNjcmlwdAlnZW9tZXRyeXZvcG91dHB1dAogICAgbGFiZWwJIkdlb21ldHJ5IFZPUCBPdXRwdXQiCgogICAgaW5wdXQJdmVjdG9yCVAJUAogICAgaW5wdXQJdmVjdG9yCXYJVmVsb2NpdHk=
 CiAgICBpbnB1dAl2ZWN0b3IJZm9yY2UJRm9yY2UKICAgIGlucHV0CXZlY3RvcglDZAlDb2xvcgogICAgaW5wdXQJdmVjdG9yCU4JTm9ybWFsCiAgICBpbnB1dGZsYWdzCVAJMAogICAgaW5wdXRmbGFncwl2CTAKICAgIGlucHU=
 dGZsYWdzCWZvcmNlCTAKICAgIGlucHV0ZmxhZ3MJQ2QJMAogICAgaW5wdXRmbGFncwlOCTAKICAgIHNpZ25hdHVyZQkiRGVmYXVsdCBJbnB1dHMiCWRlZmF1bHQJeyB2ZWN0b3IgdmVjdG9yIHZlY3RvciB2ZWN0b3IgdmVjdG8=
-ciB9CgogICAgb3V0cHV0b3ZlcnJpZGVzCWRlZmF1bHQKICAgIHsKICAgIH0KCiAgICBoZWxwIHsKCSIiCiAgICB9Cgp9CklORFgAAAAAAAAAAAAAAAEAAAAMRGlhbG9nU2NyaXB0AAAAAAAADWxom5lSLyoKICogUFJPUFJJRVQ=
+ciB9CgogICAgb3V0cHV0b3ZlcnJpZGVzCWRlZmF1bHQKICAgIHsKICAgIH0KCiAgICBoZWxwIHsKCSIiCiAgICB9Cgp9CklORFgAAAAAAAAAAAAAAAEAAAAMRGlhbG9nU2NyaXB0AAAAAAAADWxoktkdLyoKICogUFJPUFJJRVQ=
 QVJZIElORk9STUFUSU9OLiAgVGhpcyBzb2Z0d2FyZSBpcyBwcm9wcmlldGFyeSB0bwogKiBTaWRlIEVmZmVjdHMgU29mdHdhcmUgSW5jLiwgYW5kIGlzIG5vdCB0byBiZSByZXByb2R1Y2VkLAogKiB0cmFuc21pdHRlZCwgb3I=
 IGRpc2Nsb3NlZCBpbiBhbnkgd2F5IHdpdGhvdXQgd3JpdHRlbiBwZXJtaXNzaW9uLgogKgogKiBQcm9kdWNlZCBieToKICoJU2lkZSBFZmZlY3RzIFNvZnR3YXJlIEluYwogKgk0NzcgUmljaG1vbmQgU3RyZWV0IFdlc3QKICo=
 CVRvcm9udG8sIE9udGFyaW8KICoJQ2FuYWRhICAgTTVWIDNFNwogKgk0MTYtNTA0LTk4NzYKICoKICovCgp7CiAgICBuYW1lCSJnZXRhdHRyaWIiCiAgICBzY3JpcHQJImdldGF0dHJpYiIKICAgIGxhYmVsCSJnZXRhdHRyaWI=
@@ -327,7 +332,7 @@ bGFiZWwJIkF0dHJpYnV0ZSBDbGFzcyIKCXR5cGUJc3RyaW5nCglkZWZhdWx0CXsgInBvaW50IiB9Cglt
 dGl2ZSIKCSAgICAidmVydGV4IgkiVmVydGV4IgoJICAgICJwb2ludGdyb3VwIgkiUG9pbnQgR3JvdXAiCgkgICAgInByaW1ncm91cCIJIlByaW1pdGl2ZSBHcm91cCIKCX0KICAgIH0KICAgIHBhcm0gewoJbmFtZQlhdHRyaWI=
 CglsYWJlbAkiQXR0cmlidXRlIgoJdHlwZQlzdHJpbmcKCWRlZmF1bHQJeyAiQ2QiIH0KICAgIH0KICAgIHBhcm0gewoJbmFtZQlpMQoJbGFiZWwJIlBvaW50IG9yIFByaW1pdGl2ZSIKCXR5cGUJaW50CglzaXplCTEKCWRlZmE=
 dWx0CXsgMCB9CiAgICB9CiAgICBwYXJtIHsKCW5hbWUJaTIKCWxhYmVsCSJWZXJ0ZXgiCgl0eXBlCWludAoJc2l6ZQkxCglkZWZhdWx0CXsgMCB9CiAgICB9Cn0KCklORFgAAAAAAAAAAAAAAAIAAAAIQ29udGVudHMAAAAAAAA=
-AFdo4f9xAAAADERpYWxvZ1NjcmlwdAAAAFcAAA4TaG3t0jA3MDcwNzAwMDAwMTAwMDAwMDAwMDY2NjAwMDAwMDAwMDAwMDAwMDAwMTAwMDAwMDE1MDcwMzc3NTYxMDAwMDEzMDAwMDAwMDAwMDBUUkFJTEVSISEhACMgRGlhbG8=
+AFdo/PeEAAAADERpYWxvZ1NjcmlwdAAAAFcAAA4TaPmr6zA3MDcwNzAwMDAwMTAwMDAwMDAwMDY2NjAwMDAwMDAwMDAwMDAwMDAwMTAwMDAwMDE1MDc3MTczNjA0MDAwMDEzMDAwMDAwMDAwMDBUUkFJTEVSISEhACMgRGlhbG8=
 ZyBzY3JpcHQgZm9yIGxhYnM6OmNzdl9leHBvcnRlciBhdXRvbWF0aWNhbGx5IGdlbmVyYXRlZAoKewogICAgbmFtZQlsYWJzOjpjc3ZfZXhwb3J0ZXIKICAgIHNjcmlwdAlnYW1lZGV2Ojpyb3BfY3N2X2V4cG9ydGVyCiAgICA=
 bGFiZWwJIkxhYnMgQ1NWIEV4cG9ydGVyIgoKICAgIGhlbHAgewoJIiIKICAgIH0KCiAgICBwYXJtIHsKICAgICAgICBuYW1lICAgICJleGVjdXRlIgogICAgICAgIGJhc2VwYXJtCiAgICAgICAgbGFiZWwgICAiUmVuZGVyIgo=
 ICAgICAgICBqb2lubmV4dAogICAgICAgIGV4cG9ydCAgbm9uZQogICAgfQogICAgcGFybSB7CiAgICAgICAgbmFtZSAgICAicmVuZGVyZGlhbG9nIgogICAgICAgIGJhc2VwYXJtCiAgICAgICAgbGFiZWwgICAiQ29udHJvbHM=
@@ -356,13 +361,13 @@ cmVkRXhwb3J0IgogICAgICAgIGxhYmVsICAgIkZpbHRlcmVkIEV4cG9ydCIKICAgICAgICB0eXBlICAg
 ZSBmb2xsb3dpbmcgbXVsdGlwYXJtIHRvIGRlZmluZSB3aGljaCBhdHRyaWJ1dGVzIHRvIGV4cG9ydCwgb3RoZXJ3aXNlIGp1c3QgZXhwb3J0IEBQLiIKICAgIH0KICAgIG11bHRpcGFybSB7CiAgICAgICAgbmFtZSAgICAibUE=
 dHRyaWJ1dGVzIgogICAgICAgIGxhYmVsICAgICJFeHBvcnQgQXR0cmlidXRlcyIKICAgICAgICBkZWZhdWx0IDAKICAgICAgICBkaXNhYmxld2hlbiAieyBiRmlsdGVyZWRFeHBvcnQgPT0gMCB9IgoKICAgICAgICBwYXJtIHs=
 CiAgICAgICAgICAgIG5hbWUgICAgInNBdHRyaWJ1dGUjIgogICAgICAgICAgICBsYWJlbCAgICJBdHRyaWJ1dGUiCiAgICAgICAgICAgIHR5cGUgICAgc3RyaW5nCiAgICAgICAgICAgIGRlZmF1bHQgeyAiIiB9CiAgICAgICA=
-IH0KICAgIH0KCn0KSU5EWAAAAAAAAAAAAAAAAQAAAAxEaWFsb2dTY3JpcHQAAAAAAAACm2ibmVIvKgogKiBQUk9QUklFVEFSWSBJTkZPUk1BVElPTi4gIFRoaXMgc29mdHdhcmUgaXMgcHJvcHJpZXRhcnkgdG8KICogU2lkZSA=
+IH0KICAgIH0KCn0KSU5EWAAAAAAAAAAAAAAAAQAAAAxEaWFsb2dTY3JpcHQAAAAAAAACm2iS2R0vKgogKiBQUk9QUklFVEFSWSBJTkZPUk1BVElPTi4gIFRoaXMgc29mdHdhcmUgaXMgcHJvcHJpZXRhcnkgdG8KICogU2lkZSA=
 RWZmZWN0cyBTb2Z0d2FyZSBJbmMuLCBhbmQgaXMgbm90IHRvIGJlIHJlcHJvZHVjZWQsCiAqIHRyYW5zbWl0dGVkLCBvciBkaXNjbG9zZWQgaW4gYW55IHdheSB3aXRob3V0IHdyaXR0ZW4gcGVybWlzc2lvbi4KICoKICogUHI=
 b2R1Y2VkIGJ5OgogKglTaWRlIEVmZmVjdHMgU29mdHdhcmUgSW5jCiAqCTQ3NyBSaWNobW9uZCBTdHJlZXQgV2VzdAogKglUb3JvbnRvLCBPbnRhcmlvCiAqCUNhbmFkYSAgIE01ViAzRTcKICoJNDE2LTUwNC05ODc2CiAqCiA=
 Ki8KCnsKICAgIG5hbWUJIm5lYXJwb2ludCIKICAgIHNjcmlwdAkibmVhcnBvaW50IgogICAgbGFiZWwJIm5lYXJwb2ludCIKCgogICAgY29kZSB7CgkiJG5wdCA9IG5lYXJwb2ludCgkaW5wdXQsICRwb3MpOyIKICAgIH0KCiA=
 ICAgaW5wdXQJc3RyaW5nCWlucHV0CSJJbnB1dCBHZW9tZXRyeSIKICAgIGlucHV0CXZlY3Rvcglwb3MJIlBvc2l0aW9uIgogICAgb3V0cHV0CWludAlucHQJIlBvaW50IE51bWJlciIKCiAgICBwYXJtIHsKCW5hbWUJaW5wdXQ=
-CglsYWJlbAkiR2VvbWV0cnkgRmlsZSIKCXR5cGUJZ2VvbWV0cnkKCWRlZmF1bHQJeyAiJEhIL2dlby9kZWZnZW8uYmdlbyIgfQogICAgfQp9CgpJTkRYAAAAAAAAAAAAAAACAAAACENvbnRlbnRzAAAAAAAAAFdo4f9xAAAADEQ=
-aWFsb2dTY3JpcHQAAABXAAAHoGibmUswNzA3MDcwMDAwMDEwMDAwMDAwMDA2NjYwMDAwMDAwMDAwMDAwMDAwMDEwMDAwMDAxNTA3MDM3NzU2MTAwMDAxMzAwMDAwMDAwMDAwVFJBSUxFUiEhIQAjIERpYWxvZyBzY3JpcHQgZm8=
+CglsYWJlbAkiR2VvbWV0cnkgRmlsZSIKCXR5cGUJZ2VvbWV0cnkKCWRlZmF1bHQJeyAiJEhIL2dlby9kZWZnZW8uYmdlbyIgfQogICAgfQp9CgpJTkRYAAAAAAAAAAAAAAACAAAACENvbnRlbnRzAAAAAAAAAFdo/PeEAAAADEQ=
+aWFsb2dTY3JpcHQAAABXAAAHoGiS2RkwNzA3MDcwMDAwMDEwMDAwMDAwMDA2NjYwMDAwMDAwMDAwMDAwMDAwMDEwMDAwMDAxNTA3NzE3MzYwNDAwMDAxMzAwMDAwMDAwMDAwVFJBSUxFUiEhIQAjIERpYWxvZyBzY3JpcHQgZm8=
 ciBzb2x2ZXIgYXV0b21hdGljYWxseSBnZW5lcmF0ZWQKCnsKICAgIG5hbWUJc29sdmVyCiAgICBzY3JpcHQJc29sdmVyCiAgICBsYWJlbAlTb2x2ZXIKCiAgICBoZWxwIHsKCSIiCiAgICB9CgogICAgaW5wdXRsYWJlbAkxCSI=
 SW5pdGlhbCBHZW9tZXRyeSIKICAgIGlucHV0bGFiZWwJMgkiQXV4aWxsYXJ5ICMxIgogICAgaW5wdXRsYWJlbAkzCSJBdXhpbGxhcnkgIzIiCiAgICBpbnB1dGxhYmVsCTQJIkF1eGlsbGFyeSAjMyIKCiAgICBwYXJtIHsKICA=
 ICAgICAgbmFtZSAgICAicmVzaW11bGF0ZSIKICAgICAgICBsYWJlbCAgICJSZXNldCBTaW11bGF0aW9uIgogICAgICAgIHR5cGUgICAgYnV0dG9uCiAgICAgICAgZGVmYXVsdCB7ICIwIiB9CiAgICAgICAgcmFuZ2UgICB7IDA=
@@ -378,7 +383,7 @@ IGRlZmF1bHQgeyAib24iIH0KICAgICAgICByYW5nZSAgIHsgMCAxIH0KICAgICAgICBwYXJtdGFnIHsg
 YWNoZXRvZGlzayIKICAgICAgICBsYWJlbCAgICJBbGxvdyBDYWNoaW5nIFRvIERpc2siCiAgICAgICAgdHlwZSAgICB0b2dnbGUKICAgICAgICBkZWZhdWx0IHsgIm9mZiIgfQogICAgICAgIHJhbmdlICAgeyAwIDEgfQogICA=
 ICAgICBwYXJtdGFnIHsgImF1dG9zY29wZSIgIjAwMDAwMDAwMDAwMDAwMDAiIH0KICAgIH0KICAgIHBhcm0gewogICAgICAgIG5hbWUgICAgImNhY2hlbWF4c2l6ZSIKICAgICAgICBsYWJlbCAgICJDYWNoZSBNZW1vcnkgKE0=
 QikiCiAgICAgICAgdHlwZSAgICBpbnRlZ2VyCiAgICAgICAgZGVmYXVsdCB7ICI1MDAwIiB9CiAgICAgICAgcmFuZ2UgICB7IDAhIDEwMDAgfQogICAgICAgIHBhcm10YWcgeyAiYXV0b3Njb3BlIiAiMDAwMDAwMDAwMDAwMDA=
-MDAiIH0KICAgIH0KfQpJTkRYAAAAAAAAAAAAAAABAAAADERpYWxvZ1NjcmlwdAAAAAAAAAQDaJuZUi8qCiAqIFBST1BSSUVUQVJZIElORk9STUFUSU9OLiAgVGhpcyBzb2Z0d2FyZSBpcyBwcm9wcmlldGFyeSB0bwogKiBTaWQ=
+MDAiIH0KICAgIH0KfQpJTkRYAAAAAAAAAAAAAAABAAAADERpYWxvZ1NjcmlwdAAAAAAAAAQDaJLZHS8qCiAqIFBST1BSSUVUQVJZIElORk9STUFUSU9OLiAgVGhpcyBzb2Z0d2FyZSBpcyBwcm9wcmlldGFyeSB0bwogKiBTaWQ=
 ZSBFZmZlY3RzIFNvZnR3YXJlIEluYy4sIGFuZCBpcyBub3QgdG8gYmUgcmVwcm9kdWNlZCwKICogdHJhbnNtaXR0ZWQsIG9yIGRpc2Nsb3NlZCBpbiBhbnkgd2F5IHdpdGhvdXQgd3JpdHRlbiBwZXJtaXNzaW9uLgogKgogKiA=
 UHJvZHVjZWQgYnk6CiAqCVNpZGUgRWZmZWN0cyBTb2Z0d2FyZSBJbmMKICoJNDc3IFJpY2htb25kIFN0cmVldCBXZXN0CiAqCVRvcm9udG8sIE9udGFyaW8KICoJQ2FuYWRhICAgTTVWIDNFNwogKgk0MTYtNTA0LTk4NzYKICo=
 CiAqLwoKewogICAgbmFtZQkieHl6ZGlzdCIKICAgIHNjcmlwdAkieHl6ZGlzdCIKICAgIGxhYmVsCSJ4eXpkaXN0IgoKCiAgICBjb2RlIHsKCSIkZGlzdCA9IHh5emRpc3QoJGlucHV0LCAkZ3JvdXAsICRwb3MsICRwcmltLCA=
@@ -414,7 +419,7 @@ inputs
 stat
 {
   create 1755785796
-  modify 1758345618
+  modify 1761319481
   author Laurikka@stopgap
   access 0777
 }
@@ -438,7 +443,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -1272,7 +1277,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -1882,7 +1887,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -2336,7 +2341,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -2527,7 +2532,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -2631,7 +2636,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -2836,7 +2841,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -3029,7 +3034,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -3627,7 +3632,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -4081,7 +4086,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -4272,7 +4277,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -4376,7 +4381,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -4581,7 +4586,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -4774,7 +4779,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -4865,7 +4870,7 @@ inputs
 stat
 {
   create 1755785796
-  modify 1758345619
+  modify 1761319481
   author Laurikka@stopgap
   access 0777
 }
@@ -4889,7 +4894,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -4913,7 +4918,7 @@ inputs
 stat
 {
   create 1755785796
-  modify 1758345619
+  modify 1761319481
   author Laurikka@stopgap
   access 0777
 }
@@ -4937,7 +4942,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -5074,7 +5079,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -5171,7 +5176,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -5254,7 +5259,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -5319,7 +5324,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -5387,7 +5392,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -5448,7 +5453,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -5542,7 +5547,7 @@ inputs
 stat
 {
   create 1324348265
-  modify 1758345619
+  modify 1761319481
   author nobody@nowhere
   access 0777
 }
@@ -5596,7 +5601,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -5675,7 +5680,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -5754,7 +5759,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -5833,7 +5838,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -5912,7 +5917,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -5945,7 +5950,7 @@ inputs
 stat
 {
   create 1641329590
-  modify 1759645163
+  modify 1761408913
   author nobody@nowhere
   access 0777
 }
@@ -6008,7 +6013,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -6067,7 +6072,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -6128,7 +6133,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -6203,7 +6208,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -6410,7 +6415,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -6514,7 +6519,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -6577,7 +6582,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -6665,7 +6670,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -6902,7 +6907,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -6937,7 +6942,7 @@ inputs
 stat
 {
   create 1755790085
-  modify 1759644266
+  modify 1761408904
   author Laurikka@stopgap
   access 0777
 }
@@ -6966,7 +6971,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -7028,7 +7033,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -7089,7 +7094,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -7177,7 +7182,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -7436,7 +7441,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -7714,7 +7719,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -7815,7 +7820,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -7925,7 +7930,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -8065,7 +8070,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -8227,7 +8232,7 @@ inputs
 stat
 {
   create 1324348265
-  modify 1758345619
+  modify 1761319481
   author nobody@nowhere
   access 0777
 }
@@ -8281,7 +8286,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -8360,7 +8365,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -8439,7 +8444,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -8518,7 +8523,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -8597,7 +8602,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -8693,7 +8698,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -8752,7 +8757,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -8813,7 +8818,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -8888,7 +8893,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -9114,7 +9119,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -10048,7 +10053,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -10113,7 +10118,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -10234,7 +10239,7 @@ inputs
 stat
 {
   create 1751976326
-  modify 1755787371
+  modify 1761408914
   author Laurikka@stopgap
   access 0777
 }
@@ -11035,7 +11040,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -11068,7 +11073,7 @@ inputs
 stat
 {
   create 1751978525
-  modify 1753249849
+  modify 1761319188
   author Laurikka@stopgap
   access 0777
 }
@@ -11104,7 +11109,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -11192,7 +11197,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -11285,7 +11290,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -11426,7 +11431,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -11583,7 +11588,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -11686,7 +11691,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -11759,7 +11764,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -11835,7 +11840,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -11908,7 +11913,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -12193,7 +12198,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -12297,7 +12302,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -12365,7 +12370,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -12629,7 +12634,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -12768,7 +12773,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -13279,7 +13284,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -13301,7 +13306,7 @@ Content-Type: text/plain
 sopflags sopflags = 
 comment ""
 position 16.4797 -21.5601
-connectornextid 17
+connectornextid 21
 flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on
 outputsNamed3
 {
@@ -13325,6 +13330,10 @@ inputsNamed3
 14 	attribpromote14 1 1 "input14"
 15 	attribpromote15 1 1 "input15"
 16 	attribpromote16 1 1 "input16"
+17 	attribpromote17 1 1 "input17"
+18 	attribpromote18 1 1 "input18"
+19 	attribpromote19 1 1 "input19"
+20 	attribpromote20 1 1 "input20"
 }
 inputs
 {
@@ -13344,11 +13353,15 @@ inputs
 13 	attribpromote14 0 1
 14 	attribpromote15 0 1
 15 	attribpromote16 0 1
+16 	attribpromote17 0 1
+17 	attribpromote18 0 1
+18 	attribpromote19 0 1
+19 	attribpromote20 0 1
 }
 stat
 {
   create 1752164421
-  modify 1753440030
+  modify 1761408968
   author Laurikka@stopgap
   access 0777
 }
@@ -13372,7 +13385,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -14595,7 +14608,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -14734,7 +14747,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -15245,7 +15258,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -15877,7 +15890,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -15970,7 +15983,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -16046,7 +16059,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -16119,7 +16132,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -16207,7 +16220,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -16608,7 +16621,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -16747,7 +16760,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -17258,7 +17271,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -17890,7 +17903,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -17969,7 +17982,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -18045,7 +18058,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -18118,7 +18131,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -18206,7 +18219,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -18451,7 +18464,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -18554,7 +18567,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -18627,7 +18640,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -19028,7 +19041,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -19167,7 +19180,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -19678,7 +19691,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -20373,7 +20386,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -20476,7 +20489,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -20549,7 +20562,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -20950,7 +20963,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -21089,7 +21102,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -21600,7 +21613,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -22320,7 +22333,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -22389,7 +22402,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -22492,7 +22505,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -22565,7 +22578,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -22966,7 +22979,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -23105,7 +23118,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -23616,7 +23629,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -24336,7 +24349,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -24493,7 +24506,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -24596,7 +24609,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -24669,7 +24682,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -25070,7 +25083,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -25209,7 +25222,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -25720,7 +25733,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -26421,7 +26434,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -26524,7 +26537,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -26597,7 +26610,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -26998,7 +27011,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -27137,7 +27150,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -27648,7 +27661,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -28349,7 +28362,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -28452,7 +28465,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -28525,7 +28538,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -28926,7 +28939,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -29065,7 +29078,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -29576,7 +29589,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -30277,7 +30290,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -30380,7 +30393,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -30453,7 +30466,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -30854,7 +30867,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -30993,7 +31006,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -31504,7 +31517,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -32205,7 +32218,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -32308,7 +32321,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -32381,7 +32394,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -32782,7 +32795,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -32921,7 +32934,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -33432,7 +33445,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -34152,7 +34165,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -34221,7 +34234,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -34324,7 +34337,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -34397,7 +34410,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -34798,7 +34811,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -34937,7 +34950,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -35448,7 +35461,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -36168,7 +36181,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -36237,7 +36250,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -36340,7 +36353,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -36413,7 +36426,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -36814,7 +36827,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -36953,7 +36966,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -37464,7 +37477,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -38184,7 +38197,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -38253,7 +38266,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -38356,7 +38369,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -38429,7 +38442,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -38830,7 +38843,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -38969,7 +38982,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -39480,7 +39493,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -40200,7 +40213,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -40219,7 +40232,7 @@ sopflags sopflags =
 comment ""
 position 82.2377 0.612257
 connectornextid 1
-flags =  lock off model off template on footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on
 outputsNamed3
 {
 0 "output1"
@@ -40233,7 +40246,7 @@ inputs
 stat
 {
   create 1752163308
-  modify 1753440013
+  modify 1761319273
   author Laurikka@stopgap
   access 0777
 }
@@ -40269,7 +40282,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -40304,7 +40317,7 @@ inputs
 stat
 {
   create 1752163344
-  modify 1753440063
+  modify 1761319190
   author Laurikka@stopgap
   access 0777
 }
@@ -40372,7 +40385,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -40409,7 +40422,7 @@ inputs
 stat
 {
   create 1752163390
-  modify 1753440000
+  modify 1761319143
   author Laurikka@stopgap
   access 0777
 }
@@ -40445,7 +40458,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -40480,7 +40493,7 @@ inputs
 stat
 {
   create 1751980372
-  modify 1753440000
+  modify 1761319155
   author Laurikka@stopgap
   access 0777
 }
@@ -40846,7 +40859,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -40885,7 +40898,7 @@ inputs
 stat
 {
   create 1752164324
-  modify 1753440000
+  modify 1761319147
   author Laurikka@stopgap
   access 0777
 }
@@ -40985,7 +40998,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -41180,7 +41193,7 @@ inputs
 stat
 {
   create 1752164283
-  modify 1753440000
+  modify 1761319147
   author Laurikka@stopgap
   access 0777
 }
@@ -41496,7 +41509,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -41519,7 +41532,7 @@ sopflags sopflags =
 comment "Referenced from color"
 position 81.289 -4.6023
 connectornextid 2
-flags =  lock off model off template off footprint off xray off bypass off display on render on highlight off unload off savedata off compress on colordefault on exposed on displaycomment on
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on displaycomment on
 outputsNamed3
 {
 1 "output1"
@@ -41535,7 +41548,7 @@ inputs
 stat
 {
   create 1753249185
-  modify 1753440014
+  modify 1761319237
   author Laurikka@stopgap
   access 0777
 }
@@ -42075,7 +42088,7 @@ inputs
 stat
 {
   create 1752082986
-  modify 1753440000
+  modify 1761319183
   author Laurikka@stopgap
   access 0777
 }
@@ -42216,7 +42229,7983 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/grid13.init"
+Content-Type: text/plain
+
+type = grid
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/grid13.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment ""
+position 90.0552 0.612257
+connectornextid 1
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on
+outputsNamed3
+{
+0 "output1"
+}
+inputsNamed3
+{
+}
+inputs
+{
+}
+stat
+{
+  create 1752163308
+  modify 1761319273
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 0.8 0.8 0.8 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/grid13.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+type	[ 0	locks=0 ]	(	"poly"	)
+surftype	[ 0	locks=0 ]	(	"quads"	)
+orient	[ 0	locks=0 ]	(	"xy"	)
+size	[ 0	locks=0 ]	(	0.32	0.2	)
+t	[ 0	locks=0 ]	(	0	0	0	)
+r	[ 0	locks=0 ]	(	0	180	0	)
+rows	[ 0	locks=0 ]	(	10	)
+cols	[ 0	locks=0 ]	(	10	)
+orderu	[ 0	locks=0 ]	(	4	)
+orderv	[ 0	locks=0 ]	(	4	)
+interpu	[ 0	locks=0 ]	(	"on"	)
+interpv	[ 0	locks=0 ]	(	"on"	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/grid13.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":"21.0.512"
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/scatter14.init"
+Content-Type: text/plain
+
+type = scatter::2.0
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/scatter14.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment ""
+position 90.0552 -0.387743
+connectornextid 2
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on
+outputsNamed3
+{
+1 "output1"
+}
+inputsNamed3
+{
+0 	grid13 0 1 "input1"
+}
+inputs
+{
+0 	grid13 0 1
+}
+stat
+{
+  create 1752163344
+  modify 1761319253
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 0.8 0.8 0.8 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/scatter14.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+group	[ 0	locks=0 ]	(	""	)
+stdswitcher	[ 0	locks=0 ]	(	0	0	)
+generateby	[ 0	locks=0 ]	(	"bydensity"	)
+indepvoxel	[ 0	locks=0 ]	(	"off"	)
+forcetotal	[ 0	locks=0 ]	(	"on"	)
+npts	[ 0	locks=0 ]	(	7	)
+densityscale	[ 0	locks=0 ]	(	10	)
+usedensityattrib	[ 0	locks=0 ]	(	"off"	)
+densityattrib	[ 0	locks=0 ]	(	density	)
+useareaattrib	[ 0	locks=0 ]	(	"off"	)
+areaattrib	[ 0	locks=0 ]	(	area	)
+useareaforvolumes	[ 0	locks=0 ]	(	"off"	)
+usedensitytexture	[ 0	locks=0 ]	(	"off"	)
+densitytexture	[ 0	locks=0 ]	(	default.pic	)
+uvattrib	[ 0	locks=0 ]	(	uv	)
+primcountattrib	[ 0	locks=0 ]	(	count	)
+useemergencylimit	[ 0	locks=0 ]	(	"on"	)
+emergencylimit	[ 0	locks=0 ]	(	20552	)
+seed	[ 0	locks=0 ]	(	335.8	)
+overrideprimseed	[ 0	locks=0 ]	(	"off"	)
+primseedattrib	[ 0	locks=0 ]	(	primid	)
+randomizeorder	[ 0	locks=0 ]	(	"on"	)
+relaxpoints	[ 0	locks=0 ]	(	"on"	)
+relaxiterations	[ 0	locks=0 ]	(	1	)
+usegeometricnormals	[ 0	locks=0 ]	(	"off"	)
+scaleradiiby	[ 0	locks=0 ]	(	1	)
+usemaxradius	[ 0	locks=0 ]	(	"on"	)
+maxradius	[ 0	locks=0 ]	(	10	)
+useprimnumattrib	[ 0	locks=0 ]	(	"off"	)
+primnumattrib	[ 0	locks=0 ]	(	sourceprim	)
+useprimuvwattrib	[ 0	locks=0 ]	(	"off"	)
+primuvwattrib	[ 0	locks=0 ]	(	sourceprimuv	)
+useoutputdensityattrib	[ 0	locks=0 ]	(	"off"	)
+outputdensityattrib	[ 0	locks=0 ]	(	density	)
+useoutputradiusattrib	[ 0	locks=0 ]	(	"off"	)
+outputradiusattrib	[ 0	locks=0 ]	(	pscale	)
+useoutputidattrib	[ 0	locks=0 ]	(	"off"	)
+outputidattrib	[ 0	locks=0 ]	(	id	)
+radiusintexturespace	[ 0	locks=0 ]	(	"off"	)
+pointattribs	[ 0	locks=0 ]	(	*	)
+vertattribs	[ 0	locks=0 ]	(	"N uv*"	)
+primattribs	[ 0	locks=0 ]	(	""	)
+detailattribs	[ 0	locks=0 ]	(	""	)
+detailattribsasdetail	[ 0	locks=0 ]	(	""	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/scatter14.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":"21.0.512"
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/copytopoints17.init"
+Content-Type: text/plain
+
+type = copytopoints::2.0
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/copytopoints17.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment ""
+position 89.1095 -3.51044
+connectornextid 3
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on
+outputsNamed3
+{
+2 "output1"
+}
+inputsNamed3
+{
+0 	(__dot17) "" 1 "input1"
+1 	scatter14 1 1 "input2"
+}
+inputs
+{
+0 	(__dot17) 0 1
+1 	scatter14 0 1
+}
+stat
+{
+  create 1752163390
+  modify 1761319335
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 1 0.65 0.1 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/copytopoints17.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+sourcegroup	[ 0	locks=0 ]	(	""	)
+sourcegrouptype	[ 0	locks=0 ]	(	"guess"	)
+targetgroup	[ 0	locks=0 ]	(	""	)
+useidattrib	[ 0	locks=0 ]	(	"off"	)
+idattrib	[ 0	locks=0 ]	(	name	)
+pack	[ 0	locks=0 ]	(	"off"	)
+pivot	[ 0	locks=0 ]	(	"centroid"	)
+viewportlod	[ 0	locks=0 ]	(	"full"	)
+transform	[ 0	locks=0 ]	(	"on"	)
+useimplicitn	[ 0	locks=0 ]	(	"on"	)
+resettargetattribs	[ 0	locks=0 ]	(	0	)
+targetattribs	[ 0	locks=0 ]	(	0	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/copytopoints17.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":"21.0.512"
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/calculate_pixel_coordinates16.init"
+Content-Type: text/plain
+
+type = attribwrangle
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/calculate_pixel_coordinates16.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment "Referenced from calculate_pixel_coordinates"
+position 89.1065 -5.75466
+connectornextid 2
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on displaycomment on
+outputsNamed3
+{
+1 "output1"
+}
+inputsNamed3
+{
+0 	color16 1 1 "input1"
+}
+inputs
+{
+0 	color16 0 1
+}
+stat
+{
+  create 1751980372
+  modify 1761319249
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 0.8 0.8 0.8 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/calculate_pixel_coordinates16.chn"
+Content-Type: text/plain
+
+{
+    channel vex_precision {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"auto\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../calculate_pixel_coordinates/vex_precision\") }
+    }
+    channel vex_selectiongroup {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../calculate_pixel_coordinates/vex_selectiongroup\") }
+    }
+    channel vex_inplace {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../calculate_pixel_coordinates/vex_inplace\") }
+    }
+    channel vex_matchattrib {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"id\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../calculate_pixel_coordinates/vex_matchattrib\") }
+    }
+    channel vex_updatenmls {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../calculate_pixel_coordinates/vex_updatenmls\") }
+    }
+    channel vex_outputmask {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"*\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../calculate_pixel_coordinates/vex_outputmask\") }
+    }
+    channel vex_cwdpath {
+      lefttype = extend
+      righttype = extend
+      defaultString = \".\"
+      flags = 0
+      segment { length = 0 expr = chsop(\"../calculate_pixel_coordinates/vex_cwdpath\") }
+    }
+    channel groupautobind {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../calculate_pixel_coordinates/groupautobind\") }
+    }
+    channel autobind {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../calculate_pixel_coordinates/autobind\") }
+    }
+    channel vex_strict {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../calculate_pixel_coordinates/vex_strict\") }
+    }
+    channel exportlist {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"*\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../calculate_pixel_coordinates/exportlist\") }
+    }
+    channel snippet {
+      lefttype = extend
+      righttype = extend
+      defaultString = "\"i@posx=int(fit(@P.x,-0.16,0.16,0,160))+10;
+i@posy=int(fit(@P.y,-0.1,0.1,200,0))+40;\""
+      flags = 0
+      segment { length = 0 expr = chs(\"../calculate_pixel_coordinates/snippet\") }
+    }
+    channel vex_threadjobsize {
+      lefttype = extend
+      righttype = extend
+      default = 1024
+      flags = 0
+      segment { length = 0 value = 1024 1024 expr = ch(\"../calculate_pixel_coordinates/vex_threadjobsize\") }
+    }
+    channel vex_numcount {
+      lefttype = extend
+      righttype = extend
+      default = 10
+      flags = 0
+      segment { length = 0 value = 10 10 expr = ch(\"../calculate_pixel_coordinates/vex_numcount\") }
+    }
+    channel class {
+      lefttype = extend
+      righttype = extend
+      default = 2
+      flags = 0
+      segment { length = 0 value = 2 2 expr = ch(\"../calculate_pixel_coordinates/class\") }
+    }
+    channel grouptype {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../calculate_pixel_coordinates/grouptype\") }
+    }
+    channel group {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../calculate_pixel_coordinates/group\") }
+    }
+  }
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/calculate_pixel_coordinates16.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+folder0	[ 0	locks=0 ]	(	0	0	)
+group	[ 0	locks=0 ]	(	[ group	"" ] 	)
+grouptype	[ 0	locks=0 ]	(	[ grouptype	0 ] 	)
+class	[ 0	locks=0 ]	(	[ class	2 ] 	)
+vex_numcount	[ 0	locks=0 ]	(	[ vex_numcount	10 ] 	)
+vex_threadjobsize	[ 0	locks=0 ]	(	[ vex_threadjobsize	1024 ] 	)
+snippet	[ 0	locks=0 ]	(	[ snippet	"" ] 	)
+exportlist	[ 0	locks=0 ]	(	[ exportlist	* ] 	)
+vex_strict	[ 0	locks=0 ]	(	[ vex_strict	0 ] 	)
+vex_strictvariables	[ 0	locks=0 ]	(	"on"	)
+autobind	[ 0	locks=0 ]	(	[ autobind	1 ] 	)
+bindings	[ 0	locks=0 ]	(	0	)
+groupautobind	[ 0	locks=0 ]	(	[ groupautobind	1 ] 	)
+groupbindings	[ 0	locks=0 ]	(	0	)
+vex_cwdpath	[ 0	locks=0 ]	(	[ vex_cwdpath	. ] 	)
+vex_outputmask	[ 0	locks=0 ]	(	[ vex_outputmask	* ] 	)
+vex_updatenmls	[ 0	locks=0 ]	(	[ vex_updatenmls	0 ] 	)
+vex_matchattrib	[ 0	locks=0 ]	(	[ vex_matchattrib	id ] 	)
+vex_inplace	[ 0	locks=0 ]	(	[ vex_inplace	0 ] 	)
+vex_selectiongroup	[ 0	locks=0 ]	(	[ vex_selectiongroup	"" ] 	)
+vex_precision	[ 0	locks=0 ]	(	[ vex_precision	auto ] 	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/calculate_pixel_coordinates16.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":""
+	},
+	"referenced_from":{
+		"type":"string",
+		"value":"../calculate_pixel_coordinates"
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/add20.init"
+Content-Type: text/plain
+
+type = add
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/add20.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment "Referenced from add2"
+position 89.1095 -9.92461
+connectornextid 2
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on displaycomment on
+outputsNamed3
+{
+0 "output1"
+}
+inputsNamed3
+{
+1 	attribdelete17 1 1 "input1"
+}
+inputs
+{
+0 	attribdelete17 0 1
+}
+stat
+{
+  create 1752164238
+  modify 1761319249
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 0.8 0.8 0.8 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/add20.chn"
+Content-Type: text/plain
+
+{
+    channel weight0 {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../add2/weight0\") }
+    }
+    channel pt0z {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../add2/pt0z\") }
+    }
+    channel pt0y {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../add2/pt0y\") }
+    }
+    channel pt0x {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../add2/pt0x\") }
+    }
+    channel usept0 {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../add2/usept0\") }
+    }
+    channel closed0 {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../add2/closed0\") }
+    }
+    channel prim0 {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../add2/prim0\") }
+    }
+    channel appendunusedtoparticlesystem {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../add2/appendunusedtoparticlesystem\") }
+    }
+    channel particlegroup {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../add2/particlegroup\") }
+    }
+    channel addparticlesystem {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../add2/addparticlesystem\") }
+    }
+    channel closedall {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../add2/closedall\") }
+    }
+    channel attrname {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../add2/attrname\") }
+    }
+    channel inc {
+      lefttype = extend
+      righttype = extend
+      default = 2
+      flags = 0
+      segment { length = 0 value = 2 2 expr = ch(\"../add2/inc\") }
+    }
+    channel add {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../add2/add\") }
+    }
+    channel group {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../add2/group\") }
+    }
+    channel remove {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../add2/remove\") }
+    }
+    channel keep {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../add2/keep\") }
+    }
+  }
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/add20.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+stdswitcher	[ 0	locks=0 ]	(	0	0	0	)
+keep	[ 0	locks=0 ]	(	[ keep	0 ] 	)
+points	[ 0	locks=0 ]	(	1	)
+remove	[ 0	locks=0 ]	(	[ remove	0 ] 	)
+switcher	[ 0	locks=0 ]	(	0	0	)
+prims	[ 0	locks=0 ]	(	1	)
+group	[ 0	locks=0 ]	(	[ group	"" ] 	)
+add	[ 0	locks=0 ]	(	[ add	0 ] 	)
+inc	[ 0	locks=0 ]	(	[ inc	2 ] 	)
+attrname	[ 0	locks=0 ]	(	[ attrname	"" ] 	)
+closedall	[ 0	locks=0 ]	(	[ closedall	0 ] 	)
+addparticlesystem	[ 0	locks=0 ]	(	[ addparticlesystem	0 ] 	)
+particlegroup	[ 0	locks=0 ]	(	[ particlegroup	"" ] 	)
+appendunusedtoparticlesystem	[ 0	locks=0 ]	(	[ appendunusedtoparticlesystem	0 ] 	)
+prim0	[ 0	locks=0 ]	(	[ prim0	"" ] 	)
+closed0	[ 0	locks=0 ]	(	[ closed0	0 ] 	)
+usept0	[ 0	locks=0 ]	(	[ usept0	1 ] 	)
+pt0	[ 0	locks=0 ]	(	[ pt0x	0 ] 	[ pt0y	0 ] 	[ pt0z	0 ] 	)
+weight0	[ 0	locks=0 ]	(	[ weight0	1 ] 	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/add20.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":"21.0.512"
+	},
+	"referenced_from":{
+		"type":"string",
+		"value":"../add2"
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/attribpromote17.init"
+Content-Type: text/plain
+
+type = attribpromote
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/attribpromote17.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment "Referenced from attribpromote1"
+position 89.106 -10.9246
+connectornextid 2
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on displaycomment on
+outputsNamed3
+{
+1 "output1"
+}
+inputsNamed3
+{
+0 	add20 0 1 "input1"
+}
+inputs
+{
+0 	add20 0 1
+}
+stat
+{
+  create 1752164324
+  modify 1761319249
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 0.8 0.8 0.8 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/attribpromote17.chn"
+Content-Type: text/plain
+
+{
+    channel deletein {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../attribpromote1/deletein\") }
+    }
+    channel outname {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../attribpromote1/outname\") }
+    }
+    channel useoutname {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../attribpromote1/useoutname\") }
+    }
+    channel method {
+      lefttype = extend
+      righttype = extend
+      default = 2
+      flags = 0
+      segment { length = 0 value = 2 2 expr = ch(\"../attribpromote1/method\") }
+    }
+    channel pieceattrib {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"name\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../attribpromote1/pieceattrib\") }
+    }
+    channel usepieceattrib {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../attribpromote1/usepieceattrib\") }
+    }
+    channel outclass {
+      lefttype = extend
+      righttype = extend
+      default = 2
+      flags = 0
+      segment { length = 0 value = 2 2 expr = ch(\"../attribpromote1/outclass\") }
+    }
+    channel inclass {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../attribpromote1/inclass\") }
+    }
+    channel inname {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"level\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../attribpromote1/inname\") }
+    }
+  }
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/attribpromote17.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+inname	[ 0	locks=0 ]	(	[ inname	"" ] 	)
+inclass	[ 0	locks=0 ]	(	[ inclass	2 ] 	)
+outclass	[ 0	locks=0 ]	(	[ outclass	2 ] 	)
+usepieceattrib	[ 0	locks=0 ]	(	[ usepieceattrib	0 ] 	)
+pieceattrib	[ 0	locks=0 ]	(	[ pieceattrib	name ] 	)
+method	[ 0	locks=0 ]	(	[ method	2 ] 	)
+useoutname	[ 0	locks=0 ]	(	[ useoutname	0 ] 	)
+outname	[ 0	locks=0 ]	(	[ outname	"" ] 	)
+deletein	[ 0	locks=0 ]	(	[ deletein	1 ] 	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/attribpromote17.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":"21.0.512"
+	},
+	"referenced_from":{
+		"type":"string",
+		"value":"../attribpromote1"
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/attribdelete17.init"
+Content-Type: text/plain
+
+type = attribdelete
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/attribdelete17.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment "Referenced from attribdelete1"
+position 89.106 -8.92485
+connectornextid 2
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on displaycomment on
+outputsNamed3
+{
+1 "output1"
+}
+inputsNamed3
+{
+0 	delete17 1 1 "input1"
+}
+inputs
+{
+0 	delete17 0 1
+}
+stat
+{
+  create 1752164347
+  modify 1761319249
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 0.8 0.8 0.8 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/attribdelete17.chn"
+Content-Type: text/plain
+
+{
+    channel updatevar {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../attribdelete1/updatevar\") }
+    }
+    channel dtldel {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../attribdelete1/dtldel\") }
+    }
+    channel dodtldel {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../attribdelete1/dodtldel\") }
+    }
+    channel primdel {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../attribdelete1/primdel\") }
+    }
+    channel doprimdel {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../attribdelete1/doprimdel\") }
+    }
+    channel vtxdel {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../attribdelete1/vtxdel\") }
+    }
+    channel dovtxdel {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../attribdelete1/dovtxdel\") }
+    }
+    channel ptdel {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../attribdelete1/ptdel\") }
+    }
+    channel doptdel {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../attribdelete1/doptdel\") }
+    }
+    channel negate {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../attribdelete1/negate\") }
+    }
+    channel usereference {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../attribdelete1/usereference\") }
+    }
+  }
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/attribdelete17.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+usereference	[ 0	locks=0 ]	(	[ usereference	0 ] 	)
+negate	[ 0	locks=0 ]	(	[ negate	0 ] 	)
+doptdel	[ 0	locks=0 ]	(	[ doptdel	1 ] 	)
+ptdel	[ 0	locks=0 ]	(	[ ptdel	"" ] 	)
+dovtxdel	[ 0	locks=0 ]	(	[ dovtxdel	1 ] 	)
+vtxdel	[ 0	locks=0 ]	(	[ vtxdel	"" ] 	)
+doprimdel	[ 0	locks=0 ]	(	[ doprimdel	1 ] 	)
+primdel	[ 0	locks=0 ]	(	[ primdel	"" ] 	)
+dodtldel	[ 0	locks=0 ]	(	[ dodtldel	1 ] 	)
+dtldel	[ 0	locks=0 ]	(	[ dtldel	"" ] 	)
+updatevar	[ 0	locks=0 ]	(	[ updatevar	1 ] 	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/attribdelete17.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":""
+	},
+	"referenced_from":{
+		"type":"string",
+		"value":"../attribdelete1"
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/delete17.init"
+Content-Type: text/plain
+
+type = delete
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/delete17.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment "Referenced from delete1"
+position 89.1095 -7.92485
+connectornextid 2
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on displaycomment on
+outputsNamed3
+{
+1 "output1"
+}
+inputsNamed3
+{
+0 	collect_values_to_array18 1 1 "input1"
+}
+inputs
+{
+0 	collect_values_to_array18 0 1
+}
+stat
+{
+  create 1752164283
+  modify 1761319249
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 0.8 0.8 0.8 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/delete17.chn"
+Content-Type: text/plain
+
+{
+    channel rangeend {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/rangeend\") }
+    }
+    channel keeppoints {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/keeppoints\") }
+    }
+    channel removegrp {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../delete1/removegrp\") }
+    }
+    channel percent {
+      lefttype = extend
+      righttype = extend
+      default = 50
+      flags = 0
+      segment { length = 0 value = 50 50 expr = ch(\"../delete1/percent\") }
+    }
+    channel seedattrib {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"id\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../delete1/seedattrib\") }
+    }
+    channel useseedattrib {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/useseedattrib\") }
+    }
+    channel globalseed {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../delete1/globalseed\") }
+    }
+    channel userandom {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/userandom\") }
+    }
+    channel tol {
+      lefttype = extend
+      righttype = extend
+      default = 0.001
+      flags = 0
+      segment { length = 0 value = 0.001 0.001 expr = ch(\"../delete1/tol\") }
+    }
+    channel doopen {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/doopen\") }
+    }
+    channel zaf {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/zaf\") }
+    }
+    channel degenerate {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/degenerate\") }
+    }
+    channel affectdegenerate {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/affectdegenerate\") }
+    }
+    channel camerapath {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chsop(\"../delete1/camerapath\") }
+    }
+    channel angle {
+      lefttype = extend
+      righttype = extend
+      default = 180
+      flags = 0
+      segment { length = 0 value = 180 180 expr = ch(\"../delete1/angle\") }
+    }
+    channel dirz {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../delete1/dirz\") }
+    }
+    channel diry {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/diry\") }
+    }
+    channel dirx {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/dirx\") }
+    }
+    channel affectnormal {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/affectnormal\") }
+    }
+    channel tz {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/tz\") }
+    }
+    channel ty {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/ty\") }
+    }
+    channel tx {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/tx\") }
+    }
+    channel sizez {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../delete1/sizez\") }
+    }
+    channel sizey {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../delete1/sizey\") }
+    }
+    channel sizex {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../delete1/sizex\") }
+    }
+    channel boundtype {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/boundtype\") }
+    }
+    channel affectvolume {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/affectvolume\") }
+    }
+    channel select2 {
+      lefttype = extend
+      righttype = extend
+      default = 2
+      flags = 0
+      segment { length = 0 value = 2 2 expr = ch(\"../delete1/select2\") }
+    }
+    channel select1 {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../delete1/select1\") }
+    }
+    channel rangestart {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/rangestart\") }
+    }
+    channel pattern {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"*\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../delete1/pattern\") }
+    }
+    channel filter {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../delete1/filter\") }
+    }
+    channel groupop {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/groupop\") }
+    }
+    channel affectnumber {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../delete1/affectnumber\") }
+    }
+    channel geotype {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/geotype\") }
+    }
+    channel entity {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../delete1/entity\") }
+    }
+    channel negate {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/negate\") }
+    }
+    channel label0 {
+      lefttype = extend
+      righttype = extend
+      defaultString = "\"Warning: Group Is NOT Filtered by Geometry Type\""
+      flags = 0
+      segment { length = 0 expr = chs(\"../delete1/label0\") }
+    }
+    channel group {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../delete1/group\") }
+    }
+  }
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/delete17.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+group	[ 0	locks=0 ]	(	[ group	"" ] 	)
+label0	[ 0	locks=0 ]	(	[ label0	"Warning: Group Is NOT Filtered by Geometry Type" ] 	)
+negate	[ 0	locks=0 ]	(	[ negate	0 ] 	)
+entity	[ 0	locks=0 ]	(	[ entity	0 ] 	)
+geotype	[ 0	locks=0 ]	(	[ geotype	0 ] 	)
+stdswitcher	[ 0	locks=0 ]	(	0	0	0	0	0	)
+affectnumber	[ 0	locks=0 ]	(	[ affectnumber	1 ] 	)
+groupop	[ 0	locks=0 ]	(	[ groupop	0 ] 	)
+filter	[ 0	locks=0 ]	(	[ filter	1 ] 	)
+pattern	[ 0	locks=0 ]	(	[ pattern	!* ] 	)
+range	[ 0	locks=0 ]	(	[ rangestart	0 ] 	[ rangeend	0 ] 	)
+select	[ 0	locks=0 ]	(	[ select1	1 ] 	[ select2	2 ] 	)
+affectvolume	[ 0	locks=0 ]	(	[ affectvolume	0 ] 	)
+boundtype	[ 0	locks=0 ]	(	[ boundtype	0 ] 	)
+size	[ 0	locks=0 ]	(	[ sizex	1 ] 	[ sizey	1 ] 	[ sizez	1 ] 	)
+t	[ 0	locks=0 ]	(	[ tx	0 ] 	[ ty	0 ] 	[ tz	0 ] 	)
+affectnormal	[ 0	locks=0 ]	(	[ affectnormal	0 ] 	)
+dir	[ 0	locks=0 ]	(	[ dirx	0 ] 	[ diry	0 ] 	[ dirz	1 ] 	)
+angle	[ 0	locks=0 ]	(	[ angle	180 ] 	)
+camerapath	[ 0	locks=0 ]	(	[ camerapath	"" ] 	)
+affectdegenerate	[ 0	locks=0 ]	(	[ affectdegenerate	0 ] 	)
+degenerate	[ 0	locks=0 ]	(	[ degenerate	0 ] 	)
+zaf	[ 0	locks=0 ]	(	[ zaf	0 ] 	)
+doopen	[ 0	locks=0 ]	(	[ doopen	0 ] 	)
+tol	[ 0	locks=0 ]	(	[ tol	0.001 ] 	)
+userandom	[ 0	locks=0 ]	(	[ userandom	0 ] 	)
+globalseed	[ 0	locks=0 ]	(	[ globalseed	1 ] 	)
+useseedattrib	[ 0	locks=0 ]	(	[ useseedattrib	0 ] 	)
+seedattrib	[ 0	locks=0 ]	(	[ seedattrib	id ] 	)
+percent	[ 0	locks=0 ]	(	[ percent	50 ] 	)
+removegrp	[ 0	locks=0 ]	(	[ removegrp	1 ] 	)
+keeppoints	[ 0	locks=0 ]	(	[ keeppoints	0 ] 	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/delete17.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":"21.0.512"
+	},
+	"referenced_from":{
+		"type":"string",
+		"value":"../delete1"
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/color16.init"
+Content-Type: text/plain
+
+type = attribwrangle
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/color16.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment "Referenced from color"
+position 89.1065 -4.6023
+connectornextid 2
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on displaycomment on
+outputsNamed3
+{
+1 "output1"
+}
+inputsNamed3
+{
+0 	copytopoints17 2 1 "input1"
+}
+inputs
+{
+0 	copytopoints17 0 1
+}
+stat
+{
+  create 1753249185
+  modify 1761319275
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 0.8 0.8 0.8 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/color16.spareparmdef"
+Content-Type: text/plain
+
+    group {
+        name    "folder1"
+        label   "Code"
+
+        parm {
+            name    "group"
+            baseparm
+            label   "Group"
+            export  none
+            bindselector uvselect "Modify Attribs"
+                "Select the geometry to affect and press Enter to complete."
+                0 1 0xffffffff 0 grouptype 0
+        }
+        parm {
+            name    "grouptype"
+            baseparm
+            label   "Group Type"
+            export  none
+        }
+        parm {
+            name    "class"
+            baseparm
+            label   "Run Over"
+            export  none
+        }
+        parm {
+            name    "vex_numcount"
+            baseparm
+            label   "Number Count"
+            export  none
+        }
+        parm {
+            name    "vex_threadjobsize"
+            baseparm
+            label   "Thread Job Size"
+            export  none
+        }
+        groupsimple {
+            name    "folder_generatedparms_snippet"
+            label   "Generated Channel Parameters"
+            grouptag { "sidefx::look" "blank" }
+
+            parm {
+                name    "color"
+                label   "Color"
+                type    ramp_rgb
+                default { "2" }
+                range   { 1! 10 }
+            }
+        }
+
+        parm {
+            name    "snippet"
+            baseparm
+            label   "VEXpression"
+            export  all
+        }
+        parm {
+            name    "exportlist"
+            baseparm
+            label   "Attributes to Create"
+            export  none
+        }
+        parm {
+            name    "vex_strict"
+            baseparm
+            label   "Enforce Prototypes"
+            export  none
+        }
+    }
+
+    group {
+        name    "folder1_1"
+        label   "Bindings"
+
+        parm {
+            name    "autobind"
+            baseparm
+            label   "Autobind by Name"
+            export  none
+        }
+        multiparm {
+            name    "bindings"
+            label    "Number of Bindings"
+            baseparm
+            default 0
+            parmtag { "autoscope" "0000000000000000" }
+            parmtag { "multistartoffset" "1" }
+
+            parm {
+                name    "bindname#"
+                baseparm
+                label   "Attribute Name"
+                export  none
+            }
+            parm {
+                name    "bindparm#"
+                baseparm
+                label   "VEX Parameter"
+                export  none
+            }
+        }
+
+        parm {
+            name    "groupautobind"
+            baseparm
+            label   "Autobind Groups by Name"
+            export  none
+        }
+        multiparm {
+            name    "groupbindings"
+            label    "Group Bindings"
+            baseparm
+            default 0
+            parmtag { "autoscope" "0000000000000000" }
+            parmtag { "multistartoffset" "1" }
+
+            parm {
+                name    "bindgroupname#"
+                baseparm
+                label   "Group Name"
+                export  none
+            }
+            parm {
+                name    "bindgroupparm#"
+                baseparm
+                label   "VEX Parameter"
+                export  none
+            }
+        }
+
+        parm {
+            name    "vex_cwdpath"
+            baseparm
+            label   "Evaluation Node Path"
+            export  none
+        }
+        parm {
+            name    "vex_outputmask"
+            baseparm
+            label   "Export Parameters"
+            export  none
+        }
+        parm {
+            name    "vex_updatenmls"
+            baseparm
+            label   "Update Normals If Displaced"
+            export  none
+        }
+        parm {
+            name    "vex_matchattrib"
+            baseparm
+            label   "Attribute to Match"
+            export  none
+        }
+        parm {
+            name    "vex_inplace"
+            baseparm
+            label   "Compute Results In Place"
+            export  none
+        }
+        parm {
+            name    "vex_selectiongroup"
+            baseparm
+            label   "Output Selection Group"
+            export  none
+        }
+        parm {
+            name    "vex_precision"
+            baseparm
+            label   "VEX Precision"
+            export  none
+        }
+    }
+
+    parm {
+        name    "vex_strictvariables"
+        baseparm
+        label   "Standard Variable Names Only"
+        export  none
+    }
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/color16.chn"
+Content-Type: text/plain
+
+{
+    channel color4interp {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/color4interp\") }
+    }
+    channel color4cb {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/color4cb\") }
+    }
+    channel color4cg {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/color4cg\") }
+    }
+    channel color4cr {
+      lefttype = extend
+      righttype = extend
+      default = 0.5
+      flags = 0
+      segment { length = 0 value = 0.5 0.5 expr = ch(\"../color/color4cr\") }
+    }
+    channel color4pos {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/color4pos\") }
+    }
+    channel color3interp {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/color3interp\") }
+    }
+    channel color3cb {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/color3cb\") }
+    }
+    channel color3cg {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/color3cg\") }
+    }
+    channel color3cr {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/color3cr\") }
+    }
+    channel color3pos {
+      lefttype = extend
+      righttype = extend
+      default = 0.83333331346511841
+      flags = 0
+      segment { length = 0 value = 0.83333331346511841 0.83333331346511841 expr = ch(\"../color/color3pos\") }
+    }
+    channel color2interp {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/color2interp\") }
+    }
+    channel color2cb {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/color2cb\") }
+    }
+    channel color2cg {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/color2cg\") }
+    }
+    channel color2cr {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/color2cr\") }
+    }
+    channel color2pos {
+      lefttype = extend
+      righttype = extend
+      default = 0.49293786287307739
+      flags = 0
+      segment { length = 0 value = 0.49293786287307739 0.49293786287307739 expr = ch(\"../color/color2pos\") }
+    }
+    channel color1interp {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/color1interp\") }
+    }
+    channel color1cb {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/color1cb\") }
+    }
+    channel color1cg {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/color1cg\") }
+    }
+    channel color1cr {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/color1cr\") }
+    }
+    channel color1pos {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/color1pos\") }
+    }
+    channel vex_precision {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"auto\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../color/vex_precision\") }
+    }
+    channel vex_selectiongroup {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../color/vex_selectiongroup\") }
+    }
+    channel vex_inplace {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/vex_inplace\") }
+    }
+    channel vex_matchattrib {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"id\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../color/vex_matchattrib\") }
+    }
+    channel vex_updatenmls {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/vex_updatenmls\") }
+    }
+    channel vex_outputmask {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"*\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../color/vex_outputmask\") }
+    }
+    channel vex_cwdpath {
+      lefttype = extend
+      righttype = extend
+      defaultString = \".\"
+      flags = 0
+      segment { length = 0 expr = chsop(\"../color/vex_cwdpath\") }
+    }
+    channel groupautobind {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/groupautobind\") }
+    }
+    channel autobind {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/autobind\") }
+    }
+    channel vex_strict {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/vex_strict\") }
+    }
+    channel exportlist {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"*\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../color/exportlist\") }
+    }
+    channel snippet {
+      lefttype = extend
+      righttype = extend
+      defaultString = "\"v@Cd=chramp(\\\"color\\\",fit(@ptnum,0,6,0,1));
+\""
+      flags = 0
+      segment { length = 0 expr = chs(\"../color/snippet\") }
+    }
+    channel vex_threadjobsize {
+      lefttype = extend
+      righttype = extend
+      default = 1024
+      flags = 0
+      segment { length = 0 value = 1024 1024 expr = ch(\"../color/vex_threadjobsize\") }
+    }
+    channel vex_numcount {
+      lefttype = extend
+      righttype = extend
+      default = 10
+      flags = 0
+      segment { length = 0 value = 10 10 expr = ch(\"../color/vex_numcount\") }
+    }
+    channel class {
+      lefttype = extend
+      righttype = extend
+      default = 2
+      flags = 0
+      segment { length = 0 value = 2 2 expr = ch(\"../color/class\") }
+    }
+    channel grouptype {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/grouptype\") }
+    }
+    channel group {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../color/group\") }
+    }
+  }
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/color16.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+folder0	[ 0	locks=0 ]	(	0	0	)
+group	[ 0	locks=0 ]	(	[ group	"" ] 	)
+grouptype	[ 0	locks=0 ]	(	[ grouptype	0 ] 	)
+class	[ 0	locks=0 ]	(	[ class	2 ] 	)
+vex_numcount	[ 0	locks=0 ]	(	[ vex_numcount	10 ] 	)
+vex_threadjobsize	[ 0	locks=0 ]	(	[ vex_threadjobsize	1024 ] 	)
+snippet	[ 0	locks=0 ]	(	[ snippet	"" ] 	)
+exportlist	[ 0	locks=0 ]	(	[ exportlist	* ] 	)
+vex_strict	[ 0	locks=0 ]	(	[ vex_strict	0 ] 	)
+vex_strictvariables	[ 0	locks=0 ]	(	"on"	)
+autobind	[ 0	locks=0 ]	(	[ autobind	1 ] 	)
+bindings	[ 0	locks=0 ]	(	0	)
+groupautobind	[ 0	locks=0 ]	(	[ groupautobind	1 ] 	)
+groupbindings	[ 0	locks=0 ]	(	0	)
+vex_cwdpath	[ 0	locks=0 ]	(	[ vex_cwdpath	. ] 	)
+vex_outputmask	[ 0	locks=0 ]	(	[ vex_outputmask	* ] 	)
+vex_updatenmls	[ 0	locks=0 ]	(	[ vex_updatenmls	0 ] 	)
+vex_matchattrib	[ 0	locks=0 ]	(	[ vex_matchattrib	id ] 	)
+vex_inplace	[ 0	locks=0 ]	(	[ vex_inplace	0 ] 	)
+vex_selectiongroup	[ 0	locks=0 ]	(	[ vex_selectiongroup	"" ] 	)
+vex_precision	[ 0	locks=0 ]	(	[ vex_precision	auto ] 	)
+folder1	[ 0	locks=0 ]	(	0	0	)
+folder_generatedparms_snippet	[ 0	locks=0 ]	(	0	)
+color	[ 0	locks=0 ]	(	4	)
+color1pos	[ 0	locks=0 ]	(	[ color1pos	0 ] 	)
+color1c	[ 0	locks=0 ]	(	[ color1cr	0 ] 	[ color1cg	0 ] 	[ color1cb	0 ] 	)
+color1interp	[ 0	locks=0 ]	(	[ color1interp	1 ] 	)
+color2pos	[ 0	locks=0 ]	(	[ color2pos	0 ] 	)
+color2c	[ 0	locks=0 ]	(	[ color2cr	0 ] 	[ color2cg	0 ] 	[ color2cb	0 ] 	)
+color2interp	[ 0	locks=0 ]	(	[ color2interp	1 ] 	)
+color3pos	[ 0	locks=0 ]	(	[ color3pos	0 ] 	)
+color3c	[ 0	locks=0 ]	(	[ color3cr	0 ] 	[ color3cg	0 ] 	[ color3cb	0 ] 	)
+color3interp	[ 0	locks=0 ]	(	[ color3interp	1 ] 	)
+color4pos	[ 0	locks=0 ]	(	[ color4pos	0 ] 	)
+color4c	[ 0	locks=0 ]	(	[ color4cr	0 ] 	[ color4cg	0 ] 	[ color4cb	0 ] 	)
+color4interp	[ 0	locks=0 ]	(	[ color4interp	1 ] 	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/color16.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":""
+	},
+	"referenced_from":{
+		"type":"string",
+		"value":"../color"
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/collect_values_to_array18.init"
+Content-Type: text/plain
+
+type = attribwrangle
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/collect_values_to_array18.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment ""
+position 89.1065 -6.89972
+connectornextid 2
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on
+outputsNamed3
+{
+1 "output1"
+}
+inputsNamed3
+{
+0 	calculate_pixel_coordinates16 1 1 "input1"
+}
+inputs
+{
+0 	calculate_pixel_coordinates16 0 1
+}
+stat
+{
+  create 1752082986
+  modify 1761319328
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 0.8 0.8 0.8 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/collect_values_to_array18.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+folder0	[ 0	locks=0 ]	(	0	0	)
+group	[ 0	locks=0 ]	(	""	)
+grouptype	[ 0	locks=0 ]	(	"guess"	)
+class	[ 0	locks=0 ]	(	"detail"	)
+vex_numcount	[ 0	locks=0 ]	(	10	)
+vex_threadjobsize	[ 0	locks=0 ]	(	1024	)
+snippet	[ 0	locks=0 ]	(	"i[]@level = array();
+for(int i=0; i<7; i++){
+    int tempx = point(0, \"posx\", i);
+    append(@level, tempx);
+    int tempy = point(0, \"posy\", i);
+    append(@level, tempy);
+}
+append(@level, 4);                    // how many frames before next sprite reveal
+append(@level, 0);                     // pad with zero to get 16 bytes"	)
+exportlist	[ 0	locks=0 ]	(	*	)
+vex_strict	[ 0	locks=0 ]	(	"off"	)
+vex_strictvariables	[ 0	locks=0 ]	(	"on"	)
+autobind	[ 0	locks=0 ]	(	"on"	)
+bindings	[ 0	locks=0 ]	(	0	)
+groupautobind	[ 0	locks=0 ]	(	"on"	)
+groupbindings	[ 0	locks=0 ]	(	0	)
+vex_cwdpath	[ 0	locks=0 ]	(	.	)
+vex_outputmask	[ 0	locks=0 ]	(	*	)
+vex_updatenmls	[ 0	locks=0 ]	(	"off"	)
+vex_matchattrib	[ 0	locks=0 ]	(	id	)
+vex_inplace	[ 0	locks=0 ]	(	"off"	)
+vex_selectiongroup	[ 0	locks=0 ]	(	""	)
+vex_precision	[ 0	locks=0 ]	(	auto	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/collect_values_to_array18.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":""
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/grid14.init"
+Content-Type: text/plain
+
+type = grid
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/grid14.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment ""
+position 96.8787 0.612257
+connectornextid 1
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on
+outputsNamed3
+{
+0 "output1"
+}
+inputsNamed3
+{
+}
+inputs
+{
+}
+stat
+{
+  create 1752163308
+  modify 1761319400
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 0.8 0.8 0.8 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/grid14.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+type	[ 0	locks=0 ]	(	"poly"	)
+surftype	[ 0	locks=0 ]	(	"quads"	)
+orient	[ 0	locks=0 ]	(	"xy"	)
+size	[ 0	locks=0 ]	(	0.32	0.2	)
+t	[ 0	locks=0 ]	(	0	0	0	)
+r	[ 0	locks=0 ]	(	0	180	0	)
+rows	[ 0	locks=0 ]	(	10	)
+cols	[ 0	locks=0 ]	(	10	)
+orderu	[ 0	locks=0 ]	(	4	)
+orderv	[ 0	locks=0 ]	(	4	)
+interpu	[ 0	locks=0 ]	(	"on"	)
+interpv	[ 0	locks=0 ]	(	"on"	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/grid14.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":"21.0.512"
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/scatter15.init"
+Content-Type: text/plain
+
+type = scatter::2.0
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/scatter15.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment ""
+position 96.8787 -0.387743
+connectornextid 2
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on
+outputsNamed3
+{
+1 "output1"
+}
+inputsNamed3
+{
+0 	grid14 0 1 "input1"
+}
+inputs
+{
+0 	grid14 0 1
+}
+stat
+{
+  create 1752163344
+  modify 1761319379
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 0.8 0.8 0.8 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/scatter15.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+group	[ 0	locks=0 ]	(	""	)
+stdswitcher	[ 0	locks=0 ]	(	0	0	)
+generateby	[ 0	locks=0 ]	(	"bydensity"	)
+indepvoxel	[ 0	locks=0 ]	(	"off"	)
+forcetotal	[ 0	locks=0 ]	(	"on"	)
+npts	[ 0	locks=0 ]	(	7	)
+densityscale	[ 0	locks=0 ]	(	10	)
+usedensityattrib	[ 0	locks=0 ]	(	"off"	)
+densityattrib	[ 0	locks=0 ]	(	density	)
+useareaattrib	[ 0	locks=0 ]	(	"off"	)
+areaattrib	[ 0	locks=0 ]	(	area	)
+useareaforvolumes	[ 0	locks=0 ]	(	"off"	)
+usedensitytexture	[ 0	locks=0 ]	(	"off"	)
+densitytexture	[ 0	locks=0 ]	(	default.pic	)
+uvattrib	[ 0	locks=0 ]	(	uv	)
+primcountattrib	[ 0	locks=0 ]	(	count	)
+useemergencylimit	[ 0	locks=0 ]	(	"on"	)
+emergencylimit	[ 0	locks=0 ]	(	20552	)
+seed	[ 0	locks=0 ]	(	116.5	)
+overrideprimseed	[ 0	locks=0 ]	(	"off"	)
+primseedattrib	[ 0	locks=0 ]	(	primid	)
+randomizeorder	[ 0	locks=0 ]	(	"on"	)
+relaxpoints	[ 0	locks=0 ]	(	"on"	)
+relaxiterations	[ 0	locks=0 ]	(	1	)
+usegeometricnormals	[ 0	locks=0 ]	(	"off"	)
+scaleradiiby	[ 0	locks=0 ]	(	1	)
+usemaxradius	[ 0	locks=0 ]	(	"on"	)
+maxradius	[ 0	locks=0 ]	(	10	)
+useprimnumattrib	[ 0	locks=0 ]	(	"off"	)
+primnumattrib	[ 0	locks=0 ]	(	sourceprim	)
+useprimuvwattrib	[ 0	locks=0 ]	(	"off"	)
+primuvwattrib	[ 0	locks=0 ]	(	sourceprimuv	)
+useoutputdensityattrib	[ 0	locks=0 ]	(	"off"	)
+outputdensityattrib	[ 0	locks=0 ]	(	density	)
+useoutputradiusattrib	[ 0	locks=0 ]	(	"off"	)
+outputradiusattrib	[ 0	locks=0 ]	(	pscale	)
+useoutputidattrib	[ 0	locks=0 ]	(	"off"	)
+outputidattrib	[ 0	locks=0 ]	(	id	)
+radiusintexturespace	[ 0	locks=0 ]	(	"off"	)
+pointattribs	[ 0	locks=0 ]	(	*	)
+vertattribs	[ 0	locks=0 ]	(	"N uv*"	)
+primattribs	[ 0	locks=0 ]	(	""	)
+detailattribs	[ 0	locks=0 ]	(	""	)
+detailattribsasdetail	[ 0	locks=0 ]	(	""	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/scatter15.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":"21.0.512"
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/copytopoints18.init"
+Content-Type: text/plain
+
+type = copytopoints::2.0
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/copytopoints18.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment ""
+position 95.933 -3.51044
+connectornextid 3
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on
+outputsNamed3
+{
+2 "output1"
+}
+inputsNamed3
+{
+0 	(__dot18) "" 1 "input1"
+1 	transform13 1 1 "input2"
+}
+inputs
+{
+0 	(__dot18) 0 1
+1 	transform13 0 1
+}
+stat
+{
+  create 1752163390
+  modify 1761319346
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 1 0.65 0.1 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/copytopoints18.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+sourcegroup	[ 0	locks=0 ]	(	""	)
+sourcegrouptype	[ 0	locks=0 ]	(	"guess"	)
+targetgroup	[ 0	locks=0 ]	(	""	)
+useidattrib	[ 0	locks=0 ]	(	"off"	)
+idattrib	[ 0	locks=0 ]	(	name	)
+pack	[ 0	locks=0 ]	(	"off"	)
+pivot	[ 0	locks=0 ]	(	"centroid"	)
+viewportlod	[ 0	locks=0 ]	(	"full"	)
+transform	[ 0	locks=0 ]	(	"on"	)
+useimplicitn	[ 0	locks=0 ]	(	"on"	)
+resettargetattribs	[ 0	locks=0 ]	(	0	)
+targetattribs	[ 0	locks=0 ]	(	0	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/copytopoints18.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":"21.0.512"
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/calculate_pixel_coordinates17.init"
+Content-Type: text/plain
+
+type = attribwrangle
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/calculate_pixel_coordinates17.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment "Referenced from calculate_pixel_coordinates"
+position 95.93 -5.75466
+connectornextid 2
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on displaycomment on
+outputsNamed3
+{
+1 "output1"
+}
+inputsNamed3
+{
+0 	color17 1 1 "input1"
+}
+inputs
+{
+0 	color17 0 1
+}
+stat
+{
+  create 1751980372
+  modify 1761319346
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 0.8 0.8 0.8 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/calculate_pixel_coordinates17.chn"
+Content-Type: text/plain
+
+{
+    channel vex_precision {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"auto\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../calculate_pixel_coordinates/vex_precision\") }
+    }
+    channel vex_selectiongroup {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../calculate_pixel_coordinates/vex_selectiongroup\") }
+    }
+    channel vex_inplace {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../calculate_pixel_coordinates/vex_inplace\") }
+    }
+    channel vex_matchattrib {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"id\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../calculate_pixel_coordinates/vex_matchattrib\") }
+    }
+    channel vex_updatenmls {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../calculate_pixel_coordinates/vex_updatenmls\") }
+    }
+    channel vex_outputmask {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"*\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../calculate_pixel_coordinates/vex_outputmask\") }
+    }
+    channel vex_cwdpath {
+      lefttype = extend
+      righttype = extend
+      defaultString = \".\"
+      flags = 0
+      segment { length = 0 expr = chsop(\"../calculate_pixel_coordinates/vex_cwdpath\") }
+    }
+    channel groupautobind {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../calculate_pixel_coordinates/groupautobind\") }
+    }
+    channel autobind {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../calculate_pixel_coordinates/autobind\") }
+    }
+    channel vex_strict {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../calculate_pixel_coordinates/vex_strict\") }
+    }
+    channel exportlist {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"*\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../calculate_pixel_coordinates/exportlist\") }
+    }
+    channel snippet {
+      lefttype = extend
+      righttype = extend
+      defaultString = "\"i@posx=int(fit(@P.x,-0.16,0.16,0,160))+10;
+i@posy=int(fit(@P.y,-0.1,0.1,200,0))+40;\""
+      flags = 0
+      segment { length = 0 expr = chs(\"../calculate_pixel_coordinates/snippet\") }
+    }
+    channel vex_threadjobsize {
+      lefttype = extend
+      righttype = extend
+      default = 1024
+      flags = 0
+      segment { length = 0 value = 1024 1024 expr = ch(\"../calculate_pixel_coordinates/vex_threadjobsize\") }
+    }
+    channel vex_numcount {
+      lefttype = extend
+      righttype = extend
+      default = 10
+      flags = 0
+      segment { length = 0 value = 10 10 expr = ch(\"../calculate_pixel_coordinates/vex_numcount\") }
+    }
+    channel class {
+      lefttype = extend
+      righttype = extend
+      default = 2
+      flags = 0
+      segment { length = 0 value = 2 2 expr = ch(\"../calculate_pixel_coordinates/class\") }
+    }
+    channel grouptype {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../calculate_pixel_coordinates/grouptype\") }
+    }
+    channel group {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../calculate_pixel_coordinates/group\") }
+    }
+  }
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/calculate_pixel_coordinates17.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+folder0	[ 0	locks=0 ]	(	0	0	)
+group	[ 0	locks=0 ]	(	[ group	"" ] 	)
+grouptype	[ 0	locks=0 ]	(	[ grouptype	0 ] 	)
+class	[ 0	locks=0 ]	(	[ class	2 ] 	)
+vex_numcount	[ 0	locks=0 ]	(	[ vex_numcount	10 ] 	)
+vex_threadjobsize	[ 0	locks=0 ]	(	[ vex_threadjobsize	1024 ] 	)
+snippet	[ 0	locks=0 ]	(	[ snippet	"" ] 	)
+exportlist	[ 0	locks=0 ]	(	[ exportlist	* ] 	)
+vex_strict	[ 0	locks=0 ]	(	[ vex_strict	0 ] 	)
+vex_strictvariables	[ 0	locks=0 ]	(	"on"	)
+autobind	[ 0	locks=0 ]	(	[ autobind	1 ] 	)
+bindings	[ 0	locks=0 ]	(	0	)
+groupautobind	[ 0	locks=0 ]	(	[ groupautobind	1 ] 	)
+groupbindings	[ 0	locks=0 ]	(	0	)
+vex_cwdpath	[ 0	locks=0 ]	(	[ vex_cwdpath	. ] 	)
+vex_outputmask	[ 0	locks=0 ]	(	[ vex_outputmask	* ] 	)
+vex_updatenmls	[ 0	locks=0 ]	(	[ vex_updatenmls	0 ] 	)
+vex_matchattrib	[ 0	locks=0 ]	(	[ vex_matchattrib	id ] 	)
+vex_inplace	[ 0	locks=0 ]	(	[ vex_inplace	0 ] 	)
+vex_selectiongroup	[ 0	locks=0 ]	(	[ vex_selectiongroup	"" ] 	)
+vex_precision	[ 0	locks=0 ]	(	[ vex_precision	auto ] 	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/calculate_pixel_coordinates17.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":""
+	},
+	"referenced_from":{
+		"type":"string",
+		"value":"../calculate_pixel_coordinates"
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/add21.init"
+Content-Type: text/plain
+
+type = add
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/add21.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment "Referenced from add2"
+position 95.933 -9.92461
+connectornextid 2
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on displaycomment on
+outputsNamed3
+{
+0 "output1"
+}
+inputsNamed3
+{
+1 	attribdelete18 1 1 "input1"
+}
+inputs
+{
+0 	attribdelete18 0 1
+}
+stat
+{
+  create 1752164238
+  modify 1761319346
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 0.8 0.8 0.8 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/add21.chn"
+Content-Type: text/plain
+
+{
+    channel weight0 {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../add2/weight0\") }
+    }
+    channel pt0z {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../add2/pt0z\") }
+    }
+    channel pt0y {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../add2/pt0y\") }
+    }
+    channel pt0x {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../add2/pt0x\") }
+    }
+    channel usept0 {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../add2/usept0\") }
+    }
+    channel closed0 {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../add2/closed0\") }
+    }
+    channel prim0 {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../add2/prim0\") }
+    }
+    channel appendunusedtoparticlesystem {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../add2/appendunusedtoparticlesystem\") }
+    }
+    channel particlegroup {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../add2/particlegroup\") }
+    }
+    channel addparticlesystem {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../add2/addparticlesystem\") }
+    }
+    channel closedall {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../add2/closedall\") }
+    }
+    channel attrname {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../add2/attrname\") }
+    }
+    channel inc {
+      lefttype = extend
+      righttype = extend
+      default = 2
+      flags = 0
+      segment { length = 0 value = 2 2 expr = ch(\"../add2/inc\") }
+    }
+    channel add {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../add2/add\") }
+    }
+    channel group {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../add2/group\") }
+    }
+    channel remove {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../add2/remove\") }
+    }
+    channel keep {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../add2/keep\") }
+    }
+  }
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/add21.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+stdswitcher	[ 0	locks=0 ]	(	0	0	0	)
+keep	[ 0	locks=0 ]	(	[ keep	0 ] 	)
+points	[ 0	locks=0 ]	(	1	)
+remove	[ 0	locks=0 ]	(	[ remove	0 ] 	)
+switcher	[ 0	locks=0 ]	(	0	0	)
+prims	[ 0	locks=0 ]	(	1	)
+group	[ 0	locks=0 ]	(	[ group	"" ] 	)
+add	[ 0	locks=0 ]	(	[ add	0 ] 	)
+inc	[ 0	locks=0 ]	(	[ inc	2 ] 	)
+attrname	[ 0	locks=0 ]	(	[ attrname	"" ] 	)
+closedall	[ 0	locks=0 ]	(	[ closedall	0 ] 	)
+addparticlesystem	[ 0	locks=0 ]	(	[ addparticlesystem	0 ] 	)
+particlegroup	[ 0	locks=0 ]	(	[ particlegroup	"" ] 	)
+appendunusedtoparticlesystem	[ 0	locks=0 ]	(	[ appendunusedtoparticlesystem	0 ] 	)
+prim0	[ 0	locks=0 ]	(	[ prim0	"" ] 	)
+closed0	[ 0	locks=0 ]	(	[ closed0	0 ] 	)
+usept0	[ 0	locks=0 ]	(	[ usept0	1 ] 	)
+pt0	[ 0	locks=0 ]	(	[ pt0x	0 ] 	[ pt0y	0 ] 	[ pt0z	0 ] 	)
+weight0	[ 0	locks=0 ]	(	[ weight0	1 ] 	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/add21.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":"21.0.512"
+	},
+	"referenced_from":{
+		"type":"string",
+		"value":"../add2"
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/attribpromote18.init"
+Content-Type: text/plain
+
+type = attribpromote
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/attribpromote18.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment "Referenced from attribpromote1"
+position 95.9295 -10.9246
+connectornextid 2
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on displaycomment on
+outputsNamed3
+{
+1 "output1"
+}
+inputsNamed3
+{
+0 	add21 0 1 "input1"
+}
+inputs
+{
+0 	add21 0 1
+}
+stat
+{
+  create 1752164324
+  modify 1761319386
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 0.8 0.8 0.8 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/attribpromote18.chn"
+Content-Type: text/plain
+
+{
+    channel deletein {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../attribpromote1/deletein\") }
+    }
+    channel outname {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../attribpromote1/outname\") }
+    }
+    channel useoutname {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../attribpromote1/useoutname\") }
+    }
+    channel method {
+      lefttype = extend
+      righttype = extend
+      default = 2
+      flags = 0
+      segment { length = 0 value = 2 2 expr = ch(\"../attribpromote1/method\") }
+    }
+    channel pieceattrib {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"name\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../attribpromote1/pieceattrib\") }
+    }
+    channel usepieceattrib {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../attribpromote1/usepieceattrib\") }
+    }
+    channel outclass {
+      lefttype = extend
+      righttype = extend
+      default = 2
+      flags = 0
+      segment { length = 0 value = 2 2 expr = ch(\"../attribpromote1/outclass\") }
+    }
+    channel inclass {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../attribpromote1/inclass\") }
+    }
+    channel inname {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"level\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../attribpromote1/inname\") }
+    }
+  }
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/attribpromote18.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+inname	[ 0	locks=0 ]	(	[ inname	"" ] 	)
+inclass	[ 0	locks=0 ]	(	[ inclass	2 ] 	)
+outclass	[ 0	locks=0 ]	(	[ outclass	2 ] 	)
+usepieceattrib	[ 0	locks=0 ]	(	[ usepieceattrib	0 ] 	)
+pieceattrib	[ 0	locks=0 ]	(	[ pieceattrib	name ] 	)
+method	[ 0	locks=0 ]	(	[ method	2 ] 	)
+useoutname	[ 0	locks=0 ]	(	[ useoutname	0 ] 	)
+outname	[ 0	locks=0 ]	(	[ outname	"" ] 	)
+deletein	[ 0	locks=0 ]	(	[ deletein	1 ] 	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/attribpromote18.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":"21.0.512"
+	},
+	"referenced_from":{
+		"type":"string",
+		"value":"../attribpromote1"
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/attribdelete18.init"
+Content-Type: text/plain
+
+type = attribdelete
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/attribdelete18.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment "Referenced from attribdelete1"
+position 95.9295 -8.92485
+connectornextid 2
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on displaycomment on
+outputsNamed3
+{
+1 "output1"
+}
+inputsNamed3
+{
+0 	delete18 1 1 "input1"
+}
+inputs
+{
+0 	delete18 0 1
+}
+stat
+{
+  create 1752164347
+  modify 1761319346
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 0.8 0.8 0.8 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/attribdelete18.chn"
+Content-Type: text/plain
+
+{
+    channel updatevar {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../attribdelete1/updatevar\") }
+    }
+    channel dtldel {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../attribdelete1/dtldel\") }
+    }
+    channel dodtldel {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../attribdelete1/dodtldel\") }
+    }
+    channel primdel {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../attribdelete1/primdel\") }
+    }
+    channel doprimdel {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../attribdelete1/doprimdel\") }
+    }
+    channel vtxdel {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../attribdelete1/vtxdel\") }
+    }
+    channel dovtxdel {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../attribdelete1/dovtxdel\") }
+    }
+    channel ptdel {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../attribdelete1/ptdel\") }
+    }
+    channel doptdel {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../attribdelete1/doptdel\") }
+    }
+    channel negate {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../attribdelete1/negate\") }
+    }
+    channel usereference {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../attribdelete1/usereference\") }
+    }
+  }
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/attribdelete18.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+usereference	[ 0	locks=0 ]	(	[ usereference	0 ] 	)
+negate	[ 0	locks=0 ]	(	[ negate	0 ] 	)
+doptdel	[ 0	locks=0 ]	(	[ doptdel	1 ] 	)
+ptdel	[ 0	locks=0 ]	(	[ ptdel	"" ] 	)
+dovtxdel	[ 0	locks=0 ]	(	[ dovtxdel	1 ] 	)
+vtxdel	[ 0	locks=0 ]	(	[ vtxdel	"" ] 	)
+doprimdel	[ 0	locks=0 ]	(	[ doprimdel	1 ] 	)
+primdel	[ 0	locks=0 ]	(	[ primdel	"" ] 	)
+dodtldel	[ 0	locks=0 ]	(	[ dodtldel	1 ] 	)
+dtldel	[ 0	locks=0 ]	(	[ dtldel	"" ] 	)
+updatevar	[ 0	locks=0 ]	(	[ updatevar	1 ] 	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/attribdelete18.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":""
+	},
+	"referenced_from":{
+		"type":"string",
+		"value":"../attribdelete1"
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/delete18.init"
+Content-Type: text/plain
+
+type = delete
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/delete18.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment "Referenced from delete1"
+position 95.933 -7.92485
+connectornextid 2
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on displaycomment on
+outputsNamed3
+{
+1 "output1"
+}
+inputsNamed3
+{
+0 	collect_values_to_array19 1 1 "input1"
+}
+inputs
+{
+0 	collect_values_to_array19 0 1
+}
+stat
+{
+  create 1752164283
+  modify 1761319346
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 0.8 0.8 0.8 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/delete18.chn"
+Content-Type: text/plain
+
+{
+    channel rangeend {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/rangeend\") }
+    }
+    channel keeppoints {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/keeppoints\") }
+    }
+    channel removegrp {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../delete1/removegrp\") }
+    }
+    channel percent {
+      lefttype = extend
+      righttype = extend
+      default = 50
+      flags = 0
+      segment { length = 0 value = 50 50 expr = ch(\"../delete1/percent\") }
+    }
+    channel seedattrib {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"id\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../delete1/seedattrib\") }
+    }
+    channel useseedattrib {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/useseedattrib\") }
+    }
+    channel globalseed {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../delete1/globalseed\") }
+    }
+    channel userandom {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/userandom\") }
+    }
+    channel tol {
+      lefttype = extend
+      righttype = extend
+      default = 0.001
+      flags = 0
+      segment { length = 0 value = 0.001 0.001 expr = ch(\"../delete1/tol\") }
+    }
+    channel doopen {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/doopen\") }
+    }
+    channel zaf {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/zaf\") }
+    }
+    channel degenerate {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/degenerate\") }
+    }
+    channel affectdegenerate {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/affectdegenerate\") }
+    }
+    channel camerapath {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chsop(\"../delete1/camerapath\") }
+    }
+    channel angle {
+      lefttype = extend
+      righttype = extend
+      default = 180
+      flags = 0
+      segment { length = 0 value = 180 180 expr = ch(\"../delete1/angle\") }
+    }
+    channel dirz {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../delete1/dirz\") }
+    }
+    channel diry {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/diry\") }
+    }
+    channel dirx {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/dirx\") }
+    }
+    channel affectnormal {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/affectnormal\") }
+    }
+    channel tz {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/tz\") }
+    }
+    channel ty {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/ty\") }
+    }
+    channel tx {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/tx\") }
+    }
+    channel sizez {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../delete1/sizez\") }
+    }
+    channel sizey {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../delete1/sizey\") }
+    }
+    channel sizex {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../delete1/sizex\") }
+    }
+    channel boundtype {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/boundtype\") }
+    }
+    channel affectvolume {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/affectvolume\") }
+    }
+    channel select2 {
+      lefttype = extend
+      righttype = extend
+      default = 2
+      flags = 0
+      segment { length = 0 value = 2 2 expr = ch(\"../delete1/select2\") }
+    }
+    channel select1 {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../delete1/select1\") }
+    }
+    channel rangestart {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/rangestart\") }
+    }
+    channel pattern {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"*\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../delete1/pattern\") }
+    }
+    channel filter {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../delete1/filter\") }
+    }
+    channel groupop {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/groupop\") }
+    }
+    channel affectnumber {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../delete1/affectnumber\") }
+    }
+    channel geotype {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/geotype\") }
+    }
+    channel entity {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../delete1/entity\") }
+    }
+    channel negate {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/negate\") }
+    }
+    channel label0 {
+      lefttype = extend
+      righttype = extend
+      defaultString = "\"Warning: Group Is NOT Filtered by Geometry Type\""
+      flags = 0
+      segment { length = 0 expr = chs(\"../delete1/label0\") }
+    }
+    channel group {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../delete1/group\") }
+    }
+  }
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/delete18.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+group	[ 0	locks=0 ]	(	[ group	"" ] 	)
+label0	[ 0	locks=0 ]	(	[ label0	"Warning: Group Is NOT Filtered by Geometry Type" ] 	)
+negate	[ 0	locks=0 ]	(	[ negate	0 ] 	)
+entity	[ 0	locks=0 ]	(	[ entity	0 ] 	)
+geotype	[ 0	locks=0 ]	(	[ geotype	0 ] 	)
+stdswitcher	[ 0	locks=0 ]	(	0	0	0	0	0	)
+affectnumber	[ 0	locks=0 ]	(	[ affectnumber	1 ] 	)
+groupop	[ 0	locks=0 ]	(	[ groupop	0 ] 	)
+filter	[ 0	locks=0 ]	(	[ filter	1 ] 	)
+pattern	[ 0	locks=0 ]	(	[ pattern	!* ] 	)
+range	[ 0	locks=0 ]	(	[ rangestart	0 ] 	[ rangeend	0 ] 	)
+select	[ 0	locks=0 ]	(	[ select1	1 ] 	[ select2	2 ] 	)
+affectvolume	[ 0	locks=0 ]	(	[ affectvolume	0 ] 	)
+boundtype	[ 0	locks=0 ]	(	[ boundtype	0 ] 	)
+size	[ 0	locks=0 ]	(	[ sizex	1 ] 	[ sizey	1 ] 	[ sizez	1 ] 	)
+t	[ 0	locks=0 ]	(	[ tx	0 ] 	[ ty	0 ] 	[ tz	0 ] 	)
+affectnormal	[ 0	locks=0 ]	(	[ affectnormal	0 ] 	)
+dir	[ 0	locks=0 ]	(	[ dirx	0 ] 	[ diry	0 ] 	[ dirz	1 ] 	)
+angle	[ 0	locks=0 ]	(	[ angle	180 ] 	)
+camerapath	[ 0	locks=0 ]	(	[ camerapath	"" ] 	)
+affectdegenerate	[ 0	locks=0 ]	(	[ affectdegenerate	0 ] 	)
+degenerate	[ 0	locks=0 ]	(	[ degenerate	0 ] 	)
+zaf	[ 0	locks=0 ]	(	[ zaf	0 ] 	)
+doopen	[ 0	locks=0 ]	(	[ doopen	0 ] 	)
+tol	[ 0	locks=0 ]	(	[ tol	0.001 ] 	)
+userandom	[ 0	locks=0 ]	(	[ userandom	0 ] 	)
+globalseed	[ 0	locks=0 ]	(	[ globalseed	1 ] 	)
+useseedattrib	[ 0	locks=0 ]	(	[ useseedattrib	0 ] 	)
+seedattrib	[ 0	locks=0 ]	(	[ seedattrib	id ] 	)
+percent	[ 0	locks=0 ]	(	[ percent	50 ] 	)
+removegrp	[ 0	locks=0 ]	(	[ removegrp	1 ] 	)
+keeppoints	[ 0	locks=0 ]	(	[ keeppoints	0 ] 	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/delete18.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":"21.0.512"
+	},
+	"referenced_from":{
+		"type":"string",
+		"value":"../delete1"
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/color17.init"
+Content-Type: text/plain
+
+type = attribwrangle
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/color17.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment "Referenced from color"
+position 95.93 -4.6023
+connectornextid 2
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on displaycomment on
+outputsNamed3
+{
+1 "output1"
+}
+inputsNamed3
+{
+0 	copytopoints18 2 1 "input1"
+}
+inputs
+{
+0 	copytopoints18 0 1
+}
+stat
+{
+  create 1753249185
+  modify 1761319386
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 0.8 0.8 0.8 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/color17.spareparmdef"
+Content-Type: text/plain
+
+    group {
+        name    "folder1"
+        label   "Code"
+
+        parm {
+            name    "group"
+            baseparm
+            label   "Group"
+            export  none
+            bindselector uvselect "Modify Attribs"
+                "Select the geometry to affect and press Enter to complete."
+                0 1 0xffffffff 0 grouptype 0
+        }
+        parm {
+            name    "grouptype"
+            baseparm
+            label   "Group Type"
+            export  none
+        }
+        parm {
+            name    "class"
+            baseparm
+            label   "Run Over"
+            export  none
+        }
+        parm {
+            name    "vex_numcount"
+            baseparm
+            label   "Number Count"
+            export  none
+        }
+        parm {
+            name    "vex_threadjobsize"
+            baseparm
+            label   "Thread Job Size"
+            export  none
+        }
+        groupsimple {
+            name    "folder_generatedparms_snippet"
+            label   "Generated Channel Parameters"
+            grouptag { "sidefx::look" "blank" }
+
+            parm {
+                name    "color"
+                label   "Color"
+                type    ramp_rgb
+                default { "2" }
+                range   { 1! 10 }
+            }
+        }
+
+        parm {
+            name    "snippet"
+            baseparm
+            label   "VEXpression"
+            export  all
+        }
+        parm {
+            name    "exportlist"
+            baseparm
+            label   "Attributes to Create"
+            export  none
+        }
+        parm {
+            name    "vex_strict"
+            baseparm
+            label   "Enforce Prototypes"
+            export  none
+        }
+    }
+
+    group {
+        name    "folder1_1"
+        label   "Bindings"
+
+        parm {
+            name    "autobind"
+            baseparm
+            label   "Autobind by Name"
+            export  none
+        }
+        multiparm {
+            name    "bindings"
+            label    "Number of Bindings"
+            baseparm
+            default 0
+            parmtag { "autoscope" "0000000000000000" }
+            parmtag { "multistartoffset" "1" }
+
+            parm {
+                name    "bindname#"
+                baseparm
+                label   "Attribute Name"
+                export  none
+            }
+            parm {
+                name    "bindparm#"
+                baseparm
+                label   "VEX Parameter"
+                export  none
+            }
+        }
+
+        parm {
+            name    "groupautobind"
+            baseparm
+            label   "Autobind Groups by Name"
+            export  none
+        }
+        multiparm {
+            name    "groupbindings"
+            label    "Group Bindings"
+            baseparm
+            default 0
+            parmtag { "autoscope" "0000000000000000" }
+            parmtag { "multistartoffset" "1" }
+
+            parm {
+                name    "bindgroupname#"
+                baseparm
+                label   "Group Name"
+                export  none
+            }
+            parm {
+                name    "bindgroupparm#"
+                baseparm
+                label   "VEX Parameter"
+                export  none
+            }
+        }
+
+        parm {
+            name    "vex_cwdpath"
+            baseparm
+            label   "Evaluation Node Path"
+            export  none
+        }
+        parm {
+            name    "vex_outputmask"
+            baseparm
+            label   "Export Parameters"
+            export  none
+        }
+        parm {
+            name    "vex_updatenmls"
+            baseparm
+            label   "Update Normals If Displaced"
+            export  none
+        }
+        parm {
+            name    "vex_matchattrib"
+            baseparm
+            label   "Attribute to Match"
+            export  none
+        }
+        parm {
+            name    "vex_inplace"
+            baseparm
+            label   "Compute Results In Place"
+            export  none
+        }
+        parm {
+            name    "vex_selectiongroup"
+            baseparm
+            label   "Output Selection Group"
+            export  none
+        }
+        parm {
+            name    "vex_precision"
+            baseparm
+            label   "VEX Precision"
+            export  none
+        }
+    }
+
+    parm {
+        name    "vex_strictvariables"
+        baseparm
+        label   "Standard Variable Names Only"
+        export  none
+    }
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/color17.chn"
+Content-Type: text/plain
+
+{
+    channel color4interp {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/color4interp\") }
+    }
+    channel color4cb {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/color4cb\") }
+    }
+    channel color4cg {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/color4cg\") }
+    }
+    channel color4cr {
+      lefttype = extend
+      righttype = extend
+      default = 0.5
+      flags = 0
+      segment { length = 0 value = 0.5 0.5 expr = ch(\"../color/color4cr\") }
+    }
+    channel color4pos {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/color4pos\") }
+    }
+    channel color3interp {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/color3interp\") }
+    }
+    channel color3cb {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/color3cb\") }
+    }
+    channel color3cg {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/color3cg\") }
+    }
+    channel color3cr {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/color3cr\") }
+    }
+    channel color3pos {
+      lefttype = extend
+      righttype = extend
+      default = 0.83333331346511841
+      flags = 0
+      segment { length = 0 value = 0.83333331346511841 0.83333331346511841 expr = ch(\"../color/color3pos\") }
+    }
+    channel color2interp {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/color2interp\") }
+    }
+    channel color2cb {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/color2cb\") }
+    }
+    channel color2cg {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/color2cg\") }
+    }
+    channel color2cr {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/color2cr\") }
+    }
+    channel color2pos {
+      lefttype = extend
+      righttype = extend
+      default = 0.49293786287307739
+      flags = 0
+      segment { length = 0 value = 0.49293786287307739 0.49293786287307739 expr = ch(\"../color/color2pos\") }
+    }
+    channel color1interp {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/color1interp\") }
+    }
+    channel color1cb {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/color1cb\") }
+    }
+    channel color1cg {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/color1cg\") }
+    }
+    channel color1cr {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/color1cr\") }
+    }
+    channel color1pos {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/color1pos\") }
+    }
+    channel vex_precision {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"auto\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../color/vex_precision\") }
+    }
+    channel vex_selectiongroup {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../color/vex_selectiongroup\") }
+    }
+    channel vex_inplace {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/vex_inplace\") }
+    }
+    channel vex_matchattrib {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"id\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../color/vex_matchattrib\") }
+    }
+    channel vex_updatenmls {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/vex_updatenmls\") }
+    }
+    channel vex_outputmask {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"*\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../color/vex_outputmask\") }
+    }
+    channel vex_cwdpath {
+      lefttype = extend
+      righttype = extend
+      defaultString = \".\"
+      flags = 0
+      segment { length = 0 expr = chsop(\"../color/vex_cwdpath\") }
+    }
+    channel groupautobind {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/groupautobind\") }
+    }
+    channel autobind {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/autobind\") }
+    }
+    channel vex_strict {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/vex_strict\") }
+    }
+    channel exportlist {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"*\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../color/exportlist\") }
+    }
+    channel snippet {
+      lefttype = extend
+      righttype = extend
+      defaultString = "\"v@Cd=chramp(\\\"color\\\",fit(@ptnum,0,6,0,1));
+\""
+      flags = 0
+      segment { length = 0 expr = chs(\"../color/snippet\") }
+    }
+    channel vex_threadjobsize {
+      lefttype = extend
+      righttype = extend
+      default = 1024
+      flags = 0
+      segment { length = 0 value = 1024 1024 expr = ch(\"../color/vex_threadjobsize\") }
+    }
+    channel vex_numcount {
+      lefttype = extend
+      righttype = extend
+      default = 10
+      flags = 0
+      segment { length = 0 value = 10 10 expr = ch(\"../color/vex_numcount\") }
+    }
+    channel class {
+      lefttype = extend
+      righttype = extend
+      default = 2
+      flags = 0
+      segment { length = 0 value = 2 2 expr = ch(\"../color/class\") }
+    }
+    channel grouptype {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/grouptype\") }
+    }
+    channel group {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../color/group\") }
+    }
+  }
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/color17.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+folder0	[ 0	locks=0 ]	(	0	0	)
+group	[ 0	locks=0 ]	(	[ group	"" ] 	)
+grouptype	[ 0	locks=0 ]	(	[ grouptype	0 ] 	)
+class	[ 0	locks=0 ]	(	[ class	2 ] 	)
+vex_numcount	[ 0	locks=0 ]	(	[ vex_numcount	10 ] 	)
+vex_threadjobsize	[ 0	locks=0 ]	(	[ vex_threadjobsize	1024 ] 	)
+snippet	[ 0	locks=0 ]	(	[ snippet	"" ] 	)
+exportlist	[ 0	locks=0 ]	(	[ exportlist	* ] 	)
+vex_strict	[ 0	locks=0 ]	(	[ vex_strict	0 ] 	)
+vex_strictvariables	[ 0	locks=0 ]	(	"on"	)
+autobind	[ 0	locks=0 ]	(	[ autobind	1 ] 	)
+bindings	[ 0	locks=0 ]	(	0	)
+groupautobind	[ 0	locks=0 ]	(	[ groupautobind	1 ] 	)
+groupbindings	[ 0	locks=0 ]	(	0	)
+vex_cwdpath	[ 0	locks=0 ]	(	[ vex_cwdpath	. ] 	)
+vex_outputmask	[ 0	locks=0 ]	(	[ vex_outputmask	* ] 	)
+vex_updatenmls	[ 0	locks=0 ]	(	[ vex_updatenmls	0 ] 	)
+vex_matchattrib	[ 0	locks=0 ]	(	[ vex_matchattrib	id ] 	)
+vex_inplace	[ 0	locks=0 ]	(	[ vex_inplace	0 ] 	)
+vex_selectiongroup	[ 0	locks=0 ]	(	[ vex_selectiongroup	"" ] 	)
+vex_precision	[ 0	locks=0 ]	(	[ vex_precision	auto ] 	)
+folder1	[ 0	locks=0 ]	(	0	0	)
+folder_generatedparms_snippet	[ 0	locks=0 ]	(	0	)
+color	[ 0	locks=0 ]	(	4	)
+color1pos	[ 0	locks=0 ]	(	[ color1pos	0 ] 	)
+color1c	[ 0	locks=0 ]	(	[ color1cr	0 ] 	[ color1cg	0 ] 	[ color1cb	0 ] 	)
+color1interp	[ 0	locks=0 ]	(	[ color1interp	1 ] 	)
+color2pos	[ 0	locks=0 ]	(	[ color2pos	0 ] 	)
+color2c	[ 0	locks=0 ]	(	[ color2cr	0 ] 	[ color2cg	0 ] 	[ color2cb	0 ] 	)
+color2interp	[ 0	locks=0 ]	(	[ color2interp	1 ] 	)
+color3pos	[ 0	locks=0 ]	(	[ color3pos	0 ] 	)
+color3c	[ 0	locks=0 ]	(	[ color3cr	0 ] 	[ color3cg	0 ] 	[ color3cb	0 ] 	)
+color3interp	[ 0	locks=0 ]	(	[ color3interp	1 ] 	)
+color4pos	[ 0	locks=0 ]	(	[ color4pos	0 ] 	)
+color4c	[ 0	locks=0 ]	(	[ color4cr	0 ] 	[ color4cg	0 ] 	[ color4cb	0 ] 	)
+color4interp	[ 0	locks=0 ]	(	[ color4interp	1 ] 	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/color17.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":""
+	},
+	"referenced_from":{
+		"type":"string",
+		"value":"../color"
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/collect_values_to_array19.init"
+Content-Type: text/plain
+
+type = attribwrangle
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/collect_values_to_array19.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment ""
+position 95.93 -6.89972
+connectornextid 2
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on
+outputsNamed3
+{
+1 "output1"
+}
+inputsNamed3
+{
+0 	calculate_pixel_coordinates17 1 1 "input1"
+}
+inputs
+{
+0 	calculate_pixel_coordinates17 0 1
+}
+stat
+{
+  create 1752082986
+  modify 1761319346
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 0.8 0.8 0.8 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/collect_values_to_array19.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+folder0	[ 0	locks=0 ]	(	0	0	)
+group	[ 0	locks=0 ]	(	""	)
+grouptype	[ 0	locks=0 ]	(	"guess"	)
+class	[ 0	locks=0 ]	(	"detail"	)
+vex_numcount	[ 0	locks=0 ]	(	10	)
+vex_threadjobsize	[ 0	locks=0 ]	(	1024	)
+snippet	[ 0	locks=0 ]	(	"i[]@level = array();
+for(int i=0; i<7; i++){
+    int tempx = point(0, \"posx\", i);
+    append(@level, tempx);
+    int tempy = point(0, \"posy\", i);
+    append(@level, tempy);
+}
+append(@level, 3);                    // how many frames before next sprite reveal
+append(@level, 0);                     // pad with zero to get 16 bytes"	)
+exportlist	[ 0	locks=0 ]	(	*	)
+vex_strict	[ 0	locks=0 ]	(	"off"	)
+vex_strictvariables	[ 0	locks=0 ]	(	"on"	)
+autobind	[ 0	locks=0 ]	(	"on"	)
+bindings	[ 0	locks=0 ]	(	0	)
+groupautobind	[ 0	locks=0 ]	(	"on"	)
+groupbindings	[ 0	locks=0 ]	(	0	)
+vex_cwdpath	[ 0	locks=0 ]	(	.	)
+vex_outputmask	[ 0	locks=0 ]	(	*	)
+vex_updatenmls	[ 0	locks=0 ]	(	"off"	)
+vex_matchattrib	[ 0	locks=0 ]	(	id	)
+vex_inplace	[ 0	locks=0 ]	(	"off"	)
+vex_selectiongroup	[ 0	locks=0 ]	(	""	)
+vex_precision	[ 0	locks=0 ]	(	auto	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/collect_values_to_array19.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":""
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/transform13.init"
+Content-Type: text/plain
+
+type = xform
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/transform13.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment ""
+position 96.8787 -1.80716
+connectornextid 2
+flags =  lock off model off template off footprint off xray off bypass on display off render off highlight off unload off savedata off compress on colordefault on exposed on
+outputsNamed3
+{
+1 "output1"
+}
+inputsNamed3
+{
+0 	scatter15 1 1 "input1"
+}
+inputs
+{
+0 	scatter15 0 1
+}
+stat
+{
+  create 1753428359
+  modify 1761319346
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 0.8 0.8 0.8 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/transform13.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+group	[ 0	locks=0 ]	(	""	)
+grouptype	[ 0	locks=0 ]	(	"guess"	)
+xOrd	[ 0	locks=0 ]	(	"srt"	)
+rOrd	[ 0	locks=0 ]	(	"xyz"	)
+t	[ 0	locks=0 ]	(	0	0	0	)
+r	[ 0	locks=0 ]	(	0	0	0	)
+s	[ 0	locks=0 ]	(	1	1	1	)
+shear	[ 0	locks=0 ]	(	0	0	0	)
+scale	[ 0	locks=0 ]	(	0.52	)
+parmgroup_pivotxform	[ 0	locks=0 ]	(	0	)
+p	[ 0	locks=0 ]	(	0	0	0	)
+pr	[ 0	locks=0 ]	(	0	0	0	)
+parmgroup_prexform	[ 0	locks=0 ]	(	0	)
+prexform_xOrd	[ 0	locks=0 ]	(	"srt"	)
+prexform_rOrd	[ 0	locks=0 ]	(	"xyz"	)
+prexform_t	[ 0	locks=0 ]	(	0	0	0	)
+prexform_r	[ 0	locks=0 ]	(	0	0	0	)
+prexform_s	[ 0	locks=0 ]	(	1	1	1	)
+prexform_shear	[ 0	locks=0 ]	(	0	0	0	)
+movecentroid	[ 0	locks=0 ]	(	0	)
+movepivot	[ 0	locks=0 ]	(	0	)
+attribs	[ 0	locks=0 ]	(	*	)
+updatenmls	[ 0	locks=0 ]	(	"off"	)
+updateaffectednmls	[ 0	locks=0 ]	(	"on"	)
+vlength	[ 0	locks=0 ]	(	"on"	)
+invertxform	[ 0	locks=0 ]	(	"off"	)
+addattrib	[ 0	locks=0 ]	(	"off"	)
+outputattrib	[ 0	locks=0 ]	(	xform	)
+outputmerge	[ 0	locks=0 ]	(	"post"	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/transform13.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":"21.0.512"
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/grid15.init"
+Content-Type: text/plain
+
+type = grid
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/grid15.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment ""
+position 107.085 0.612257
+connectornextid 1
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on
+outputsNamed3
+{
+0 "output1"
+}
+inputsNamed3
+{
+}
+inputs
+{
+}
+stat
+{
+  create 1752163308
+  modify 1761408968
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 0.8 0.8 0.8 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/grid15.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+type	[ 0	locks=0 ]	(	"poly"	)
+surftype	[ 0	locks=0 ]	(	"quads"	)
+orient	[ 0	locks=0 ]	(	"xy"	)
+size	[ 0	locks=0 ]	(	0.32	0.2	)
+t	[ 0	locks=0 ]	(	0	0	0	)
+r	[ 0	locks=0 ]	(	0	180	0	)
+rows	[ 0	locks=0 ]	(	10	)
+cols	[ 0	locks=0 ]	(	10	)
+orderu	[ 0	locks=0 ]	(	4	)
+orderv	[ 0	locks=0 ]	(	4	)
+interpu	[ 0	locks=0 ]	(	"on"	)
+interpv	[ 0	locks=0 ]	(	"on"	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/grid15.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":"21.0.512"
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/scatter16.init"
+Content-Type: text/plain
+
+type = scatter::2.0
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/scatter16.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment ""
+position 107.085 -0.387743
+connectornextid 2
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on
+outputsNamed3
+{
+1 "output1"
+}
+inputsNamed3
+{
+0 	grid15 0 1 "input1"
+}
+inputs
+{
+0 	grid15 0 1
+}
+stat
+{
+  create 1752163344
+  modify 1761319430
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 0.8 0.8 0.8 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/scatter16.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+group	[ 0	locks=0 ]	(	""	)
+stdswitcher	[ 0	locks=0 ]	(	0	0	)
+generateby	[ 0	locks=0 ]	(	"bydensity"	)
+indepvoxel	[ 0	locks=0 ]	(	"off"	)
+forcetotal	[ 0	locks=0 ]	(	"on"	)
+npts	[ 0	locks=0 ]	(	7	)
+densityscale	[ 0	locks=0 ]	(	10	)
+usedensityattrib	[ 0	locks=0 ]	(	"off"	)
+densityattrib	[ 0	locks=0 ]	(	density	)
+useareaattrib	[ 0	locks=0 ]	(	"off"	)
+areaattrib	[ 0	locks=0 ]	(	area	)
+useareaforvolumes	[ 0	locks=0 ]	(	"off"	)
+usedensitytexture	[ 0	locks=0 ]	(	"off"	)
+densitytexture	[ 0	locks=0 ]	(	default.pic	)
+uvattrib	[ 0	locks=0 ]	(	uv	)
+primcountattrib	[ 0	locks=0 ]	(	count	)
+useemergencylimit	[ 0	locks=0 ]	(	"on"	)
+emergencylimit	[ 0	locks=0 ]	(	20552	)
+seed	[ 0	locks=0 ]	(	2143.9	)
+overrideprimseed	[ 0	locks=0 ]	(	"off"	)
+primseedattrib	[ 0	locks=0 ]	(	primid	)
+randomizeorder	[ 0	locks=0 ]	(	"on"	)
+relaxpoints	[ 0	locks=0 ]	(	"on"	)
+relaxiterations	[ 0	locks=0 ]	(	1	)
+usegeometricnormals	[ 0	locks=0 ]	(	"off"	)
+scaleradiiby	[ 0	locks=0 ]	(	1	)
+usemaxradius	[ 0	locks=0 ]	(	"on"	)
+maxradius	[ 0	locks=0 ]	(	10	)
+useprimnumattrib	[ 0	locks=0 ]	(	"off"	)
+primnumattrib	[ 0	locks=0 ]	(	sourceprim	)
+useprimuvwattrib	[ 0	locks=0 ]	(	"off"	)
+primuvwattrib	[ 0	locks=0 ]	(	sourceprimuv	)
+useoutputdensityattrib	[ 0	locks=0 ]	(	"off"	)
+outputdensityattrib	[ 0	locks=0 ]	(	density	)
+useoutputradiusattrib	[ 0	locks=0 ]	(	"off"	)
+outputradiusattrib	[ 0	locks=0 ]	(	pscale	)
+useoutputidattrib	[ 0	locks=0 ]	(	"off"	)
+outputidattrib	[ 0	locks=0 ]	(	id	)
+radiusintexturespace	[ 0	locks=0 ]	(	"off"	)
+pointattribs	[ 0	locks=0 ]	(	*	)
+vertattribs	[ 0	locks=0 ]	(	"N uv*"	)
+primattribs	[ 0	locks=0 ]	(	""	)
+detailattribs	[ 0	locks=0 ]	(	""	)
+detailattribsasdetail	[ 0	locks=0 ]	(	""	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/scatter16.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":"21.0.512"
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/copytopoints19.init"
+Content-Type: text/plain
+
+type = copytopoints::2.0
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/copytopoints19.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment ""
+position 106.14 -3.51044
+connectornextid 3
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on
+outputsNamed3
+{
+2 "output1"
+}
+inputsNamed3
+{
+0 	(__dot19) "" 1 "input1"
+1 	transform14 1 1 "input2"
+}
+inputs
+{
+0 	(__dot19) 0 1
+1 	transform14 0 1
+}
+stat
+{
+  create 1752163390
+  modify 1761319410
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 1 0.65 0.1 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/copytopoints19.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+sourcegroup	[ 0	locks=0 ]	(	""	)
+sourcegrouptype	[ 0	locks=0 ]	(	"guess"	)
+targetgroup	[ 0	locks=0 ]	(	""	)
+useidattrib	[ 0	locks=0 ]	(	"off"	)
+idattrib	[ 0	locks=0 ]	(	name	)
+pack	[ 0	locks=0 ]	(	"off"	)
+pivot	[ 0	locks=0 ]	(	"centroid"	)
+viewportlod	[ 0	locks=0 ]	(	"full"	)
+transform	[ 0	locks=0 ]	(	"on"	)
+useimplicitn	[ 0	locks=0 ]	(	"on"	)
+resettargetattribs	[ 0	locks=0 ]	(	0	)
+targetattribs	[ 0	locks=0 ]	(	0	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/copytopoints19.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":"21.0.512"
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/calculate_pixel_coordinates18.init"
+Content-Type: text/plain
+
+type = attribwrangle
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/calculate_pixel_coordinates18.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment "Referenced from calculate_pixel_coordinates"
+position 106.137 -5.75466
+connectornextid 2
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on displaycomment on
+outputsNamed3
+{
+1 "output1"
+}
+inputsNamed3
+{
+0 	color18 1 1 "input1"
+}
+inputs
+{
+0 	color18 0 1
+}
+stat
+{
+  create 1751980372
+  modify 1761319410
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 0.8 0.8 0.8 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/calculate_pixel_coordinates18.chn"
+Content-Type: text/plain
+
+{
+    channel vex_precision {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"auto\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../calculate_pixel_coordinates/vex_precision\") }
+    }
+    channel vex_selectiongroup {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../calculate_pixel_coordinates/vex_selectiongroup\") }
+    }
+    channel vex_inplace {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../calculate_pixel_coordinates/vex_inplace\") }
+    }
+    channel vex_matchattrib {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"id\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../calculate_pixel_coordinates/vex_matchattrib\") }
+    }
+    channel vex_updatenmls {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../calculate_pixel_coordinates/vex_updatenmls\") }
+    }
+    channel vex_outputmask {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"*\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../calculate_pixel_coordinates/vex_outputmask\") }
+    }
+    channel vex_cwdpath {
+      lefttype = extend
+      righttype = extend
+      defaultString = \".\"
+      flags = 0
+      segment { length = 0 expr = chsop(\"../calculate_pixel_coordinates/vex_cwdpath\") }
+    }
+    channel groupautobind {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../calculate_pixel_coordinates/groupautobind\") }
+    }
+    channel autobind {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../calculate_pixel_coordinates/autobind\") }
+    }
+    channel vex_strict {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../calculate_pixel_coordinates/vex_strict\") }
+    }
+    channel exportlist {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"*\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../calculate_pixel_coordinates/exportlist\") }
+    }
+    channel snippet {
+      lefttype = extend
+      righttype = extend
+      defaultString = "\"i@posx=int(fit(@P.x,-0.16,0.16,0,160))+10;
+i@posy=int(fit(@P.y,-0.1,0.1,200,0))+40;\""
+      flags = 0
+      segment { length = 0 expr = chs(\"../calculate_pixel_coordinates/snippet\") }
+    }
+    channel vex_threadjobsize {
+      lefttype = extend
+      righttype = extend
+      default = 1024
+      flags = 0
+      segment { length = 0 value = 1024 1024 expr = ch(\"../calculate_pixel_coordinates/vex_threadjobsize\") }
+    }
+    channel vex_numcount {
+      lefttype = extend
+      righttype = extend
+      default = 10
+      flags = 0
+      segment { length = 0 value = 10 10 expr = ch(\"../calculate_pixel_coordinates/vex_numcount\") }
+    }
+    channel class {
+      lefttype = extend
+      righttype = extend
+      default = 2
+      flags = 0
+      segment { length = 0 value = 2 2 expr = ch(\"../calculate_pixel_coordinates/class\") }
+    }
+    channel grouptype {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../calculate_pixel_coordinates/grouptype\") }
+    }
+    channel group {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../calculate_pixel_coordinates/group\") }
+    }
+  }
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/calculate_pixel_coordinates18.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+folder0	[ 0	locks=0 ]	(	0	0	)
+group	[ 0	locks=0 ]	(	[ group	"" ] 	)
+grouptype	[ 0	locks=0 ]	(	[ grouptype	0 ] 	)
+class	[ 0	locks=0 ]	(	[ class	2 ] 	)
+vex_numcount	[ 0	locks=0 ]	(	[ vex_numcount	10 ] 	)
+vex_threadjobsize	[ 0	locks=0 ]	(	[ vex_threadjobsize	1024 ] 	)
+snippet	[ 0	locks=0 ]	(	[ snippet	"" ] 	)
+exportlist	[ 0	locks=0 ]	(	[ exportlist	* ] 	)
+vex_strict	[ 0	locks=0 ]	(	[ vex_strict	0 ] 	)
+vex_strictvariables	[ 0	locks=0 ]	(	"on"	)
+autobind	[ 0	locks=0 ]	(	[ autobind	1 ] 	)
+bindings	[ 0	locks=0 ]	(	0	)
+groupautobind	[ 0	locks=0 ]	(	[ groupautobind	1 ] 	)
+groupbindings	[ 0	locks=0 ]	(	0	)
+vex_cwdpath	[ 0	locks=0 ]	(	[ vex_cwdpath	. ] 	)
+vex_outputmask	[ 0	locks=0 ]	(	[ vex_outputmask	* ] 	)
+vex_updatenmls	[ 0	locks=0 ]	(	[ vex_updatenmls	0 ] 	)
+vex_matchattrib	[ 0	locks=0 ]	(	[ vex_matchattrib	id ] 	)
+vex_inplace	[ 0	locks=0 ]	(	[ vex_inplace	0 ] 	)
+vex_selectiongroup	[ 0	locks=0 ]	(	[ vex_selectiongroup	"" ] 	)
+vex_precision	[ 0	locks=0 ]	(	[ vex_precision	auto ] 	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/calculate_pixel_coordinates18.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":""
+	},
+	"referenced_from":{
+		"type":"string",
+		"value":"../calculate_pixel_coordinates"
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/add22.init"
+Content-Type: text/plain
+
+type = add
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/add22.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment "Referenced from add2"
+position 106.14 -9.92461
+connectornextid 2
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on displaycomment on
+outputsNamed3
+{
+0 "output1"
+}
+inputsNamed3
+{
+1 	attribdelete19 1 1 "input1"
+}
+inputs
+{
+0 	attribdelete19 0 1
+}
+stat
+{
+  create 1752164238
+  modify 1761319410
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 0.8 0.8 0.8 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/add22.chn"
+Content-Type: text/plain
+
+{
+    channel weight0 {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../add2/weight0\") }
+    }
+    channel pt0z {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../add2/pt0z\") }
+    }
+    channel pt0y {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../add2/pt0y\") }
+    }
+    channel pt0x {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../add2/pt0x\") }
+    }
+    channel usept0 {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../add2/usept0\") }
+    }
+    channel closed0 {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../add2/closed0\") }
+    }
+    channel prim0 {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../add2/prim0\") }
+    }
+    channel appendunusedtoparticlesystem {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../add2/appendunusedtoparticlesystem\") }
+    }
+    channel particlegroup {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../add2/particlegroup\") }
+    }
+    channel addparticlesystem {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../add2/addparticlesystem\") }
+    }
+    channel closedall {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../add2/closedall\") }
+    }
+    channel attrname {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../add2/attrname\") }
+    }
+    channel inc {
+      lefttype = extend
+      righttype = extend
+      default = 2
+      flags = 0
+      segment { length = 0 value = 2 2 expr = ch(\"../add2/inc\") }
+    }
+    channel add {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../add2/add\") }
+    }
+    channel group {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../add2/group\") }
+    }
+    channel remove {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../add2/remove\") }
+    }
+    channel keep {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../add2/keep\") }
+    }
+  }
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/add22.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+stdswitcher	[ 0	locks=0 ]	(	0	0	0	)
+keep	[ 0	locks=0 ]	(	[ keep	0 ] 	)
+points	[ 0	locks=0 ]	(	1	)
+remove	[ 0	locks=0 ]	(	[ remove	0 ] 	)
+switcher	[ 0	locks=0 ]	(	0	0	)
+prims	[ 0	locks=0 ]	(	1	)
+group	[ 0	locks=0 ]	(	[ group	"" ] 	)
+add	[ 0	locks=0 ]	(	[ add	0 ] 	)
+inc	[ 0	locks=0 ]	(	[ inc	2 ] 	)
+attrname	[ 0	locks=0 ]	(	[ attrname	"" ] 	)
+closedall	[ 0	locks=0 ]	(	[ closedall	0 ] 	)
+addparticlesystem	[ 0	locks=0 ]	(	[ addparticlesystem	0 ] 	)
+particlegroup	[ 0	locks=0 ]	(	[ particlegroup	"" ] 	)
+appendunusedtoparticlesystem	[ 0	locks=0 ]	(	[ appendunusedtoparticlesystem	0 ] 	)
+prim0	[ 0	locks=0 ]	(	[ prim0	"" ] 	)
+closed0	[ 0	locks=0 ]	(	[ closed0	0 ] 	)
+usept0	[ 0	locks=0 ]	(	[ usept0	1 ] 	)
+pt0	[ 0	locks=0 ]	(	[ pt0x	0 ] 	[ pt0y	0 ] 	[ pt0z	0 ] 	)
+weight0	[ 0	locks=0 ]	(	[ weight0	1 ] 	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/add22.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":"21.0.512"
+	},
+	"referenced_from":{
+		"type":"string",
+		"value":"../add2"
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/attribpromote19.init"
+Content-Type: text/plain
+
+type = attribpromote
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/attribpromote19.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment "Referenced from attribpromote1"
+position 106.136 -10.9246
+connectornextid 2
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on displaycomment on
+outputsNamed3
+{
+1 "output1"
+}
+inputsNamed3
+{
+0 	add22 0 1 "input1"
+}
+inputs
+{
+0 	add22 0 1
+}
+stat
+{
+  create 1752164324
+  modify 1761319410
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 0.8 0.8 0.8 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/attribpromote19.chn"
+Content-Type: text/plain
+
+{
+    channel deletein {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../attribpromote1/deletein\") }
+    }
+    channel outname {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../attribpromote1/outname\") }
+    }
+    channel useoutname {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../attribpromote1/useoutname\") }
+    }
+    channel method {
+      lefttype = extend
+      righttype = extend
+      default = 2
+      flags = 0
+      segment { length = 0 value = 2 2 expr = ch(\"../attribpromote1/method\") }
+    }
+    channel pieceattrib {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"name\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../attribpromote1/pieceattrib\") }
+    }
+    channel usepieceattrib {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../attribpromote1/usepieceattrib\") }
+    }
+    channel outclass {
+      lefttype = extend
+      righttype = extend
+      default = 2
+      flags = 0
+      segment { length = 0 value = 2 2 expr = ch(\"../attribpromote1/outclass\") }
+    }
+    channel inclass {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../attribpromote1/inclass\") }
+    }
+    channel inname {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"level\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../attribpromote1/inname\") }
+    }
+  }
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/attribpromote19.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+inname	[ 0	locks=0 ]	(	[ inname	"" ] 	)
+inclass	[ 0	locks=0 ]	(	[ inclass	2 ] 	)
+outclass	[ 0	locks=0 ]	(	[ outclass	2 ] 	)
+usepieceattrib	[ 0	locks=0 ]	(	[ usepieceattrib	0 ] 	)
+pieceattrib	[ 0	locks=0 ]	(	[ pieceattrib	name ] 	)
+method	[ 0	locks=0 ]	(	[ method	2 ] 	)
+useoutname	[ 0	locks=0 ]	(	[ useoutname	0 ] 	)
+outname	[ 0	locks=0 ]	(	[ outname	"" ] 	)
+deletein	[ 0	locks=0 ]	(	[ deletein	1 ] 	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/attribpromote19.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":"21.0.512"
+	},
+	"referenced_from":{
+		"type":"string",
+		"value":"../attribpromote1"
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/attribdelete19.init"
+Content-Type: text/plain
+
+type = attribdelete
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/attribdelete19.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment "Referenced from attribdelete1"
+position 106.136 -8.92485
+connectornextid 2
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on displaycomment on
+outputsNamed3
+{
+1 "output1"
+}
+inputsNamed3
+{
+0 	delete19 1 1 "input1"
+}
+inputs
+{
+0 	delete19 0 1
+}
+stat
+{
+  create 1752164347
+  modify 1761319410
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 0.8 0.8 0.8 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/attribdelete19.chn"
+Content-Type: text/plain
+
+{
+    channel updatevar {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../attribdelete1/updatevar\") }
+    }
+    channel dtldel {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../attribdelete1/dtldel\") }
+    }
+    channel dodtldel {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../attribdelete1/dodtldel\") }
+    }
+    channel primdel {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../attribdelete1/primdel\") }
+    }
+    channel doprimdel {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../attribdelete1/doprimdel\") }
+    }
+    channel vtxdel {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../attribdelete1/vtxdel\") }
+    }
+    channel dovtxdel {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../attribdelete1/dovtxdel\") }
+    }
+    channel ptdel {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../attribdelete1/ptdel\") }
+    }
+    channel doptdel {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../attribdelete1/doptdel\") }
+    }
+    channel negate {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../attribdelete1/negate\") }
+    }
+    channel usereference {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../attribdelete1/usereference\") }
+    }
+  }
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/attribdelete19.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+usereference	[ 0	locks=0 ]	(	[ usereference	0 ] 	)
+negate	[ 0	locks=0 ]	(	[ negate	0 ] 	)
+doptdel	[ 0	locks=0 ]	(	[ doptdel	1 ] 	)
+ptdel	[ 0	locks=0 ]	(	[ ptdel	"" ] 	)
+dovtxdel	[ 0	locks=0 ]	(	[ dovtxdel	1 ] 	)
+vtxdel	[ 0	locks=0 ]	(	[ vtxdel	"" ] 	)
+doprimdel	[ 0	locks=0 ]	(	[ doprimdel	1 ] 	)
+primdel	[ 0	locks=0 ]	(	[ primdel	"" ] 	)
+dodtldel	[ 0	locks=0 ]	(	[ dodtldel	1 ] 	)
+dtldel	[ 0	locks=0 ]	(	[ dtldel	"" ] 	)
+updatevar	[ 0	locks=0 ]	(	[ updatevar	1 ] 	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/attribdelete19.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":""
+	},
+	"referenced_from":{
+		"type":"string",
+		"value":"../attribdelete1"
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/delete19.init"
+Content-Type: text/plain
+
+type = delete
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/delete19.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment "Referenced from delete1"
+position 106.14 -7.92485
+connectornextid 2
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on displaycomment on
+outputsNamed3
+{
+1 "output1"
+}
+inputsNamed3
+{
+0 	collect_values_to_array20 1 1 "input1"
+}
+inputs
+{
+0 	collect_values_to_array20 0 1
+}
+stat
+{
+  create 1752164283
+  modify 1761319410
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 0.8 0.8 0.8 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/delete19.chn"
+Content-Type: text/plain
+
+{
+    channel rangeend {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/rangeend\") }
+    }
+    channel keeppoints {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/keeppoints\") }
+    }
+    channel removegrp {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../delete1/removegrp\") }
+    }
+    channel percent {
+      lefttype = extend
+      righttype = extend
+      default = 50
+      flags = 0
+      segment { length = 0 value = 50 50 expr = ch(\"../delete1/percent\") }
+    }
+    channel seedattrib {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"id\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../delete1/seedattrib\") }
+    }
+    channel useseedattrib {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/useseedattrib\") }
+    }
+    channel globalseed {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../delete1/globalseed\") }
+    }
+    channel userandom {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/userandom\") }
+    }
+    channel tol {
+      lefttype = extend
+      righttype = extend
+      default = 0.001
+      flags = 0
+      segment { length = 0 value = 0.001 0.001 expr = ch(\"../delete1/tol\") }
+    }
+    channel doopen {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/doopen\") }
+    }
+    channel zaf {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/zaf\") }
+    }
+    channel degenerate {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/degenerate\") }
+    }
+    channel affectdegenerate {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/affectdegenerate\") }
+    }
+    channel camerapath {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chsop(\"../delete1/camerapath\") }
+    }
+    channel angle {
+      lefttype = extend
+      righttype = extend
+      default = 180
+      flags = 0
+      segment { length = 0 value = 180 180 expr = ch(\"../delete1/angle\") }
+    }
+    channel dirz {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../delete1/dirz\") }
+    }
+    channel diry {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/diry\") }
+    }
+    channel dirx {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/dirx\") }
+    }
+    channel affectnormal {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/affectnormal\") }
+    }
+    channel tz {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/tz\") }
+    }
+    channel ty {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/ty\") }
+    }
+    channel tx {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/tx\") }
+    }
+    channel sizez {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../delete1/sizez\") }
+    }
+    channel sizey {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../delete1/sizey\") }
+    }
+    channel sizex {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../delete1/sizex\") }
+    }
+    channel boundtype {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/boundtype\") }
+    }
+    channel affectvolume {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/affectvolume\") }
+    }
+    channel select2 {
+      lefttype = extend
+      righttype = extend
+      default = 2
+      flags = 0
+      segment { length = 0 value = 2 2 expr = ch(\"../delete1/select2\") }
+    }
+    channel select1 {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../delete1/select1\") }
+    }
+    channel rangestart {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/rangestart\") }
+    }
+    channel pattern {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"*\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../delete1/pattern\") }
+    }
+    channel filter {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../delete1/filter\") }
+    }
+    channel groupop {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/groupop\") }
+    }
+    channel affectnumber {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../delete1/affectnumber\") }
+    }
+    channel geotype {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/geotype\") }
+    }
+    channel entity {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../delete1/entity\") }
+    }
+    channel negate {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/negate\") }
+    }
+    channel label0 {
+      lefttype = extend
+      righttype = extend
+      defaultString = "\"Warning: Group Is NOT Filtered by Geometry Type\""
+      flags = 0
+      segment { length = 0 expr = chs(\"../delete1/label0\") }
+    }
+    channel group {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../delete1/group\") }
+    }
+  }
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/delete19.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+group	[ 0	locks=0 ]	(	[ group	"" ] 	)
+label0	[ 0	locks=0 ]	(	[ label0	"Warning: Group Is NOT Filtered by Geometry Type" ] 	)
+negate	[ 0	locks=0 ]	(	[ negate	0 ] 	)
+entity	[ 0	locks=0 ]	(	[ entity	0 ] 	)
+geotype	[ 0	locks=0 ]	(	[ geotype	0 ] 	)
+stdswitcher	[ 0	locks=0 ]	(	0	0	0	0	0	)
+affectnumber	[ 0	locks=0 ]	(	[ affectnumber	1 ] 	)
+groupop	[ 0	locks=0 ]	(	[ groupop	0 ] 	)
+filter	[ 0	locks=0 ]	(	[ filter	1 ] 	)
+pattern	[ 0	locks=0 ]	(	[ pattern	!* ] 	)
+range	[ 0	locks=0 ]	(	[ rangestart	0 ] 	[ rangeend	0 ] 	)
+select	[ 0	locks=0 ]	(	[ select1	1 ] 	[ select2	2 ] 	)
+affectvolume	[ 0	locks=0 ]	(	[ affectvolume	0 ] 	)
+boundtype	[ 0	locks=0 ]	(	[ boundtype	0 ] 	)
+size	[ 0	locks=0 ]	(	[ sizex	1 ] 	[ sizey	1 ] 	[ sizez	1 ] 	)
+t	[ 0	locks=0 ]	(	[ tx	0 ] 	[ ty	0 ] 	[ tz	0 ] 	)
+affectnormal	[ 0	locks=0 ]	(	[ affectnormal	0 ] 	)
+dir	[ 0	locks=0 ]	(	[ dirx	0 ] 	[ diry	0 ] 	[ dirz	1 ] 	)
+angle	[ 0	locks=0 ]	(	[ angle	180 ] 	)
+camerapath	[ 0	locks=0 ]	(	[ camerapath	"" ] 	)
+affectdegenerate	[ 0	locks=0 ]	(	[ affectdegenerate	0 ] 	)
+degenerate	[ 0	locks=0 ]	(	[ degenerate	0 ] 	)
+zaf	[ 0	locks=0 ]	(	[ zaf	0 ] 	)
+doopen	[ 0	locks=0 ]	(	[ doopen	0 ] 	)
+tol	[ 0	locks=0 ]	(	[ tol	0.001 ] 	)
+userandom	[ 0	locks=0 ]	(	[ userandom	0 ] 	)
+globalseed	[ 0	locks=0 ]	(	[ globalseed	1 ] 	)
+useseedattrib	[ 0	locks=0 ]	(	[ useseedattrib	0 ] 	)
+seedattrib	[ 0	locks=0 ]	(	[ seedattrib	id ] 	)
+percent	[ 0	locks=0 ]	(	[ percent	50 ] 	)
+removegrp	[ 0	locks=0 ]	(	[ removegrp	1 ] 	)
+keeppoints	[ 0	locks=0 ]	(	[ keeppoints	0 ] 	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/delete19.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":"21.0.512"
+	},
+	"referenced_from":{
+		"type":"string",
+		"value":"../delete1"
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/color18.init"
+Content-Type: text/plain
+
+type = attribwrangle
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/color18.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment "Referenced from color"
+position 106.137 -4.6023
+connectornextid 2
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on displaycomment on
+outputsNamed3
+{
+1 "output1"
+}
+inputsNamed3
+{
+0 	copytopoints19 2 1 "input1"
+}
+inputs
+{
+0 	copytopoints19 0 1
+}
+stat
+{
+  create 1753249185
+  modify 1761319996
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 0.8 0.8 0.8 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/color18.spareparmdef"
+Content-Type: text/plain
+
+    group {
+        name    "folder1"
+        label   "Code"
+
+        parm {
+            name    "group"
+            baseparm
+            label   "Group"
+            export  none
+            bindselector uvselect "Modify Attribs"
+                "Select the geometry to affect and press Enter to complete."
+                0 1 0xffffffff 0 grouptype 0
+        }
+        parm {
+            name    "grouptype"
+            baseparm
+            label   "Group Type"
+            export  none
+        }
+        parm {
+            name    "class"
+            baseparm
+            label   "Run Over"
+            export  none
+        }
+        parm {
+            name    "vex_numcount"
+            baseparm
+            label   "Number Count"
+            export  none
+        }
+        parm {
+            name    "vex_threadjobsize"
+            baseparm
+            label   "Thread Job Size"
+            export  none
+        }
+        groupsimple {
+            name    "folder_generatedparms_snippet"
+            label   "Generated Channel Parameters"
+            grouptag { "sidefx::look" "blank" }
+
+            parm {
+                name    "color"
+                label   "Color"
+                type    ramp_rgb
+                default { "2" }
+                range   { 1! 10 }
+            }
+        }
+
+        parm {
+            name    "snippet"
+            baseparm
+            label   "VEXpression"
+            export  all
+        }
+        parm {
+            name    "exportlist"
+            baseparm
+            label   "Attributes to Create"
+            export  none
+        }
+        parm {
+            name    "vex_strict"
+            baseparm
+            label   "Enforce Prototypes"
+            export  none
+        }
+    }
+
+    group {
+        name    "folder1_1"
+        label   "Bindings"
+
+        parm {
+            name    "autobind"
+            baseparm
+            label   "Autobind by Name"
+            export  none
+        }
+        multiparm {
+            name    "bindings"
+            label    "Number of Bindings"
+            baseparm
+            default 0
+            parmtag { "autoscope" "0000000000000000" }
+            parmtag { "multistartoffset" "1" }
+
+            parm {
+                name    "bindname#"
+                baseparm
+                label   "Attribute Name"
+                export  none
+            }
+            parm {
+                name    "bindparm#"
+                baseparm
+                label   "VEX Parameter"
+                export  none
+            }
+        }
+
+        parm {
+            name    "groupautobind"
+            baseparm
+            label   "Autobind Groups by Name"
+            export  none
+        }
+        multiparm {
+            name    "groupbindings"
+            label    "Group Bindings"
+            baseparm
+            default 0
+            parmtag { "autoscope" "0000000000000000" }
+            parmtag { "multistartoffset" "1" }
+
+            parm {
+                name    "bindgroupname#"
+                baseparm
+                label   "Group Name"
+                export  none
+            }
+            parm {
+                name    "bindgroupparm#"
+                baseparm
+                label   "VEX Parameter"
+                export  none
+            }
+        }
+
+        parm {
+            name    "vex_cwdpath"
+            baseparm
+            label   "Evaluation Node Path"
+            export  none
+        }
+        parm {
+            name    "vex_outputmask"
+            baseparm
+            label   "Export Parameters"
+            export  none
+        }
+        parm {
+            name    "vex_updatenmls"
+            baseparm
+            label   "Update Normals If Displaced"
+            export  none
+        }
+        parm {
+            name    "vex_matchattrib"
+            baseparm
+            label   "Attribute to Match"
+            export  none
+        }
+        parm {
+            name    "vex_inplace"
+            baseparm
+            label   "Compute Results In Place"
+            export  none
+        }
+        parm {
+            name    "vex_selectiongroup"
+            baseparm
+            label   "Output Selection Group"
+            export  none
+        }
+        parm {
+            name    "vex_precision"
+            baseparm
+            label   "VEX Precision"
+            export  none
+        }
+    }
+
+    parm {
+        name    "vex_strictvariables"
+        baseparm
+        label   "Standard Variable Names Only"
+        export  none
+    }
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/color18.chn"
+Content-Type: text/plain
+
+{
+    channel color4interp {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/color4interp\") }
+    }
+    channel color4cb {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/color4cb\") }
+    }
+    channel color4cg {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/color4cg\") }
+    }
+    channel color4cr {
+      lefttype = extend
+      righttype = extend
+      default = 0.5
+      flags = 0
+      segment { length = 0 value = 0.5 0.5 expr = ch(\"../color/color4cr\") }
+    }
+    channel color4pos {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/color4pos\") }
+    }
+    channel color3interp {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/color3interp\") }
+    }
+    channel color3cb {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/color3cb\") }
+    }
+    channel color3cg {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/color3cg\") }
+    }
+    channel color3cr {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/color3cr\") }
+    }
+    channel color3pos {
+      lefttype = extend
+      righttype = extend
+      default = 0.83333331346511841
+      flags = 0
+      segment { length = 0 value = 0.83333331346511841 0.83333331346511841 expr = ch(\"../color/color3pos\") }
+    }
+    channel color2interp {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/color2interp\") }
+    }
+    channel color2cb {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/color2cb\") }
+    }
+    channel color2cg {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/color2cg\") }
+    }
+    channel color2cr {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/color2cr\") }
+    }
+    channel color2pos {
+      lefttype = extend
+      righttype = extend
+      default = 0.49293786287307739
+      flags = 0
+      segment { length = 0 value = 0.49293786287307739 0.49293786287307739 expr = ch(\"../color/color2pos\") }
+    }
+    channel color1interp {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/color1interp\") }
+    }
+    channel color1cb {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/color1cb\") }
+    }
+    channel color1cg {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/color1cg\") }
+    }
+    channel color1cr {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/color1cr\") }
+    }
+    channel color1pos {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/color1pos\") }
+    }
+    channel vex_precision {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"auto\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../color/vex_precision\") }
+    }
+    channel vex_selectiongroup {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../color/vex_selectiongroup\") }
+    }
+    channel vex_inplace {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/vex_inplace\") }
+    }
+    channel vex_matchattrib {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"id\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../color/vex_matchattrib\") }
+    }
+    channel vex_updatenmls {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/vex_updatenmls\") }
+    }
+    channel vex_outputmask {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"*\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../color/vex_outputmask\") }
+    }
+    channel vex_cwdpath {
+      lefttype = extend
+      righttype = extend
+      defaultString = \".\"
+      flags = 0
+      segment { length = 0 expr = chsop(\"../color/vex_cwdpath\") }
+    }
+    channel groupautobind {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/groupautobind\") }
+    }
+    channel autobind {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/autobind\") }
+    }
+    channel vex_strict {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/vex_strict\") }
+    }
+    channel exportlist {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"*\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../color/exportlist\") }
+    }
+    channel snippet {
+      lefttype = extend
+      righttype = extend
+      defaultString = "\"v@Cd=chramp(\\\"color\\\",fit(@ptnum,0,6,0,1));
+\""
+      flags = 0
+      segment { length = 0 expr = chs(\"../color/snippet\") }
+    }
+    channel vex_threadjobsize {
+      lefttype = extend
+      righttype = extend
+      default = 1024
+      flags = 0
+      segment { length = 0 value = 1024 1024 expr = ch(\"../color/vex_threadjobsize\") }
+    }
+    channel vex_numcount {
+      lefttype = extend
+      righttype = extend
+      default = 10
+      flags = 0
+      segment { length = 0 value = 10 10 expr = ch(\"../color/vex_numcount\") }
+    }
+    channel class {
+      lefttype = extend
+      righttype = extend
+      default = 2
+      flags = 0
+      segment { length = 0 value = 2 2 expr = ch(\"../color/class\") }
+    }
+    channel grouptype {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/grouptype\") }
+    }
+    channel group {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../color/group\") }
+    }
+  }
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/color18.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+folder0	[ 0	locks=0 ]	(	0	0	)
+group	[ 0	locks=0 ]	(	[ group	"" ] 	)
+grouptype	[ 0	locks=0 ]	(	[ grouptype	0 ] 	)
+class	[ 0	locks=0 ]	(	[ class	2 ] 	)
+vex_numcount	[ 0	locks=0 ]	(	[ vex_numcount	10 ] 	)
+vex_threadjobsize	[ 0	locks=0 ]	(	[ vex_threadjobsize	1024 ] 	)
+snippet	[ 0	locks=0 ]	(	[ snippet	"" ] 	)
+exportlist	[ 0	locks=0 ]	(	[ exportlist	* ] 	)
+vex_strict	[ 0	locks=0 ]	(	[ vex_strict	0 ] 	)
+vex_strictvariables	[ 0	locks=0 ]	(	"on"	)
+autobind	[ 0	locks=0 ]	(	[ autobind	1 ] 	)
+bindings	[ 0	locks=0 ]	(	0	)
+groupautobind	[ 0	locks=0 ]	(	[ groupautobind	1 ] 	)
+groupbindings	[ 0	locks=0 ]	(	0	)
+vex_cwdpath	[ 0	locks=0 ]	(	[ vex_cwdpath	. ] 	)
+vex_outputmask	[ 0	locks=0 ]	(	[ vex_outputmask	* ] 	)
+vex_updatenmls	[ 0	locks=0 ]	(	[ vex_updatenmls	0 ] 	)
+vex_matchattrib	[ 0	locks=0 ]	(	[ vex_matchattrib	id ] 	)
+vex_inplace	[ 0	locks=0 ]	(	[ vex_inplace	0 ] 	)
+vex_selectiongroup	[ 0	locks=0 ]	(	[ vex_selectiongroup	"" ] 	)
+vex_precision	[ 0	locks=0 ]	(	[ vex_precision	auto ] 	)
+folder1	[ 0	locks=0 ]	(	0	0	)
+folder_generatedparms_snippet	[ 0	locks=0 ]	(	0	)
+color	[ 0	locks=0 ]	(	4	)
+color1pos	[ 0	locks=0 ]	(	[ color1pos	0 ] 	)
+color1c	[ 0	locks=0 ]	(	[ color1cr	0 ] 	[ color1cg	0 ] 	[ color1cb	0 ] 	)
+color1interp	[ 0	locks=0 ]	(	[ color1interp	1 ] 	)
+color2pos	[ 0	locks=0 ]	(	[ color2pos	0 ] 	)
+color2c	[ 0	locks=0 ]	(	[ color2cr	0 ] 	[ color2cg	0 ] 	[ color2cb	0 ] 	)
+color2interp	[ 0	locks=0 ]	(	[ color2interp	1 ] 	)
+color3pos	[ 0	locks=0 ]	(	[ color3pos	0 ] 	)
+color3c	[ 0	locks=0 ]	(	[ color3cr	0 ] 	[ color3cg	0 ] 	[ color3cb	0 ] 	)
+color3interp	[ 0	locks=0 ]	(	[ color3interp	1 ] 	)
+color4pos	[ 0	locks=0 ]	(	[ color4pos	0 ] 	)
+color4c	[ 0	locks=0 ]	(	[ color4cr	0 ] 	[ color4cg	0 ] 	[ color4cb	0 ] 	)
+color4interp	[ 0	locks=0 ]	(	[ color4interp	1 ] 	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/color18.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":""
+	},
+	"referenced_from":{
+		"type":"string",
+		"value":"../color"
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/collect_values_to_array20.init"
+Content-Type: text/plain
+
+type = attribwrangle
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/collect_values_to_array20.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment ""
+position 106.137 -6.89972
+connectornextid 2
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on
+outputsNamed3
+{
+1 "output1"
+}
+inputsNamed3
+{
+0 	calculate_pixel_coordinates18 1 1 "input1"
+}
+inputs
+{
+0 	calculate_pixel_coordinates18 0 1
+}
+stat
+{
+  create 1752082986
+  modify 1761319410
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 0.8 0.8 0.8 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/collect_values_to_array20.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+folder0	[ 0	locks=0 ]	(	0	0	)
+group	[ 0	locks=0 ]	(	""	)
+grouptype	[ 0	locks=0 ]	(	"guess"	)
+class	[ 0	locks=0 ]	(	"detail"	)
+vex_numcount	[ 0	locks=0 ]	(	10	)
+vex_threadjobsize	[ 0	locks=0 ]	(	1024	)
+snippet	[ 0	locks=0 ]	(	"i[]@level = array();
+for(int i=0; i<7; i++){
+    int tempx = point(0, \"posx\", i);
+    append(@level, tempx);
+    int tempy = point(0, \"posy\", i);
+    append(@level, tempy);
+}
+append(@level, 3);                    // how many frames before next sprite reveal
+append(@level, 0);                     // pad with zero to get 16 bytes"	)
+exportlist	[ 0	locks=0 ]	(	*	)
+vex_strict	[ 0	locks=0 ]	(	"off"	)
+vex_strictvariables	[ 0	locks=0 ]	(	"on"	)
+autobind	[ 0	locks=0 ]	(	"on"	)
+bindings	[ 0	locks=0 ]	(	0	)
+groupautobind	[ 0	locks=0 ]	(	"on"	)
+groupbindings	[ 0	locks=0 ]	(	0	)
+vex_cwdpath	[ 0	locks=0 ]	(	.	)
+vex_outputmask	[ 0	locks=0 ]	(	*	)
+vex_updatenmls	[ 0	locks=0 ]	(	"off"	)
+vex_matchattrib	[ 0	locks=0 ]	(	id	)
+vex_inplace	[ 0	locks=0 ]	(	"off"	)
+vex_selectiongroup	[ 0	locks=0 ]	(	""	)
+vex_precision	[ 0	locks=0 ]	(	auto	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/collect_values_to_array20.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":""
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/transform14.init"
+Content-Type: text/plain
+
+type = xform
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/transform14.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment ""
+position 107.085 -1.80716
+connectornextid 2
+flags =  lock off model off template off footprint off xray off bypass on display off render off highlight off unload off savedata off compress on colordefault on exposed on
+outputsNamed3
+{
+1 "output1"
+}
+inputsNamed3
+{
+0 	scatter16 1 1 "input1"
+}
+inputs
+{
+0 	scatter16 0 1
+}
+stat
+{
+  create 1753428359
+  modify 1761319410
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 0.8 0.8 0.8 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/transform14.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+group	[ 0	locks=0 ]	(	""	)
+grouptype	[ 0	locks=0 ]	(	"guess"	)
+xOrd	[ 0	locks=0 ]	(	"srt"	)
+rOrd	[ 0	locks=0 ]	(	"xyz"	)
+t	[ 0	locks=0 ]	(	0	0	0	)
+r	[ 0	locks=0 ]	(	0	0	0	)
+s	[ 0	locks=0 ]	(	1	1	1	)
+shear	[ 0	locks=0 ]	(	0	0	0	)
+scale	[ 0	locks=0 ]	(	0.52	)
+parmgroup_pivotxform	[ 0	locks=0 ]	(	0	)
+p	[ 0	locks=0 ]	(	0	0	0	)
+pr	[ 0	locks=0 ]	(	0	0	0	)
+parmgroup_prexform	[ 0	locks=0 ]	(	0	)
+prexform_xOrd	[ 0	locks=0 ]	(	"srt"	)
+prexform_rOrd	[ 0	locks=0 ]	(	"xyz"	)
+prexform_t	[ 0	locks=0 ]	(	0	0	0	)
+prexform_r	[ 0	locks=0 ]	(	0	0	0	)
+prexform_s	[ 0	locks=0 ]	(	1	1	1	)
+prexform_shear	[ 0	locks=0 ]	(	0	0	0	)
+movecentroid	[ 0	locks=0 ]	(	0	)
+movepivot	[ 0	locks=0 ]	(	0	)
+attribs	[ 0	locks=0 ]	(	*	)
+updatenmls	[ 0	locks=0 ]	(	"off"	)
+updateaffectednmls	[ 0	locks=0 ]	(	"on"	)
+vlength	[ 0	locks=0 ]	(	"on"	)
+invertxform	[ 0	locks=0 ]	(	"off"	)
+addattrib	[ 0	locks=0 ]	(	"off"	)
+outputattrib	[ 0	locks=0 ]	(	xform	)
+outputmerge	[ 0	locks=0 ]	(	"post"	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/transform14.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":"21.0.512"
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/grid16.init"
+Content-Type: text/plain
+
+type = grid
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/grid16.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment ""
+position 115.335 0.612257
+connectornextid 1
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on
+outputsNamed3
+{
+0 "output1"
+}
+inputsNamed3
+{
+}
+inputs
+{
+}
+stat
+{
+  create 1752163308
+  modify 1761408968
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 0.8 0.8 0.8 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/grid16.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+type	[ 0	locks=0 ]	(	"poly"	)
+surftype	[ 0	locks=0 ]	(	"quads"	)
+orient	[ 0	locks=0 ]	(	"xy"	)
+size	[ 0	locks=0 ]	(	0.32	0.2	)
+t	[ 0	locks=0 ]	(	0	0	0	)
+r	[ 0	locks=0 ]	(	0	180	0	)
+rows	[ 0	locks=0 ]	(	10	)
+cols	[ 0	locks=0 ]	(	10	)
+orderu	[ 0	locks=0 ]	(	4	)
+orderv	[ 0	locks=0 ]	(	4	)
+interpu	[ 0	locks=0 ]	(	"on"	)
+interpv	[ 0	locks=0 ]	(	"on"	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/grid16.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":"21.0.512"
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/scatter17.init"
+Content-Type: text/plain
+
+type = scatter::2.0
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/scatter17.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment ""
+position 115.335 -0.387743
+connectornextid 2
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on
+outputsNamed3
+{
+1 "output1"
+}
+inputsNamed3
+{
+0 	grid16 0 1 "input1"
+}
+inputs
+{
+0 	grid16 0 1
+}
+stat
+{
+  create 1752163344
+  modify 1761408980
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 0.8 0.8 0.8 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/scatter17.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+group	[ 0	locks=0 ]	(	""	)
+stdswitcher	[ 0	locks=0 ]	(	0	0	)
+generateby	[ 0	locks=0 ]	(	"bydensity"	)
+indepvoxel	[ 0	locks=0 ]	(	"off"	)
+forcetotal	[ 0	locks=0 ]	(	"on"	)
+npts	[ 0	locks=0 ]	(	7	)
+densityscale	[ 0	locks=0 ]	(	10	)
+usedensityattrib	[ 0	locks=0 ]	(	"off"	)
+densityattrib	[ 0	locks=0 ]	(	density	)
+useareaattrib	[ 0	locks=0 ]	(	"off"	)
+areaattrib	[ 0	locks=0 ]	(	area	)
+useareaforvolumes	[ 0	locks=0 ]	(	"off"	)
+usedensitytexture	[ 0	locks=0 ]	(	"off"	)
+densitytexture	[ 0	locks=0 ]	(	default.pic	)
+uvattrib	[ 0	locks=0 ]	(	uv	)
+primcountattrib	[ 0	locks=0 ]	(	count	)
+useemergencylimit	[ 0	locks=0 ]	(	"on"	)
+emergencylimit	[ 0	locks=0 ]	(	20552	)
+seed	[ 0	locks=0 ]	(	1944.5	)
+overrideprimseed	[ 0	locks=0 ]	(	"off"	)
+primseedattrib	[ 0	locks=0 ]	(	primid	)
+randomizeorder	[ 0	locks=0 ]	(	"on"	)
+relaxpoints	[ 0	locks=0 ]	(	"on"	)
+relaxiterations	[ 0	locks=0 ]	(	1	)
+usegeometricnormals	[ 0	locks=0 ]	(	"off"	)
+scaleradiiby	[ 0	locks=0 ]	(	1	)
+usemaxradius	[ 0	locks=0 ]	(	"on"	)
+maxradius	[ 0	locks=0 ]	(	10	)
+useprimnumattrib	[ 0	locks=0 ]	(	"off"	)
+primnumattrib	[ 0	locks=0 ]	(	sourceprim	)
+useprimuvwattrib	[ 0	locks=0 ]	(	"off"	)
+primuvwattrib	[ 0	locks=0 ]	(	sourceprimuv	)
+useoutputdensityattrib	[ 0	locks=0 ]	(	"off"	)
+outputdensityattrib	[ 0	locks=0 ]	(	density	)
+useoutputradiusattrib	[ 0	locks=0 ]	(	"off"	)
+outputradiusattrib	[ 0	locks=0 ]	(	pscale	)
+useoutputidattrib	[ 0	locks=0 ]	(	"off"	)
+outputidattrib	[ 0	locks=0 ]	(	id	)
+radiusintexturespace	[ 0	locks=0 ]	(	"off"	)
+pointattribs	[ 0	locks=0 ]	(	*	)
+vertattribs	[ 0	locks=0 ]	(	"N uv*"	)
+primattribs	[ 0	locks=0 ]	(	""	)
+detailattribs	[ 0	locks=0 ]	(	""	)
+detailattribsasdetail	[ 0	locks=0 ]	(	""	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/scatter17.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":"21.0.512"
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/copytopoints20.init"
+Content-Type: text/plain
+
+type = copytopoints::2.0
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/copytopoints20.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment ""
+position 114.39 -3.51044
+connectornextid 3
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on
+outputsNamed3
+{
+2 "output1"
+}
+inputsNamed3
+{
+0 	(__dot20) "" 1 "input1"
+1 	transform15 1 1 "input2"
+}
+inputs
+{
+0 	(__dot20) 0 1
+1 	transform15 0 1
+}
+stat
+{
+  create 1752163390
+  modify 1761408968
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 1 0.65 0.1 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/copytopoints20.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+sourcegroup	[ 0	locks=0 ]	(	""	)
+sourcegrouptype	[ 0	locks=0 ]	(	"guess"	)
+targetgroup	[ 0	locks=0 ]	(	""	)
+useidattrib	[ 0	locks=0 ]	(	"off"	)
+idattrib	[ 0	locks=0 ]	(	name	)
+pack	[ 0	locks=0 ]	(	"off"	)
+pivot	[ 0	locks=0 ]	(	"centroid"	)
+viewportlod	[ 0	locks=0 ]	(	"full"	)
+transform	[ 0	locks=0 ]	(	"on"	)
+useimplicitn	[ 0	locks=0 ]	(	"on"	)
+resettargetattribs	[ 0	locks=0 ]	(	0	)
+targetattribs	[ 0	locks=0 ]	(	0	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/copytopoints20.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":"21.0.512"
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/calculate_pixel_coordinates19.init"
+Content-Type: text/plain
+
+type = attribwrangle
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/calculate_pixel_coordinates19.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment "Referenced from calculate_pixel_coordinates"
+position 114.387 -5.75466
+connectornextid 2
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on displaycomment on
+outputsNamed3
+{
+1 "output1"
+}
+inputsNamed3
+{
+0 	color19 1 1 "input1"
+}
+inputs
+{
+0 	color19 0 1
+}
+stat
+{
+  create 1751980372
+  modify 1761408918
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 0.8 0.8 0.8 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/calculate_pixel_coordinates19.chn"
+Content-Type: text/plain
+
+{
+    channel vex_precision {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"auto\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../calculate_pixel_coordinates/vex_precision\") }
+    }
+    channel vex_selectiongroup {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../calculate_pixel_coordinates/vex_selectiongroup\") }
+    }
+    channel vex_inplace {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../calculate_pixel_coordinates/vex_inplace\") }
+    }
+    channel vex_matchattrib {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"id\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../calculate_pixel_coordinates/vex_matchattrib\") }
+    }
+    channel vex_updatenmls {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../calculate_pixel_coordinates/vex_updatenmls\") }
+    }
+    channel vex_outputmask {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"*\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../calculate_pixel_coordinates/vex_outputmask\") }
+    }
+    channel vex_cwdpath {
+      lefttype = extend
+      righttype = extend
+      defaultString = \".\"
+      flags = 0
+      segment { length = 0 expr = chsop(\"../calculate_pixel_coordinates/vex_cwdpath\") }
+    }
+    channel groupautobind {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../calculate_pixel_coordinates/groupautobind\") }
+    }
+    channel autobind {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../calculate_pixel_coordinates/autobind\") }
+    }
+    channel vex_strict {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../calculate_pixel_coordinates/vex_strict\") }
+    }
+    channel exportlist {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"*\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../calculate_pixel_coordinates/exportlist\") }
+    }
+    channel snippet {
+      lefttype = extend
+      righttype = extend
+      defaultString = "\"i@posx=int(fit(@P.x,-0.16,0.16,0,160))+10;
+i@posy=int(fit(@P.y,-0.1,0.1,200,0))+40;\""
+      flags = 0
+      segment { length = 0 expr = chs(\"../calculate_pixel_coordinates/snippet\") }
+    }
+    channel vex_threadjobsize {
+      lefttype = extend
+      righttype = extend
+      default = 1024
+      flags = 0
+      segment { length = 0 value = 1024 1024 expr = ch(\"../calculate_pixel_coordinates/vex_threadjobsize\") }
+    }
+    channel vex_numcount {
+      lefttype = extend
+      righttype = extend
+      default = 10
+      flags = 0
+      segment { length = 0 value = 10 10 expr = ch(\"../calculate_pixel_coordinates/vex_numcount\") }
+    }
+    channel class {
+      lefttype = extend
+      righttype = extend
+      default = 2
+      flags = 0
+      segment { length = 0 value = 2 2 expr = ch(\"../calculate_pixel_coordinates/class\") }
+    }
+    channel grouptype {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../calculate_pixel_coordinates/grouptype\") }
+    }
+    channel group {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../calculate_pixel_coordinates/group\") }
+    }
+  }
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/calculate_pixel_coordinates19.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+folder0	[ 0	locks=0 ]	(	0	0	)
+group	[ 0	locks=0 ]	(	[ group	"" ] 	)
+grouptype	[ 0	locks=0 ]	(	[ grouptype	0 ] 	)
+class	[ 0	locks=0 ]	(	[ class	2 ] 	)
+vex_numcount	[ 0	locks=0 ]	(	[ vex_numcount	10 ] 	)
+vex_threadjobsize	[ 0	locks=0 ]	(	[ vex_threadjobsize	1024 ] 	)
+snippet	[ 0	locks=0 ]	(	[ snippet	"" ] 	)
+exportlist	[ 0	locks=0 ]	(	[ exportlist	* ] 	)
+vex_strict	[ 0	locks=0 ]	(	[ vex_strict	0 ] 	)
+vex_strictvariables	[ 0	locks=0 ]	(	"on"	)
+autobind	[ 0	locks=0 ]	(	[ autobind	1 ] 	)
+bindings	[ 0	locks=0 ]	(	0	)
+groupautobind	[ 0	locks=0 ]	(	[ groupautobind	1 ] 	)
+groupbindings	[ 0	locks=0 ]	(	0	)
+vex_cwdpath	[ 0	locks=0 ]	(	[ vex_cwdpath	. ] 	)
+vex_outputmask	[ 0	locks=0 ]	(	[ vex_outputmask	* ] 	)
+vex_updatenmls	[ 0	locks=0 ]	(	[ vex_updatenmls	0 ] 	)
+vex_matchattrib	[ 0	locks=0 ]	(	[ vex_matchattrib	id ] 	)
+vex_inplace	[ 0	locks=0 ]	(	[ vex_inplace	0 ] 	)
+vex_selectiongroup	[ 0	locks=0 ]	(	[ vex_selectiongroup	"" ] 	)
+vex_precision	[ 0	locks=0 ]	(	[ vex_precision	auto ] 	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/calculate_pixel_coordinates19.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":""
+	},
+	"referenced_from":{
+		"type":"string",
+		"value":"../calculate_pixel_coordinates"
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/add23.init"
+Content-Type: text/plain
+
+type = add
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/add23.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment "Referenced from add2"
+position 114.39 -9.92461
+connectornextid 2
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on displaycomment on
+outputsNamed3
+{
+0 "output1"
+}
+inputsNamed3
+{
+1 	attribdelete20 1 1 "input1"
+}
+inputs
+{
+0 	attribdelete20 0 1
+}
+stat
+{
+  create 1752164238
+  modify 1761408918
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 0.8 0.8 0.8 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/add23.chn"
+Content-Type: text/plain
+
+{
+    channel weight0 {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../add2/weight0\") }
+    }
+    channel pt0z {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../add2/pt0z\") }
+    }
+    channel pt0y {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../add2/pt0y\") }
+    }
+    channel pt0x {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../add2/pt0x\") }
+    }
+    channel usept0 {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../add2/usept0\") }
+    }
+    channel closed0 {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../add2/closed0\") }
+    }
+    channel prim0 {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../add2/prim0\") }
+    }
+    channel appendunusedtoparticlesystem {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../add2/appendunusedtoparticlesystem\") }
+    }
+    channel particlegroup {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../add2/particlegroup\") }
+    }
+    channel addparticlesystem {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../add2/addparticlesystem\") }
+    }
+    channel closedall {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../add2/closedall\") }
+    }
+    channel attrname {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../add2/attrname\") }
+    }
+    channel inc {
+      lefttype = extend
+      righttype = extend
+      default = 2
+      flags = 0
+      segment { length = 0 value = 2 2 expr = ch(\"../add2/inc\") }
+    }
+    channel add {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../add2/add\") }
+    }
+    channel group {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../add2/group\") }
+    }
+    channel remove {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../add2/remove\") }
+    }
+    channel keep {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../add2/keep\") }
+    }
+  }
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/add23.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+stdswitcher	[ 0	locks=0 ]	(	0	0	0	)
+keep	[ 0	locks=0 ]	(	[ keep	0 ] 	)
+points	[ 0	locks=0 ]	(	1	)
+remove	[ 0	locks=0 ]	(	[ remove	0 ] 	)
+switcher	[ 0	locks=0 ]	(	0	0	)
+prims	[ 0	locks=0 ]	(	1	)
+group	[ 0	locks=0 ]	(	[ group	"" ] 	)
+add	[ 0	locks=0 ]	(	[ add	0 ] 	)
+inc	[ 0	locks=0 ]	(	[ inc	2 ] 	)
+attrname	[ 0	locks=0 ]	(	[ attrname	"" ] 	)
+closedall	[ 0	locks=0 ]	(	[ closedall	0 ] 	)
+addparticlesystem	[ 0	locks=0 ]	(	[ addparticlesystem	0 ] 	)
+particlegroup	[ 0	locks=0 ]	(	[ particlegroup	"" ] 	)
+appendunusedtoparticlesystem	[ 0	locks=0 ]	(	[ appendunusedtoparticlesystem	0 ] 	)
+prim0	[ 0	locks=0 ]	(	[ prim0	"" ] 	)
+closed0	[ 0	locks=0 ]	(	[ closed0	0 ] 	)
+usept0	[ 0	locks=0 ]	(	[ usept0	1 ] 	)
+pt0	[ 0	locks=0 ]	(	[ pt0x	0 ] 	[ pt0y	0 ] 	[ pt0z	0 ] 	)
+weight0	[ 0	locks=0 ]	(	[ weight0	1 ] 	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/add23.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":"21.0.512"
+	},
+	"referenced_from":{
+		"type":"string",
+		"value":"../add2"
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/attribpromote20.init"
+Content-Type: text/plain
+
+type = attribpromote
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/attribpromote20.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment "Referenced from attribpromote1"
+position 114.386 -10.9246
+connectornextid 2
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on displaycomment on
+outputsNamed3
+{
+1 "output1"
+}
+inputsNamed3
+{
+0 	add23 0 1 "input1"
+}
+inputs
+{
+0 	add23 0 1
+}
+stat
+{
+  create 1752164324
+  modify 1761408918
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 0.8 0.8 0.8 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/attribpromote20.chn"
+Content-Type: text/plain
+
+{
+    channel deletein {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../attribpromote1/deletein\") }
+    }
+    channel outname {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../attribpromote1/outname\") }
+    }
+    channel useoutname {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../attribpromote1/useoutname\") }
+    }
+    channel method {
+      lefttype = extend
+      righttype = extend
+      default = 2
+      flags = 0
+      segment { length = 0 value = 2 2 expr = ch(\"../attribpromote1/method\") }
+    }
+    channel pieceattrib {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"name\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../attribpromote1/pieceattrib\") }
+    }
+    channel usepieceattrib {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../attribpromote1/usepieceattrib\") }
+    }
+    channel outclass {
+      lefttype = extend
+      righttype = extend
+      default = 2
+      flags = 0
+      segment { length = 0 value = 2 2 expr = ch(\"../attribpromote1/outclass\") }
+    }
+    channel inclass {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../attribpromote1/inclass\") }
+    }
+    channel inname {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"level\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../attribpromote1/inname\") }
+    }
+  }
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/attribpromote20.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+inname	[ 0	locks=0 ]	(	[ inname	"" ] 	)
+inclass	[ 0	locks=0 ]	(	[ inclass	2 ] 	)
+outclass	[ 0	locks=0 ]	(	[ outclass	2 ] 	)
+usepieceattrib	[ 0	locks=0 ]	(	[ usepieceattrib	0 ] 	)
+pieceattrib	[ 0	locks=0 ]	(	[ pieceattrib	name ] 	)
+method	[ 0	locks=0 ]	(	[ method	2 ] 	)
+useoutname	[ 0	locks=0 ]	(	[ useoutname	0 ] 	)
+outname	[ 0	locks=0 ]	(	[ outname	"" ] 	)
+deletein	[ 0	locks=0 ]	(	[ deletein	1 ] 	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/attribpromote20.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":"21.0.512"
+	},
+	"referenced_from":{
+		"type":"string",
+		"value":"../attribpromote1"
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/attribdelete20.init"
+Content-Type: text/plain
+
+type = attribdelete
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/attribdelete20.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment "Referenced from attribdelete1"
+position 114.386 -8.92485
+connectornextid 2
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on displaycomment on
+outputsNamed3
+{
+1 "output1"
+}
+inputsNamed3
+{
+0 	delete20 1 1 "input1"
+}
+inputs
+{
+0 	delete20 0 1
+}
+stat
+{
+  create 1752164347
+  modify 1761408918
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 0.8 0.8 0.8 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/attribdelete20.chn"
+Content-Type: text/plain
+
+{
+    channel updatevar {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../attribdelete1/updatevar\") }
+    }
+    channel dtldel {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../attribdelete1/dtldel\") }
+    }
+    channel dodtldel {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../attribdelete1/dodtldel\") }
+    }
+    channel primdel {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../attribdelete1/primdel\") }
+    }
+    channel doprimdel {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../attribdelete1/doprimdel\") }
+    }
+    channel vtxdel {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../attribdelete1/vtxdel\") }
+    }
+    channel dovtxdel {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../attribdelete1/dovtxdel\") }
+    }
+    channel ptdel {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../attribdelete1/ptdel\") }
+    }
+    channel doptdel {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../attribdelete1/doptdel\") }
+    }
+    channel negate {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../attribdelete1/negate\") }
+    }
+    channel usereference {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../attribdelete1/usereference\") }
+    }
+  }
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/attribdelete20.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+usereference	[ 0	locks=0 ]	(	[ usereference	0 ] 	)
+negate	[ 0	locks=0 ]	(	[ negate	0 ] 	)
+doptdel	[ 0	locks=0 ]	(	[ doptdel	1 ] 	)
+ptdel	[ 0	locks=0 ]	(	[ ptdel	"" ] 	)
+dovtxdel	[ 0	locks=0 ]	(	[ dovtxdel	1 ] 	)
+vtxdel	[ 0	locks=0 ]	(	[ vtxdel	"" ] 	)
+doprimdel	[ 0	locks=0 ]	(	[ doprimdel	1 ] 	)
+primdel	[ 0	locks=0 ]	(	[ primdel	"" ] 	)
+dodtldel	[ 0	locks=0 ]	(	[ dodtldel	1 ] 	)
+dtldel	[ 0	locks=0 ]	(	[ dtldel	"" ] 	)
+updatevar	[ 0	locks=0 ]	(	[ updatevar	1 ] 	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/attribdelete20.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":""
+	},
+	"referenced_from":{
+		"type":"string",
+		"value":"../attribdelete1"
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/delete20.init"
+Content-Type: text/plain
+
+type = delete
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/delete20.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment "Referenced from delete1"
+position 114.39 -7.92485
+connectornextid 2
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on displaycomment on
+outputsNamed3
+{
+1 "output1"
+}
+inputsNamed3
+{
+0 	collect_values_to_array21 1 1 "input1"
+}
+inputs
+{
+0 	collect_values_to_array21 0 1
+}
+stat
+{
+  create 1752164283
+  modify 1761408918
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 0.8 0.8 0.8 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/delete20.chn"
+Content-Type: text/plain
+
+{
+    channel rangeend {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/rangeend\") }
+    }
+    channel keeppoints {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/keeppoints\") }
+    }
+    channel removegrp {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../delete1/removegrp\") }
+    }
+    channel percent {
+      lefttype = extend
+      righttype = extend
+      default = 50
+      flags = 0
+      segment { length = 0 value = 50 50 expr = ch(\"../delete1/percent\") }
+    }
+    channel seedattrib {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"id\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../delete1/seedattrib\") }
+    }
+    channel useseedattrib {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/useseedattrib\") }
+    }
+    channel globalseed {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../delete1/globalseed\") }
+    }
+    channel userandom {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/userandom\") }
+    }
+    channel tol {
+      lefttype = extend
+      righttype = extend
+      default = 0.001
+      flags = 0
+      segment { length = 0 value = 0.001 0.001 expr = ch(\"../delete1/tol\") }
+    }
+    channel doopen {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/doopen\") }
+    }
+    channel zaf {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/zaf\") }
+    }
+    channel degenerate {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/degenerate\") }
+    }
+    channel affectdegenerate {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/affectdegenerate\") }
+    }
+    channel camerapath {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chsop(\"../delete1/camerapath\") }
+    }
+    channel angle {
+      lefttype = extend
+      righttype = extend
+      default = 180
+      flags = 0
+      segment { length = 0 value = 180 180 expr = ch(\"../delete1/angle\") }
+    }
+    channel dirz {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../delete1/dirz\") }
+    }
+    channel diry {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/diry\") }
+    }
+    channel dirx {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/dirx\") }
+    }
+    channel affectnormal {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/affectnormal\") }
+    }
+    channel tz {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/tz\") }
+    }
+    channel ty {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/ty\") }
+    }
+    channel tx {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/tx\") }
+    }
+    channel sizez {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../delete1/sizez\") }
+    }
+    channel sizey {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../delete1/sizey\") }
+    }
+    channel sizex {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../delete1/sizex\") }
+    }
+    channel boundtype {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/boundtype\") }
+    }
+    channel affectvolume {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/affectvolume\") }
+    }
+    channel select2 {
+      lefttype = extend
+      righttype = extend
+      default = 2
+      flags = 0
+      segment { length = 0 value = 2 2 expr = ch(\"../delete1/select2\") }
+    }
+    channel select1 {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../delete1/select1\") }
+    }
+    channel rangestart {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/rangestart\") }
+    }
+    channel pattern {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"*\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../delete1/pattern\") }
+    }
+    channel filter {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../delete1/filter\") }
+    }
+    channel groupop {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/groupop\") }
+    }
+    channel affectnumber {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../delete1/affectnumber\") }
+    }
+    channel geotype {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/geotype\") }
+    }
+    channel entity {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../delete1/entity\") }
+    }
+    channel negate {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../delete1/negate\") }
+    }
+    channel label0 {
+      lefttype = extend
+      righttype = extend
+      defaultString = "\"Warning: Group Is NOT Filtered by Geometry Type\""
+      flags = 0
+      segment { length = 0 expr = chs(\"../delete1/label0\") }
+    }
+    channel group {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../delete1/group\") }
+    }
+  }
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/delete20.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+group	[ 0	locks=0 ]	(	[ group	"" ] 	)
+label0	[ 0	locks=0 ]	(	[ label0	"Warning: Group Is NOT Filtered by Geometry Type" ] 	)
+negate	[ 0	locks=0 ]	(	[ negate	0 ] 	)
+entity	[ 0	locks=0 ]	(	[ entity	0 ] 	)
+geotype	[ 0	locks=0 ]	(	[ geotype	0 ] 	)
+stdswitcher	[ 0	locks=0 ]	(	0	0	0	0	0	)
+affectnumber	[ 0	locks=0 ]	(	[ affectnumber	1 ] 	)
+groupop	[ 0	locks=0 ]	(	[ groupop	0 ] 	)
+filter	[ 0	locks=0 ]	(	[ filter	1 ] 	)
+pattern	[ 0	locks=0 ]	(	[ pattern	!* ] 	)
+range	[ 0	locks=0 ]	(	[ rangestart	0 ] 	[ rangeend	0 ] 	)
+select	[ 0	locks=0 ]	(	[ select1	1 ] 	[ select2	2 ] 	)
+affectvolume	[ 0	locks=0 ]	(	[ affectvolume	0 ] 	)
+boundtype	[ 0	locks=0 ]	(	[ boundtype	0 ] 	)
+size	[ 0	locks=0 ]	(	[ sizex	1 ] 	[ sizey	1 ] 	[ sizez	1 ] 	)
+t	[ 0	locks=0 ]	(	[ tx	0 ] 	[ ty	0 ] 	[ tz	0 ] 	)
+affectnormal	[ 0	locks=0 ]	(	[ affectnormal	0 ] 	)
+dir	[ 0	locks=0 ]	(	[ dirx	0 ] 	[ diry	0 ] 	[ dirz	1 ] 	)
+angle	[ 0	locks=0 ]	(	[ angle	180 ] 	)
+camerapath	[ 0	locks=0 ]	(	[ camerapath	"" ] 	)
+affectdegenerate	[ 0	locks=0 ]	(	[ affectdegenerate	0 ] 	)
+degenerate	[ 0	locks=0 ]	(	[ degenerate	0 ] 	)
+zaf	[ 0	locks=0 ]	(	[ zaf	0 ] 	)
+doopen	[ 0	locks=0 ]	(	[ doopen	0 ] 	)
+tol	[ 0	locks=0 ]	(	[ tol	0.001 ] 	)
+userandom	[ 0	locks=0 ]	(	[ userandom	0 ] 	)
+globalseed	[ 0	locks=0 ]	(	[ globalseed	1 ] 	)
+useseedattrib	[ 0	locks=0 ]	(	[ useseedattrib	0 ] 	)
+seedattrib	[ 0	locks=0 ]	(	[ seedattrib	id ] 	)
+percent	[ 0	locks=0 ]	(	[ percent	50 ] 	)
+removegrp	[ 0	locks=0 ]	(	[ removegrp	1 ] 	)
+keeppoints	[ 0	locks=0 ]	(	[ keeppoints	0 ] 	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/delete20.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":"21.0.512"
+	},
+	"referenced_from":{
+		"type":"string",
+		"value":"../delete1"
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/color19.init"
+Content-Type: text/plain
+
+type = attribwrangle
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/color19.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment "Referenced from color"
+position 114.387 -4.6023
+connectornextid 2
+flags =  lock off model off template on footprint off xray off bypass off display on render on highlight off unload off savedata off compress on colordefault on exposed on displaycomment on
+outputsNamed3
+{
+1 "output1"
+}
+inputsNamed3
+{
+0 	copytopoints20 2 1 "input1"
+}
+inputs
+{
+0 	copytopoints20 0 1
+}
+stat
+{
+  create 1753249185
+  modify 1761408970
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 0.8 0.8 0.8 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/color19.spareparmdef"
+Content-Type: text/plain
+
+    group {
+        name    "folder1"
+        label   "Code"
+
+        parm {
+            name    "group"
+            baseparm
+            label   "Group"
+            export  none
+            bindselector uvselect "Modify Attribs"
+                "Select the geometry to affect and press Enter to complete."
+                0 1 0xffffffff 0 grouptype 0
+        }
+        parm {
+            name    "grouptype"
+            baseparm
+            label   "Group Type"
+            export  none
+        }
+        parm {
+            name    "class"
+            baseparm
+            label   "Run Over"
+            export  none
+        }
+        parm {
+            name    "vex_numcount"
+            baseparm
+            label   "Number Count"
+            export  none
+        }
+        parm {
+            name    "vex_threadjobsize"
+            baseparm
+            label   "Thread Job Size"
+            export  none
+        }
+        groupsimple {
+            name    "folder_generatedparms_snippet"
+            label   "Generated Channel Parameters"
+            grouptag { "sidefx::look" "blank" }
+
+            parm {
+                name    "color"
+                label   "Color"
+                type    ramp_rgb
+                default { "2" }
+                range   { 1! 10 }
+            }
+        }
+
+        parm {
+            name    "snippet"
+            baseparm
+            label   "VEXpression"
+            export  all
+        }
+        parm {
+            name    "exportlist"
+            baseparm
+            label   "Attributes to Create"
+            export  none
+        }
+        parm {
+            name    "vex_strict"
+            baseparm
+            label   "Enforce Prototypes"
+            export  none
+        }
+    }
+
+    group {
+        name    "folder1_1"
+        label   "Bindings"
+
+        parm {
+            name    "autobind"
+            baseparm
+            label   "Autobind by Name"
+            export  none
+        }
+        multiparm {
+            name    "bindings"
+            label    "Number of Bindings"
+            baseparm
+            default 0
+            parmtag { "autoscope" "0000000000000000" }
+            parmtag { "multistartoffset" "1" }
+
+            parm {
+                name    "bindname#"
+                baseparm
+                label   "Attribute Name"
+                export  none
+            }
+            parm {
+                name    "bindparm#"
+                baseparm
+                label   "VEX Parameter"
+                export  none
+            }
+        }
+
+        parm {
+            name    "groupautobind"
+            baseparm
+            label   "Autobind Groups by Name"
+            export  none
+        }
+        multiparm {
+            name    "groupbindings"
+            label    "Group Bindings"
+            baseparm
+            default 0
+            parmtag { "autoscope" "0000000000000000" }
+            parmtag { "multistartoffset" "1" }
+
+            parm {
+                name    "bindgroupname#"
+                baseparm
+                label   "Group Name"
+                export  none
+            }
+            parm {
+                name    "bindgroupparm#"
+                baseparm
+                label   "VEX Parameter"
+                export  none
+            }
+        }
+
+        parm {
+            name    "vex_cwdpath"
+            baseparm
+            label   "Evaluation Node Path"
+            export  none
+        }
+        parm {
+            name    "vex_outputmask"
+            baseparm
+            label   "Export Parameters"
+            export  none
+        }
+        parm {
+            name    "vex_updatenmls"
+            baseparm
+            label   "Update Normals If Displaced"
+            export  none
+        }
+        parm {
+            name    "vex_matchattrib"
+            baseparm
+            label   "Attribute to Match"
+            export  none
+        }
+        parm {
+            name    "vex_inplace"
+            baseparm
+            label   "Compute Results In Place"
+            export  none
+        }
+        parm {
+            name    "vex_selectiongroup"
+            baseparm
+            label   "Output Selection Group"
+            export  none
+        }
+        parm {
+            name    "vex_precision"
+            baseparm
+            label   "VEX Precision"
+            export  none
+        }
+    }
+
+    parm {
+        name    "vex_strictvariables"
+        baseparm
+        label   "Standard Variable Names Only"
+        export  none
+    }
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/color19.chn"
+Content-Type: text/plain
+
+{
+    channel color4interp {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/color4interp\") }
+    }
+    channel color4cb {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/color4cb\") }
+    }
+    channel color4cg {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/color4cg\") }
+    }
+    channel color4cr {
+      lefttype = extend
+      righttype = extend
+      default = 0.5
+      flags = 0
+      segment { length = 0 value = 0.5 0.5 expr = ch(\"../color/color4cr\") }
+    }
+    channel color4pos {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/color4pos\") }
+    }
+    channel color3interp {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/color3interp\") }
+    }
+    channel color3cb {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/color3cb\") }
+    }
+    channel color3cg {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/color3cg\") }
+    }
+    channel color3cr {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/color3cr\") }
+    }
+    channel color3pos {
+      lefttype = extend
+      righttype = extend
+      default = 0.83333331346511841
+      flags = 0
+      segment { length = 0 value = 0.83333331346511841 0.83333331346511841 expr = ch(\"../color/color3pos\") }
+    }
+    channel color2interp {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/color2interp\") }
+    }
+    channel color2cb {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/color2cb\") }
+    }
+    channel color2cg {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/color2cg\") }
+    }
+    channel color2cr {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/color2cr\") }
+    }
+    channel color2pos {
+      lefttype = extend
+      righttype = extend
+      default = 0.49293786287307739
+      flags = 0
+      segment { length = 0 value = 0.49293786287307739 0.49293786287307739 expr = ch(\"../color/color2pos\") }
+    }
+    channel color1interp {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/color1interp\") }
+    }
+    channel color1cb {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/color1cb\") }
+    }
+    channel color1cg {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/color1cg\") }
+    }
+    channel color1cr {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/color1cr\") }
+    }
+    channel color1pos {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/color1pos\") }
+    }
+    channel vex_precision {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"auto\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../color/vex_precision\") }
+    }
+    channel vex_selectiongroup {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../color/vex_selectiongroup\") }
+    }
+    channel vex_inplace {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/vex_inplace\") }
+    }
+    channel vex_matchattrib {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"id\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../color/vex_matchattrib\") }
+    }
+    channel vex_updatenmls {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/vex_updatenmls\") }
+    }
+    channel vex_outputmask {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"*\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../color/vex_outputmask\") }
+    }
+    channel vex_cwdpath {
+      lefttype = extend
+      righttype = extend
+      defaultString = \".\"
+      flags = 0
+      segment { length = 0 expr = chsop(\"../color/vex_cwdpath\") }
+    }
+    channel groupautobind {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/groupautobind\") }
+    }
+    channel autobind {
+      lefttype = extend
+      righttype = extend
+      default = 1
+      flags = 0
+      segment { length = 0 value = 1 1 expr = ch(\"../color/autobind\") }
+    }
+    channel vex_strict {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/vex_strict\") }
+    }
+    channel exportlist {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"*\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../color/exportlist\") }
+    }
+    channel snippet {
+      lefttype = extend
+      righttype = extend
+      defaultString = "\"v@Cd=chramp(\\\"color\\\",fit(@ptnum,0,6,0,1));
+\""
+      flags = 0
+      segment { length = 0 expr = chs(\"../color/snippet\") }
+    }
+    channel vex_threadjobsize {
+      lefttype = extend
+      righttype = extend
+      default = 1024
+      flags = 0
+      segment { length = 0 value = 1024 1024 expr = ch(\"../color/vex_threadjobsize\") }
+    }
+    channel vex_numcount {
+      lefttype = extend
+      righttype = extend
+      default = 10
+      flags = 0
+      segment { length = 0 value = 10 10 expr = ch(\"../color/vex_numcount\") }
+    }
+    channel class {
+      lefttype = extend
+      righttype = extend
+      default = 2
+      flags = 0
+      segment { length = 0 value = 2 2 expr = ch(\"../color/class\") }
+    }
+    channel grouptype {
+      lefttype = extend
+      righttype = extend
+      flags = 0
+      segment { length = 0 expr = ch(\"../color/grouptype\") }
+    }
+    channel group {
+      lefttype = extend
+      righttype = extend
+      defaultString = \"\"
+      flags = 0
+      segment { length = 0 expr = chs(\"../color/group\") }
+    }
+  }
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/color19.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+folder0	[ 0	locks=0 ]	(	0	0	)
+group	[ 0	locks=0 ]	(	[ group	"" ] 	)
+grouptype	[ 0	locks=0 ]	(	[ grouptype	0 ] 	)
+class	[ 0	locks=0 ]	(	[ class	2 ] 	)
+vex_numcount	[ 0	locks=0 ]	(	[ vex_numcount	10 ] 	)
+vex_threadjobsize	[ 0	locks=0 ]	(	[ vex_threadjobsize	1024 ] 	)
+snippet	[ 0	locks=0 ]	(	[ snippet	"" ] 	)
+exportlist	[ 0	locks=0 ]	(	[ exportlist	* ] 	)
+vex_strict	[ 0	locks=0 ]	(	[ vex_strict	0 ] 	)
+vex_strictvariables	[ 0	locks=0 ]	(	"on"	)
+autobind	[ 0	locks=0 ]	(	[ autobind	1 ] 	)
+bindings	[ 0	locks=0 ]	(	0	)
+groupautobind	[ 0	locks=0 ]	(	[ groupautobind	1 ] 	)
+groupbindings	[ 0	locks=0 ]	(	0	)
+vex_cwdpath	[ 0	locks=0 ]	(	[ vex_cwdpath	. ] 	)
+vex_outputmask	[ 0	locks=0 ]	(	[ vex_outputmask	* ] 	)
+vex_updatenmls	[ 0	locks=0 ]	(	[ vex_updatenmls	0 ] 	)
+vex_matchattrib	[ 0	locks=0 ]	(	[ vex_matchattrib	id ] 	)
+vex_inplace	[ 0	locks=0 ]	(	[ vex_inplace	0 ] 	)
+vex_selectiongroup	[ 0	locks=0 ]	(	[ vex_selectiongroup	"" ] 	)
+vex_precision	[ 0	locks=0 ]	(	[ vex_precision	auto ] 	)
+folder1	[ 0	locks=0 ]	(	0	0	)
+folder_generatedparms_snippet	[ 0	locks=0 ]	(	0	)
+color	[ 0	locks=0 ]	(	4	)
+color1pos	[ 0	locks=0 ]	(	[ color1pos	0 ] 	)
+color1c	[ 0	locks=0 ]	(	[ color1cr	0 ] 	[ color1cg	0 ] 	[ color1cb	0 ] 	)
+color1interp	[ 0	locks=0 ]	(	[ color1interp	1 ] 	)
+color2pos	[ 0	locks=0 ]	(	[ color2pos	0 ] 	)
+color2c	[ 0	locks=0 ]	(	[ color2cr	0 ] 	[ color2cg	0 ] 	[ color2cb	0 ] 	)
+color2interp	[ 0	locks=0 ]	(	[ color2interp	1 ] 	)
+color3pos	[ 0	locks=0 ]	(	[ color3pos	0 ] 	)
+color3c	[ 0	locks=0 ]	(	[ color3cr	0 ] 	[ color3cg	0 ] 	[ color3cb	0 ] 	)
+color3interp	[ 0	locks=0 ]	(	[ color3interp	1 ] 	)
+color4pos	[ 0	locks=0 ]	(	[ color4pos	0 ] 	)
+color4c	[ 0	locks=0 ]	(	[ color4cr	0 ] 	[ color4cg	0 ] 	[ color4cb	0 ] 	)
+color4interp	[ 0	locks=0 ]	(	[ color4interp	1 ] 	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/color19.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":""
+	},
+	"referenced_from":{
+		"type":"string",
+		"value":"../color"
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/collect_values_to_array21.init"
+Content-Type: text/plain
+
+type = attribwrangle
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/collect_values_to_array21.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment ""
+position 114.387 -6.89972
+connectornextid 2
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on
+outputsNamed3
+{
+1 "output1"
+}
+inputsNamed3
+{
+0 	calculate_pixel_coordinates19 1 1 "input1"
+}
+inputs
+{
+0 	calculate_pixel_coordinates19 0 1
+}
+stat
+{
+  create 1752082986
+  modify 1761408918
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 0.8 0.8 0.8 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/collect_values_to_array21.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+folder0	[ 0	locks=0 ]	(	0	0	)
+group	[ 0	locks=0 ]	(	""	)
+grouptype	[ 0	locks=0 ]	(	"guess"	)
+class	[ 0	locks=0 ]	(	"detail"	)
+vex_numcount	[ 0	locks=0 ]	(	10	)
+vex_threadjobsize	[ 0	locks=0 ]	(	1024	)
+snippet	[ 0	locks=0 ]	(	"i[]@level = array();
+for(int i=0; i<7; i++){
+    int tempx = point(0, \"posx\", i);
+    append(@level, tempx);
+    int tempy = point(0, \"posy\", i);
+    append(@level, tempy);
+}
+append(@level, 3);                    // how many frames before next sprite reveal
+append(@level, 0);                     // pad with zero to get 16 bytes"	)
+exportlist	[ 0	locks=0 ]	(	*	)
+vex_strict	[ 0	locks=0 ]	(	"off"	)
+vex_strictvariables	[ 0	locks=0 ]	(	"on"	)
+autobind	[ 0	locks=0 ]	(	"on"	)
+bindings	[ 0	locks=0 ]	(	0	)
+groupautobind	[ 0	locks=0 ]	(	"on"	)
+groupbindings	[ 0	locks=0 ]	(	0	)
+vex_cwdpath	[ 0	locks=0 ]	(	.	)
+vex_outputmask	[ 0	locks=0 ]	(	*	)
+vex_updatenmls	[ 0	locks=0 ]	(	"off"	)
+vex_matchattrib	[ 0	locks=0 ]	(	id	)
+vex_inplace	[ 0	locks=0 ]	(	"off"	)
+vex_selectiongroup	[ 0	locks=0 ]	(	""	)
+vex_precision	[ 0	locks=0 ]	(	auto	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/collect_values_to_array21.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":""
+	}
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/transform15.init"
+Content-Type: text/plain
+
+type = xform
+matchesdef = 1
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/transform15.def"
+Content-Type: text/plain
+
+sopflags sopflags = 
+comment ""
+position 115.335 -1.80716
+connectornextid 2
+flags =  lock off model off template off footprint off xray off bypass on display off render off highlight off unload off savedata off compress on colordefault on exposed on
+outputsNamed3
+{
+1 "output1"
+}
+inputsNamed3
+{
+0 	scatter17 1 1 "input1"
+}
+inputs
+{
+0 	scatter17 0 1
+}
+stat
+{
+  create 1753428359
+  modify 1761408918
+  author Laurikka@stopgap
+  access 0777
+}
+color UT_Color RGB 0.8 0.8 0.8 
+delscript ""
+exprlanguage hscript
+end
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/transform15.parm"
+Content-Type: text/plain
+
+{
+version 0.8
+group	[ 0	locks=0 ]	(	""	)
+grouptype	[ 0	locks=0 ]	(	"guess"	)
+xOrd	[ 0	locks=0 ]	(	"srt"	)
+rOrd	[ 0	locks=0 ]	(	"xyz"	)
+t	[ 0	locks=0 ]	(	0	0	0	)
+r	[ 0	locks=0 ]	(	0	0	0	)
+s	[ 0	locks=0 ]	(	1	1	1	)
+shear	[ 0	locks=0 ]	(	0	0	0	)
+scale	[ 0	locks=0 ]	(	0.52	)
+parmgroup_pivotxform	[ 0	locks=0 ]	(	0	)
+p	[ 0	locks=0 ]	(	0	0	0	)
+pr	[ 0	locks=0 ]	(	0	0	0	)
+parmgroup_prexform	[ 0	locks=0 ]	(	0	)
+prexform_xOrd	[ 0	locks=0 ]	(	"srt"	)
+prexform_rOrd	[ 0	locks=0 ]	(	"xyz"	)
+prexform_t	[ 0	locks=0 ]	(	0	0	0	)
+prexform_r	[ 0	locks=0 ]	(	0	0	0	)
+prexform_s	[ 0	locks=0 ]	(	1	1	1	)
+prexform_shear	[ 0	locks=0 ]	(	0	0	0	)
+movecentroid	[ 0	locks=0 ]	(	0	)
+movepivot	[ 0	locks=0 ]	(	0	)
+attribs	[ 0	locks=0 ]	(	*	)
+updatenmls	[ 0	locks=0 ]	(	"off"	)
+updateaffectednmls	[ 0	locks=0 ]	(	"on"	)
+vlength	[ 0	locks=0 ]	(	"on"	)
+invertxform	[ 0	locks=0 ]	(	"off"	)
+addattrib	[ 0	locks=0 ]	(	"off"	)
+outputattrib	[ 0	locks=0 ]	(	xform	)
+outputmerge	[ 0	locks=0 ]	(	"post"	)
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/transform15.userdata"
+Content-Type: text/plain
+
+{
+	"___Version___":{
+		"type":"string",
+		"value":"21.0.512"
 	}
 }
 
@@ -42429,10 +50418,62 @@ Content-Type: text/plain
 }
 
 --HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/__dot17.networkdotinit"
+Content-Type: text/plain
+
+{
+	"version":1,
+	"posx":88.3468180740762676,
+	"posy":2.07017995157072932,
+	"pinned":false,
+	"color":"FROMOUTPUT",
+	"input":"(__dot16) 0 1"
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/__dot18.networkdotinit"
+Content-Type: text/plain
+
+{
+	"version":1,
+	"posx":95.1703090751876744,
+	"posy":2.0701799515707302,
+	"pinned":false,
+	"color":"FROMOUTPUT",
+	"input":"(__dot17) 0 1"
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/__dot19.networkdotinit"
+Content-Type: text/plain
+
+{
+	"version":1,
+	"posx":105.377097959617501,
+	"posy":2.07017995157073065,
+	"pinned":false,
+	"color":"FROMOUTPUT",
+	"input":"(__dot18) 0 1"
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/levels/__dot20.networkdotinit"
+Content-Type: text/plain
+
+{
+	"version":1,
+	"posx":113.627146812841445,
+	"posy":2.07017995157073065,
+	"pinned":false,
+	"color":"FROMOUTPUT",
+	"input":"(__dot19) 0 1"
+}
+
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
 Content-Disposition: attachment; filename="obj/levels.order"
 Content-Type: text/plain
 
-175
+218
 circle1
 transform1
 copy1
@@ -42608,6 +50649,49 @@ delete16
 color15
 collect_values_to_array17
 transform12
+grid13
+scatter14
+copytopoints17
+calculate_pixel_coordinates16
+add20
+attribpromote17
+attribdelete17
+delete17
+color16
+collect_values_to_array18
+grid14
+scatter15
+copytopoints18
+calculate_pixel_coordinates17
+add21
+attribpromote18
+attribdelete18
+delete18
+color17
+collect_values_to_array19
+transform13
+grid15
+scatter16
+copytopoints19
+calculate_pixel_coordinates18
+add22
+attribpromote19
+attribdelete19
+delete19
+color18
+collect_values_to_array20
+transform14
+grid16
+scatter17
+copytopoints20
+calculate_pixel_coordinates19
+add23
+attribpromote20
+attribdelete20
+delete20
+color19
+collect_values_to_array21
+transform15
 
 --HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
 Content-Disposition: attachment; filename="obj/levels.net"
@@ -43445,7 +51529,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -43626,7 +51710,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -43874,7 +51958,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -43978,7 +52062,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -44046,7 +52130,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -44489,7 +52573,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -44650,7 +52734,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -44754,7 +52838,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -44822,7 +52906,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -44960,7 +53044,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -45225,7 +53309,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -45386,7 +53470,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -45490,7 +53574,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -45558,7 +53642,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -45696,7 +53780,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -45772,7 +53856,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -45848,7 +53932,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -45908,7 +53992,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -45999,7 +54083,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -46031,7 +54115,7 @@ inputs
 stat
 {
   create 1723647446
-  modify 1752427483
+  modify 1759654421
   author Laurikka@stopgap
   access 0777
 }
@@ -46046,9 +54130,9 @@ Content-Type: text/plain
 
 {
 version 0.8
-stdswitcher	[ 0	locks=0 ]	(	5	5	5	5	5	5	5	)
+stdswitcher	[ 0	locks=0 ]	(	0	0	0	0	0	0	0	)
 source	[ 0	locks=0 ]	(	file	)
-file	[ 0	locks=0 ]	(	G:/projects_2025/c64game/introtune/lead_2.mid	)
+file	[ 0	locks=0 ]	(	$HIP/lead_2.mid	)
 entire	[ 0	locks=0 ]	(	"on"	)
 channel	[ 0	locks=0 ]	(	1	)
 prefix	[ 0	locks=0 ]	(	""	)
@@ -46128,7 +54212,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -46156,7 +54240,7 @@ Content-Type: text/plain
 0
 511
 0
-0
+4
 
 --HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
 Content-Disposition: attachment; filename="obj/chopnet_midi/_OUT.init"
@@ -46220,7 +54304,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -46265,7 +54349,7 @@ inputs
 stat
 {
   create 1723647446
-  modify 1752315456
+  modify 1759654429
   author Laurikka@stopgap
   access 0777
 }
@@ -46280,9 +54364,9 @@ Content-Type: text/plain
 
 {
 version 0.8
-stdswitcher	[ 0	locks=0 ]	(	5	5	5	5	5	5	5	)
+stdswitcher	[ 0	locks=0 ]	(	0	0	0	0	0	0	0	)
 source	[ 0	locks=0 ]	(	file	)
-file	[ 0	locks=0 ]	(	G:/projects_2025/c64game/introtune/bass_ch1_1.mid	)
+file	[ 0	locks=0 ]	(	$HIP/bass_ch1_1.mid	)
 entire	[ 0	locks=0 ]	(	"on"	)
 channel	[ 0	locks=0 ]	(	1	)
 prefix	[ 0	locks=0 ]	(	""	)
@@ -46362,7 +54446,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -46461,7 +54545,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -46506,7 +54590,7 @@ inputs
 stat
 {
   create 1723647446
-  modify 1752315461
+  modify 1759654435
   author Laurikka@stopgap
   access 0777
 }
@@ -46521,9 +54605,9 @@ Content-Type: text/plain
 
 {
 version 0.8
-stdswitcher	[ 0	locks=0 ]	(	5	5	5	5	5	5	5	)
+stdswitcher	[ 0	locks=0 ]	(	0	0	0	0	0	0	0	)
 source	[ 0	locks=0 ]	(	file	)
-file	[ 0	locks=0 ]	(	G:/projects_2025/c64game/introtune/bass_ch2_1.mid	)
+file	[ 0	locks=0 ]	(	$HIP/bass_ch2_1.mid	)
 entire	[ 0	locks=0 ]	(	"on"	)
 channel	[ 0	locks=0 ]	(	1	)
 prefix	[ 0	locks=0 ]	(	""	)
@@ -46603,7 +54687,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -47480,7 +55564,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -47515,7 +55599,7 @@ inputs
 stat
 {
   create 1723650917
-  modify 1752427586
+  modify 1759654444
   author Laurikka@stopgap
   access 0777
 }
@@ -47548,7 +55632,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -47692,7 +55776,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -47796,7 +55880,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -47900,7 +55984,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -47968,7 +56052,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -48072,7 +56156,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -48140,7 +56224,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -48244,7 +56328,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -48411,7 +56495,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -48515,7 +56599,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -48583,7 +56667,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -48847,7 +56931,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -49202,7 +57286,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -49341,7 +57425,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -49909,7 +57993,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -50264,7 +58348,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -50403,7 +58487,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	},
 	"referenced_from":{
 		"type":"string",
@@ -50840,7 +58924,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -50874,7 +58958,7 @@ inputs
 stat
 {
   create 1752329528
-  modify 1752428506
+  modify 1759654444
   author Laurikka@stopgap
   access 0777
 }
@@ -50900,7 +58984,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -51497,7 +59581,7 @@ inputs
 stat
 {
   create 1755785796
-  modify 1758345619
+  modify 1761320795
   author Laurikka@stopgap
   access 0777
 }
@@ -51521,7 +59605,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -51552,7 +59636,7 @@ inputs
 stat
 {
   create 1755787458
-  modify 1758345611
+  modify 1759654458
   author Laurikka@stopgap
   access 0777
 }
@@ -51570,7 +59654,7 @@ version 0.8
 execute	[ 0	locks=0 ]	(	0	)
 renderdialog	[ 0	locks=0 ]	(	0	)
 export_node	[ 0	locks=0 ]	(	/obj/levels/_to_CSV	)
-csv_path	[ 0	locks=0 ]	(	$JOB/vasm/assets/levels.csv	)
+csv_path	[ 0	locks=0 ]	(	$HIP/levels.csv	)
 fd_advanced	[ 0	locks=0 ]	(	1	)
 export_header	[ 0	locks=0 ]	(	"off"	)
 use_custom_header	[ 0	locks=0 ]	(	"off"	)
@@ -51592,7 +59676,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":""
+		"value":"512"
 	}
 }
 
@@ -51623,7 +59707,7 @@ inputs
 stat
 {
   create 1755787458
-  modify 1758345611
+  modify 1759654468
   author Laurikka@stopgap
   access 0777
 }
@@ -51641,7 +59725,7 @@ version 0.8
 execute	[ 0	locks=0 ]	(	0	)
 renderdialog	[ 0	locks=0 ]	(	0	)
 export_node	[ 0	locks=0 ]	(	/obj/mididata/_OUT	)
-csv_path	[ 0	locks=0 ]	(	$JOB/intro/midi.csv	)
+csv_path	[ 0	locks=0 ]	(	$HIP/midi.csv	)
 fd_advanced	[ 0	locks=0 ]	(	1	)
 export_header	[ 0	locks=0 ]	(	"off"	)
 use_custom_header	[ 0	locks=0 ]	(	"off"	)
@@ -51663,7 +59747,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":""
+		"value":"512"
 	}
 }
 
@@ -51694,7 +59778,7 @@ inputs
 stat
 {
   create 1755787458
-  modify 1758345611
+  modify 1759654474
   author Laurikka@stopgap
   access 0777
 }
@@ -51712,7 +59796,7 @@ version 0.8
 execute	[ 0	locks=0 ]	(	0	)
 renderdialog	[ 0	locks=0 ]	(	0	)
 export_node	[ 0	locks=0 ]	(	/obj/tables/_OUT	)
-csv_path	[ 0	locks=0 ]	(	$JOB/assets/tables.csv	)
+csv_path	[ 0	locks=0 ]	(	$HIP/tables.csv	)
 fd_advanced	[ 0	locks=0 ]	(	1	)
 export_header	[ 0	locks=0 ]	(	"on"	)
 use_custom_header	[ 0	locks=0 ]	(	"off"	)
@@ -51736,7 +59820,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":""
+		"value":"512"
 	}
 }
 
@@ -51767,7 +59851,7 @@ inputs
 stat
 {
   create 1755787458
-  modify 1759644409
+  modify 1759654481
   author Laurikka@stopgap
   access 0777
 }
@@ -51785,7 +59869,7 @@ version 0.8
 execute	[ 0	locks=0 ]	(	0	)
 renderdialog	[ 0	locks=0 ]	(	0	)
 export_node	[ 0	locks=0 ]	(	/obj/charfx/_OUT_charfx_2	)
-csv_path	[ 0	locks=0 ]	(	$JOB/assets/charfx.csv	)
+csv_path	[ 0	locks=0 ]	(	$HIP/charfx.csv	)
 fd_advanced	[ 0	locks=0 ]	(	1	)
 export_header	[ 0	locks=0 ]	(	"on"	)
 use_custom_header	[ 0	locks=0 ]	(	"off"	)
@@ -51809,7 +59893,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":""
+		"value":"512"
 	}
 }
 
@@ -51849,7 +59933,7 @@ inputs
 stat
 {
   create 1755785796
-  modify 1758345619
+  modify 1761319481
   author Laurikka@stopgap
   access 0777
 }
@@ -51873,7 +59957,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -51903,7 +59987,7 @@ inputs
 stat
 {
   create 1755785796
-  modify 1758345619
+  modify 1761319481
   author Laurikka@stopgap
   access 0777
 }
@@ -51927,7 +60011,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -51957,7 +60041,7 @@ inputs
 stat
 {
   create 1755785796
-  modify 1758345619
+  modify 1761319481
   author Laurikka@stopgap
   access 0777
 }
@@ -51981,7 +60065,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -52023,7 +60107,7 @@ inputs
 stat
 {
   create 1755785796
-  modify 1759653334
+  modify 1761319517
   author Laurikka@stopgap
   access 0777
 }
@@ -52055,7 +60139,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -52093,7 +60177,7 @@ inputs
 stat
 {
   create 1755785797
-  modify 1758345619
+  modify 1761319481
   author Laurikka@stopgap
   access 0777
 }
@@ -52117,7 +60201,7 @@ Content-Type: text/plain
 {
 	"___Version___":{
 		"type":"string",
-		"value":"21.0.440"
+		"value":"21.0.512"
 	}
 }
 
@@ -52140,7 +60224,7 @@ visualizerset vis_density type ( vis_color ) label ( 'density Point Attribute' )
 Content-Disposition: attachment; filename=".application"
 Content-Type: text/plain
 
-networkeditor -p '{\n}\n'networkeditor -p '{\n}\n'performance -c on -d on -f on -g off -j on -k on -m off -n on -o on -t off -v on -p on -y on -u on -e off -r absolute -R seconds -w tree panetab12
+networkeditor -p '{\n}\n'performance -c on -d on -f on -g off -j on -k on -m off -n on -o on -t off -v on -p on -y on -u on -e off -r absolute -R seconds -w tree panetab12
 chopview -a 0 -c "" -k 1 -m 1 -b 1 -e 1 -f 0 -g 0 -H 1 -i 0 -j 1 -l 0 -n 1 -V 0 -y 0 -B 0 -s 0 -S 0.034375 -u 0 -v 0 -h -10 310 -r -1.5 1.5 Build.panetab13
 imgview -p '(' none -z 1 ')' 0 -c 0 -l on -s off -i imgview2
 imgdispopt -m 256 -P on -M on -A on -j on -x off -L on -g 2.2 -B 1 -v split -V 2 2 -d h -a off -i 2 -b 0 0 0 -o "" -h on -H on -c 0.8 0.8 0.8 -C 1 1 1 -S 1 1 0 -R 6 -F dc -D "" -I "" -f "" -s off -r 256 256 -p on -l on -t on
@@ -52233,7 +60317,7 @@ viewroto  -S file -F '' -C '' -a on -f 'scale' -o 0 0 -s 1 1 -O 1 -B 1 -e off im
 viewforeground -d on -f on -D Pz -s 0 Build.panetab1.world.persp1
 viewforeground -o 1 Build.panetab1.world.persp1
 viewheadlight -H off -q off -t 0 -D -30 -30 -100  -s on -b 0.8 -c 0 -Z 0.02 -d """" -r 0 0 0 -T 1 1 1 -i 1 -e 0 -m off -A 0 -a 45 -f 1 -F 1 -I 1 -E 0 -S on -z 0.51 -k on -M off -B 3 -g 0.2 0.2 0.2 -h 0.5 -K 1 1 1 -j 1 -J 0 -l 33 -L 55 -O 0.83 0.93 1 -p 0.4 -P 0 -n 30 -N -80 -w 0.58 0.79 1  -u 0.5 -U 0 -v 35 -V -170 Build.panetab1.world.persp1
-viewtransform Build.panetab1.world.persp1 version ( 3 )  flag ( Fx )  orthowidth ( 2.35581 )  focal ( 50 )  aperture ( 41.4214 )  window ( 0 1 0 1 )  winroll ( 0 )  clear ( 1 )  nearfar ( 0.00353526 35352.6 )  aspect ( 1.33333 )  pixelaspect ( 1 )  txyz ( -0.120774 -0.180031 6.1524 )  pxyz ( 0.30132 -0.322261 -0.118365 )  rotation ( 0.998706 0.0190097 -0.0471613 2.77197e-17 0.927489 0.37385 0.0508484 -0.373367 0.926289  )  homedistance ( 3.84372 )  homeadjboxwidth ( 2.35581 )  homeorthowidth ( 2.35581 )  homeradius ( 3.53488 )  homeaxis ( 0 )  homecustom ( 0.707107 -0.353553 0.612372 0 0.866025 0.5 -0.707107 -0.353553 0.612372  )  adjustlimits ( 3 )  fov ( 45b)  limitnear ( 0 1)  
+viewtransform Build.panetab1.world.persp1 version ( 3 )  flag ( Fx )  orthowidth ( 0.267129 )  focal ( 50 )  aperture ( 41.4214 )  window ( 0 1 0 1 )  winroll ( 0 )  clear ( 1 )  nearfar ( 0.000379609 3796.09 )  aspect ( 1.33333 )  pixelaspect ( 1 )  txyz ( 0.00424358 0.00383187 0.463321 )  pxyz ( 0.00424358 0.00383187 0.00424358 )  rotation ( 0.982581 -0.00654819 0.185722 2.72721e-17 0.999379 0.0352362 -0.185837 -0.0346224 0.98197  )  homedistance ( 0.459077 )  homeadjboxwidth ( 0.267129 )  homeorthowidth ( 0.267129 )  homeradius ( 0.379563 )  homeaxis ( 0 )  homecustom ( 0.707107 -0.353553 0.612372 0 0.866025 0.5 -0.707107 -0.353553 0.612372  )  adjustlimits ( 3 )  fov ( 45b)  limitnear ( 0 1)  
 viewcamera -c '' Build.panetab1.world.persp1
 vieworthogrid -d on -o 0 0 0 -s 0.2 0.2 -r 5 5 -R 1 Build.panetab1.world.persp1
 viewuvgrid -r on -s 0.1 0.1 -P off -S 64 64 -O 0 0 -C on -t on Build.panetab1.world.persp1
@@ -52389,19 +60473,18 @@ viewsnapshotoption -s off -h off -a 1 -v '*' -m 0 Build.panetab1.world
 cplane -o 0 0 0 -n 4.37114e-08 1 -4.37114e-08 -x 1.91069e-15 4.37114e-08 1 -l n -s 0.1 0.1 -c 40 40 -r 10 10 -d off Build.panetab1.world
 glcache -t 1638 -v 6553
 glcache -T 0
-panepath -d Build -f -p panetab14 /obj/tables
-panepath -d Build -f -p panetab1 /obj/tables
-panepath -d Build -f -p panetab2 /obj/tables
-panepath -d Build -f -p panetab3 /obj/tables
-panepath -d Build -f -p panetab11 /obj/tables
-panepath -d Build -f -p panetab5 /obj/tables
-panepath -d Build -f -p panetab6 /obj/tables
+panepath -d Build -f -p panetab14 /out/csv_exporter_levels
+panepath -d Build -f -p panetab1 /obj/levels/scatter17
+panepath -d Build -f -p panetab2 /out/csv_exporter_levels
+panepath -d Build -f -p panetab3 /out/csv_exporter_levels
+panepath -d Build -f -p panetab11 /out/csv_exporter_levels
+panepath -d Build -f -p panetab5 /out/csv_exporter_levels
+panepath -d Build -f -p panetab6 /out/csv_exporter_levels
 panepath -d Build -f -p panetab12 /obj/
-panepath -d Build -f -p panetab15 /obj/tables
-panepath -d Build -f -p panetab7 /obj/tables
+panepath -d Build -f -p panetab15 /out/csv_exporter_levels
+panepath -d Build -f -p panetab7 /out/csv_exporter_levels
 panepath -d Build -f -p panetab8 /obj/
-panepath -d Build -f -p panetab9 /obj/tables
-panepath -d Build -f -p panetab10 /obj/tables
+panepath -d Build -f -p panetab9 /out/csv_exporter_levels
 desk set Build
 radial menu set main
 viewupdate -u always

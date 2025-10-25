@@ -2,10 +2,9 @@
 
 ;## directives ##########################################
 DEBUG        = 0            ; if 1 includes debug-related stuff
-SKIPINTRO    = 0            ; go straight to game
-COMPRESS     = 1            ; if on skip the autorun part
-SKIPSOUND    = 0            ; skip sound routines
-STARTLEVEL   = 0            ; override start level
+SKIPINTRO    = 0            ; if 1 go straight to game
+COMPRESS     = 0            ; if 1 skip the autorun part
+SKIPSOUND    = 0            ; if 1 skip sound routines
 
 ;## constants ###########################################
 SOUND        = $3000
@@ -16,13 +15,14 @@ FONT         = $4000        ; font absolute location
 FXCHAR       = FONT+$200    ; character used for moving background FX
 COLORROW     = 23*40+16     ; location of color dots at the bottom
 MAX_SPEED    = 4            ; max movement speed
+STARTLEVEL   = 18            ; set start level
 
 LEFT_LIMIT   = 5            ; limits for sprites before they wrap around
 RIGHT_LIMIT  = 90
 UP_LIMIT     = 24
 DOWN_LIMIT   = 250
 
-TIPS_WAIT    = 250
+TIPS_WAIT    = 250          ; how many frames to wait before next tip
 
 ;## zero page addresses #############################################
 VAR0         = $10          ; reusable variables
@@ -49,7 +49,7 @@ LEVELS_P     = $25          ; +$26, pointer to level data
 SPRITE_LEVEL = $27          ; offset for sprite animation sheet
 TITLE_F      = $28          ; framecounter for title screen
 TITLE_READY  = $29          ; marker to delay game start immediately after
-SCROLLER_F   = $2A          ; counter for character swap
+SCROLLER_F   = $2A          ; counter for character swap in scroller
 SPRITEACTIVE = $2B          ; which sprites to consider for collisions
 TIMER_F      = $2C          ; delays updating timer
 TIMER_D1     = $2D          ; three decimal digits for time left
@@ -74,10 +74,10 @@ CHARFX_CMEM_2= $78          ; +$37, memory pointer for charfx color
 CHARFX_CLR_2 = $7a          ; color for the effect
 CHARFX_SPR_2 = $7b          ; sprite number to calculate
 
-TIPS_TIMER   = $7c
-TIPS_OFFSET  = $7d
-TIPS_COLOR   = $7f
-TIPS_SET     = $80
+TIPS_TIMER   = $7c          ; frame counter for title screen tips
+TIPS_OFFSET  = $7d          ; +$7e, memory pointer for tips texts
+TIPS_COLOR   = $7f          ; pointer for tips color fade table
+TIPS_SET     = $80          ; keep track of which tip is displayed
 
 COLLISION    = $40          ; $40-47 bitmasks to compare collided sprites
 CARRYBIT     = $48          ; $48-57 for calculating the extra x bit
@@ -447,7 +447,7 @@ idlewait1:
 ;## joystick read  ##################################################
 joystick_read:
     lda LEVEL_R             ; if first sprite is not yet revealed
-    beq :+++++              ; skip checking joystick
+    beq .end                ; skip checking joystick
 
     lda $dc00               ; read port A joystick 2 bits
 :                           ;.read_right
@@ -466,7 +466,26 @@ joystick_read:
     bit SINGLEBITS+1
     bne :+
     inc SPEEDX+1
-:                           ;.end
+:
+    lda $dc01               ; read port A joystick 2 bits
+:                           ;.read_right
+    bit SINGLEBITS+3        ; compare to stored bit pattern
+    bne :+                  ; if not active, skip to next
+    inc SPEEDX
+:                           ;.read_left
+    bit SINGLEBITS+2
+    bne :+
+    dec SPEEDX
+:                           ;.read_up
+    bit SINGLEBITS
+    bne :+
+    dec SPEEDX+1            ; sprite 0 y-speed is here
+:                           ;.read_down
+    bit SINGLEBITS+1
+    bne .end
+    inc SPEEDX+1
+
+.end                        ;.end
 
 ;## countermove to move other sprites towards hero sprite ############
     ldx #1                  ; go through twice to get x and y
@@ -668,9 +687,11 @@ idlewait2:
     clc
     inc LEVEL
     lda LEVEL
-    cmp #16
+    cmp #19                 ; if level equals this, reset back to zero
     bne :+
     clc
+    lda #0
+    sta LEVEL
     lda #<levels            ; indirect 16-bit adress of level data
     sta LEVELS_P            ; location is stored in two bytes
     lda #>levels            ; in zero page
@@ -776,6 +797,9 @@ levels:
     byte 141, 114, 77, 213, 103, 171, 57, 106, 115, 40, 157, 197, 22, 43, 3, 0
     byte 170, 134, 48, 84, 141, 211, 112, 127, 135, 43, 56, 217, 14, 40, 3, 0
     byte 59, 163, 112, 137, 81, 104, 128, 57, 21, 227, 169, 101, 61, 40, 2, 0
+    byte 170, 144, 160, 240, 129, 133, 51, 150, 96, 126, 89, 225, 143, 69, 4, 0
+    byte 113, 204, 134, 110, 99, 81, 80, 198, 35, 153, 138, 204, 60, 73, 3, 0
+    byte 10, 180, 117, 130, 126, 61, 82, 187, 50, 137, 48, 221, 170, 70, 3, 0
 
 
 sintable:   ; 36 delta sine values, twice to allow offsets
