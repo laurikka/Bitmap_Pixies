@@ -15,7 +15,8 @@ FONT         = $4000        ; font absolute location
 FXCHAR       = FONT+$200    ; character used for moving background FX
 COLORROW     = 23*40+16     ; location of color dots at the bottom
 MAX_SPEED    = 4            ; max movement speed
-STARTLEVEL   = 18            ; set start level
+LASTLEVEL    = 20           ; last level before wrap to 0
+STARTLEVEL   = 0            ; set start level
 
 LEFT_LIMIT   = 5            ; limits for sprites before they wrap around
 RIGHT_LIMIT  = 90
@@ -311,12 +312,11 @@ sprite_collision:
     inc BONUSTIME_D1
     ldy #1
     jsr feedback_points
-    lda #3                  ; load 1 to retrigger ch1
+    lda #3                  ; load 3 to retrigger ch1
     sta PLAY_TABLE
     jmp .end
 
 :                           ; five points
-
     clc
     lda #5
     adc POINTBUFFER
@@ -467,7 +467,7 @@ joystick_read:
     bne :+
     inc SPEEDX+1
 :
-    lda $dc01               ; read port A joystick 2 bits
+    lda $dc01               ; read port B joystick 1 bits
 :                           ;.read_right
     bit SINGLEBITS+3        ; compare to stored bit pattern
     bne :+                  ; if not active, skip to next
@@ -687,7 +687,7 @@ idlewait2:
     clc
     inc LEVEL
     lda LEVEL
-    cmp #19                 ; if level equals this, reset back to zero
+    cmp #LASTLEVEL          ; if level equals this, reset back to zero
     bne :+
     clc
     lda #0
@@ -800,6 +800,7 @@ levels:
     byte 170, 144, 160, 240, 129, 133, 51, 150, 96, 126, 89, 225, 143, 69, 4, 0
     byte 113, 204, 134, 110, 99, 81, 80, 198, 35, 153, 138, 204, 60, 73, 3, 0
     byte 10, 180, 117, 130, 126, 61, 82, 187, 50, 137, 48, 221, 170, 70, 3, 0
+    byte 164, 78, 57, 120, 114, 93, 42, 240, 10, 198, 88, 229, 13, 44, 3, 0
 
 
 sintable:   ; 36 delta sine values, twice to allow offsets
@@ -813,7 +814,7 @@ highscore:
     blk 20,$30              ; 4 rows of 5 zeroes
 
 colorfade:  ; fade text in and out
-    byte 0,0,0,0,0,0,0,0,0,11,11,12,12,15,15,1,1,15,15,12
+    byte 0,0,0,0,0,0,11,11,11,12,12,12,15,15,15,1,1,15,15,12
 
 posx:   ; sprite position divided by 4 mapped to character pos in 40x25 grid
     byte 36, 36, 36, 36, 36, 36, 36, 37, 37, 38, 38, 39, 39, 0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19, 20, 20, 21, 21, 22, 22, 23, 23, 24, 24, 25, 25, 26, 26, 27, 27, 28, 28, 29, 29, 30, 30, 31, 31, 32, 32, 33, 33, 34, 34, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35

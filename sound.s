@@ -192,14 +192,16 @@ play_sprite:
     jsr play_reset_env
     lda PLAY_ENVFRM
     bne :+
-    lda #%00001000          ; 0-3 decay, 4-7 attack
+    lda #%00001001          ; 0-3 decay, 4-7 attack
     sta $d405               ; ch 1
     lda #%11101000          ; 0-3 release, 4-7 sustain vol
     sta $d406               ; ch 1
     lda #%01000001
     sta $d404
 
-    lda #4
+    clc
+    lda #9
+    adc LEVEL_R
     sta ch1_pos
 
     lda #0
@@ -210,17 +212,24 @@ play_sprite:
 
 
 play_retrigger_ch1:
-    lda #%00011010          ; 0-3 decay, 4-7 attack
+    jsr play_reset_env
+    lda PLAY_ENVFRM
+    bne :+
+    lda #%00011001          ; 0-3 decay, 4-7 attack
     sta $d405               ; ch 1
-    lda #%01001010          ; 0-3 release, 4-7 sustain vol
+    lda #%01001000          ; 0-3 release, 4-7 sustain vol
     sta $d406               ; ch 1
     lda #%01000001
     sta $d404
     lda #0
     sta PLAY_TABLE
+:
     rts
 
 play_retrigger_ch2:
+    jsr play_reset_env
+    lda PLAY_ENVFRM
+    bne :+
     lda #%00011010          ; 0-3 decay, 4-7 attack
     sta $d40c               ; ch 1
     lda #%01001010          ; 0-3 release, 4-7 sustain vol
@@ -229,22 +238,26 @@ play_retrigger_ch2:
     sta $d40b
     lda #0
     sta PLAY_TABLE
+:
     rts
 
 play_end:
-    clc
-    lda #%00011000          ; 0-3 decay, 4-7 attack
+    jsr play_reset_env
+    lda PLAY_ENVFRM
+    bne :+
+;    clc
+    lda #%00011101          ; 0-3 decay, 4-7 attack
     sta $d405               ; ch 1
-    lda #%00011000          ; 0-3 decay, 4-7 attack
+    lda #%00011101          ; 0-3 decay, 4-7 attack
     sta $d40c               ; ch 2
-    lda #%00100111          ; 0-3 decay, 4-7 attack
+    lda #%00100110          ; 0-3 decay, 4-7 attack
     sta $d413               ; ch 3
 
-    lda #%01001010          ; 0-3 release, 4-7 sustain vol
+    lda #%00000010          ; 0-3 release, 4-7 sustain vol
     sta $d406               ; ch 1
-    lda #%01001100          ; 0-3 release, 4-7 sustain vol
+    lda #%00000100          ; 0-3 release, 4-7 sustain vol
     sta $d40d               ; ch 2
-    lda #%00100010          ; 0-3 release, 4-7 sustain vol
+    lda #%00000010          ; 0-3 release, 4-7 sustain vol
     sta $d414               ; ch 3
 
     lda #%01000001
@@ -272,8 +285,11 @@ play_start:
     bne .skip_1
 
     lda ch1_pos             ; current position
+    cmp #24
+    bcs :+
     cmp #8                  ; compare
-    bne :+                  ; skip if not that
+    bne :++                 ; skip if not tequal or higher
+:
     lda #0                  ; reset to 0
     sta ch1_pos
 :
@@ -285,6 +301,13 @@ play_start:
     lda notes_highbyte,x
     sta $d401
 
+    lda ch2_pos             ; current position
+    cmp #8                  ; compare
+    bcc :+                  ; skip if not equal or higher
+    lda #0                  ; reset to 0
+    sta ch2_pos
+:
+
     lda start_ch2,y
     tax
     lda notes_lowbyte,x
@@ -292,6 +315,7 @@ play_start:
     lda notes_highbyte,x
     sta $d408
     inc ch1_pos
+    inc ch2_pos
 
 .skip_1
     lda PLAY_FRAME          ; to next note
@@ -300,7 +324,7 @@ play_start:
 
     lda ch1_pos             ; current position
     cmp #6                  ; compare
-    bne :+                  ; skip if not that
+    bne :+                  ; skip if not equal or higher
     lda #0                  ; reset to 0
     sta ch1_pos
 :
@@ -373,10 +397,9 @@ pw_update:
     sta $d402
     lda #0                  ; add carry bit
     adc ch1pwh              ; to pulse high byte
-    clc
-    cmp #$e0
+    cmp #$f
     bcc :+
-    lda #$20
+    lda #$1
 :
     sta ch1pwh
     sta $d403
@@ -388,10 +411,9 @@ pw_update:
     sta $d409
     lda #0
     adc ch2pwh
-    clc
-    cmp #$e0
+    cmp #$f
     bcc :+
-    lda #$20
+    lda #$1
 :
     sta ch2pwh
     sta $d40a
@@ -403,10 +425,9 @@ pw_update:
     sta $d410
     lda #0
     adc ch3pwh
-    clc
-    cmp #$e0
+    cmp #$f
     bcc :+
-    lda #$20
+    lda #$1
 :
     sta ch3pwh
     sta $d411
@@ -415,12 +436,15 @@ pw_update:
 intro_ch1:
     byte  6, 8, 9,11,13,14,15,16
 intro_ch2:
-    byte 16,18,19,20,21,11,13,14
+    byte 10,11,12,13,14,15,16,17,18,19,20,21,22
 intro_ch3:
     byte 10,11, 1, 3, 4, 6, 8, 9
 
+
 start_ch1:
     byte 12,14, 2, 4, 6, 8,10,11
+sprite_reveal:
+    byte 7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24
 start_ch2:
     byte 16,17,18,20, 8,10,12,14
 start_ch3:

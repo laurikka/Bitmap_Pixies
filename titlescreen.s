@@ -169,7 +169,7 @@ title_main:
     beq :+
     jmp to_the_game
 :
-    lda $dc01               ; read port A joystick 2 bits
+    lda $dc01               ; read port B joystick 1 bits
     and #%00001111
     cmp #%00001111
     beq :+
@@ -241,10 +241,10 @@ set_tips:
 
 .end
     lda TIPS_TIMER
-    cmp #13
+    cmp #12
     bcs :++
     ldy #79
-    ldx TIPS_TIMER
+    tax
     lda colorfade,x
 :
     sta $d800+20*40,y

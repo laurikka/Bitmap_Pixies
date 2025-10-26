@@ -793,6 +793,8 @@ feedback_print:             ; print text to screen
     sbc #$60
 :
     sta SCREEN+10*40+16,x   ; text location with row offset
+    lda #15
+    sta $d800+10*40+16,x
     iny
     inx
     cpx #8
@@ -908,18 +910,22 @@ feedback_bonustime:         ; print points to screen
 
 feedback_bonustime_clear:
     ldx #13
-    lda #$40
 :
+    lda #$40
     sta SCREEN+12*40+12,x          ; text location with row offset
+    lda #12
+    sta $d800+12*40+12,x          ; text location with row offset
     dex
     bpl :-
     rts
 
 feedback_clear:
     ldx #7
-    lda #$40
 :
+    lda #$40
     sta SCREEN+10*40+16,x          ; text location with row offset
+    lda #12
+    sta $d800+10*40+16,x          ; text location with row offset
     dex
     bpl :-
 
