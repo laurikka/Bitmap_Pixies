@@ -2,9 +2,6 @@
 ;##  subroutines                                                ##
 ;#################################################################
 
-
-
-
 gameinit:
     lda #STARTLEVEL
     sta LEVEL

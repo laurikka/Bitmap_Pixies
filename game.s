@@ -3,11 +3,11 @@
 ;## directives ##########################################
 DEBUG        = 0            ; if 1 includes debug-related stuff
 SKIPINTRO    = 0            ; if 1 go straight to game
-COMPRESS     = 0            ; if 1 skip the autorun part
+COMPRESS     = 1            ; if 1 skip the autorun part
 SKIPSOUND    = 0            ; if 1 skip sound routines
 
 ;## constants ###########################################
-SOUND        = $3000
+SOUND        = $3000        ; sound routines in memory
 SCREEN       = $4400        ; screen memory
 SCREENSPR    = $4800        ; sprite screen memory
 SPRITE_MEM   = $20          ; $20 * $40 equals $800
@@ -111,12 +111,11 @@ init:
     dex
     bpl :-                  ; jump to previous anonymous label
 
-    sta TIPS_SET
+    sta TIPS_SET            ; init titlescreen tips to 0
     sta TIPS_COLOR
-    lda #50
+    lda #50                 ; initial wait in frames before first tip
     sta TIPS_TIMER
-
-    lda #<tips              ; indirect 16-bit adress of scrolltext
+    lda #<tips              ; indirect 16-bit adress of tips texts
     sta TIPS_OFFSET         ; location is stored in two bytes
     lda #>tips              ; in zero page
     sta TIPS_OFFSET+1
@@ -383,7 +382,7 @@ maxspeed:                   ; check each sprite against speed limit
     lda LEVEL_F             ; check level timer
     cmp REVEALTIMER         ; compare against reveal delay
     beq :+                  ; if equals, proceed with reveal
-    bne :++++                ; otherwise skip to end
+    bne :++++               ; otherwise skip to end
 :                           ;.reveal
     ldx LEVEL_R             ; copy sprite count to x
     clc
@@ -406,11 +405,11 @@ maxspeed:                   ; check each sprite against speed limit
     sta PLAY_TABLE
     
     jmp :++
-:                           ; end
+:                            ; end
     inx
     stx LEVEL_R
     lda #0
-    sta LEVEL_F             ; zero out level timer
+    sta LEVEL_F              ; zero out level timer
     clc
     cpx MOVEDELAY
     bcc :+
@@ -484,8 +483,7 @@ joystick_read:
     bit SINGLEBITS+1
     bne .end
     inc SPEEDX+1
-
-.end                        ;.end
+.end
 
 ;## countermove to move other sprites towards hero sprite ############
     ldx #1                  ; go through twice to get x and y
@@ -751,7 +749,7 @@ tips:
     ascii "       not needed in this game          "
 
     ascii "      start collecting the pixies       "
-    ascii "      immediately as level starts       "
+    ascii "      immediately as  they appear       "
 
     ascii "        border color shows the          "
     ascii "        next color  to collect          "

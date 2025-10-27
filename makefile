@@ -2,7 +2,7 @@ all: game.prg
 
 game.prg: game.s titlescreen.s subroutines.s sound.s bin/spritesheet_0.bin bin/font.bin bin/sprite_logo_0.bin scroller.txt
 		vasm6502_oldstyle -Fbin -cbm-prg game.s -o game.prg
-#		exomizer sfx 2048 -x1 game.prg -o game.prg
+		exomizer sfx 2048 -x1 game.prg -o game.prg
 #		retrodebugger game.prg
 		denise game.prg
 
