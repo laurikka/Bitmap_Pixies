@@ -164,14 +164,14 @@ title_main:
     cmp #1
     bcc :+
     lda $dc00               ; read port A joystick 2 bits
-    and #%00001111
-    cmp #%00001111
+    and #%00011111
+    cmp #%00011111
     beq :+
     jmp to_the_game
 :
     lda $dc01               ; read port B joystick 1 bits
-    and #%00001111
-    cmp #%00001111
+    and #%00011111
+    cmp #%00011111
     beq :+
     jmp to_the_game
 :
@@ -391,7 +391,6 @@ set_tips:
     endif
 
     jsr bgfx
-;    jsr bgfx
 
     if DEBUG=1
     lda #0
