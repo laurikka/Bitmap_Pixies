@@ -1,9 +1,13 @@
 # Bitmap Pixies
 
+![alt text](screenshot.png "screenshot")
+
 A game for Commodore 64
 
 Play advice: move around with joystick in either port and collect all pixies, no fire button needed in this game. Collecting the colors in correct order is rewarded both in time and points so pay attention to the sequence.
 The game is designed to be played on tac-2 or similar quick action joystick. A low latency setup like a real hardware or mister on crt will make obtaining high scores much easier.
+
+Compiled game available from Itch: https://laurikka.itch.io/bitmap-pixies
 
 Compiling the game:
 - Coded for Vasm assembler: http://sun.hasenbraten.de/vasm/index.php?view=relsrc
